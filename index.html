@@ -63,7 +63,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 @keyframes heroFloat{from{transform:translateY(0);}to{transform:translateY(-10px);}}
 .login-tag{text-align:center;color:var(--muted);font-weight:700;font-size:.95rem;margin-bottom:28px;}
 .login-card{background:var(--card);border:2px solid var(--border);border-radius:24px;
-  padding:36px 32px;width:100%;max-width:520px;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:fadeUp .5s ease;}
+  padding:clamp(20px,5vw,36px) clamp(16px,4vw,32px);width:calc(100% - 24px);max-width:520px;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:fadeUp .5s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 .lbl{font-weight:800;font-size:.74rem;letter-spacing:1.3px;text-transform:uppercase;
   color:var(--muted);margin-bottom:7px;display:block;}
@@ -84,7 +84,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .av-sec{font-weight:800;font-size:.74rem;letter-spacing:1.3px;text-transform:uppercase;
   color:var(--muted);margin-bottom:12px;display:block;}
 .av-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-bottom:20px;}
-@media(max-width:420px){.av-grid{grid-template-columns:repeat(4,1fr);}}
+
 .avi{background:#0d1729;border:2px solid var(--border);border-radius:12px;
   padding:10px 4px;text-align:center;cursor:pointer;transition:all .2s;}
 .avi:hover{border-color:var(--g3);transform:scale(1.07);}
@@ -92,8 +92,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .avi .ae{font-size:1.85rem;display:block;}
 .avi .an{font-size:.57rem;font-weight:700;color:var(--muted);margin-top:3px;}
 .start-btn{width:100%;background:linear-gradient(135deg,var(--g1),#ff9f43);color:#1a0800;
-  border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:1.2rem;
-  padding:18px;border-radius:99px;cursor:pointer;transition:all .25s;
+  border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1rem,3vw,1.2rem);
+  padding:clamp(14px,3.5vw,18px);border-radius:99px;cursor:pointer;transition:all .25s;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
   box-shadow:0 6px 28px rgba(247,201,72,.38);}
 .start-btn:hover{transform:scale(1.03);box-shadow:0 8px 40px rgba(247,201,72,.6);}
 .start-btn:disabled{opacity:.3;cursor:not-allowed;transform:none;box-shadow:none;}
@@ -119,7 +120,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .topbar{position:sticky;top:0;z-index:100;background:rgba(7,9,15,.92);
   backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:12px 24px;flex-wrap:wrap;}
+  gap:8px;padding:10px 16px;flex-wrap:nowrap;overflow:hidden;}
 .logo{font-family:'Baloo 2',cursive;font-weight:900;font-size:1.45rem;
   background:linear-gradient(135deg,var(--g1),var(--g3));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -138,16 +139,18 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .avbtn:hover{transform:scale(1.1);}
 
 /* tabs */
-.tabs{display:flex;gap:8px;padding:16px 24px 0;flex-wrap:wrap;}
+.tabs{display:flex;gap:8px;padding:12px 16px 0;flex-wrap:nowrap;overflow-x:auto;
+  scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}
+.tabs::-webkit-scrollbar{display:none;}
 .tab{background:var(--card);border:2px solid var(--border);color:var(--muted);
-  font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;
+  flex-shrink:0;font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;
   padding:9px 18px;border-radius:99px;cursor:pointer;transition:all .2s;}
 .tab:hover{border-color:var(--g3);color:var(--txt);}
 .tab.active{background:var(--g3);border-color:var(--g3);color:#0a1929;}
 
 /* ─── ROAD MAP ─── */
 #pnl-map{padding:20px 24px 60px;display:block;}
-.map-section-title{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.7rem;
+.map-section-title{font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(1.1rem,3vw,1.7rem);
   margin:28px 0 8px;text-align:center;}
 .map-section-sub{text-align:center;font-size:1rem;color:var(--muted);margin-bottom:28px;}
 .roadmap-wrap{position:relative;width:100%;max-width:780px;margin:0 auto;}
@@ -201,7 +204,13 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .gtb h2{font-family:'Baloo 2',cursive;font-size:1.45rem;font-weight:800;}
 .gtb p{font-size:.9rem;color:var(--muted);}
 .pdots{display:flex;gap:6px;}
-.dot{width:13px;height:13px;border-radius:50%;background:var(--border);transition:all .3s;}
+.dot{width:14px;height:14px;border-radius:50%;background:var(--border);
+  transition:all .35s;border:2px solid transparent;}
+.dot.done{background:var(--g2);}
+.dot.active{background:var(--g1);box-shadow:0 0 8px rgba(247,201,72,.6);
+  animation:dotPulse .8s ease-in-out infinite alternate;}
+.dot.ca-dot-base{border-color:rgba(176,124,248,.4);}
+@keyframes dotPulse{from{transform:scale(1);}to{transform:scale(1.3);}}
 .dot.done{background:var(--g2);}
 .dot.active{background:var(--g1);box-shadow:0 0 8px var(--g1);}
 .lives{display:flex;gap:5px;align-items:center;}
@@ -210,21 +219,21 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 
 /* game panel */
 .gpanel{background:var(--card);border:2px solid var(--border);border-radius:var(--r);
-  padding:28px 24px;margin-bottom:13px;text-align:center;animation:fadeUp .3s ease;}
+  padding:clamp(14px,4vw,28px) 24px;margin-bottom:13px;text-align:center;animation:fadeUp .3s ease;}
 .gpanel h3{font-family:'Baloo 2',cursive;font-size:1.35rem;font-weight:700;margin-bottom:6px;}
 .gpsub{color:var(--muted);font-size:1rem;margin-bottom:18px;}
 
 /* clue display */
 .clue-box{background:#0d1729;border:2px dashed var(--border);border-radius:13px;
-  padding:24px;margin:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px;}
+  padding:clamp(12px,3vw,24px);margin:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px;}
 .clue-emoji{font-size:4.2rem;}
 .clue-hint{font-size:.95rem;color:var(--muted);font-weight:700;font-style:italic;}
 .clue-ph{display:inline-block;background:rgba(74,179,244,.1);border:1.5px solid var(--g3);
   color:var(--g3);font-size:1.1rem;font-weight:700;padding:5px 18px;
-  border-radius:99px;font-family:monospace;}
+  border-radius:99px;font-family:'Noto Sans',sans-serif;letter-spacing:.5px;}
 
 /* listen btn */
-.lbtn{display:inline-flex;align-items:center;gap:8px;
+.lbtn{display:inline-flex;align-items:center;gap:8px;width:100%;justify-content:center;
   background:linear-gradient(135deg,var(--g3),#1a7ab8);color:#fff;border:none;
   font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;
   padding:13px 28px;border-radius:99px;cursor:pointer;
@@ -236,8 +245,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 /* options */
 .ogrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;}
 .obtn{background:#0d1729;border:2px solid var(--border);color:var(--txt);
-  font-family:'Nunito',sans-serif;font-weight:700;font-size:1.15rem;
-  padding:16px;border-radius:var(--rsm);cursor:pointer;transition:all .2s;}
+  font-family:'Nunito',sans-serif;font-weight:700;font-size:clamp(.9rem,2.5vw,1.15rem);
+  padding:clamp(10px,3vw,16px);border-radius:var(--rsm);cursor:pointer;transition:all .2s;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .obtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.08);transform:scale(1.03);}
 .obtn.correct{background:rgba(78,220,132,.13);border-color:var(--g2);color:var(--g2);animation:pop .35s ease;}
 .obtn.wrong{background:rgba(240,106,106,.13);border-color:var(--g4);color:var(--g4);animation:shake .4s ease;}
@@ -245,17 +255,24 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-7px);}75%{transform:translateX(7px);}}
 
 /* feedback */
-.fbbox{margin-top:16px;padding:14px 20px;border-radius:var(--rsm);
-  font-weight:700;font-size:1rem;display:none;animation:fadeUp .3s ease;line-height:1.6;}
+.fbbox{margin-top:16px;padding:16px 20px;border-radius:14px;
+  font-weight:700;font-size:1rem;display:none;line-height:1.6;}
+.fbok{background:rgba(78,220,132,.12)!important;border:2px solid var(--g2)!important;
+  animation:fbBounce .4s cubic-bezier(.34,1.56,.64,1);}
+.fbno{background:rgba(240,106,106,.12)!important;border:2px solid var(--g4)!important;
+  animation:fbShake .45s ease;}
+@keyframes fbBounce{0%{transform:scale(.9);opacity:0;}70%{transform:scale(1.05);}100%{transform:scale(1);opacity:1;}}
+@keyframes fbShake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
 .fbbox.show{display:block;}
-.fbok{background:rgba(78,220,132,.08);border:1.5px solid var(--g2);color:var(--g2);}
-.fbno{background:rgba(240,106,106,.08);border:1.5px solid var(--g4);color:var(--g4);}
+
+
 
 /* next btn */
 .nxtbtn{background:linear-gradient(135deg,var(--g2),#27ae60);color:#041208;
-  border:none;font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;
-  padding:14px 32px;border-radius:99px;cursor:pointer;margin-top:14px;
-  transition:all .2s;display:none;box-shadow:0 4px 16px rgba(78,220,132,.3);}
+  border:none;font-family:'Nunito',sans-serif;font-weight:800;font-size:clamp(.95rem,2.5vw,1.1rem);
+  padding:clamp(12px,3vw,14px) clamp(20px,5vw,32px);border-radius:99px;cursor:pointer;margin-top:14px;
+  transition:all .2s;display:none;box-shadow:0 4px 16px rgba(78,220,132,.3);
+  width:100%;touch-action:manipulation;}
 .nxtbtn:hover{transform:scale(1.05);}
 .nxtbtn.show{display:inline-flex;align-items:center;gap:7px;}
 
@@ -271,7 +288,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 @keyframes blink{from{opacity:1;}to{opacity:.2;}}
 
 /* speaking */
-.recbtn{display:inline-flex;align-items:center;gap:8px;
+.recbtn{display:inline-flex;align-items:center;gap:8px;width:100%;justify-content:center;
   background:linear-gradient(135deg,var(--g4),#c0392b);color:#fff;border:none;
   font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;
   padding:14px 32px;border-radius:99px;cursor:pointer;margin-top:11px;
@@ -297,7 +314,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
 .mcol{display:flex;flex-direction:column;gap:8px;}
 .mitem{background:#0d1729;border:2px solid var(--border);border-radius:var(--rsm);
-  padding:14px 16px;font-weight:700;font-size:1.05rem;cursor:pointer;transition:all .2s;text-align:center;}
+  padding:clamp(10px,2.5vw,14px) clamp(8px,2vw,16px);font-weight:700;
+  font-size:clamp(.88rem,2.3vw,1.05rem);cursor:pointer;transition:all .2s;text-align:center;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .mitem:hover:not(.matched){border-color:var(--g3);}
 .mitem.sel-l{border-color:var(--g1);background:rgba(247,201,72,.1);}
 .mitem.matched{border-color:var(--g2);background:rgba(78,220,132,.1);color:var(--g2);pointer-events:none;}
@@ -308,11 +327,14 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
   background:#0d1729;border:2px dashed var(--border);border-radius:var(--rsm);
   padding:10px;align-items:center;margin:13px 0;}
 .wbank{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin:9px 0;}
-.wchip{background:var(--g3);color:#051a2a;font-weight:700;padding:9px 18px;
-  border-radius:99px;font-size:1rem;cursor:pointer;transition:all .2s;animation:pop .3s ease;}
+.wchip{background:var(--g3);color:#051a2a;font-weight:700;padding:clamp(7px,2vw,9px) clamp(12px,3vw,18px);
+  border-radius:99px;font-size:clamp(.85rem,2.3vw,1rem);cursor:pointer;transition:all .2s;
+  animation:pop .3s ease;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .wchip:hover{background:var(--g4);color:#fff;}
 .bchip{background:var(--card2);border:2px solid var(--border);color:var(--txt);
-  font-weight:700;padding:9px 18px;border-radius:99px;font-size:1rem;cursor:pointer;transition:all .2s;}
+  font-weight:700;padding:clamp(7px,2vw,9px) clamp(12px,3vw,18px);border-radius:99px;
+  font-size:clamp(.85rem,2.3vw,1rem);cursor:pointer;transition:all .2s;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .bchip:hover{border-color:var(--g3);transform:scale(1.04);}
 .bchip.used{opacity:.24;pointer-events:none;}
 
@@ -487,7 +509,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 footer{position:relative;z-index:1;background:#05070d;border-top:1px solid var(--border);
   padding:18px 20px;text-align:center;font-size:.73rem;color:var(--muted);font-weight:600;line-height:1.7;}
 footer span{color:var(--g3);}
-@media(max-width:600px){.ogrid,.picgrid,.matchgrid{grid-template-columns:1fr 1fr;}.map-section-title{font-size:1.1rem;}.sb-podium{gap:6px;}.podium-bar{width:48px;}}
+.map-section-title{font-size:1.1rem;}.sb-podium{gap:6px;}.podium-bar{width:48px;}}
 
 
 /* ─── BILINGUAL Thai/English UDL SUPPORT ─── */
@@ -503,8 +525,7 @@ footer span{color:var(--g3);}
 #rm-short,#rm-long{
   grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
 }
-@media(max-width:500px){
-  #rm-short,#rm-long{grid-template-columns:repeat(3,1fr);}
+
   #char-card-grid{grid-template-columns:repeat(2,1fr)!important;}
 }
 /* ─── SPACE VIDEO BG — ensure scr-app allows fixed children ─── */
@@ -550,6 +571,154 @@ footer span{color:var(--g3);}
 .up-status.error{background:rgba(240,106,106,.1);border:1.5px solid var(--g4);color:var(--g4);}
 .up-status.info{background:rgba(74,179,244,.1);border:1.5px solid var(--g3);color:var(--g3);}
 .up-status.uploading{background:rgba(176,124,248,.1);border:1.5px solid var(--g5);color:var(--g5);}
+
+/* ═══ RESPONSIVE SYSTEM ═══ */
+/* Tablet ≤768px */
+@media(max-width:768px){
+  .tabs,.t-tabs{padding:10px 12px 0;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;}
+  .tabs::-webkit-scrollbar,.t-tabs::-webkit-scrollbar{display:none;}
+  .tab{font-size:.78rem;padding:8px 12px;white-space:nowrap;flex-shrink:0;}
+  #char-card-grid{grid-template-columns:repeat(3,1fr)!important;gap:10px;}
+  #rm-short,#rm-long{grid-template-columns:repeat(3,1fr);gap:14px;}
+  .av-grid-lg{grid-template-columns:repeat(3,1fr);gap:10px;}
+  .sb-podium{gap:8px;}.podium-bar{width:52px;}.podium-name{font-size:.7rem;}
+  .login-card{max-width:420px;}
+}
+/* Mobile ≤480px */
+@media(max-width:480px){
+  html{font-size:15px;}
+  .topbar{padding:8px 10px;}
+  .xpbar-wrap{max-width:80px;}
+  .avbtn{width:38px;height:38px;font-size:1.3rem;}
+  .tabs,.t-tabs{padding:8px 10px 0;gap:5px;}
+  .tab{font-size:.7rem;padding:7px 9px;}
+  .tab br,.tab .th-inline{display:none;}
+  #char-card-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px;}
+  #rm-short,#rm-long{grid-template-columns:repeat(2,1fr);gap:10px;}
+  #pnl-map{padding:10px 10px 60px;}
+  .map-section-title{font-size:1.05rem;margin:14px 0 5px;}
+  .gpanel{padding:14px 12px;}
+  .ghdr{gap:6px;margin-bottom:10px;}
+  .back-btn{font-size:.78rem;padding:6px 10px;}
+  .gtb h2{font-size:1rem;}
+  .clue-emoji{font-size:2.4rem;}
+  .ogrid{grid-template-columns:1fr 1fr;gap:8px;}
+  .obtn{font-size:.95rem;padding:11px 6px;}
+  .picgrid{grid-template-columns:1fr 1fr;gap:8px;}
+  .picmoji{font-size:1.7rem;}
+  .matchgrid{grid-template-columns:1fr 1fr;gap:6px;}
+  .mitem{font-size:.88rem;padding:10px 8px;}
+  .rtmr{font-size:2.2rem;}
+  .waveform{height:36px;}
+  .recbtn{font-size:.88rem;padding:10px 16px;}
+  .nxtbtn{font-size:.92rem;padding:11px 20px;}
+  .av-grid-lg{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .av-grid{grid-template-columns:repeat(4,1fr);}
+  .bdg-grid{grid-template-columns:repeat(3,1fr);gap:7px;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .sb-podium{gap:5px;}.podium-bar{width:44px;}.podium-name{font-size:.63rem;}
+  .sb-row{padding:10px 12px;}
+  .mode-tabs{flex-direction:column;}
+  .login-card{margin:0 10px;padding:20px 16px;}
+  .login-hero{font-size:2rem;}
+}
+/* XS phones ≤360px */
+@media(max-width:360px){
+  html{font-size:14px;}
+  #rm-short,#rm-long{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .ogrid,.picgrid{grid-template-columns:1fr 1fr;}
+  .obtn{font-size:.88rem;padding:10px 5px;}
+  .clue-emoji{font-size:2rem;}
+  .av-grid-lg{grid-template-columns:repeat(2,1fr);}
+  .bdg-grid{grid-template-columns:repeat(2,1fr);}
+  .tab{font-size:.66rem;padding:6px 8px;}
+  #char-card-grid{grid-template-columns:repeat(2,1fr)!important;}
+}
+
+/* ═══ CA TASK STYLES ═══ */
+.ca-badge{display:block;background:linear-gradient(135deg,var(--g5),#6a3fa0);
+  color:#fff;font-size:.82rem;font-weight:800;padding:9px 16px;border-radius:10px;
+  margin-bottom:14px;letter-spacing:.5px;text-align:center;
+  animation:caBadgeIn .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes caBadgeIn{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+.ca-instr{background:linear-gradient(135deg,rgba(176,124,248,.1),rgba(74,179,244,.06));
+  border:1.5px dashed rgba(176,124,248,.35);border-radius:12px;
+  padding:14px 16px;margin-bottom:16px;line-height:1.7;}
+.ca-instr .en{font-size:.95rem;font-weight:700;color:var(--txt);}
+.ca-instr .th{font-size:.82rem;color:var(--muted);margin-top:4px;font-weight:600;}
+.ca-noheart{font-size:.75rem;color:var(--muted);text-align:center;margin-top:10px;font-style:italic;}
+
+/* Sound Sorter */
+.sorter-pool{margin-bottom:14px;}
+.sorter-pool-label{font-size:.72rem;font-weight:800;color:var(--muted);
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.sorter-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;min-height:52px;}
+.sorter-chip{background:var(--card2);border:2px solid var(--border);border-radius:10px;
+  padding:10px 12px;text-align:center;cursor:pointer;transition:all .2s;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.sorter-chip:hover{border-color:var(--g3);transform:scale(1.06);}
+.sorter-chip.chip-selected{border-color:var(--g1);background:rgba(247,201,72,.12);
+  box-shadow:0 0 12px rgba(247,201,72,.3);}
+.sorter-chip.chip-placed{opacity:.35;cursor:default;transform:none;}
+.sorter-chip .chip-emoji{font-size:1.8rem;display:block;line-height:1.2;}
+.sorter-chip .chip-word{font-size:.72rem;font-weight:700;color:var(--muted);
+  margin-top:3px;display:block;}
+.sorter-zones{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.sorter-zone{background:#0d1729;border:2px dashed var(--border);border-radius:12px;
+  padding:10px;min-height:90px;cursor:pointer;transition:border-color .2s;}
+.sorter-zone:hover{border-color:var(--g3);}
+.sorter-zone.zone-yes{border-color:rgba(78,220,132,.4);}
+.sorter-zone.zone-no{border-color:rgba(240,106,106,.4);}
+.sorter-zone-label{text-align:center;font-weight:800;font-size:.82rem;
+  padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.zone-yes .sorter-zone-label{color:var(--g2);}
+.zone-no .sorter-zone-label{color:var(--g4);}
+.zone-chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;min-height:40px;}
+.zone-chip{background:var(--card);border:1.5px solid var(--border);border-radius:8px;
+  padding:6px 8px;text-align:center;font-size:1.4rem;}
+.zone-chip.zc-correct{border-color:var(--g2);background:rgba(78,220,132,.15);}
+.zone-chip.zc-wrong{border-color:var(--g4);background:rgba(240,106,106,.15);}
+.sorter-score{text-align:center;font-family:'Baloo 2',cursive;font-size:1.1rem;
+  font-weight:800;color:var(--g1);margin-top:8px;display:none;}
+.sorter-check-btn{width:100%;background:linear-gradient(135deg,var(--g5),#6a3fa0);
+  color:#fff;border:none;font-family:'Nunito',sans-serif;font-weight:800;
+  font-size:1rem;padding:13px;border-radius:99px;cursor:pointer;margin-top:10px;
+  display:none;touch-action:manipulation;}
+
+/* My Favourite Word */
+.favword-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  gap:10px;margin:14px 0;}
+.favword-card{background:#0d1729;border:2px solid var(--border);border-radius:12px;
+  padding:12px 8px;text-align:center;cursor:pointer;transition:all .22s;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.favword-card:hover{border-color:var(--g3);transform:scale(1.05);}
+.favword-card.fav-selected{border-color:var(--g1);background:rgba(247,201,72,.1);
+  box-shadow:0 0 20px rgba(247,201,72,.3);}
+.favword-card .fw-emoji{font-size:2rem;display:block;margin-bottom:5px;}
+.favword-card .fw-word{font-size:1rem;font-weight:800;color:var(--txt);}
+.favword-card .fw-ipa{font-size:.7rem;color:var(--muted);margin-top:2px;
+  font-family:'Noto Sans',monospace;}
+.fav-chosen{background:rgba(247,201,72,.08);border:2px solid rgba(247,201,72,.3);
+  border-radius:12px;padding:14px;margin:12px 0;text-align:center;display:none;}
+.fav-chosen .fc-label{font-size:.72rem;font-weight:800;color:var(--g1);
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.fav-chosen .fc-frame{font-size:.95rem;font-weight:700;color:var(--txt);
+  line-height:1.6;margin-bottom:10px;}
+.fav-chosen .fc-th{font-size:.82rem;color:var(--muted);margin-bottom:12px;}
+.fav-recbtn{display:inline-flex;align-items:center;gap:8px;width:100%;
+  justify-content:center;background:linear-gradient(135deg,var(--g4),#c0392b);
+  color:#fff;border:none;font-family:'Nunito',sans-serif;font-weight:800;
+  font-size:.95rem;padding:12px 22px;border-radius:99px;cursor:pointer;
+  transition:all .2s;touch-action:manipulation;}
+.fav-waveform{display:flex;align-items:center;justify-content:center;gap:3px;
+  height:38px;margin:8px auto;width:160px;}
+.fav-wbar{width:5px;background:var(--g4);border-radius:99px;
+  transition:height .09s;}
+@media(max-width:480px){
+  .sorter-zones{grid-template-columns:1fr 1fr;}
+  .sorter-chip .chip-emoji{font-size:1.5rem;}
+  .favword-grid{grid-template-columns:repeat(3,1fr);}
+}
 </style>
 <!-- Firebase SDK (Realtime Database for live scoreboard) -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -676,6 +845,10 @@ footer span{color:var(--g3);}
         <div class="xpbar"><div class="xpfill" id="xpf" style="width:0%"></div></div>
       </div>
       <div class="lvlbdg" id="lvlb">Lv 1</div>
+      <div id="hud-streak" style="display:none;align-items:center;
+        background:rgba(240,106,106,.15);border:1.5px solid rgba(240,106,106,.35);
+        color:var(--g4);font-weight:800;font-size:.85rem;padding:5px 12px;
+        border-radius:99px;white-space:nowrap;"></div>
       <div class="avbtn" id="avbtn" onclick="showPanel('profile')">🐱</div>
       <button onclick="doLogout()"
         style="background:rgba(240,106,106,.18);border:2px solid var(--g4);color:var(--g4);
@@ -696,14 +869,36 @@ footer span{color:var(--g3);}
     <button class="tab" data-p="badges" onclick="showPanel('badges')">🏅 Badges <span class="th-inline" style="font-size:.78em;">ป้าย</span></button>
   </div>
 
-  <div id="pnl-map" style="position:relative;z-index:2;padding:20px 16px 60px;">
+  <div id="pnl-map" style="position:relative;z-index:2;padding:clamp(10px,3vw,20px) clamp(10px,3vw,16px) 60px;">
     <!-- SHORT VOWEL PLANETS -->
-    <div class="map-section-title" style="color:var(--g1);position:relative;z-index:1;">🔤 Galaxy 1: Short Vowels <span style="font-size:.6em;font-weight:600;color:var(--muted);">กาแล็กซีที่ 1: สระเสียงสั้น</span></div>
-    <div class="map-section-sub" style="position:relative;z-index:1;">Complete all planets to unlock Short Vowel Clue! <span class="th-inline">ทำทุกดาวเคราะห์ให้ครบเพื่อปลดล็อกเบาะแสสระสั้น!</span></div>
+    <div style="position:relative;z-index:1;margin:8px 0 16px;">
+  <div style="height:1px;background:linear-gradient(90deg,transparent,var(--g1),transparent);margin-bottom:12px;"></div>
+  <div style="display:flex;align-items:center;gap:12px;padding:12px 18px;
+    background:linear-gradient(135deg,rgba(247,201,72,.08),rgba(74,179,244,.05));
+    border:1.5px solid rgba(247,201,72,.2);border-radius:14px;">
+    <span style="font-size:1.8rem;">🔤</span>
+    <div>
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.1rem;color:var(--g1);">Galaxy 1: Short Vowels</div>
+      <div style="font-size:.78rem;color:var(--muted);font-weight:600;">กาแล็กซีที่ 1 · 4 planets · /æ/ /ɛ/ /ɪ/ /ɒ/</div>
+    </div>
+  </div>
+</div>
+    <div class="map-section-sub" style="position:relative;z-index:1;">Complete all planets to unlock Short Vowel Clue! <span class="th-inline">ทำทุกดาวเคราะห์ให้ครบเพื่อปลดล็อกเบาะแสสระเสียงสั้น!</span></div>
     <div id="rm-short" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px;max-width:960px;margin:0 auto 40px;position:relative;z-index:1;"></div>
     <!-- LONG VOWEL PLANETS -->
-    <div class="map-section-title" style="color:var(--g3);position:relative;z-index:1;">🌊 Galaxy 2: Long Vowels <span style="font-size:.6em;font-weight:600;color:var(--muted);">กาแล็กซีที่ 2: สระเสียงยาว</span></div>
-    <div class="map-section-sub" style="position:relative;z-index:1;">Complete all planets to unlock Long Vowel Clue! <span class="th-inline">ทำทุกดาวเคราะห์ให้ครบเพื่อปลดล็อกเบาะแสสระยาว!</span></div>
+    <div style="position:relative;z-index:1;margin:24px 0 16px;">
+  <div style="height:1px;background:linear-gradient(90deg,transparent,var(--g3),transparent);margin-bottom:12px;"></div>
+  <div style="display:flex;align-items:center;gap:12px;padding:12px 18px;
+    background:linear-gradient(135deg,rgba(74,179,244,.08),rgba(176,124,248,.05));
+    border:1.5px solid rgba(74,179,244,.2);border-radius:14px;">
+    <span style="font-size:1.8rem;">🌊</span>
+    <div>
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.1rem;color:var(--g3);">Galaxy 2: Long Vowels</div>
+      <div style="font-size:.78rem;color:var(--muted);font-weight:600;">กาแล็กซีที่ 2 · 4 planets · /eɪ/ /iː/ /oʊ/ /aɪ/</div>
+    </div>
+  </div>
+</div>
+    <div class="map-section-sub" style="position:relative;z-index:1;">Complete all planets to unlock Long Vowel Clue! <span class="th-inline">ทำทุกดาวเคราะห์ให้ครบเพื่อปลดล็อกเบาะแสสระเสียงยาว!</span></div>
     <div id="rm-long" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px;max-width:960px;margin:0 auto 40px;position:relative;z-index:1;"></div>
     <!-- FINAL MISSION: BLACKHOLE -->
     <div class="final-box" id="final-box" style="position:relative;z-index:1;">
@@ -1453,7 +1648,39 @@ const MISSIONS=[
      clueEmoji:'🚂🐝💡',clueHint:"A sentence with /eɪ/, /iː/, /oʊ/, and /aɪ/!",
      ok:"✅ train/eɪ/ bee/iː/ float/oʊ/ light/aɪ/ — FOUR long vowels! GALAXY DEFEATED! 🌌🏆🎉"}
    ]}
-];
+,
+    {t:'sorter',ph:'/æ/',
+     ok:'🎉 Great sorting! / เยี่ยม! จัดเรียงได้ถูกต้อง!',
+     no:'Keep trying! / ลองใหม่อีกครั้ง!',
+     items:[{e:'🐟',w:'fish',c:false},{e:'🎒',w:'bag',c:true},{e:'☕',w:'cup',c:false},{e:'🦀',w:'crab',c:true},{e:'🌙',w:'moon',c:false},{e:'🪰',w:'fly',c:false},{e:'🧢',w:'cap',c:true},{e:'📦',w:'box',c:false}]},
+    {t:'favword',ph:'/ɛ/',
+     ok:'⭐ Favourite word recorded! / บันทึกคำโปรดแล้ว!',
+     no:'Keep going! / ต่อไป!',
+     words:[{e:'🛏️',w:'bed'},{e:'🔴',w:'red'},{e:'🖊️',w:'pen'},{e:'🕸️',w:'web'},{e:'🦆',w:'hen'},{e:'🔟',w:'ten'}]},
+    {t:'sorter',ph:'/ɪ/',
+     ok:'🎉 Great sorting! / เยี่ยม! จัดเรียงได้ถูกต้อง!',
+     no:'Keep trying! / ลองใหม่อีกครั้ง!',
+     items:[{e:'🐟',w:'fish',c:true},{e:'🎂',w:'cake',c:false},{e:'🥛',w:'milk',c:true},{e:'⛵',w:'boat',c:false},{e:'🦵',w:'kick',c:true},{e:'🌙',w:'moon',c:false},{e:'🎁',w:'gift',c:true},{e:'🛣️',w:'road',c:false}]},
+    {t:'favword',ph:'/ɒ/',
+     ok:'⭐ Favourite word recorded! / บันทึกคำโปรดแล้ว!',
+     no:'Keep going! / ต่อไป!',
+     words:[{e:'🔥',w:'hot'},{e:'🐶',w:'dog'},{e:'📦',w:'box'},{e:'🦊',w:'fox'},{e:'🔝',w:'top'},{e:'🫙',w:'pot'}]},
+    {t:'sorter',ph:'/eɪ/',
+     ok:'🎉 Great sorting! / เยี่ยม! จัดเรียงได้ถูกต้อง!',
+     no:'Keep trying! / ลองใหม่อีกครั้ง!',
+     items:[{e:'🌧️',w:'rain',c:true},{e:'🏃',w:'run',c:false},{e:'🍰',w:'cake',c:true},{e:'🐱',w:'cat',c:false},{e:'🚂',w:'train',c:true},{e:'🐷',w:'pig',c:false},{e:'☀️',w:'day',c:true},{e:'📦',w:'box',c:false}]},
+    {t:'favword',ph:'/iː/',
+     ok:'⭐ Favourite word recorded! / บันทึกคำโปรดแล้ว!',
+     no:'Keep going! / ต่อไป!',
+     words:[{e:'🌳',w:'tree'},{e:'🐝',w:'bee'},{e:'👣',w:'feet'},{e:'🌱',w:'seed'},{e:'📅',w:'week'},{e:'🟢',w:'green'}]},
+    {t:'sorter',ph:'/oʊ/',
+     ok:'🎉 Great sorting! / เยี่ยม! จัดเรียงได้ถูกต้อง!',
+     no:'Keep trying! / ลองใหม่อีกครั้ง!',
+     items:[{e:'⛵',w:'boat',c:true},{e:'🎩',w:'hat',c:false},{e:'🧥',w:'coat',c:true},{e:'🐱',w:'cat',c:false},{e:'🐸',w:'toad',c:true},{e:'☕',w:'cup',c:false},{e:'🐐',w:'goat',c:true},{e:'🐷',w:'pig',c:false}]},
+    {t:'favword',ph:'/aɪ/',
+     ok:'⭐ Favourite word recorded! / บันทึกคำโปรดแล้ว!',
+     no:'Keep going! / ต่อไป!',
+     words:[{e:'💡',w:'light'},{e:'🌙',w:'night'},{e:'✅',w:'right'},{e:'💪',w:'might'},{e:'👁️',w:'sight'},{e:'✈️',w:'flight'}]}];
 
 /* ══════════════════════════════════════════════
    FINAL MISSION CLUES
@@ -2273,7 +2500,7 @@ function renderTPasswords(){
   const pnl=document.getElementById('t-pnl-passwords');
   let rows='';
   STUDENTS.forEach((s,i)=>{
-    rows+=`<tr><td>${i+1}</td><td><strong>${s.name}</strong></td><td style="font-family:monospace;color:var(--g5);letter-spacing:1px;">${s.pw}</td></tr>`;
+    rows+=`<tr><td>${i+1}</td><td><strong>${s.name}</strong></td><td style="font-family:'Noto Sans',monospace;color:var(--g5);letter-spacing:1px;">${s.pw}</td></tr>`;
   });
   pnl.innerHTML=`<div class="t-card"><h3>🔑 Student Passwords</h3>
     <p style="font-size:.78rem;color:var(--muted);margin-bottom:12px;">Each student has a unique 7-character password (digits + lowercase letters).</p>
@@ -2385,7 +2612,7 @@ async function buildCharacterSelection(){
       <div style="width:100%;padding-top:100%;position:relative;border-radius:12px;overflow:hidden;background:#0a1628;margin-bottom:8px;">
         <img src="${file.url}" alt="${meta.name}"
           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          loading="lazy" onload="this.style.opacity='1'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;
           font-size:3.8rem;background:radial-gradient(circle,#16213e,#07090f);">${meta.emoji}</div>
       </div>
@@ -2566,7 +2793,7 @@ function renderPlanetCards(pathId, missions, containerId){
     imgWrap.innerHTML = `
       <img src="${imgSrc}" alt="${m.title}"
         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        loading="lazy" onload="this.style.opacity='1'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
       <div style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:radial-gradient(circle,${m.col}22,#0a1628);">
         <span style="font-size:3rem;">${m.icon}</span>
         <span style="font-size:.7rem;font-weight:700;color:${m.col};text-align:center;padding:0 6px;">${m.sub}</span>
@@ -2756,7 +2983,13 @@ function renderDots(n){
 }
 function updDots(i){
   const n=S.curMission.tasks.length;
-  for(let j=0;j<n;j++){const d=document.getElementById('d'+j);if(d)d.className='dot'+(j<i?' done':(j===i?' active':''));}
+  const tasks=S.curMission.tasks;
+  for(let j=0;j<n;j++){
+    const d=document.getElementById('d'+j);if(!d)continue;
+    const isCA=tasks[j]&&(tasks[j].t==='sorter'||tasks[j].t==='favword');
+    d.className='dot'+(j<i?' done':(j===i?' active':''));
+    d.style.background=j<i?'':(j===i?(isCA?'var(--g5)':''):(isCA?'rgba(176,124,248,.4)':''));
+  }
 }
 function renderLives(){
   const ld=document.getElementById('lives-display');if(!ld)return;ld.innerHTML='';
@@ -2767,6 +3000,9 @@ function renderLives(){
 }
 function loseLife(){
   S.lives--;renderLives();
+  const gc2=document.getElementById('gc');
+  if(gc2){gc2.style.outline='3px solid rgba(240,106,106,.6)';
+    setTimeout(()=>gc2.style.outline='',400);}
   if(S.lives<=0){showGameOver();return true;}
   return false;
 }
@@ -2795,6 +3031,305 @@ function renderTask(){
   else if(tk.t==='rapid')renderRapid(tk,gc);
   else if(tk.t==='match')renderMatch(tk,gc);
   else if(tk.t==='sb')renderSB(tk,gc);
+  else if(tk.t==='sorter')renderSorter(tk,gc);
+  else if(tk.t==='favword')renderFavWord(tk,gc);
+}
+
+
+/* ══════════════════════════════════════════════
+   CA TASK 1: SOUND SORTER
+   Student sorts NEW words into YES/NO buckets
+   Creative = transfer of knowledge to novel items
+══════════════════════════════════════════════ */
+function renderSorter(tk, gc){
+  const p = mkP(
+    bi('🔀 Sound Sorter','🔀 จัดเรียงเสียง'),
+    bi('Sort the NEW words — has this sound or not?','จัดคำใหม่ — มีเสียงนี้หรือไม่?')
+  );
+  // CA badge
+  const badge = document.createElement('div');
+  badge.innerHTML = '<div class="ca-badge">🌟 PLANET CHALLENGE — Creative Task / งานสร้างสรรค์</div>';
+  p.appendChild(badge);
+
+  // Instruction
+  const instr = document.createElement('div');
+  instr.className = 'ca-instr';
+  instr.innerHTML = `
+    <div class="en">These words are NEW — not from the mission! Tap a word, then tap the correct bucket.<br>Does it have the <strong>${tk.ph}</strong> sound or not?</div>
+    <div class="th">คำเหล่านี้เป็นคำใหม่! แตะคำ แล้วแตะถังที่ถูกต้อง — มีเสียง ${tk.ph} หรือไม่?</div>`;
+  p.appendChild(instr);
+
+  // Pool of chips
+  const poolWrap = document.createElement('div');
+  poolWrap.className = 'sorter-pool';
+  poolWrap.innerHTML = '<div class="sorter-pool-label">Tap to select / แตะเพื่อเลือก</div>';
+  const pool = document.createElement('div');
+  pool.className = 'sorter-chips';
+  pool.id = 'sort-pool';
+
+  // Shuffle items so they appear random each time
+  const items = [...tk.items].sort(() => Math.random() - .5);
+  items.forEach(item => {
+    const chip = document.createElement('div');
+    chip.className = 'sorter-chip';
+    chip.dataset.word = item.w;
+    chip.dataset.correct = item.c;
+    chip.innerHTML = `<span class="chip-emoji">${item.e}</span><span class="chip-word">${item.w}</span>`;
+    chip.onclick = () => selectSorterChip(chip);
+    pool.appendChild(chip);
+  });
+  poolWrap.appendChild(pool);
+  p.appendChild(poolWrap);
+
+  // Drop zones
+  const zones = document.createElement('div');
+  zones.className = 'sorter-zones';
+  zones.innerHTML = `
+    <div class="sorter-zone zone-yes" id="zone-yes" onclick="placeSorterChip(true)">
+      <div class="sorter-zone-label">✅ YES — has ${tk.ph}</div>
+      <div class="zone-chips" id="zchips-yes"></div>
+    </div>
+    <div class="sorter-zone zone-no" id="zone-no" onclick="placeSorterChip(false)">
+      <div class="sorter-zone-label">❌ NO — no ${tk.ph}</div>
+      <div class="zone-chips" id="zchips-no"></div>
+    </div>`;
+  p.appendChild(zones);
+
+  // Score display + check button
+  const scoreDiv = document.createElement('div');
+  scoreDiv.className = 'sorter-score';
+  scoreDiv.id = 'sorter-score';
+  p.appendChild(scoreDiv);
+
+  const checkBtn = document.createElement('button');
+  checkBtn.className = 'sorter-check-btn';
+  checkBtn.id = 'sorter-check';
+  checkBtn.innerHTML = bi('✅ Check my sorting!','✅ ตรวจคำตอบ!');
+  checkBtn.onclick = () => checkSorter(tk);
+  p.appendChild(checkBtn);
+
+  p.appendChild(mkFb());
+  p.appendChild(mkNxt());
+  gc.appendChild(p);
+
+  // State
+  window._sorterSelected = null;
+  window._sorterPlaced = 0;
+  window._sorterTotal = items.length;
+}
+
+function selectSorterChip(chip){
+  if(chip.classList.contains('chip-placed')) return;
+  document.querySelectorAll('.sorter-chip').forEach(c => c.classList.remove('chip-selected'));
+  if(window._sorterSelected === chip){ window._sorterSelected = null; return; }
+  chip.classList.add('chip-selected');
+  window._sorterSelected = chip;
+}
+
+function placeSorterChip(isYes){
+  const chip = window._sorterSelected;
+  if(!chip) return;
+  chip.classList.remove('chip-selected');
+  chip.classList.add('chip-placed');
+  window._sorterSelected = null;
+
+  // Add to zone
+  const zoneId = isYes ? 'zchips-yes' : 'zchips-no';
+  const zone = document.getElementById(zoneId);
+  const zchip = document.createElement('div');
+  zchip.className = 'zone-chip';
+  zchip.dataset.word = chip.dataset.word;
+  zchip.dataset.correct = chip.dataset.correct;
+  zchip.dataset.placedYes = isYes;
+  zchip.innerHTML = chip.querySelector('.chip-emoji').textContent;
+  zchip.title = chip.querySelector('.chip-word').textContent;
+  zone.appendChild(zchip);
+
+  window._sorterPlaced++;
+  if(window._sorterPlaced >= window._sorterTotal){
+    document.getElementById('sorter-check').style.display = 'block';
+  }
+}
+
+function checkSorter(tk){
+  let score = 0;
+  const allZoneChips = document.querySelectorAll('.zone-chip');
+  allZoneChips.forEach(zc => {
+    const correct = zc.dataset.correct === 'true';
+    const placedYes = zc.dataset.placedYes === 'true';
+    const isCorrect = correct === placedYes;
+    zc.classList.add(isCorrect ? 'zc-correct' : 'zc-wrong');
+    if(isCorrect) score++;
+  });
+  const total = allZoneChips.length;
+  const ok = score >= Math.ceil(total * 0.75); // 75%+ = pass
+
+  const scoreDiv = document.getElementById('sorter-score');
+  scoreDiv.style.display = 'block';
+  scoreDiv.innerHTML = `${score}/${total} correct! ${score===total?'🎉 Perfect!':ok?'✅ Good job!':'Keep practising!'}<br>
+    <span style="font-size:.8rem;color:var(--muted);">+${score*5} XP</span>`;
+
+  document.getElementById('sorter-check').style.display = 'none';
+
+  const tk2 = S.curMission.tasks[S.task];
+  const fbMsg = ok
+    ? `🎉 Great sorting! You identified the ${tk.ph} sounds! / เยี่ยม! คุณจำแนกเสียง ${tk.ph} ได้แล้ว!`
+    : `Keep practising! Green = correct / ฝึกต่อไป! สีเขียว = ถูกต้อง`;
+  showFb(ok, tk2, fbMsg);
+  addXP(score * 5);
+  if(ok){ streak(true); S.results.push(true); showNxt(); }
+  else{ streak(false); S.results.push(false); }
+}
+
+/* ══════════════════════════════════════════════
+   CA TASK 2: MY FAVOURITE WORD
+   Student chooses a word they like + records it
+   Creative = personal choice + voice production
+══════════════════════════════════════════════ */
+function renderFavWord(tk, gc){
+  const p = mkP(
+    bi('⭐ My Favourite Word','⭐ คำโปรดของฉัน'),
+    bi('Pick the word YOU like most, then record it!','เลือกคำที่คุณชอบที่สุด แล้วบันทึกเสียง!')
+  );
+
+  const badge = document.createElement('div');
+  badge.innerHTML = '<div class="ca-badge">🌟 PLANET CHALLENGE — Creative Task / งานสร้างสรรค์</div>';
+  p.appendChild(badge);
+
+  const instr = document.createElement('div');
+  instr.className = 'ca-instr';
+  instr.innerHTML = `
+    <div class="en">Look at all the words below. Choose <strong>ONE</strong> you like most — any reason is fine!<br>
+    Then record yourself saying: <em>"I like the word ___, /sound/ /sound/ /sound/, ___"</em></div>
+    <div class="th">ดูคำทั้งหมด เลือก <strong>1 คำ</strong> ที่ชอบที่สุด — เหตุผลอะไรก็ได้!<br>
+    แล้วพูดว่า: <em>"I like the word ___, /เสียง/ /เสียง/ /เสียง/, ___"</em></div>`;
+  p.appendChild(instr);
+
+  // Word cards grid
+  const grid = document.createElement('div');
+  grid.className = 'favword-grid';
+  grid.id = 'favword-grid';
+  tk.words.forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'favword-card';
+    card.innerHTML = `<span class="fw-emoji">${w.e}</span>
+      <div class="fw-word">${w.w}</div>
+      <div class="fw-ipa">${tk.ph}</div>`;
+    card.onclick = () => selectFavWord(card, w, tk);
+    grid.appendChild(card);
+  });
+  p.appendChild(grid);
+
+  // Chosen display (hidden until selected)
+  const chosenDiv = document.createElement('div');
+  chosenDiv.className = 'fav-chosen';
+  chosenDiv.id = 'fav-chosen';
+  p.appendChild(chosenDiv);
+
+  const note = document.createElement('p');
+  note.className = 'ca-noheart';
+  note.textContent = 'No hearts lost on this task — just choose and try! / ไม่เสียหัวใจ — แค่เลือกและลอง!';
+  p.appendChild(note);
+
+  p.appendChild(mkFb());
+  p.appendChild(mkNxt());
+  gc.appendChild(p);
+  window._favRec = false;
+  window._favIv = null;
+}
+
+function selectFavWord(card, word, tk){
+  document.querySelectorAll('.favword-card').forEach(c => c.classList.remove('fav-selected'));
+  card.classList.add('fav-selected');
+
+  const cd = document.getElementById('fav-chosen');
+  cd.style.display = 'block';
+  cd.innerHTML = `
+    <div class="fc-label">You chose / คุณเลือก</div>
+    <div style="font-size:2.2rem;margin-bottom:6px;">${word.e}</div>
+    <div class="fc-frame">Say: <em>"I like the word <strong>${word.w}</strong>, ${tk.ph} ${tk.ph} ${tk.ph}, <strong>${word.w}</strong>."</em></div>
+    <div class="fc-th">พูดว่า: "ฉันชอบคำว่า ${word.w}" แล้วออกเสียง ${tk.ph} สามครั้ง</div>
+    <div class="fav-waveform" id="fav-wf">
+      ${'<div class="fav-wbar" style="height:6px;"></div>'.repeat(14)}
+    </div>
+    <button class="fav-recbtn" id="fav-rb" onclick="toggleFavRec('${word.w}',\`${tk.ph}\`)">
+      🎙️ ${bi('Record yourself / บันทึกเสียง','Record yourself / บันทึกเสียง')}
+    </button>`;
+}
+
+function toggleFavRec(word, ph){
+  const rb = document.getElementById('fav-rb');
+  const bars = document.getElementById('fav-wf')?.querySelectorAll('.fav-wbar');
+  if(!rb) return;
+
+  if(window._favRec){
+    // Stop
+    window._favRec = false;
+    clearInterval(window._favIv);
+    if(window._favSR){ try{window._favSR.stop();}catch(e){} }
+    rb.innerHTML = '🎙️ ' + bi('Record yourself / บันทึกเสียง','Record yourself / บันทึกเสียง');
+    bars?.forEach(b => b.style.height = '6px');
+    return;
+  }
+
+  // Start
+  window._favRec = true;
+  rb.innerHTML = bi('⏹ Recording… / กำลังบันทึก…','⏹ Recording… / กำลังบันทึก…');
+  window._favIv = setInterval(() =>
+    bars?.forEach(b => b.style.height = (Math.random()*30+5)+'px'), 110);
+
+  // Try Web Speech API for recognition
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(SR){
+    const recog = new SR();
+    window._favSR = recog;
+    recog.lang = 'en-US';
+    recog.maxAlternatives = 5;
+    recog.onresult = (event) => {
+      clearInterval(window._favIv);
+      bars?.forEach(b => b.style.height = '6px');
+      window._favRec = false;
+      rb.style.display = 'none';
+
+      const heard = Array.from({length: event.results[0].length}, (_,i) =>
+        event.results[0][i].transcript.toLowerCase().trim());
+      const wordClean = word.toLowerCase();
+      const saidWord = heard.some(h => h.includes(wordClean));
+
+      const tk2 = S.curMission.tasks[S.task];
+      const fbMsg = saidWord
+        ? `⭐ Favourite word recorded! "${word}" saved. / บันทึกคำโปรด "${word}" แล้ว!<br>
+           <span style="font-size:.78em;opacity:.8;">🎤 Heard: "${heard[0]}" ✓</span>`
+        : `🎤 Heard: "${heard[0]||'nothing'}" — try saying "${word}" clearly!<br>
+           <span style="font-size:.78em;color:var(--muted);">ลองพูด "${word}" ให้ชัดขึ้น</span>`;
+
+      showFb(true, tk2, fbMsg); // Always pass — creative task, no wrong answer
+      addXP(20); streak(true); S.results.push(true); showNxt();
+    };
+    recog.onerror = () => {
+      clearInterval(window._favIv);
+      bars?.forEach(b => b.style.height = '6px');
+      window._favRec = false;
+      // Auto-pass on mic error — creative task
+      const tk2 = S.curMission.tasks[S.task];
+      showFb(true, tk2, `⭐ Great choice! "${word}" is your favourite word! / "${word}" คือคำโปรดของคุณ!`);
+      addXP(20); streak(true); S.results.push(true); showNxt();
+    };
+    recog.onend = () => { window._favRec = false; clearInterval(window._favIv); };
+    setTimeout(() => { if(window._favSR){ try{window._favSR.stop();}catch(e){} } }, 5000);
+    recog.start();
+  } else {
+    // No Speech API — auto pass after 4 seconds
+    setTimeout(() => {
+      clearInterval(window._favIv);
+      bars?.forEach(b => b.style.height = '6px');
+      window._favRec = false;
+      rb.style.display = 'none';
+      const tk2 = S.curMission.tasks[S.task];
+      showFb(true, tk2, `⭐ "${word}" is your favourite ${ph} word! / "${word}" คือคำโปรดของคุณ!`);
+      addXP(20); streak(true); S.results.push(true); showNxt();
+    }, 4000);
+  }
 }
 
 /* helpers */
@@ -2896,35 +3431,156 @@ function toggleRec(w){
   const b=document.getElementById('recbtn');
   const bars=document.querySelectorAll('.wbar');
   if(!b)return;
+
+  // If already recording — stop
   if(b.classList.contains('recording')){
-    b.classList.remove('recording');b.innerHTML='🎙️ Tap to Record';
+    b.classList.remove('recording');
+    b.innerHTML=bi('🎙️ Tap to Record','🎙️ แตะเพื่อบันทึก');
     bars.forEach(x=>x.style.height='6px');
     clearInterval(S.waveIv);clearTimeout(S.recTO);
-    setTimeout(()=>simSpk(w),700);
-  } else {
-    b.classList.add('recording');b.innerHTML=bi('⏹ Recording…','⏹ กำลังบันทึก…');
-    S.waveIv=setInterval(()=>bars.forEach(x=>x.style.height=(Math.random()*34+5)+'px'),110);
-    S.recTO=setTimeout(()=>toggleRec(w),3500);
+    if(S._spkRecog){try{S._spkRecog.stop();}catch(e){}}
+    return;
   }
+
+  // Check Web Speech API support
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    // Fallback: no speech API — show manual self-assess buttons
+    showManualSpkAssess(w);
+    return;
+  }
+
+  // Start recording UI
+  b.classList.add('recording');
+  b.innerHTML=bi('⏹ Recording…','⏹ กำลังฟัง…');
+  S.waveIv=setInterval(()=>bars.forEach(x=>x.style.height=(Math.random()*34+5)+'px'),110);
+  S.recTO=setTimeout(()=>{
+    if(S._spkRecog){try{S._spkRecog.stop();}catch(e){}}
+  },4000);
+
+  // Set up speech recognition
+  const recog=new SpeechRecognition();
+  S._spkRecog=recog;
+  recog.lang='en-US';
+  recog.interimResults=false;
+  recog.maxAlternatives=5;
+
+  recog.onresult=(event)=>{
+    clearInterval(S.waveIv);clearTimeout(S.recTO);
+    b.classList.remove('recording');
+    b.innerHTML=bi('🎙️ Tap to Record','🎙️ แตะเพื่อบันทึก');
+    bars.forEach(x=>x.style.height='6px');
+
+    // Collect all alternatives the browser heard
+    const heard=[];
+    for(let i=0;i<event.results[0].length;i++){
+      heard.push(event.results[0][i].transcript.toLowerCase().trim());
+    }
+
+    // Check if target word appears in any alternative
+    const target=w.toLowerCase().replace(/[^a-z]/g,'');
+    const ok=heard.some(h=>{
+      const hClean=h.replace(/[^a-z\s]/g,'');
+      return hClean===target || hClean.includes(target) || target.includes(hClean);
+    });
+
+    // Show what was heard in feedback
+    const heardDisplay=heard[0]||'(nothing heard)';
+    const tk=S.curMission.tasks[S.task];
+    const fbMsg=ok
+      ? `${tk.ok}<br><span style="font-size:.78em;opacity:.8;">🎤 Heard: "${heardDisplay}" ✓</span>`
+      : `${tk.no}<br><span style="font-size:.78em;opacity:.8;">🎤 Heard: "${heardDisplay}" — try saying <strong>${w}</strong> again</span><br><span style="font-size:.75em;color:#ffa0a0;">ได้ยิน: "${heardDisplay}" — ลองพูด "${w}" ใหม่อีกครั้ง</span>`;
+
+    showFb(ok,tk,fbMsg);
+    if(ok){addXP(20);streak(true);S.speakOk++;if(S.speakOk>=3)grantBadge('voice');showNxt();S.results.push(true);}
+    else{streak(false);S.results.push(false);
+      const dead=loseLife();
+      if(!dead&&b){b.innerHTML=bi('🔄 Try Again','🔄 ลองอีกครั้ง');b.classList.remove('recording');}
+    }
+  };
+
+  recog.onerror=(event)=>{
+    clearInterval(S.waveIv);clearTimeout(S.recTO);
+    b.classList.remove('recording');
+    b.innerHTML=bi('🎙️ Tap to Record','🎙️ แตะเพื่อบันทึก');
+    bars.forEach(x=>x.style.height='6px');
+
+    if(event.error==='not-allowed'||event.error==='permission-denied'){
+      // Microphone blocked — show manual fallback
+      showManualSpkAssess(w);
+    } else if(event.error==='no-speech'){
+      // Nothing heard — prompt to try again
+      const fb=document.getElementById('fb');
+      if(fb){fb.className='fbbox show fbno';
+        fb.innerHTML=`🔇 No voice detected. Please speak clearly into your microphone.<br>
+          <span style="font-size:.82em;color:var(--muted);">ไม่ได้ยินเสียง — พูดให้ชัดขึ้นใกล้ไมโครโฟน</span>`;}
+    } else {
+      showManualSpkAssess(w);
+    }
+  };
+
+  recog.onend=()=>{
+    clearInterval(S.waveIv);
+    if(b.classList.contains('recording')){
+      b.classList.remove('recording');
+      b.innerHTML=bi('🎙️ Tap to Record','🎙️ แตะเพื่อบันทึก');
+      bars.forEach(x=>x.style.height='6px');
+    }
+  };
+
+  try{recog.start();}
+  catch(e){showManualSpkAssess(w);}
 }
-function simSpk(w){
+
+/* ── Manual self-assess fallback (when mic not available) ── */
+function showManualSpkAssess(w){
+  const gc=document.getElementById('gc');
+  const existing=document.getElementById('manual-assess');
+  if(existing)return; // already showing
+  const div=document.createElement('div');
+  div.id='manual-assess';
+  div.style.cssText='background:rgba(247,201,72,.08);border:2px solid rgba(247,201,72,.3);border-radius:13px;padding:14px 16px;margin-top:12px;text-align:center;';
+  div.innerHTML=`
+    <div style="font-size:.88rem;font-weight:700;color:var(--g1);margin-bottom:8px;">
+      🎤 Microphone not available — Did you say <strong>"${w}"</strong> correctly?<br>
+      <span style="font-size:.8em;color:var(--muted);">ไมโครโฟนไม่พร้อม — คุณพูด "${w}" ได้ถูกต้องไหม?</span>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button onclick="selfAssess(true,'${w}')" style="background:linear-gradient(135deg,var(--g2),#27ae60);color:#041208;border:none;font-family:'Nunito',sans-serif;font-weight:800;font-size:.92rem;padding:10px 20px;border-radius:99px;cursor:pointer;">
+        ✅ Yes, I said it! / ใช่ พูดได้!
+      </button>
+      <button onclick="selfAssess(false,'${w}')" style="background:rgba(240,106,106,.2);color:var(--g4);border:2px solid var(--g4);font-family:'Nunito',sans-serif;font-weight:800;font-size:.92rem;padding:10px 20px;border-radius:99px;cursor:pointer;">
+        ❌ Not yet / ยังไม่ได้
+      </button>
+    </div>`;
+  if(gc)gc.appendChild(div);
+}
+
+function selfAssess(ok,w){
+  const div=document.getElementById('manual-assess');
+  if(div)div.remove();
   const tk=S.curMission.tasks[S.task];
-  const ok=Math.random()>.25;
   showFb(ok,tk);
   if(ok){addXP(20);streak(true);S.speakOk++;if(S.speakOk>=3)grantBadge('voice');showNxt();S.results.push(true);}
   else{streak(false);S.results.push(false);
     const dead=loseLife();
-    const b=document.getElementById('recbtn');if(!dead&&b){b.innerHTML='🔄 Try Again';b.classList.remove('recording');}
+    const b=document.getElementById('recbtn');
+    if(!dead&&b){b.innerHTML=bi('🔄 Try Again','🔄 ลองอีกครั้ง');b.classList.remove('recording');}
   }
 }
+
+function simSpk(w){ toggleRec(w); } // legacy alias — redirects to real function
 
 /* ── RAPID ── */
 function renderRapid(tk,gc){
   const p=mkP(bi('⚡ Rapid Challenge!','⚡ รอบด่วน!'),biQ(tk.q));
   p.innerHTML+=`<div class="clue-ph" style="margin-bottom:10px;">${tk.ph}</div><div class="rtmr" id="rtmr">12</div>`;
   const og=document.createElement('div');og.className='ogrid';og.id='og';
-  tk.words.forEach((w,i)=>{
-    const b=document.createElement('button');b.className='obtn';b.textContent=w;b.dataset.sel='false';
+  // Shuffle words so pattern is not always left=correct, right=wrong
+  const shuffledWords=[...tk.words.map((w,i)=>({w,i}))].sort(()=>Math.random()-.5);
+  shuffledWords.forEach(({w,i})=>{
+    const b=document.createElement('button');b.className='obtn';b.textContent=w;
+    b.dataset.sel='false';b.dataset.origIdx=i;
     b.onclick=()=>{b.dataset.sel=b.dataset.sel==='true'?'false':'true';
       b.style.borderColor=b.dataset.sel==='true'?'var(--g1)':'';
       b.style.background=b.dataset.sel==='true'?'rgba(247,201,72,.1)':'';};
@@ -2944,12 +3600,16 @@ function renderRapid(tk,gc){
 function chkRapid(tk,og){
   if(!og)return;
   const btns=og.querySelectorAll('.obtn');
-  const chosen=[];btns.forEach((b,i)=>{if(b.dataset.sel==='true')chosen.push(i);});
+  // Use origIdx to handle shuffled order
+  const chosen=[];btns.forEach(b=>{if(b.dataset.sel==='true')chosen.push(parseInt(b.dataset.origIdx||0));});
   btns.forEach(b=>b.disabled=true);
   const ok=JSON.stringify(chosen.sort())===JSON.stringify([...tk.ans].sort());
-  tk.ans.forEach(i=>{if(btns[i])btns[i].classList.add('correct');});
-  chosen.filter(i=>!tk.ans.includes(i)).forEach(i=>{if(btns[i])btns[i].classList.add('wrong');});
-  showFb(ok,tk);
+  btns.forEach(b=>{const oi=parseInt(b.dataset.origIdx||0);
+    if(tk.ans.includes(oi))b.classList.add('correct');
+    else if(b.dataset.sel==='true')b.classList.add('wrong');});
+  const _cWords=tk.words.filter((_,i)=>tk.ans.includes(i));
+  const _rfFb=ok?undefined:`<span style="font-size:.8em;display:block;margin-top:5px;color:var(--g2);">✅ Correct words: <strong>${_cWords.join(', ')}</strong> / คำที่ถูก</span>`;
+  showFb(ok,tk,_rfFb);
   if(ok){addXP(25);grantBadge('rapid');streak(true);}else{streak(false);loseLife();}
   S.results.push(ok);showNxt();
 }
@@ -3022,9 +3682,14 @@ function clrSB(){
 }
 function chkSB(target){
   const built=[...document.querySelectorAll('#sba .wchip')].map(c=>c.dataset.w).join(' ');
-  const ok=built===target;
+  // Accept exact match OR case-insensitive match
+  const ok=built.toLowerCase()===target.toLowerCase();
   const tk=S.curMission.tasks[S.task];
-  showFb(ok,tk,ok?undefined:`❌ Not quite! Correct order: "${target}"`);
+  const fbMsg=ok?undefined:
+    `❌ Not quite! / ยังไม่ถูก!<br>
+     <span style="font-size:.82em;">You built: <em>"${built}"</em></span><br>
+     <span style="font-size:.82em;color:var(--g2);">✅ Correct: <strong>"${target}"</strong></span>`;
+  showFb(ok,tk,fbMsg);
   if(ok){addXP(30);streak(true);showNxt();S.results.push(true);}
   else{streak(false);S.results.push(false);loseLife();}
 }
@@ -3053,13 +3718,41 @@ function finishMission(){
 }
 function showFinish(pass,total){
   const gc=document.getElementById('gc');
+  const pct=Math.round(pass/total*100);
   const stars=pass===total?'⭐⭐⭐':pass>=Math.ceil(total*2/3)?'⭐⭐☆':'⭐☆☆';
-  gc.innerHTML=`<div class="gpanel" style="text-align:center;">
-    <div style="font-size:3.4rem;margin-bottom:8px">${stars}</div>
-    <h3 style="font-size:1.5rem;margin-bottom:5px">Mission Complete! <span style="font-size:.65em;display:block;color:var(--muted);">ภารกิจสำเร็จ!</span></h3>
-    <div style="color:var(--muted);margin-bottom:12px;font-size:1.05rem;">${pass}/${total} tasks correct / ถูกต้อง</div>
-    <div style="font-size:2rem;font-weight:800;color:var(--g1);margin-bottom:20px">+${pass*15} XP! 🎉</div>
-    <button class="nxtbtn show" style="margin:0 auto;font-size:1.05rem;" onclick="showPanel('map')">🪐 Back to Planet Map / กลับแผนที่ดาว</button>
+  const xp=pass*15;
+  const m=S.curMission;
+  const msg=pass===total?'Perfect! You mastered every sound! / สมบูรณ์แบบ!':
+    pass>=Math.ceil(total*2/3)?'Great work! / ทำได้ดีมาก!':'Good effort! Try again! / ลองใหม่อีกครั้ง!';
+  gc.innerHTML=`<div class="gpanel" style="text-align:center;padding:24px 18px;">
+    <div style="font-size:3rem;margin-bottom:10px;animation:pop .5s ease;">${stars}</div>
+    <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.5rem;
+      background:linear-gradient(135deg,var(--g1),var(--g3));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;margin-bottom:2px;">Mission Complete!</div>
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">ภารกิจสำเร็จ!</div>
+    <div style="background:#0d1729;border-radius:12px;padding:12px 16px;margin-bottom:14px;text-align:left;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:7px;">
+        <span style="font-size:.8rem;color:var(--muted);">Score</span>
+        <span style="font-size:.95rem;font-weight:800;color:var(--g1);">${pass}/${total}</span>
+      </div>
+      <div style="height:8px;background:var(--border);border-radius:99px;overflow:hidden;">
+        <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--g2),var(--g3));border-radius:99px;"></div>
+      </div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:6px;">${msg}</div>
+    </div>
+    <div style="display:inline-flex;align-items:center;gap:10px;
+      background:rgba(247,201,72,.1);border:1.5px solid rgba(247,201,72,.3);
+      border-radius:12px;padding:10px 18px;margin-bottom:16px;">
+      <span style="font-size:1.4rem;">⚡</span>
+      <div style="text-align:left;">
+        <div style="font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:900;color:var(--g1);">+${xp} XP</div>
+        <div style="font-size:.7rem;color:var(--muted);">added to total / เพิ่มในคะแนนรวม</div>
+      </div>
+    </div>
+    ${m?'<div style="background:#0d1729;border-radius:10px;padding:9px 14px;margin-bottom:16px;font-size:.8rem;color:var(--muted);">🎯 Sound practiced: <strong style="color:var(--g3);">'+m.sub+'</strong></div>':''}
+    <button class="nxtbtn show" style="margin:0 auto;width:100%;font-size:1rem;"
+      onclick="showPanel('map')">🪐 Back to Planet Map / กลับแผนที่ดาว</button>
   </div>`;
 }
 
@@ -3081,6 +3774,8 @@ function updateHUD(){
   const xpm=document.getElementById('xpm');if(xpm)xpm.textContent=nt;
   const xpf=document.getElementById('xpf');if(xpf)xpf.style.width=Math.min(100,((S.xp-pt)/(nt-pt))*100)+'%';
   const lvlb=document.getElementById('lvlb');if(lvlb)lvlb.textContent='Lv '+S.level;
+  const _sE=document.getElementById('hud-streak');
+  if(_sE){if(S.streak>=2){_sE.textContent='🔥 '+S.streak;_sE.style.display='flex';}else _sE.style.display='none';}
   const avbtn=document.getElementById('avbtn');
   if(avbtn){
     if(S.avatarImg){
