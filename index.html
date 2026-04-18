@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PhonicsQuest – Sound Adventure</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@400;600;700;800&display=swap;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
    TOKENS
@@ -20,7 +20,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;min-height:100vh;font-size:17px;}
+body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;min-height:100vh;font-size:17px;}
 
 /* ═══════════════════════════════════════════════
    ANIMATED SKY BACKGROUND
@@ -36,6 +36,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 ═══════════════════════════════════════════════ */
 .screen{position:relative;z-index:1;min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;}
 .screen.active{display:flex;}
+#scr-howto.active{display:block!important;overflow-y:auto;overflow-x:hidden;}
 
 /* ─── SCREEN 1: LOGIN + FULLSCREEN VIDEO ─── */
 #scr-intro{background:linear-gradient(135deg,#030614,#0a1628,#07090f);justify-content:center;align-items:center;padding:0;position:relative;}
@@ -90,7 +91,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .avi:hover{border-color:var(--g3);transform:scale(1.07);}
 .avi.sel{border-color:var(--g1);background:rgba(247,201,72,.12);box-shadow:0 0 18px rgba(247,201,72,.35);}
 .avi .ae{font-size:1.85rem;display:block;}
-.avi .an{font-size:.57rem;font-weight:700;color:var(--muted);margin-top:3px;}
+.avi .an{font-size:.75rem;font-weight:700;color:var(--muted);margin-top:3px;}
 .start-btn{width:100%;background:linear-gradient(135deg,var(--g1),#ff9f43);color:#1a0800;
   border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1rem,3vw,1.2rem);
   padding:clamp(14px,3.5vw,18px);border-radius:99px;cursor:pointer;transition:all .25s;
@@ -113,7 +114,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .name-no-results{padding:14px 18px;color:var(--muted);font-size:.85rem;font-weight:700;text-align:center;}
 
 /* ─── SCREEN 3: MAIN APP ─── */
-#scr-app{display:none;flex-direction:column;align-items:stretch;padding:0;}
+#scr-app{display:none;flex-direction:column;align-items:stretch;padding:0;justify-content:flex-start;}
 #scr-app.active{display:flex;}
 
 /* top bar */
@@ -127,9 +128,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 /* Logo image in topbar — upscaled */
 .topbar img[alt="PhonicsQuest"]{height:52px!important;width:auto!important;}
 .hud{display:flex;align-items:center;gap:11px;flex-wrap:wrap;}
-.hud-name{font-weight:800;font-size:1rem;color:var(--g2);}
+.hud-name{font-weight:800;font-size:1.1rem;color:var(--g2);letter-spacing:.3px;}
 .xpw{display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
-.xpl{font-size:.78rem;font-weight:700;color:var(--g1);letter-spacing:1px;text-transform:uppercase;}
+.xpl{font-size:.85rem;font-weight:700;color:var(--g1);letter-spacing:1px;text-transform:uppercase;}
 .xpbar{width:130px;height:10px;background:var(--border);border-radius:99px;overflow:hidden;}
 .xpfill{height:100%;background:linear-gradient(90deg,var(--g1),#ff9f43);border-radius:99px;transition:width .6s cubic-bezier(.34,1.56,.64,1);}
 .lvlbdg{background:linear-gradient(135deg,var(--g1),#ff9f43);color:#1a1000;
@@ -143,8 +144,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
   scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}
 .tabs::-webkit-scrollbar{display:none;}
 .tab{background:var(--card);border:2px solid var(--border);color:var(--muted);
-  flex-shrink:0;font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;
-  padding:9px 18px;border-radius:99px;cursor:pointer;transition:all .2s;}
+  flex-shrink:0;font-family:'Nunito','Noto Sans Thai',sans-serif;font-weight:700;font-size:1rem;
+  padding:10px 20px;border-radius:99px;cursor:pointer;transition:all .2s;}
 .tab:hover{border-color:var(--g3);color:var(--txt);}
 .tab.active{background:var(--g3);border-color:var(--g3);color:#0a1929;}
 
@@ -221,7 +222,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .gpanel{background:var(--card);border:2px solid var(--border);border-radius:var(--r);
   padding:clamp(14px,4vw,28px) 24px;margin-bottom:13px;text-align:center;animation:fadeUp .3s ease;}
 .gpanel h3{font-family:'Baloo 2',cursive;font-size:1.35rem;font-weight:700;margin-bottom:6px;}
-.gpsub{color:var(--muted);font-size:1rem;margin-bottom:18px;}
+.gpsub{color:var(--muted);font-size:.95rem;margin-bottom:16px;line-height:1.6;font-family:'Noto Sans Thai','Nunito',sans-serif;}
 
 /* clue display */
 .clue-box{background:#0d1729;border:2px dashed var(--border);border-radius:13px;
@@ -229,8 +230,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .clue-emoji{font-size:4.2rem;}
 .clue-hint{font-size:.95rem;color:var(--muted);font-weight:700;font-style:italic;}
 .clue-ph{display:inline-block;background:rgba(74,179,244,.1);border:1.5px solid var(--g3);
-  color:var(--g3);font-size:1.1rem;font-weight:700;padding:5px 18px;
-  border-radius:99px;font-family:'Noto Sans',sans-serif;letter-spacing:.5px;}
+  color:var(--g3);font-size:.92rem;font-weight:700;padding:6px 16px;
+  border-radius:99px;font-family:'Nunito',sans-serif;letter-spacing:.3px;
+  max-width:100%;text-align:center;}
 
 /* listen btn */
 .lbtn{display:inline-flex;align-items:center;gap:8px;width:100%;justify-content:center;
@@ -247,7 +249,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .obtn{background:#0d1729;border:2px solid var(--border);color:var(--txt);
   font-family:'Nunito',sans-serif;font-weight:700;font-size:clamp(.9rem,2.5vw,1.15rem);
   padding:clamp(10px,3vw,16px);border-radius:var(--rsm);cursor:pointer;transition:all .2s;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;word-break:break-word;}
 .obtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.08);transform:scale(1.03);}
 .obtn.correct{background:rgba(78,220,132,.13);border-color:var(--g2);color:var(--g2);animation:pop .35s ease;}
 .obtn.wrong{background:rgba(240,106,106,.13);border-color:var(--g4);color:var(--g4);animation:shake .4s ease;}
@@ -364,7 +366,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .bdgc .bi{font-size:2.3rem;display:block;margin-bottom:6px;}
 .bdgc .bn{font-weight:800;font-size:.95rem;}
 .bdgc .bd{font-size:.82rem;color:var(--muted);margin-top:3px;}
-.et{display:inline-block;background:var(--g1);color:#1a0f00;font-size:.58rem;
+.et{display:inline-block;background:var(--g1);color:#1a0f00;font-size:.75rem;
   font-weight:800;padding:2px 7px;border-radius:99px;margin-top:6px;text-transform:uppercase;}
 
 /* ─── USER PROFILE PANEL ─── */
@@ -397,7 +399,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
   display:flex;align-items:center;justify-content:center;border:3px solid var(--border);}
 .podium-slot:nth-child(2) .podium-av{font-size:2.6rem;width:64px;height:64px;border-color:var(--g1);}
 .podium-name{font-size:.72rem;font-weight:800;max-width:70px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.podium-xp{font-size:.68rem;color:var(--g1);font-weight:700;}
+.podium-xp{font-size:.72rem;color:var(--g1);font-weight:700;}
 .podium-bar{border-radius:8px 8px 0 0;width:60px;display:flex;align-items:flex-start;justify-content:center;padding-top:6px;font-size:1.5rem;}
 .podium-slot:nth-child(1) .podium-bar{height:80px;background:linear-gradient(180deg,#cd7f32,#8b4513);}
 .podium-slot:nth-child(2) .podium-bar{height:110px;background:linear-gradient(180deg,var(--g1),#d4a017);}
@@ -410,7 +412,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--txt);overf
 .sb-av{font-size:1.3rem;}
 .sb-name{flex:1;font-weight:700;font-size:1rem;}
 .sb-xp{font-weight:800;color:var(--g1);font-size:1rem;}
-.sb-lvl{font-size:.68rem;color:var(--muted);font-weight:700;}
+.sb-lvl{font-size:.72rem;color:var(--muted);font-weight:700;}
 
 /* ─── UPLOAD PANEL (Final Mission) ─── */
 .upload-section{background:var(--card);border:2px solid var(--g5);border-radius:var(--r);
@@ -526,7 +528,7 @@ footer span{color:var(--g3);}
   grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
 }
 
-  #char-card-grid{grid-template-columns:repeat(2,1fr)!important;}
+  #char-card-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px;}
 }
 /* ─── SPACE VIDEO BG — ensure scr-app allows fixed children ─── */
 #scr-app{position:relative;z-index:1;}
@@ -632,7 +634,7 @@ footer span{color:var(--g3);}
   .av-grid-lg{grid-template-columns:repeat(2,1fr);}
   .bdg-grid{grid-template-columns:repeat(2,1fr);}
   .tab{font-size:.66rem;padding:6px 8px;}
-  #char-card-grid{grid-template-columns:repeat(2,1fr)!important;}
+  #char-card-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px;}
 }
 
 /* ═══ CA TASK STYLES ═══ */
@@ -697,7 +699,7 @@ footer span{color:var(--g3);}
 .favword-card .fw-emoji{font-size:2rem;display:block;margin-bottom:5px;}
 .favword-card .fw-word{font-size:1rem;font-weight:800;color:var(--txt);}
 .favword-card .fw-ipa{font-size:.7rem;color:var(--muted);margin-top:2px;
-  font-family:'Noto Sans',monospace;}
+  font-family:'Noto Sans Thai','Noto Sans','Nunito',sans-serif;}
 .fav-chosen{background:rgba(247,201,72,.08);border:2px solid rgba(247,201,72,.3);
   border-radius:12px;padding:14px;margin:12px 0;text-align:center;display:none;}
 .fav-chosen .fc-label{font-size:.72rem;font-weight:800;color:var(--g1);
@@ -761,7 +763,7 @@ footer span{color:var(--g3);}
             background:#0d1729;border:2px solid var(--g3);border-radius:13px;z-index:9999;
             box-shadow:0 12px 40px rgba(0,0,0,.7);overflow:hidden;max-height:320px;flex-direction:column;">
             <div style="padding:10px 12px;border-bottom:1px solid var(--border);">
-              <input id="stu-name-search" type="text" placeholder="🔍 Search name…" autocomplete="off"
+              <input id="stu-name-search" type="text" placeholder="🔍 Search name / ค้นหาชื่อ" autocomplete="off"
                 oninput="filterNames(this.value)"
                 style="width:100%;background:#07090f;border:1.5px solid var(--border);color:var(--txt);
                 font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;
@@ -775,20 +777,20 @@ footer span{color:var(--g3);}
           <option value="">— Choose your name —</option>
         </select>
         <label class="lbl" for="stu-pw">🔑 Password / รหัสผ่าน</label>
-        <input class="login-pw" id="stu-pw" type="password" placeholder="Enter your password" maxlength="12" oninput="chkLoginReady()">
+        <input class="login-pw" id="stu-pw" type="password" placeholder="Password / รหัสผ่าน" maxlength="12" oninput="chkLoginReady()">
         <div class="login-err" id="login-err">❌ Incorrect password. Try again.</div>
         <button class="start-btn" id="login-btn" disabled onclick="doStudentLogin()">🚀 Enter the Adventure! / เข้าสู่การผจญภัย!</button>
       </div>
       <div id="teacher-fields" class="teacher-fields">
-        <label class="lbl" for="t-user">👤 Username</label>
-        <input class="login-pw" id="t-user" type="text" placeholder="Username">
+        <label class="lbl" for="t-user">👤 Username / ชื่อผู้ใช้</label>
+        <input class="login-pw" id="t-user" type="text" placeholder="Username / ชื่อผู้ใช้">
         <label class="lbl" for="t-pw">🔑 Password / รหัสผ่าน</label>
-        <input class="login-pw" id="t-pw" type="password" placeholder="Password">
+        <input class="login-pw" id="t-pw" type="password" placeholder="Password / รหัสผ่าน">
         <div class="login-err" id="t-login-err">❌ Invalid teacher credentials.</div>
-        <button class="start-btn" onclick="doTeacherLogin()">🔓 Enter Dashboard</button>
+        <button class="start-btn" onclick="doTeacherLogin()">🔓 Enter Dashboard <span class='th-inline'>แดชบอร์ด</span></button>
       </div>
       <div class="login-toggle">
-        <button class="login-toggle-btn" id="toggle-login" onclick="toggleLoginMode()">🧑‍🏫 Teacher Login</button>
+        <button class="login-toggle-btn" id="toggle-login" onclick="toggleLoginMode()">🧑‍🏫 Teacher Login <span class='th-inline'>ครู</span></button>
       </div>
     </div>
   </div>
@@ -813,11 +815,273 @@ footer span{color:var(--g3);}
       margin-bottom:4px;text-align:center;text-shadow:none;">Choose Your Hero! <span style="font-size:.55em;font-weight:700;color:var(--muted);">เลือกตัวละครของคุณ!</span></div>
     <div style="color:#c8d8f0;font-weight:700;font-size:.95rem;margin-bottom:28px;text-align:center;
       text-shadow:0 1px 8px rgba(0,0,0,.8);">Pick the character who will join you on this space adventure 🚀<br><span class="th-inline">เลือกตัวละครที่จะร่วมเดินทางกับคุณในอวกาศ</span></div>
-    <div id="char-card-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    <div id="char-card-grid" style="display:grid;grid-template-columns:repeat(3,1fr);
       gap:16px;width:100%;max-width:900px;margin-bottom:30px;"></div>
-    <button id="char-confirm-btn" class="start-btn" style="max-width:320px;" disabled onclick="confirmCharacter()">✨ Let's Go! →</button>
+    <button id="char-confirm-btn" class="start-btn" style="max-width:320px;" disabled onclick="confirmCharacter()">✨ Let's Go! <span style='font-family:"Noto Sans Thai",sans-serif;font-size:.85em;opacity:.85;'>ไปเลย!</span> →</button>
   </div>
 </div>
+
+
+<!-- ═══════ HOW TO PLAY SCREEN ═══════ -->
+<div id="scr-howto" class="screen" style="position:relative;overflow-y:auto;min-height:100vh;background:#07090f;">
+  <video autoplay muted loop playsinline
+    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
+    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.35;display:none;"
+    onerror="this.style.display='none';">
+  </video>
+
+  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;padding:32px 20px 60px;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:36px;padding-top:20px;">
+      <div style="font-size:3.5rem;margin-bottom:12px;">🚀</div>
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:2.8rem;
+        background:linear-gradient(135deg,var(--g1),var(--g3));
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        background-clip:text;margin-bottom:8px;line-height:1.2;">How to Play</div>
+      <div style="font-size:1.4rem;font-weight:700;color:var(--g3);
+        font-family:'Noto Sans Thai','Nunito',sans-serif;">วิธีเล่น PhonicsQuest</div>
+    </div>
+
+    <!-- Step cards -->
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+
+      <!-- Step 1 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(247,201,72,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g1);
+          color:#1a0800;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(247,201,72,.5);">1</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g1);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            🌍 Choose Your Planet / เลือกดาวเคราะห์
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            Tap any unlocked planet on the map to start a mission.
+          </div>
+          <div style="font-size:1rem;color:var(--g3);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            แตะดาวเคราะห์ที่ปลดล็อกแล้วบนแผนที่เพื่อเริ่มภารกิจ
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(74,179,244,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g3);
+          color:#031525;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(74,179,244,.5);">2</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g3);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            👂 Listen Carefully / ฟังให้ดี
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            Tap 🔊 to hear a word. Then choose the correct answer or say it out loud!
+          </div>
+          <div style="font-size:1rem;color:var(--g3);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            แตะ 🔊 เพื่อฟังคำ แล้วเลือกคำตอบที่ถูกต้องหรือพูดออกเสียง!
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(78,220,132,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g2);
+          color:#041208;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(78,220,132,.5);">3</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g2);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            ❤️ Don't Lose All Hearts! / อย่าให้หมดหัวใจ!
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            You have 3 hearts per mission. Wrong answers cost a heart. Lose all 3 and restart!
+          </div>
+          <div style="font-size:1rem;color:var(--g2);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            คุณมี 3 หัวใจต่อภารกิจ — ตอบผิด = เสีย 1 หัวใจ — หมดทั้ง 3 = เริ่มใหม่!
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(176,124,248,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g5);
+          color:#fff;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(176,124,248,.5);">4</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g5);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            ⚡ Earn XP &amp; Level Up! / สะสม XP และเลเวลอัป!
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            Every correct answer gives XP. Fill the bar to level up and unlock badges!
+          </div>
+          <div style="font-size:1rem;color:var(--g5);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            ตอบถูกทุกข้อ = ได้ XP — เต็มบาร์ = เลเวลอัป และปลดล็อกป้าย!
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(240,106,106,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g4);
+          color:#fff;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(240,106,106,.5);">5</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g4);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            🌟 Planet Challenge at the End! / ภารกิจพิเศษตอนท้าย!
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            Every planet ends with a creative task — sort sounds or record your favourite word!
+          </div>
+          <div style="font-size:1rem;color:var(--g4);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            ทุกดาวมีงานสร้างสรรค์ตอนท้าย — จัดเรียงเสียงหรือบันทึกคำโปรด! ไม่เสียหัวใจ!
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end steps -->
+
+    <!-- Task type legend -->
+    <div style="background:rgba(22,33,62,.92);border:2px solid rgba(247,201,72,.35);
+      border-radius:20px;padding:20px 22px;margin-bottom:24px;backdrop-filter:blur(10px);">
+      <div style="font-weight:800;font-size:1.2rem;color:var(--g1);margin-bottom:16px;
+        text-align:center;font-family:'Baloo 2',cursive;">
+        📋 Task Types / ประเภทงาน
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">👂</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Listen &amp; Choose</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">ฟังและเลือก</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">🖼️</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Picture Match</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จับคู่รูปภาพ</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">⚡</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Rapid Fire</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">รอบด่วน 12 วินาที</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">🔗</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Match Pairs</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จับคู่</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">✏️</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Sentence Builder</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">สร้างประโยค</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">🎤</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Speak &amp; Record</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">พูดและบันทึกเสียง</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(176,124,248,.15);
+          border-radius:12px;padding:10px 12px;border:1px solid rgba(176,124,248,.3);">
+          <span style="font-size:1.5rem;">🔀</span>
+          <div>
+            <div style="font-weight:700;color:var(--g5);font-size:1rem;">Sound Sorter ⭐</div>
+            <div style="color:var(--g5);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จัดเรียงเสียง</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(176,124,248,.15);
+          border-radius:12px;padding:10px 12px;border:1px solid rgba(176,124,248,.3);">
+          <span style="font-size:1.5rem;">⭐</span>
+          <div>
+            <div style="font-weight:700;color:var(--g5);font-size:1rem;">Favourite Word ⭐</div>
+            <div style="color:var(--g5);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">คำโปรดของฉัน</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:14px;font-size:1rem;color:var(--g5);text-align:center;
+        font-family:'Noto Sans Thai','Nunito',sans-serif;font-weight:700;">
+        ⭐ Planet Challenge = Creative Task / งานสร้างสรรค์ — ไม่เสียหัวใจ!
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div style="background:rgba(247,201,72,.08);border:2px solid rgba(247,201,72,.35);
+      border-radius:20px;padding:18px 22px;margin-bottom:32px;backdrop-filter:blur(10px);">
+      <div style="font-weight:800;font-size:1.15rem;color:var(--g1);margin-bottom:12px;
+        font-family:'Baloo 2',cursive;">
+        💡 Quick Tips / เคล็ดลับ
+      </div>
+      <div style="font-size:1rem;color:#e8f0ff;line-height:2.1;
+        font-family:'Noto Sans Thai','Nunito',sans-serif;">
+        🔊 Always tap <strong style="color:var(--g1);">Hear Example</strong> first!
+        <span style="color:var(--g3);"> / แตะ "ฟังตัวอย่าง" ก่อนเสมอ!</span><br>
+        🎤 Chrome browser works best for speaking tasks
+        <span style="color:var(--g3);"> / ใช้ Chrome ดีที่สุดสำหรับงานพูด</span><br>
+        🔥 Answer correctly in a row to build a streak!
+        <span style="color:var(--g3);"> / ตอบถูกติดกันเพื่อสร้าง streak!</span><br>
+        🌟 Complete all planets to unlock the Final Mission
+        <span style="color:var(--g3);"> / ทำทุกดาวเพื่อปลดล็อกภารกิจสุดท้าย!</span>
+      </div>
+    </div>
+
+    <!-- Start button -->
+    <button onclick="goTo('app');renderRoadmaps();"
+      style="width:100%;background:linear-gradient(135deg,var(--g1),#ff9f43);
+        color:#1a0800;border:none;font-family:'Baloo 2',cursive;font-weight:900;
+        font-size:1.4rem;padding:22px;border-radius:99px;cursor:pointer;
+        touch-action:manipulation;box-shadow:0 8px 28px rgba(247,201,72,.5);
+        transition:all .2s;animation:pulse 2s ease-in-out infinite alternate;
+        margin-bottom:12px;">
+      🚀 Start Playing! / เริ่มเล่นได้เลย!
+    </button>
+
+    <!-- Skip -->
+    <div style="text-align:center;">
+      <button onclick="goTo('app');renderRoadmaps();"
+        style="background:none;border:none;color:rgba(106,130,171,.8);
+          font-family:'Noto Sans Thai','Nunito',sans-serif;
+          font-size:.95rem;cursor:pointer;text-decoration:underline;padding:10px;">
+        Already know how to play? Skip / รู้วิธีเล่นแล้ว? ข้ามได้
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ END HOW TO PLAY ═══════ -->
 
 <!-- ═══════ SCREEN 2: LOGIN (kept for compatibility, hidden) ═══════ -->
 <div id="scr-login" class="screen" style="display:none!important;"></div>
@@ -846,8 +1110,8 @@ footer span{color:var(--g3);}
       </div>
       <div class="lvlbdg" id="lvlb">Lv 1</div>
       <div id="hud-streak" style="display:none;align-items:center;
-        background:rgba(240,106,106,.15);border:1.5px solid rgba(240,106,106,.35);
-        color:var(--g4);font-weight:800;font-size:.85rem;padding:5px 12px;
+        background:rgba(247,201,72,.2);border:1.5px solid rgba(247,201,72,.4);
+        color:var(--g1);font-weight:800;font-size:.85rem;padding:5px 12px;
         border-radius:99px;white-space:nowrap;"></div>
       <div class="avbtn" id="avbtn" onclick="showPanel('profile')">🐱</div>
       <button onclick="doLogout()"
@@ -878,8 +1142,8 @@ footer span{color:var(--g3);}
     border:1.5px solid rgba(247,201,72,.2);border-radius:14px;">
     <span style="font-size:1.8rem;">🔤</span>
     <div>
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.1rem;color:var(--g1);">Galaxy 1: Short Vowels</div>
-      <div style="font-size:.78rem;color:var(--muted);font-weight:600;">กาแล็กซีที่ 1 · 4 planets · /æ/ /ɛ/ /ɪ/ /ɒ/</div>
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.3rem;color:var(--g1);">Galaxy 1: Short Vowels</div>
+      <div style="font-size:.95rem;color:var(--g1);font-weight:600;opacity:.8;font-family:'Noto Sans Thai','Nunito',sans-serif;">กาแล็กซีที่ 1 · 4 planets · Short A, E, I, O</div>
     </div>
   </div>
 </div>
@@ -893,8 +1157,8 @@ footer span{color:var(--g3);}
     border:1.5px solid rgba(74,179,244,.2);border-radius:14px;">
     <span style="font-size:1.8rem;">🌊</span>
     <div>
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.1rem;color:var(--g3);">Galaxy 2: Long Vowels</div>
-      <div style="font-size:.78rem;color:var(--muted);font-weight:600;">กาแล็กซีที่ 2 · 4 planets · /eɪ/ /iː/ /oʊ/ /aɪ/</div>
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.3rem;color:var(--g3);">Galaxy 2: Long Vowels</div>
+      <div style="font-size:.95rem;color:var(--g3);font-weight:600;opacity:.8;font-family:'Noto Sans Thai','Nunito',sans-serif;">กาแล็กซีที่ 2 · 4 planets · Long A, E, O, I</div>
     </div>
   </div>
 </div>
@@ -920,7 +1184,7 @@ footer span{color:var(--g3);}
     <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap;">
       <input id="nkin" type="text" maxlength="24"
         style="background:var(--card);border:2px solid var(--border);color:var(--txt);font-family:'Nunito',sans-serif;font-weight:700;font-size:1.05rem;padding:11px 16px;border-radius:99px;outline:none;width:220px;">
-      <button onclick="saveNick()" style="background:var(--g1);color:#1a0800;border:none;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;padding:11px 22px;border-radius:99px;cursor:pointer;">Save ✓</button>
+      <button onclick="saveNick()" style="background:var(--g1);color:#1a0800;border:none;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;padding:11px 22px;border-radius:99px;cursor:pointer;">Save ✓ <span class='th-inline'>บันทึก</span></button>
     </div>
   </div>
   <div id="pnl-badges" style="position:relative;z-index:2;padding:20px 24px 60px;">
@@ -934,13 +1198,13 @@ footer span{color:var(--g3);}
 <div id="scr-teacher" class="screen" style="position:relative;z-index:2;">
   <div class="t-topbar">
     <div class="t-logo">🧑‍🏫 Teacher Dashboard — PhonicsQuest</div>
-    <button class="t-logout" onclick="doLogout()">🚪 Log Out</button>
+    <button class="t-logout" onclick="doLogout()">🚪 Log Out <span class='th-inline'>ออกจากระบบ</span></button>
   </div>
   <div class="t-tabs">
-    <button class="t-tab active" onclick="showTPanel('students')">📋 Students</button>
-    <button class="t-tab" onclick="showTPanel('analytics')">📊 Analytics</button>
+    <button class="t-tab active" onclick="showTPanel('students')">📋 Students <span class='th-inline'>นักเรียน</span></button>
+    <button class="t-tab" onclick="showTPanel('analytics')">📊 Analytics <span class='th-inline'>วิเคราะห์</span></button>
     <button class="t-tab" onclick="showTPanel('passwords')">🔑 Password / รหัสผ่านs</button>
-    <button class="t-tab" onclick="showTPanel('uploads')">📁 Uploads</button>
+    <button class="t-tab" onclick="showTPanel('uploads')">📁 Uploads <span class='th-inline'>ไฟล์</span></button>
   </div>
   <div class="t-panel" id="t-pnl-students"></div>
   <div class="t-panel" id="t-pnl-analytics" style="display:none;"></div>
@@ -1171,20 +1435,20 @@ function biQ(en){
 }
 const MISSIONS=[
   /* ── SHORT VOWEL MISSIONS ── */
-  {id:'s1',path:'short',num:1,title:'Mission 1: Planet Earth /æ/',icon:'🏔️',col:'#f7c948',
-   sub:'Short A — /æ/ sound',lives:3,
+  {id:'s1',path:'short',num:1,title:'Mission 1: Planet Earth',icon:'🏔️',col:'#f7c948',
+   sub:'Short A Sound · เสียง A สั้น',lives:3,
    tasks:[
     {t:'intro',text:"Welcome, Explorer! In this cave you'll learn the short /æ/ sound — like in 'cat'. Listen carefully and use clues to find the right word!"},
-    {t:'mc', ph:'/æ/ short-a',
+    {t:'mc', ph:'Short A 🐱 · เสียง A สั้น',
      clueEmoji:'🐱',clueHint:'This animal says meow!',clueExtra:'It has a short /æ/ in its name.',
      q:'🔊 Listen — which word has the /æ/ sound like the animal above?',
-     word:'cat',opts:['cat','cut','cot','kit'],ans:0,
+     ipa:'/æ/',word:'cat',opts:['cat','cut','cot','kit'],ans:0,
      ok:"✅ Yes! 'cat' /kæt/ — short /æ/ sound! Open your mouth wide!",
      no:"❌ Not quite! /æ/ is the short 'a' sound — like the meow animal! Listen again."},
-    {t:'pic', ph:'/æ/ short-a',
+    {t:'pic', ph:'Short A 🐱 · เสียง A สั้น',
      q:'🔊 Listen — which picture\'s word has the /æ/ sound?',
      word:'hat',
-     pics:[{e:'🎩',w:'hat /æ/',c:true},{e:'☕',w:'cup /ʌ/',c:false},{e:'🐝',w:'bee /iː/',c:false},{e:'🚌',w:'bus /ʌ/',c:false}],
+     pics:[{e:'🎩',w:'hat /æ/',c:true},{e:'☕',w:'cup /ʌ/',c:false},{e:'🐝',w:'bee (Long E)',c:false},{e:'🚌',w:'bus /ʌ/',c:false}],
      ok:"✅ 'hat' /hæt/ — open your mouth wide for /æ/! Also: bat, cat, map!",
      no:"❌ /æ/ is in 'hat' — not 'cup' or 'bus'. Those have different vowels!"},
     {t:'obstacle', title:'⚠️ Obstacle! Letter Swap',
@@ -1193,40 +1457,41 @@ const MISSIONS=[
      word:'map',opts:['mop','map','mup','mip'],ans:1,
      ok:"✅ 'map' /mæp/ — you beat the monster! 🗺️ Great /æ/ word!",
      no:"❌ The monster tricked you! 'map' has /æ/ — not 'mop' (/ɒ/) or 'mup' (not a word)!"},
-    {t:'rapid', ph:'Short /æ/ words',
+    {t:'rapid', ph:'Short A 🐱 words',
      q:"⚡ Rapid Round! Tap ALL words with the short /æ/ sound:",
      words:['cat','cup','hat','hot','map','mud','fan','fun','bat','bit'],
      ans:[0,2,4,6,8],
      ok:"✅ cat, hat, map, fan, bat — all have /æ/! You're fast! ⚡",
      no:"❌ /æ/ words: cat, hat, map, fan, bat. Not cup(ʌ), hot(ɒ), mud(ʌ), fun(ʌ), bit(ɪ)!"},
-    {t:'spk', ph:'/æ/',word:'cat',
+    {t:'spk', ph:'Short A 🐱 · เสียง A สั้น',word:'cat',
      clueEmoji:'🐱',clueHint:'Say the name of this animal!',
      q:'🎤 Now you try! Say the word shown by the clue:',
      tip:"Open mouth, tongue low and flat: /k/-/æ/-/t/",
      ok:"✅ Great /æ/! Your 'cat' is clear! 🐱",
      no:"❌ Try again! Open your mouth wider — /kæt/. Short, flat vowel!"},
-    {t:'sb', ph:'/æ/ sentence',
-     words:['The','cat','sat','on','a','fat','mat'],target:'The cat sat on a fat mat',
-     clueEmoji:'🐱',clueHint:"Build a sentence about where the cat sat!",
+    {t:'sb', ph:'Short A sentence · ประโยค A สั้น',
+     words:['The','cat','sat','on','a','fat','mat'],target:'The fat cat sat on a mat',
+     alts:['The cat sat on a fat mat','A fat cat sat on a mat'],
+     clueEmoji:'🐱',clueHint:"Describe the cat, then tell us where it sat! / อธิบายแมว แล้วบอกว่ามันนั่งที่ไหน!",
      ok:"✅ Amazing! cat, sat, fat, mat — FOUR /æ/ words in one sentence! 🏆"}
    ]},
 
-  {id:'s2',path:'short',num:2,title:'Mission 2: Planet Mars /ɛ/',icon:'🌿',col:'#4edc84',
-   sub:'Short E — /ɛ/ sound',lives:3,
+  {id:'s2',path:'short',num:2,title:'Mission 2: Planet Mars',icon:'🌿',col:'#4edc84',
+   sub:'Short E Sound · เสียง E สั้น',lives:3,
    tasks:[
     {t:'intro',text:"The /ɛ/ swamp! This short 'e' sound is in words like 'bed' and 'red'. Your mouth is half-open — not too wide, not too closed. Listen for clues!"},
-    {t:'mc', ph:'/ɛ/ short-e',
+    {t:'mc', ph:'Short E 🛏️ · เสียง E สั้น',
      clueEmoji:'🛏️',clueHint:'You sleep on this at night.',
      q:'🔊 Listen — which word matches this clue and has /ɛ/?',
-     word:'bed',opts:['bad','bid','bed','bud'],ans:2,
+     ipa:'/ɛ/',word:'bed',opts:['bad','bid','bed','bud'],ans:2,
      ok:"✅ 'bed' /bɛd/ — perfect short /ɛ/! Also: red, pen, ten!",
      no:"❌ 'bad' has /æ/, 'bid' has /ɪ/, 'bud' has /ʌ/. 'bed' is /ɛ/!"},
-    {t:'pic', ph:'/ɛ/ short-e',
+    {t:'pic', ph:'Short E 🛏️ · เสียง E สั้น',
      q:'🔊 Listen — which picture has the /ɛ/ sound?',word:'pen',
      pics:[{e:'🖊️',w:'pen /ɛ/',c:true},{e:'🐷',w:'pig /ɪ/',c:false},{e:'☀️',w:'sun /ʌ/',c:false},{e:'🔥',w:'hot /ɒ/',c:false}],
      ok:"✅ 'pen' /pɛn/ — short /ɛ/! You write with it! 🖊️",
      no:"❌ 'pen' has /ɛ/. 'pig' has /ɪ/, 'sun' has /ʌ/, 'hot' has /ɒ/."},
-    {t:'match', ph:'Short /ɛ/ matching',
+    {t:'match', ph:'Short E 🛏️ matching',
      q:'Match the clue emoji to its /ɛ/ word:',
      pairs:[{l:'🛏️',r:'bed'},{l:'🔴',r:'red'},{l:'🖊️',r:'pen'},{l:'🕸️',r:'web'}],
      ok:"✅ All matched! bed, red, pen, web — all have short /ɛ/! 🌿",
@@ -1237,13 +1502,13 @@ const MISSIONS=[
      word:'jet',opts:['jot','jut','jet','jit'],ans:2,
      ok:"✅ 'jet' /dʒɛt/ — you escaped the echo cave! 🎉",
      no:"❌ 'jet' has /ɛ/. 'jot'=/ɒ/, 'jut'=/ʌ/, 'jit' isn't a word!"},
-    {t:'rapid', ph:'Short /ɛ/ words',
+    {t:'rapid', ph:'Short E 🛏️ words',
      q:"⚡ Rapid! Tap ALL words with the /ɛ/ sound:",
      words:['bed','bid','red','rod','pen','pan','ten','tin','web','wob'],
      ans:[0,2,4,6,8],
      ok:"✅ bed, red, pen, ten, web — all /ɛ/! Superfast! ⚡",
      no:"❌ /ɛ/ words: bed, red, pen, ten, web. Others have different vowels!"},
-    {t:'spk', ph:'/ɛ/',word:'red',
+    {t:'spk', ph:'Short E 🛏️ · เสียง E สั้น',word:'red',
      clueEmoji:'🔴',clueHint:'Say the colour of this circle!',
      q:'🎤 Say the colour of this clue:',
      tip:"Mouth half open, tongue mid-height: /r/-/ɛ/-/d/",
@@ -1251,17 +1516,17 @@ const MISSIONS=[
      no:"❌ Try again! Half-open mouth for /ɛ/ — not too wide, not too narrow!"}
    ]},
 
-  {id:'s3',path:'short',num:3,title:'Mission 3: Planet Venus /ɪ/',icon:'🌲',col:'#4ab3f4',
-   sub:'Short I — /ɪ/ sound',lives:3,
+  {id:'s3',path:'short',num:3,title:'Mission 3: Planet Venus',icon:'🌲',col:'#4ab3f4',
+   sub:'Short I Sound · เสียง I สั้น',lives:3,
    tasks:[
     {t:'intro',text:"Welcome to the /ɪ/ forest! This sound is short and small — like in 'sit' and 'pig'. Your mouth should be almost closed, slightly open at the corners!"},
-    {t:'mc', ph:'/ɪ/ short-i',
+    {t:'mc', ph:'Short I 🐷 · เสียง I สั้น',
      clueEmoji:'🐷',clueHint:'This pink farm animal loves mud.',
      q:'🔊 Listen — which word matches this clue?',
-     word:'pig',opts:['peg','pig','pug','pog'],ans:1,
+     ipa:'/ɪ/',word:'pig',opts:['peg','pig','pug','pog'],ans:1,
      ok:"✅ 'pig' /pɪg/ — short /ɪ/, almost closed mouth! 🐷",
      no:"❌ 'peg'=/ɛ/, 'pug'=/ʌ/, 'pog' isn't a word. 'pig' has /ɪ/!"},
-    {t:'pic', ph:'/ɪ/ short-i',
+    {t:'pic', ph:'Short I 🐷 · เสียง I สั้น',
      q:'🔊 Listen — which picture has the /ɪ/ sound?',word:'sit',
      pics:[{e:'🪑',w:'sit /ɪ/',c:true},{e:'🐶',w:'dog /ɒ/',c:false},{e:'🧢',w:'cap /æ/',c:false},{e:'🚌',w:'bus /ʌ/',c:false}],
      ok:"✅ 'sit' /sɪt/ — you sit on a chair! Short /ɪ/! 🪑",
@@ -1269,21 +1534,21 @@ const MISSIONS=[
     {t:'obstacle', title:'⚠️ Obstacle! Minimal Pair Minefield!',
      desc:"Step carefully — /ɪ/ and /iː/ look similar but sound different! Pick the short /ɪ/ word!",
      clueEmoji:'💡',clueHint:'A small pointed end — like at the top of a pencil.',
-     word:'tip',opts:['tip /ɪ/','teep','tape','type'],ans:0,
+     word:'tip',opts:['tip (Short I)','teep','tape','type'],ans:0,
      ok:"✅ 'tip' /tɪp/ — short /ɪ/. You dodged the /iː/ minefield! 💥",
      no:"❌ Short /ɪ/ = 'tip'. The others are long vowels or wrong!"},
-    {t:'rapid', ph:'Short /ɪ/ words',
+    {t:'rapid', ph:'Short I 🐷 words',
      q:"⚡ Rapid! Tap ALL words with /ɪ/ sound:",
      words:['sit','seat','big','beg','lip','leap','win','wine','tip','tape'],
      ans:[0,2,4,6,8],
      ok:"✅ sit, big, lip, win, tip — all short /ɪ/! Amazing! ⚡",
      no:"❌ /ɪ/ words: sit, big, lip, win, tip. Others have long /iː/ or different vowels!"},
-    {t:'match', ph:'Short /ɪ/ matching',
+    {t:'match', ph:'Short I 🐷 matching',
      q:'Match emoji clue to its /ɪ/ word:',
      pairs:[{l:'🐷',r:'pig'},{l:'🪑',r:'sit'},{l:'💡',r:'tip'},{l:'🏆',r:'win'}],
      ok:"✅ pig, sit, tip, win — all short /ɪ/! Forest cleared! 🌲",
      no:"❌ pig=🐷, sit=🪑, tip=💡, win=🏆 — try again!"},
-    {t:'spk', ph:'/ɪ/',word:'big',
+    {t:'spk', ph:'Short I 🐷 · เสียง I สั้น',word:'big',
      clueEmoji:'📦',clueHint:"Say the opposite of 'small' — this box is ___!",
      q:"🎤 Complete the phrase: 'This box is ___'",
      tip:"Almost closed mouth, corners slightly apart: /b/-/ɪ/-/g/",
@@ -1291,17 +1556,17 @@ const MISSIONS=[
      no:"❌ Try again! Almost closed mouth: /bɪg/. Don't stretch the vowel!"}
    ]},
 
-  {id:'s4',path:'short',num:4,title:'Mission 4: Planet Neptune /ɒ/',icon:'🌋',col:'#f06a6a',
-   sub:'Short O — /ɒ/ sound',lives:3,
+  {id:'s4',path:'short',num:4,title:'Mission 4: Planet Neptune',icon:'🌋',col:'#f06a6a',
+   sub:'Short O Sound · เสียง O สั้น',lives:3,
    tasks:[
     {t:'intro',text:"The volcano of /ɒ/! This hot short 'o' sound needs a rounded, open mouth — like when a doctor says 'say ahh!'. Words: hot, dog, box, pot!"},
-    {t:'mc', ph:'/ɒ/ short-o',
+    {t:'mc', ph:'Short O 🐶 · เสียง O สั้น',
      clueEmoji:'🔥',clueHint:'The opposite of cold — the volcano is very ___!',
      q:'🔊 Listen — which word matches this clue?',
-     word:'hot',opts:['hot','hat','hit','hut'],ans:0,
+     ipa:'/ɒ/',word:'hot',opts:['hot','hat','hit','hut'],ans:0,
      ok:"✅ 'hot' /hɒt/ — round lips, open mouth for /ɒ/! 🔥",
      no:"❌ 'hat'=/æ/, 'hit'=/ɪ/, 'hut'=/ʌ/. 'hot' has /ɒ/ — round your lips!"},
-    {t:'pic', ph:'/ɒ/ short-o',
+    {t:'pic', ph:'Short O 🐶 · เสียง O สั้น',
      q:'🔊 Listen — which picture has the /ɒ/ sound?',word:'dog',
      pics:[{e:'🐶',w:'dog /ɒ/',c:true},{e:'🐛',w:'bug /ʌ/',c:false},{e:'🎩',w:'hat /æ/',c:false},{e:'🐷',w:'pig /ɪ/',c:false}],
      ok:"✅ 'dog' /dɒg/ — rounded mouth for /ɒ/! 🐶",
@@ -1309,21 +1574,21 @@ const MISSIONS=[
     {t:'obstacle', title:'⚠️ Obstacle! Lava Jump — 4 Vowels!',
      desc:"Jump over lava! Only the /ɒ/ word is safe. Others will burn you!",
      clueEmoji:'📦',clueHint:'You put things inside this square container.',
-     word:'box',opts:['bax  /æ/','box  /ɒ/','bix  /ɪ/','bux  /ʌ/'],ans:1,
+     word:'box',opts:['bax (Short A)','box (Short O)','bix (Short I)','bux (Short U)'],ans:1,
      ok:"✅ 'box' /bɒks/ — you jumped the lava! Safe! 📦🌋",
      no:"❌ Only 'box' /ɒ/ is safe! bax(/æ/), bix(/ɪ/), bux(/ʌ/) — all wrong!"},
-    {t:'rapid', ph:'Short /ɒ/ words',
+    {t:'rapid', ph:'Short O 🐶 words',
      q:"⚡ Rapid! Tap ALL words with /ɒ/ sound:",
      words:['hot','hat','dog','dig','box','bus','pot','put','top','tip'],
      ans:[0,2,4,6,8],
      ok:"✅ hot, dog, box, pot, top — all /ɒ/! Volcano survived! 🌋",
      no:"❌ /ɒ/ words: hot, dog, box, pot, top. Others have /æ/,/ɪ/,/ʌ/!"},
-    {t:'match', ph:'/ɒ/ matching',
+    {t:'match', ph:'Short O 🐶 · จับคู่',
      q:'Match emoji to /ɒ/ word:',
      pairs:[{l:'🔥',r:'hot'},{l:'🐶',r:'dog'},{l:'📦',r:'box'},{l:'🦊',r:'fox'}],
      ok:"✅ hot, dog, box, fox — all /ɒ/! Volcano conquered! 🌋",
      no:"❌ hot=🔥, dog=🐶, box=📦, fox=🦊 — try again!"},
-    {t:'spk', ph:'/ɒ/',word:'hot',
+    {t:'spk', ph:'Short O 🐶 · เสียง O สั้น',word:'hot',
      clueEmoji:'🔥',clueHint:"Say how the volcano feels — it's very ___!",
      q:"🎤 Complete: 'The volcano is ___'",
      tip:"Round your lips, open mouth: /h/-/ɒ/-/t/",
@@ -1331,17 +1596,17 @@ const MISSIONS=[
      no:"❌ Round your lips and open wide: /hɒt/. Like saying 'awe'!"}
    ]},
 
-  {id:'s5',path:'short',num:5,title:'Mission 5: Planet Kepler /ʌ/',icon:'🏜️',col:'#b07cf8',
-   sub:'Short U — /ʌ/ sound',lives:3,
+  {id:'s5',path:'short',num:5,title:'Mission 5: Planet Kepler',icon:'🏜️',col:'#b07cf8',
+   sub:'Short U Sound · เสียง U สั้น',lives:3,
    tasks:[
     {t:'intro',text:"Desert of /ʌ/! This sound is like a grunt — 'uh'. Your mouth is relaxed and slightly open. Words: cup, sun, run, bus, bug!"},
-    {t:'mc', ph:'/ʌ/ short-u',
+    {t:'mc', ph:'Short U ☕ · เสียง U สั้น',
      clueEmoji:'☀️',clueHint:'It shines in the sky every day.',
      q:'🔊 Listen — which word matches this clue?',
      word:'sun',opts:['son/sun','sin','san','sen'],ans:0,
      ok:"✅ 'sun' /sʌn/ — relaxed, open mouth for /ʌ/! ☀️",
      no:"❌ 'sun' has /ʌ/. 'sin'=/ɪ/, 'san'=/æ/, 'sen'=/ɛ/ — relax your mouth!"},
-    {t:'pic', ph:'/ʌ/ short-u',
+    {t:'pic', ph:'Short U ☕ · เสียง U สั้น',
      q:'🔊 Listen — which picture has /ʌ/?',word:'cup',
      pics:[{e:'☕',w:'cup /ʌ/',c:true},{e:'🎩',w:'cap /æ/',c:false},{e:'🛏️',w:'bed /ɛ/',c:false},{e:'📦',w:'box /ɒ/',c:false}],
      ok:"✅ 'cup' /kʌp/ — relaxed /ʌ/ sound! ☕",
@@ -1352,17 +1617,18 @@ const MISSIONS=[
      word:'bus',opts:['bis','bas','bus','bos'],ans:2,
      ok:"✅ 'bus' /bʌs/ — you saw through the mirage! 🚌",
      no:"❌ Only 'bus' has /ʌ/! bis=/ɪ/, bas=/æ/, bos=/ɒ/!"},
-    {t:'rapid', ph:'Short /ʌ/ words',
+    {t:'rapid', ph:'Short U ☕ words',
      q:"⚡ Rapid! Tap ALL /ʌ/ words:",
      words:['cup','cap','sun','sin','run','ran','bus','bit','bug','bag'],
      ans:[0,2,4,6,8],
      ok:"✅ cup, sun, run, bus, bug — all /ʌ/! Desert crossed! 🏜️",
      no:"❌ /ʌ/ words: cup, sun, run, bus, bug. Others have /æ/, /ɪ/!"},
-    {t:'sb', ph:'/ʌ/ sentence',
+    {t:'sb', ph:'Short U sentence · ประโยค U สั้น',
      words:['The','sun','is','fun','but','a','bus','runs'],target:'The sun is fun but a bus runs',
+     alts:['A bus runs in the sun','The fun bus runs in the sun'],
      clueEmoji:'☀️🚌',clueHint:"Build a sentence using the sun and a bus!",
      ok:"✅ sun, fun, but, bus, runs — FIVE /ʌ/ words! You're unstoppable! 🏆"},
-    {t:'spk', ph:'/ʌ/',word:'run',
+    {t:'spk', ph:'Short U ☕ · เสียง U สั้น',word:'run',
      clueEmoji:'🏃',clueHint:"Say what this person is doing!",
      q:"🎤 What is this person doing? Say the word!",
      tip:"Relax completely, grunt slightly: /r/-/ʌ/-/n/",
@@ -1373,76 +1639,77 @@ const MISSIONS=[
   {id:'s6',path:'short',num:6,title:'Mission 6: Planet Core BOSS',icon:'⚔️',col:'#f7c948',
    sub:'All 5 Short Vowels — BOSS LEVEL!',lives:3,
    tasks:[
-    {t:'intro',text:"BOSS LEVEL! 🏆 All 5 short vowels in one arena: /æ/ /ɛ/ /ɪ/ /ɒ/ /ʌ/. You've trained hard — now prove you know them all! Listen carefully to every clue!"},
-    {t:'mc', ph:'Which vowel?',
+    {t:'intro',text:"BOSS LEVEL! 🏆 All 5 short vowels in one arena: Short A, E, I, O /ʌ/. You've trained hard — now prove you know them all! Listen carefully to every clue!"},
+    {t:'mc', ph:'Which vowel? · เสียงอะไร?',
      clueEmoji:'🎩',clueHint:'You wear this on your head.',
      q:'🔊 Listen — which vowel sound is in this word?',
-     word:'hat',opts:['/æ/ like cat','/ɛ/ like bed','/ɪ/ like sit','/ɒ/ like hot'],ans:0,
+     word:'hat',opts:['Short A 🐱 like cat','Short E 🛏️ like bed','Short I 🐷 like sit','Short O 🐶 like hot'],ans:0,
      ok:"✅ 'hat' /hæt/ — /æ/ like cat! Open wide! 🎩",
      no:"❌ 'hat' has /æ/ — the wide open, flat sound like 'cat'."},
     {t:'obstacle', title:'⚠️ BOSS OBSTACLE! Sound Maze',
      desc:"Match the CORRECT vowel to each emoji clue! Maze activated — no peeking at words!",
      clueEmoji:'🐶',clueHint:'This pet wags its tail.',
-     word:'dog',opts:['/æ/ cat','/ɛ/ bed','/ɪ/ sit','/ɒ/ hot'],ans:3,
+     word:'dog',opts:['Short A 🐱 cat','Short E 🛏️ bed','Short I 🐷 sit','Short O 🐶 hot'],ans:3,
      ok:"✅ 'dog' has /ɒ/! You found the path in the Sound Maze! 🐶",
      no:"❌ 'dog' has /ɒ/ — the rounded, open sound like 'hot'!"},
-    {t:'match', ph:'All 5 short vowels',
+    {t:'match', ph:'All Short Vowels · สระสั้นทั้ง 5',
      q:'Match each emoji clue to its vowel sound:',
      pairs:[{l:'🐱 cat',r:'/æ/'},{l:'🛏️ bed',r:'/ɛ/'},{l:'🐷 pig',r:'/ɪ/'},{l:'🐶 dog',r:'/ɒ/'}],
      ok:"✅ All vowels matched! You know all 5 short vowels! 🏆",
      no:"❌ cat=/æ/, bed=/ɛ/, pig=/ɪ/, dog=/ɒ/ — try the maze again!"},
-    {t:'rapid', ph:'All short vowels',
+    {t:'rapid', ph:'All Short Vowels · สระสั้น',
      q:"⚡ BOSS RAPID! Tap words with SHORT vowels only (not long!):",
      words:['cat','cake','bed','bead','pig','pie','dog','doge','cup','cube'],
      ans:[0,2,4,6,8],
      ok:"✅ cat/æ/, bed/ɛ/, pig/ɪ/, dog/ɒ/, cup/ʌ/ — you beat the boss! 🏆",
      no:"❌ Short vowels: cat(æ), bed(ɛ), pig(ɪ), dog(ɒ), cup(ʌ). Others are long!"},
-    {t:'spk', ph:'All short vowels',word:'top',
+    {t:'spk', ph:'All Short Vowels · สระสั้น',word:'top',
      clueEmoji:'⬆️',clueHint:"The very highest point — the ___ of the mountain.",
      q:"🎤 Say the word this clue describes:",
      tip:"Round, open, short: /t/-/ɒ/-/p/",
      ok:"✅ 'top' /tɒp/ — short /ɒ/ perfectly! Arena champion! 🏆",
      no:"❌ Round your lips for /ɒ/: 'top'. Not 'tape' or 'tip'!"},
-    {t:'sb', ph:'Mixed short vowels',
+    {t:'sb', ph:'Mixed Short Vowels · สระสั้นผสม',
      words:['A','big','red','cat','sat','on','a','hot','box'],target:'A big red cat sat on a hot box',
+     alts:['The big red cat sat on a hot box'],
      clueEmoji:'🐱📦',clueHint:"Where did the big red cat sit? Build the sentence!",
      ok:"✅ big(/ɪ/) red(/ɛ/) cat(/æ/) sat(/æ/) hot(/ɒ/) box(/ɒ/) — BOSS DEFEATED! 🏆🎉"}
    ]},
 
   /* ── LONG VOWEL MISSIONS ── */
-  {id:'l1',path:'long',num:1,title:'Mission 1: Planet Jupiter /eɪ/',icon:'🏝️',col:'#f7c948',
-   sub:'Long A — ai, ay /eɪ/ sound',lives:3,
+  {id:'l1',path:'long',num:1,title:'Mission 1: Planet Jupiter',icon:'🏝️',col:'#f7c948',
+   sub:'Long A Sound · เสียง A ยาว',lives:3,
    tasks:[
     {t:'intro',text:"Float up to the Sky Island! The long /eɪ/ sound glides — hold it longer than short /æ/. Spellings: ai (rain) and ay (play). Listen for the glide!"},
-    {t:'mc', ph:'/eɪ/ ai/ay',
+    {t:'mc', ph:'Long A 🌧️ · ai, ay',
      clueEmoji:'🌧️',clueHint:'Water falls from the sky on a cloudy day.',
      q:'🔊 Listen — which word matches this clue?',
-     word:'rain',opts:['rain','ran','run','rin'],ans:0,
+     ipa:'/eɪ/',word:'rain',opts:['rain','ran','run','rin'],ans:0,
      ok:"✅ 'rain' /reɪn/ — long /eɪ/ gliding sound! Hold it: raaaaain! ☔",
      no:"❌ 'rain' has the long /eɪ/. 'ran' has short /æ/ — very different!"},
-    {t:'pic', ph:'/eɪ/ ay',
+    {t:'pic', ph:'Long A 🌧️ · ay',
      q:'🔊 Listen — which picture has the /eɪ/ sound?',word:'play',
      pics:[{e:'🎮',w:'play /eɪ/',c:true},{e:'🐷',w:'pig /ɪ/',c:false},{e:'☀️',w:'sun /ʌ/',c:false},{e:'🐶',w:'dog /ɒ/',c:false}],
      ok:"✅ 'play' /pleɪ/ — long /eɪ/ at the end! plaaaay! 🎮",
      no:"❌ 'play' has /eɪ/. The others have short vowels!"},
-    {t:'obstacle', title:'⚠️ Sky Storm! Short vs Long /a/',
+    {t:'obstacle', title:'⚠️ Sky Storm! Short vs Long A',
      desc:"A storm mixes up /æ/ (short) and /eɪ/ (long)! Pick only the LONG /eɪ/ word!",
      clueEmoji:'🚂',clueHint:'This vehicle runs on railway tracks.',
-     word:'train',opts:['tan /æ/','tin /ɪ/','train /eɪ/','ton /ɒ/'],ans:2,
+     word:'train',opts:['tan (Short A)','tin (Short I)','train (Long A)','ton (Short O)'],ans:2,
      ok:"✅ 'train' /treɪn/ — long /eɪ/! You flew through the storm! 🚂",
      no:"❌ Only 'train' has the long /eɪ/! Others have short vowels."},
-    {t:'match', ph:'/eɪ/ spellings',
+    {t:'match', ph:'Long A 🌧️ · spellings',
      q:'Match the emoji to its long /eɪ/ word:',
      pairs:[{l:'🌧️',r:'rain'},{l:'🚂',r:'train'},{l:'🎮',r:'play'},{l:'☀️',r:'day'}],
      ok:"✅ rain, train, play, day — all long /eɪ/! Sky island conquered! 🏝️",
      no:"❌ rain=🌧️, train=🚂, play=🎮, day=☀️ — try again!"},
-    {t:'rapid', ph:'Long /eɪ/ words',
+    {t:'rapid', ph:'Long A 🌧️ words',
      q:"⚡ Rapid! Tap ONLY long /eɪ/ words:",
      words:['rain','ran','play','plan','day','dad','train','tan','say','sat'],
      ans:[0,2,4,6,8],
      ok:"✅ rain, play, day, train, say — all /eɪ/! Cloud-fast! ⚡",
      no:"❌ /eɪ/ words: rain, play, day, train, say. Others have short /æ/!"},
-    {t:'spk', ph:'/eɪ/',word:'play',
+    {t:'spk', ph:'Long A 🌧️ · เสียง A ยาว',word:'play',
      clueEmoji:'🎮',clueHint:"What kids love to do after school!",
      q:"🎤 Say what this emoji represents — hold the vowel!",
      tip:"Glide from /e/ to /ɪ/ — hold it: plaaaay",
@@ -1450,39 +1717,39 @@ const MISSIONS=[
      no:"❌ Hold the vowel longer — 'plaaaay'. It glides, don't cut it short!"}
    ]},
 
-  {id:'l2',path:'long',num:2,title:'Mission 2: Planet Saturn /iː/',icon:'🌊',col:'#4ab3f4',
-   sub:'Long E — ee, ea /iː/ sound',lives:3,
+  {id:'l2',path:'long',num:2,title:'Mission 2: Planet Saturn',icon:'🌊',col:'#4ab3f4',
+   sub:'Long E Sound · เสียง E ยาว',lives:3,
    tasks:[
     {t:'intro',text:"Dive into the /iː/ Deep Sea! This sound is long and stretched — like a smile! Spellings: ee (tree, bee) and ea (sea, leaf). Stretchhh it!"},
-    {t:'mc', ph:'/iː/ ee/ea',
+    {t:'mc', ph:'Long E 🐝 · ee, ea',
      clueEmoji:'🌳',clueHint:'A tall plant with branches and leaves.',
      q:'🔊 Listen — which word matches this clue?',
-     word:'tree',opts:['tree','trip','tray','try'],ans:0,
+     ipa:'/iː/',word:'tree',opts:['tree','trip','tray','try'],ans:0,
      ok:"✅ 'tree' /triː/ — long /iː/, smile wide! 🌳 Also: bee, see, feel!",
      no:"❌ 'tree' has long /iː/. 'trip'=/ɪ/ (short), 'tray'=/eɪ/ — different!"},
-    {t:'pic', ph:'/iː/ ee',
+    {t:'pic', ph:'Long E 🐝 · ee',
      q:'🔊 Listen — which picture has the /iː/ sound?',word:'bee',
-     pics:[{e:'🐝',w:'bee /iː/',c:true},{e:'📦',w:'box /ɒ/',c:false},{e:'🎩',w:'hat /æ/',c:false},{e:'🏃',w:'run /ʌ/',c:false}],
+     pics:[{e:'🐝',w:'bee (Long E)',c:true},{e:'📦',w:'box /ɒ/',c:false},{e:'🎩',w:'hat /æ/',c:false},{e:'🏃',w:'run /ʌ/',c:false}],
      ok:"✅ 'bee' /biː/ — hold the smile and stretch: beeee! 🐝",
      no:"❌ 'bee' has /iː/. Box=/ɒ/, hat=/æ/, run=/ʌ/ — all short!"},
-    {t:'obstacle', title:'⚠️ Deep Sea Pressure! Short /ɪ/ vs Long /iː/',
+    {t:'obstacle', title:'⚠️ Deep Sea! Short I vs Long E',
      desc:"The pressure is high! /ɪ/ and /iː/ sound VERY similar. Pick the LONG /iː/ word!",
      clueEmoji:'👣',clueHint:'You walk on these — at the bottom of your legs.',
-     word:'feet',opts:['fit /ɪ/','feet /iː/','fat /æ/','fut'],ans:1,
+     word:'feet',opts:['fit (Short I)','feet (Long E)','fat (Short A)','fut'],ans:1,
      ok:"✅ 'feet' /fiːt/ — long /iː/! You resisted the pressure! 👣",
      no:"❌ 'feet' = long /iː/. 'fit' = short /ɪ/. They sound similar — hold /iː/ longer!"},
-    {t:'match', ph:'/iː/ words',
+    {t:'match', ph:'Long E 🐝 · words',
      q:'Match emoji to its long /iː/ word:',
      pairs:[{l:'🌳',r:'tree'},{l:'🐝',r:'bee'},{l:'👣',r:'feet'},{l:'🌱',r:'seed'}],
      ok:"✅ tree, bee, feet, seed — all long /iː/! Deep sea explored! 🌊",
      no:"❌ tree=🌳, bee=🐝, feet=👣, seed=🌱 — try again!"},
-    {t:'rapid', ph:'Long /iː/ words',
+    {t:'rapid', ph:'Long E 🐝 words',
      q:"⚡ Rapid! Tap ONLY long /iː/ words:",
      words:['tree','trip','bee','bit','feet','fit','seed','sit','week','wick'],
      ans:[0,2,4,6,8],
      ok:"✅ tree, bee, feet, seed, week — all long /iː/! Deep diver! ⚡",
      no:"❌ /iː/ words: tree, bee, feet, seed, week. Others have short /ɪ/!"},
-    {t:'spk', ph:'/iː/',word:'tree',
+    {t:'spk', ph:'Long E 🐝 · เสียง E ยาว',word:'tree',
      clueEmoji:'🌳',clueHint:"Name this tall plant that grows in forests!",
      q:"🎤 Name this clue — stretch the vowel!",
      tip:"Wide smile, stretch it long: /t/-/riː/. Hold the /iː/!",
@@ -1490,39 +1757,39 @@ const MISSIONS=[
      no:"❌ Stretch more — treeeee. Your /iː/ should be at least twice as long as /ɪ/!"}
    ]},
 
-  {id:'l3',path:'long',num:3,title:'Mission 3: Planet Uranus /oʊ/',icon:'⛰️',col:'#4edc84',
-   sub:'Long O — oa, ow /oʊ/ sound',lives:3,
+  {id:'l3',path:'long',num:3,title:'Mission 3: Planet Uranus',icon:'⛰️',col:'#4edc84',
+   sub:'Long O Sound · เสียง O ยาว',lives:3,
    tasks:[
     {t:'intro',text:"Climb the /oʊ/ Mountain! This sound rounds your lips and glides — from 'oh' to a small 'oo'. Spellings: oa (boat) and ow (snow, low). Round and glide!"},
-    {t:'mc', ph:'/oʊ/ oa',
+    {t:'mc', ph:'Long O ⛵ · oa',
      clueEmoji:'⛵',clueHint:'This floats on water with a sail.',
      q:'🔊 Listen — which word matches this clue?',
-     word:'boat',opts:['boat','bat','bit','but'],ans:0,
+     ipa:'/oʊ/',word:'boat',opts:['boat','bat','bit','but'],ans:0,
      ok:"✅ 'boat' /boʊt/ — round lips glide to /ʊ/! Also: coat, road, toad! ⛵",
      no:"❌ 'boat' has long /oʊ/. 'bat'=/æ/, 'bit'=/ɪ/, 'but'=/ʌ/ — all short!"},
-    {t:'pic', ph:'/oʊ/ oa/ow',
+    {t:'pic', ph:'Long O ⛵ · oa, ow',
      q:'🔊 Listen — which picture has /oʊ/?',word:'coat',
      pics:[{e:'🧥',w:'coat /oʊ/',c:true},{e:'🐱',w:'cat /æ/',c:false},{e:'☕',w:'cup /ʌ/',c:false},{e:'🐷',w:'pig /ɪ/',c:false}],
      ok:"✅ 'coat' /koʊt/ — long /oʊ/, round your lips! 🧥",
      no:"❌ 'coat' has /oʊ/. Cat=/æ/, cup=/ʌ/, pig=/ɪ/ — all short!"},
-    {t:'obstacle', title:'⚠️ Mountain Wind! /ɒ/ vs /oʊ/',
+    {t:'obstacle', title:'⚠️ Mountain Wind! Short O vs Long O',
      desc:"Strong winds mix up short /ɒ/ and long /oʊ/! Pick the LONG one!",
      clueEmoji:'🐸',clueHint:'A green jumping amphibian that lives near ponds.',
-     word:'toad',opts:['tod /ɒ/','toad /oʊ/','tid /ɪ/','tud /ʌ/'],ans:1,
+     word:'toad',opts:['tod (Short O)','toad (Long O)','tid (Short I)','tud (Short U)'],ans:1,
      ok:"✅ 'toad' /toʊd/ — long /oʊ/! You climbed through the wind! 🐸",
      no:"❌ 'toad' has long /oʊ/. 'tod' would be short /ɒ/ — hear the difference!"},
-    {t:'match', ph:'/oʊ/ words',
+    {t:'match', ph:'Long O ⛵ · words',
      q:'Match emoji to its long /oʊ/ word:',
      pairs:[{l:'⛵',r:'boat'},{l:'🧥',r:'coat'},{l:'🛣️',r:'road'},{l:'🐸',r:'toad'}],
      ok:"✅ boat, coat, road, toad — all /oʊ/! Mountain summit! ⛰️",
      no:"❌ boat=⛵, coat=🧥, road=🛣️, toad=🐸 — try again!"},
-    {t:'rapid', ph:'Long /oʊ/ words',
+    {t:'rapid', ph:'Long O ⛵ words',
      q:"⚡ Rapid! Tap ONLY /oʊ/ words:",
      words:['boat','bat','coat','cat','road','rod','toad','top','goat','got'],
      ans:[0,2,4,6,8],
      ok:"✅ boat, coat, road, toad, goat — all long /oʊ/! Summit reached! ⚡",
      no:"❌ /oʊ/ words: boat, coat, road, toad, goat. Others have /æ/, /ɒ/!"},
-    {t:'spk', ph:'/oʊ/',word:'road',
+    {t:'spk', ph:'Long O ⛵ · เสียง O ยาว',word:'road',
      clueEmoji:'🛣️',clueHint:"Cars drive on this. Say its name!",
      q:"🎤 Name this clue — round your lips!",
      tip:"Round lips, glide: /r/-/oʊ/-/d/. Feel the lip rounding!",
@@ -1530,39 +1797,39 @@ const MISSIONS=[
      no:"❌ Round your lips and glide: /roʊd/. Don't keep lips flat!"}
    ]},
 
-  {id:'l4',path:'long',num:4,title:'Mission 4: Planet Mercury /aɪ/',icon:'⭐',col:'#b07cf8',
-   sub:'Long I — igh, i_e /aɪ/ sound',lives:3,
+  {id:'l4',path:'long',num:4,title:'Mission 4: Planet Mercury',icon:'⭐',col:'#b07cf8',
+   sub:'Long I Sound · เสียง I ยาว',lives:3,
    tasks:[
     {t:'intro',text:"Reach for the stars with /aɪ/! This long 'i' sound is a diphthong — it glides from /a/ to /ɪ/. Spellings: igh (light, night) and i_e (like, time). Listen to the glide!"},
-    {t:'mc', ph:'/aɪ/ igh',
+    {t:'mc', ph:'Long I 💡 · igh',
      clueEmoji:'💡',clueHint:'It glows in the dark and helps you see.',
      q:'🔊 Listen — which word matches this clue?',
-     word:'light',opts:['light','lit','let','lot'],ans:0,
+     ipa:'/aɪ/',word:'light',opts:['light','lit','let','lot'],ans:0,
      ok:"✅ 'light' /laɪt/ — /aɪ/ glides from /a/ to /ɪ/! 💡",
      no:"❌ 'light' has /aɪ/. 'lit'=/ɪ/, 'let'=/ɛ/, 'lot'=/ɒ/ — all short!"},
-    {t:'pic', ph:'/aɪ/ igh',
+    {t:'pic', ph:'Long I 💡 · igh',
      q:'🔊 Listen — which picture has /aɪ/?',word:'night',
-     pics:[{e:'🌙',w:'night /aɪ/',c:true},{e:'🐝',w:'bee /iː/',c:false},{e:'🚌',w:'bus /ʌ/',c:false},{e:'🔥',w:'hot /ɒ/',c:false}],
+     pics:[{e:'🌙',w:'night /aɪ/',c:true},{e:'🐝',w:'bee (Long E)',c:false},{e:'🚌',w:'bus /ʌ/',c:false},{e:'🔥',w:'hot /ɒ/',c:false}],
      ok:"✅ 'night' /naɪt/ — long /aɪ/ diphthong! 🌙",
      no:"❌ 'night' has /aɪ/. Bee=/iː/, bus=/ʌ/, hot=/ɒ/!"},
-    {t:'obstacle', title:'⚠️ Meteor Shower! /ɪ/ vs /aɪ/',
+    {t:'obstacle', title:'⚠️ Meteor Shower! Short I vs Long I',
      desc:"Meteors of /ɪ/ are falling! Only the /aɪ/ words are safe shields!",
      clueEmoji:'✅',clueHint:"The direction on the right — it means correct!",
-     word:'right',opts:['rit /ɪ/','right /aɪ/','ret /ɛ/','rot /ɒ/'],ans:1,
+     word:'right',opts:['rit (Short I)','right (Long I)','ret (Short E)','rot (Short O)'],ans:1,
      ok:"✅ 'right' /raɪt/ — your shield held! Meteor blocked! ✅",
      no:"❌ 'right' has /aɪ/. Don't confuse with 'rit'(/ɪ/) — it's not even a word!"},
-    {t:'match', ph:'/aɪ/ words',
+    {t:'match', ph:'Long I 💡 · words',
      q:'Match emoji to long /aɪ/ word:',
      pairs:[{l:'💡',r:'light'},{l:'🌙',r:'night'},{l:'✅',r:'right'},{l:'💪',r:'might'}],
      ok:"✅ light, night, right, might — all /aɪ/! Star navigator! ⭐",
      no:"❌ light=💡, night=🌙, right=✅, might=💪 — try again!"},
-    {t:'rapid', ph:'Long /aɪ/ words',
+    {t:'rapid', ph:'Long I 💡 words',
      q:"⚡ Rapid! Tap ONLY /aɪ/ words:",
      words:['light','lit','night','nit','right','rit','sight','sit','might','mit'],
      ans:[0,2,4,6,8],
      ok:"✅ light, night, right, sight, might — all /aɪ/! Shooting star! ⚡",
      no:"❌ /aɪ/ words: light, night, right, sight, might. Others have short /ɪ/!"},
-    {t:'spk', ph:'/aɪ/',word:'night',
+    {t:'spk', ph:'Long I 💡 · เสียง I ยาว',word:'night',
      clueEmoji:'🌙',clueHint:"The time when it's dark and stars appear!",
      q:"🎤 Name this time of day from the clue!",
      tip:"Glide: start with open /a/, move to /ɪ/ — /naɪt/",
@@ -1570,39 +1837,39 @@ const MISSIONS=[
      no:"❌ Feel the glide: /naɪt/. Start open, close toward /ɪ/. Don't keep it short!"}
    ]},
 
-  {id:'l5',path:'long',num:5,title:'Mission 5: Planet Pluto /uː/',icon:'❄️',col:'#4ab3f4',
-   sub:'Long U — oo, ue /uː/ sound',lives:3,
+  {id:'l5',path:'long',num:5,title:'Mission 5: Planet Pluto',icon:'❄️',col:'#4ab3f4',
+   sub:'Long U Sound · เสียง U ยาว',lives:3,
    tasks:[
     {t:'intro',text:"Enter the Ice Palace of /uː/! Tight, forward lips, long sound. Spellings: oo (moon, food) and ue (blue, clue). Round your lips and push them forward!"},
-    {t:'mc', ph:'/uː/ oo',
+    {t:'mc', ph:'Long U 🌕 · oo',
      clueEmoji:'🌕',clueHint:'It glows in the sky at night — big and round.',
      q:'🔊 Listen — which word matches this clue?',
-     word:'moon',opts:['moon','man','men','min'],ans:0,
+     ipa:'/uː/',word:'moon',opts:['moon','man','men','min'],ans:0,
      ok:"✅ 'moon' /muːn/ — tight forward lips for /uː/! 🌕",
      no:"❌ 'moon' has /uː/. 'man'=/æ/, 'men'=/ɛ/, 'min'=/ɪ/ — all short!"},
-    {t:'pic', ph:'/uː/ oo',
+    {t:'pic', ph:'Long U 🌕 · oo',
      q:'🔊 Listen — which picture has /uː/?',word:'food',
      pics:[{e:'🍎',w:'food /uː/',c:true},{e:'🎩',w:'hat /æ/',c:false},{e:'🐷',w:'pig /ɪ/',c:false},{e:'🔥',w:'hot /ɒ/',c:false}],
      ok:"✅ 'food' /fuːd/ — tight lips forward for /uː/! 🍎",
      no:"❌ 'food' has /uː/. Hat=/æ/, pig=/ɪ/, hot=/ɒ/ — all different!"},
-    {t:'obstacle', title:'⚠️ Ice Crack! /ʊ/ vs /uː/',
+    {t:'obstacle', title:'⚠️ Ice Crack! Short U vs Long U',
      desc:"The ice has two vowels hidden: short /ʊ/ (as in 'book') and long /uː/. Pick the LONG /uː/!",
      clueEmoji:'🔵',clueHint:'This colour is the colour of the sky and ocean.',
-     word:'blue',opts:['book /ʊ/','bull /ʊ/','blue /uː/','boot /uː/'],ans:2,
+     word:'blue',opts:['book (Short U)','bull (Short U)','blue (Long U)','boot (Long U)'],ans:2,
      ok:"✅ 'blue' /bluː/ — long /uː/! Ice palace safe! 🔵",
      no:"❌ 'blue' has the long /uː/. 'book'/'bull' have short /ʊ/ — slightly different!"},
-    {t:'match', ph:'/uː/ words',
+    {t:'match', ph:'Long U 🌕 · words',
      q:'Match emoji to long /uː/ word:',
      pairs:[{l:'🌕',r:'moon'},{l:'🍎',r:'food'},{l:'🔵',r:'blue'},{l:'📅',r:'soon'}],
      ok:"✅ moon, food, blue, soon — all /uː/! Ice palace conquered! ❄️",
      no:"❌ moon=🌕, food=🍎, blue=🔵, soon=📅 — try again!"},
-    {t:'rapid', ph:'Long /uː/ words',
+    {t:'rapid', ph:'Long U 🌕 words',
      q:"⚡ Rapid! Tap ONLY /uː/ words:",
      words:['moon','man','food','fed','blue','bad','soon','sun','cool','cup'],
      ans:[0,2,4,6,8],
      ok:"✅ moon, food, blue, soon, cool — all /uː/! Ice champion! ⚡",
      no:"❌ /uː/ words: moon, food, blue, soon, cool. Others have short vowels!"},
-    {t:'spk', ph:'/uː/',word:'cool',
+    {t:'spk', ph:'Long U 🌕 · เสียง U ยาว',word:'cool',
      clueEmoji:'❄️',clueHint:"The opposite of warm — the ice palace is very ___!",
      q:"🎤 Complete: 'The ice palace is ___'",
      tip:"Tight forward lips, long sound: /k/-/uː/-/l/",
@@ -1613,71 +1880,72 @@ const MISSIONS=[
   {id:'l6',path:'long',num:6,title:'Mission 6: Galactic BOSS',icon:'🌌',col:'#f7c948',
    sub:'All Long Vowels — BOSS LEVEL!',lives:3,
    tasks:[
-    {t:'intro',text:"GALAXY BOSS LEVEL! 🌌 All long vowels: /eɪ/ /iː/ /oʊ/ /aɪ/ /uː/. You've explored 5 worlds — now prove you command them all! The galaxy awaits!"},
-    {t:'mc', ph:'Which long vowel?',
+    {t:'intro',text:"GALAXY BOSS LEVEL! 🌌 All long vowels: Long A, E, O, I /uː/. You've explored 5 worlds — now prove you command them all! The galaxy awaits!"},
+    {t:'mc', ph:'Which long vowel? · สระยาวอะไร?',
      clueEmoji:'⛵',clueHint:'It floats on water.',
      q:'🔊 Listen — which long vowel sound is in this word?',
-     word:'boat',opts:['/eɪ/ rain','/iː/ tree','/oʊ/ boat','/aɪ/ night'],ans:2,
+     word:'boat',opts:['Long A 🌧️ rain','Long E 🐝 tree','Long O ⛵ boat','Long I 💡 night'],ans:2,
      ok:"✅ 'boat' has /oʊ/ — round lip glide! 🌌",
      no:"❌ 'boat' /boʊt/ has /oʊ/ — not /eɪ/, /iː/, or /aɪ/!"},
     {t:'obstacle', title:'⚠️ GALAXY BOSS! Mixed Vowel Nebula',
      desc:"All short and long vowels swirl together! Find ONLY the long /iː/ word!",
      clueEmoji:'🐝',clueHint:'A flying insect that makes honey.',
-     word:'bee',opts:['bee /iː/','bay /eɪ/','bow /oʊ/','buy /aɪ/'],ans:0,
+     word:'bee',opts:['bee (Long E)','bay (Long A)','bow (Long O)','buy (Long I)'],ans:0,
      ok:"✅ 'bee' /biː/ — long /iː/! You navigated the nebula! 🐝🌌",
      no:"❌ 'bee' has /iː/. 'bay'=/eɪ/, 'bow'=/oʊ/, 'buy'=/aɪ/ — all different!"},
-    {t:'match', ph:'All long vowels',
+    {t:'match', ph:'All Long Vowels · สระยาว',
      q:'Match emoji to its long vowel sound:',
      pairs:[{l:'🌧️ rain',r:'/eɪ/'},{l:'🌳 tree',r:'/iː/'},{l:'⛵ boat',r:'/oʊ/'},{l:'💡 light',r:'/aɪ/'}],
      ok:"✅ rain/eɪ/, tree/iː/, boat/oʊ/, light/aɪ/ — Galaxy Master! 🌌",
      no:"❌ rain=/eɪ/, tree=/iː/, boat=/oʊ/, light=/aɪ/ — try again!"},
-    {t:'rapid', ph:'Long vowels only',
+    {t:'rapid', ph:'Long Vowels Only · สระยาวเท่านั้น',
      q:"⚡ GALAXY RAPID! Tap ONLY long vowel words:",
      words:['rain','ran','tree','trip','boat','bat','light','lit','moon','man'],
      ans:[0,2,4,6,8],
      ok:"✅ rain/eɪ/ tree/iː/ boat/oʊ/ light/aɪ/ moon/uː/ — GALAXY CONQUERED! 🌌🏆",
      no:"❌ Long vowels: rain(eɪ), tree(iː), boat(oʊ), light(aɪ), moon(uː)!"},
-    {t:'spk', ph:'Long /eɪ/',word:'train',
+    {t:'spk', ph:'Long A 🌧️',word:'train',
      clueEmoji:'🚂',clueHint:"This vehicle travels on rails across the country!",
      q:"🎤 Name this vehicle from the clue — hold the vowel!",
      tip:"Glide /eɪ/: /tr/-/eɪ/-/n/. Like saying 'eh-ee' quickly!",
      ok:"✅ 'train' — beautiful /eɪ/ glide! Galaxy champion! 🚂🌌",
      no:"❌ Hold the glide: /treɪn/. Start with /e/ and slide to /ɪ/!"},
-    {t:'sb', ph:'Mixed long vowels',
+    {t:'sb', ph:'Mixed Long Vowels · สระยาวผสม',
      words:['The','train','and','a','bee','float','by','the','light'],target:'The train and a bee float by the light',
-     clueEmoji:'🚂🐝💡',clueHint:"A sentence with /eɪ/, /iː/, /oʊ/, and /aɪ/!",
+     alts:['A bee and the train float by the light','The bee and a train float by the light'],
+     clueEmoji:'🚂🐝💡',clueHint:"Use train, bee, float and light in one sentence! / ใช้ train, bee, float และ light ในประโยคเดียว!",
      ok:"✅ train/eɪ/ bee/iː/ float/oʊ/ light/aɪ/ — FOUR long vowels! GALAXY DEFEATED! 🌌🏆🎉"}
    ]}
 ,
-    {t:'sorter',ph:'/æ/',
+    {t:'sorter',ph:'Short A 🐱 · เสียง A สั้น',
      ok:'🎉 Great sorting! / เยี่ยม! จัดเรียงได้ถูกต้อง!',
      no:'Keep trying! / ลองใหม่อีกครั้ง!',
      items:[{e:'🐟',w:'fish',c:false},{e:'🎒',w:'bag',c:true},{e:'☕',w:'cup',c:false},{e:'🦀',w:'crab',c:true},{e:'🌙',w:'moon',c:false},{e:'🪰',w:'fly',c:false},{e:'🧢',w:'cap',c:true},{e:'📦',w:'box',c:false}]},
-    {t:'favword',ph:'/ɛ/',
+    {t:'favword',ph:'Short E 🛏️ · เสียง E สั้น',
      ok:'⭐ Favourite word recorded! / บันทึกคำโปรดแล้ว!',
      no:'Keep going! / ต่อไป!',
      words:[{e:'🛏️',w:'bed'},{e:'🔴',w:'red'},{e:'🖊️',w:'pen'},{e:'🕸️',w:'web'},{e:'🦆',w:'hen'},{e:'🔟',w:'ten'}]},
-    {t:'sorter',ph:'/ɪ/',
+    {t:'sorter',ph:'Short I 🐷 · เสียง I สั้น',
      ok:'🎉 Great sorting! / เยี่ยม! จัดเรียงได้ถูกต้อง!',
      no:'Keep trying! / ลองใหม่อีกครั้ง!',
      items:[{e:'🐟',w:'fish',c:true},{e:'🎂',w:'cake',c:false},{e:'🥛',w:'milk',c:true},{e:'⛵',w:'boat',c:false},{e:'🦵',w:'kick',c:true},{e:'🌙',w:'moon',c:false},{e:'🎁',w:'gift',c:true},{e:'🛣️',w:'road',c:false}]},
-    {t:'favword',ph:'/ɒ/',
+    {t:'favword',ph:'Short O 🐶 · เสียง O สั้น',
      ok:'⭐ Favourite word recorded! / บันทึกคำโปรดแล้ว!',
      no:'Keep going! / ต่อไป!',
      words:[{e:'🔥',w:'hot'},{e:'🐶',w:'dog'},{e:'📦',w:'box'},{e:'🦊',w:'fox'},{e:'🔝',w:'top'},{e:'🫙',w:'pot'}]},
-    {t:'sorter',ph:'/eɪ/',
+    {t:'sorter',ph:'Long A 🌧️ · เสียง A ยาว',
      ok:'🎉 Great sorting! / เยี่ยม! จัดเรียงได้ถูกต้อง!',
      no:'Keep trying! / ลองใหม่อีกครั้ง!',
      items:[{e:'🌧️',w:'rain',c:true},{e:'🏃',w:'run',c:false},{e:'🍰',w:'cake',c:true},{e:'🐱',w:'cat',c:false},{e:'🚂',w:'train',c:true},{e:'🐷',w:'pig',c:false},{e:'☀️',w:'day',c:true},{e:'📦',w:'box',c:false}]},
-    {t:'favword',ph:'/iː/',
+    {t:'favword',ph:'Long E 🐝 · เสียง E ยาว',
      ok:'⭐ Favourite word recorded! / บันทึกคำโปรดแล้ว!',
      no:'Keep going! / ต่อไป!',
      words:[{e:'🌳',w:'tree'},{e:'🐝',w:'bee'},{e:'👣',w:'feet'},{e:'🌱',w:'seed'},{e:'📅',w:'week'},{e:'🟢',w:'green'}]},
-    {t:'sorter',ph:'/oʊ/',
+    {t:'sorter',ph:'Long O ⛵ · เสียง O ยาว',
      ok:'🎉 Great sorting! / เยี่ยม! จัดเรียงได้ถูกต้อง!',
      no:'Keep trying! / ลองใหม่อีกครั้ง!',
      items:[{e:'⛵',w:'boat',c:true},{e:'🎩',w:'hat',c:false},{e:'🧥',w:'coat',c:true},{e:'🐱',w:'cat',c:false},{e:'🐸',w:'toad',c:true},{e:'☕',w:'cup',c:false},{e:'🐐',w:'goat',c:true},{e:'🐷',w:'pig',c:false}]},
-    {t:'favword',ph:'/aɪ/',
+    {t:'favword',ph:'Long I 💡 · เสียง I ยาว',
      ok:'⭐ Favourite word recorded! / บันทึกคำโปรดแล้ว!',
      no:'Keep going! / ต่อไป!',
      words:[{e:'💡',w:'light'},{e:'🌙',w:'night'},{e:'✅',w:'right'},{e:'💪',w:'might'},{e:'👁️',w:'sight'},{e:'✈️',w:'flight'}]}];
@@ -1755,6 +2023,18 @@ function goTo(screen){
   else if(screen==='charsel'){
     document.getElementById('scr-charsel').classList.add('active');
     buildCharacterSelection();   // async — fetches real filenames from GitHub API
+  }
+  else if(screen==='howto'){
+    const el=document.getElementById('scr-howto');
+    if(el){
+      el.classList.add('active');
+      el.style.display='block';  // force override any inline style conflict
+      el.style.minHeight='100vh';
+      el.scrollTop=0;            // scroll to top each time
+    }
+    // Show space video behind howto screen
+    if(spaceBg){spaceBg.style.display='block'; try{spaceBg.play();}catch(e){}}
+    if(spaceOvl) spaceOvl.style.display='block';
   }
   else if(screen==='app'){document.getElementById('scr-app').classList.add('active');showPanel('map');}
   else if(screen==='teacher'){document.getElementById('scr-teacher').classList.add('active');showTPanel('students');}
@@ -1841,7 +2121,7 @@ function selectStudentName(name){
   const dt=document.getElementById('name-display-text');
   if(dt){
     const initials=name.slice(0,2).toUpperCase();
-    dt.innerHTML=`<span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--g3),var(--g5));font-size:.68rem;font-weight:900;color:#fff;margin-right:8px;flex-shrink:0;">${initials}</span>${name}`;
+    dt.innerHTML=`<span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--g3),var(--g5));font-size:.72rem;font-weight:900;color:#fff;margin-right:8px;flex-shrink:0;">${initials}</span>${name}`;
     dt.style.color='var(--txt)';
   }
   // Close dropdown
@@ -2006,7 +2286,7 @@ function renderProfile(){
       </div>
     </div>
     <div style="text-align:center;margin-top:12px;">
-      <button class="back-btn" style="font-size:.82rem;" onclick="doLogout()">🚪 Log Out</button>
+      <button class="back-btn" style="font-size:.82rem;" onclick="doLogout()">🚪 Log Out <span class='th-inline'>ออกจากระบบ</span></button>
     </div>`;
 }
 
@@ -2138,8 +2418,8 @@ function renderUploadSection(){
   wrap.innerHTML=`
     <div class="upload-section">
       <div class="mode-tabs">
-        <button class="mode-tab active" onclick="switchUpMode('upload',this)">📤 Upload Files</button>
-        <button class="mode-tab" onclick="switchUpMode('record',this)">🎙️ Live Recording</button>
+        <button class="mode-tab active" onclick="switchUpMode('upload',this)">📤 Upload Files <span class='th-inline'>อัปโหลดไฟล์</span></button>
+        <button class="mode-tab" onclick="switchUpMode('record',this)">🎙️ Live Recording <span class='th-inline'>บันทึกสด</span></button>
       </div>
       <!-- FILE UPLOAD MODE -->
       <div id="up-mode-upload">
@@ -2149,12 +2429,12 @@ function renderUploadSection(){
           <input type="file" id="up-file-input" multiple accept=".mp3,.mp4,.avi,.wav" onchange="upHandleFiles(this.files)">
           <div style="font-size:2.2rem;margin-bottom:4px;">📂</div>
           <div style="font-size:.82rem;color:var(--muted);font-weight:700;">Tap to browse or drag files here</div>
-          <div style="font-size:.68rem;color:var(--muted);margin-top:4px;opacity:.6;">Multiple files allowed</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:4px;opacity:.6;">Multiple files allowed</div>
         </div>
         <div id="up-file-list"></div>
         <div class="submit-bar-up" id="up-bar" style="display:none;">
           <span style="font-size:.76rem;color:var(--muted);font-weight:700;" id="up-count">0 files</span>
-          <button class="sbtn" onclick="upSubmit('upload')">📤 Submit to Teacher</button>
+          <button class="sbtn" onclick="upSubmit('upload')">📤 Submit <span class='th-inline'>ส่งให้ครู</span></button>
         </div>
         <div class="up-status" id="up-st-upload"></div>
         <div class="up-progress" id="up-pg-upload"><div class="up-progress-fill" id="up-pf-upload"></div></div>
@@ -2173,14 +2453,14 @@ function renderUploadSection(){
           <div style="font-size:.74rem;color:var(--muted);font-weight:700;margin-bottom:4px;">🔊 Preview:</div>
           <audio id="up-rec-audio" controls style="width:100%;height:34px;border-radius:8px;"></audio>
           <div style="display:flex;gap:8px;margin-top:8px;justify-content:center;">
-            <button class="action-pill discard" onclick="upDiscardRec()">🗑 Discard</button>
-            <button class="action-pill keep" onclick="upKeepRec()">✓ Keep & Add</button>
+            <button class="action-pill discard" onclick="upDiscardRec()">🗑 Discard <span class='th-inline'>ยกเลิก</span></button>
+            <button class="action-pill keep" onclick="upKeepRec()">✓ Keep <span class='th-inline'>เก็บไว้</span></button>
           </div>
         </div>
         <div id="up-rec-list"></div>
         <div class="submit-bar-up" id="up-rbar" style="display:none;">
           <span style="font-size:.76rem;color:var(--muted);font-weight:700;" id="up-rcount">0 recordings</span>
-          <button class="sbtn" onclick="upSubmit('record')">📤 Submit to Teacher</button>
+          <button class="sbtn" onclick="upSubmit('record')">📤 Submit <span class='th-inline'>ส่งให้ครู</span></button>
         </div>
         <div class="up-status" id="up-st-record"></div>
         <div class="up-progress" id="up-pg-record"><div class="up-progress-fill" id="up-pf-record"></div></div>
@@ -2396,14 +2676,14 @@ function renderTStudents(){
       <td>${xp}</td><td>Lv ${lvl}</td><td>${missions}/${MISSIONS.length}</td><td>${badges}</td>
       <td>${lastActive}</td>
       <td>
-        <button class="t-btn" onclick="tViewStudent('${s.name}')">View</button>
-        <button class="t-btn danger" onclick="tResetStudent('${s.name}')">Reset</button>
+        <button class="t-btn" onclick="tViewStudent('${s.name}')">View <span class="th-inline">ดู</span></button>
+        <button class="t-btn danger" onclick="tResetStudent('${s.name}')">Reset <span class="th-inline">รีเซ็ต</span></button>
       </td></tr>`;
   });
   pnl.innerHTML=`
     <div class="t-card">
       <h3>📋 Student Roster (${STUDENTS.length})</h3>
-      <input class="t-search" placeholder="🔍 Search students…" oninput="filterTStudents(this.value)">
+      <input class="t-search" placeholder="🔍 Search / ค้นหา" oninput="filterTStudents(this.value)">
       <div style="overflow-x:auto;">
       <table class="t-table" id="t-stu-table">
         <thead><tr><th>Name</th><th>Avatar</th><th>XP</th><th>Level</th><th>Missions</th><th>Badges</th><th>Last Active</th><th>Actions</th></tr></thead>
@@ -2441,7 +2721,7 @@ function tViewStudent(name){
     <h4 style="font-size:.85rem;margin:12px 0 6px;">Override XP</h4>
     <div style="display:flex;gap:8px;align-items:center;">
       <input class="t-input" id="override-xp" type="number" value="${d.xp||0}" style="max-width:120px;">
-      <button class="t-btn success" onclick="tOverrideXP('${name}')">Save XP</button>
+      <button class="t-btn success" onclick="tOverrideXP('${name}')">Save XP <span class="th-inline">บันทึก</span></button>
     </div>
   </div>`;
   document.body.appendChild(overlay);
@@ -2500,7 +2780,7 @@ function renderTPasswords(){
   const pnl=document.getElementById('t-pnl-passwords');
   let rows='';
   STUDENTS.forEach((s,i)=>{
-    rows+=`<tr><td>${i+1}</td><td><strong>${s.name}</strong></td><td style="font-family:'Noto Sans',monospace;color:var(--g5);letter-spacing:1px;">${s.pw}</td></tr>`;
+    rows+=`<tr><td>${i+1}</td><td><strong>${s.name}</strong></td><td style="font-family:'Noto Sans Thai','Noto Sans','Nunito',sans-serif;color:var(--g5);letter-spacing:1px;">${s.pw}</td></tr>`;
   });
   pnl.innerHTML=`<div class="t-card"><h3>🔑 Student Passwords</h3>
     <p style="font-size:.78rem;color:var(--muted);margin-bottom:12px;">Each student has a unique 7-character password (digits + lowercase letters).</p>
@@ -2518,7 +2798,7 @@ function renderTUploads(){
     if(d&&d.uploads&&d.uploads.length){
       d.uploads.forEach(u=>{
         rows+=`<tr><td>${s.name}</td><td>${u.name}</td><td>${u.date}</td>
-          <td><button class="t-btn" onclick="tDownloadUpload('${s.name}',${d.uploads.indexOf(u)})">⬇ Download</button></td></tr>`;
+          <td><button class="t-btn" onclick="tDownloadUpload('${s.name}',${d.uploads.indexOf(u)})">⬇ Download <span class="th-inline">ดาวน์โหลด</span></button></td></tr>`;
       });
     }
   });
@@ -2594,19 +2874,28 @@ async function buildCharacterSelection(){
     }
   } catch(e){ console.warn('GitHub API unavailable, using fallback URLs'); }
 
-  // Fallback: use CHARACTER_CARDS array if API fails
+  // Ensure we always have 8 characters — pad with CHAR_META fallbacks if GitHub returns fewer
   if(!imageFiles.length){
     imageFiles = CHARACTER_CARDS.map(c => ({url: c.img, name: c.id}));
   }
+  // If GitHub returned fewer than CHAR_META count, pad with emoji fallbacks
+  while(imageFiles.length < CHAR_META.length){
+    const i = imageFiles.length;
+    imageFiles.push({url: '', name: CHAR_META[i]?.id || 'c'+(i+1)});
+  }
+  // Cap at CHAR_META count (8)
+  imageFiles = imageFiles.slice(0, CHAR_META.length);
 
-  // Render grid
+  // Render grid — force 3 columns directly in JS (most reliable)
   grid.innerHTML = '';
+  grid.style.cssText = 'display:flex;flex-wrap:wrap;justify-content:center;gap:16px;width:100%;max-width:900px;margin-bottom:30px;';
   imageFiles.forEach((file, i) => {
     const meta = CHAR_META[i] || {id:'c'+(i+1), name:'Hero '+(i+1), emoji:'⭐'};
     const card = document.createElement('div');
     card.id = 'charcard-' + meta.id;
     card.style.cssText = `background:rgba(22,33,62,0.82);border:3px solid var(--border);border-radius:18px;
-      padding:10px;text-align:center;cursor:pointer;transition:all .25s;position:relative;backdrop-filter:blur(8px);`;
+      padding:10px;text-align:center;cursor:pointer;transition:all .25s;position:relative;backdrop-filter:blur(8px);
+      width:calc(33.333% - 12px);min-width:180px;max-width:280px;flex-shrink:0;`;
 
     card.innerHTML = `
       <div style="width:100%;padding-top:100%;position:relative;border-radius:12px;overflow:hidden;background:#0a1628;margin-bottom:8px;">
@@ -2680,7 +2969,7 @@ function confirmCharacter(){
       avbtn.textContent = S.avatar;
     }
   }
-  goTo('app');
+  goTo('howto');
   updateHUD();
   renderBadges();
   spawnConfetti();
@@ -2726,11 +3015,38 @@ async function loadPlanetCards(){
       {headers:{'Accept':'application/vnd.github.v3+json'}});
     if(res.ok){
       const files = await res.json();
-      const imgs = files.filter(f=>/\.(png|jpe?g|webp)$/i.test(f.name))
-                        .map(f=>f.download_url);
-      // Map to mission IDs by order: s1-s6 then l1-l6
+      const imgFiles = files.filter(f=>/\.(png|jpe?g|webp)$/i.test(f.name));
+      // Match by filename keywords — much more reliable than positional order
+      const keyMap = {
+        's1':['short_a','short-a','shorta','earth'],
+        's2':['short_e','short-e','shorte','mars'],
+        's3':['short_i','short-i','shorti','venus'],
+        's4':['short_o','short-o','shorto','neptune'],
+        's5':['short_u','short-u','shortu','kepler'],
+        's6':['boss','core','boss_short'],
+        'l1':['long_a','long-a','longa','jupiter'],
+        'l2':['long_e','long-e','longe','saturn'],
+        'l3':['long_o','long-o','longo','uranus'],
+        'l4':['long_i','long-i','longi','mercury'],
+        'l5':['long_u','long-u','longu','pluto'],
+        'l6':['boss_long','galactic'],
+      };
+      imgFiles.forEach(f=>{
+        const nameLower = f.name.toLowerCase();
+        for(const [id, keys] of Object.entries(keyMap)){
+          if(keys.some(k=>nameLower.includes(k))){
+            PLANET_CARDS[id] = f.download_url; break;
+          }
+        }
+      });
+      // Any unmatched? Fill by position as fallback
       const order=['s1','s2','s3','s4','s5','s6','l1','l2','l3','l4','l5','l6'];
-      imgs.forEach((url,i)=>{ if(order[i]) PLANET_CARDS[order[i]]=url; });
+      const matched = imgFiles.filter(f=>{
+        const n=f.name.toLowerCase();
+        return !Object.values(keyMap).flat().some(k=>n.includes(k));
+      });
+      let mi=0;
+      order.forEach(id=>{ if(!PLANET_CARDS[id]&&matched[mi]) PLANET_CARDS[id]=matched[mi++].download_url; });
       _planetCardsLoaded = true;
       console.log('Planet cards loaded from GitHub:', imgs.length,'images');
     }
@@ -2939,7 +3255,7 @@ function showClueUnlock(clueId){
     <span class="cup-icon">🔮</span><h2>Clue Unlocked!</h2>
     <p>You've earned a secret clue for your teacher presentation:</p>
     <div class="cup-clue">${clue.text}</div>
-    <button class="start-btn" style="max-width:220px;font-size:.9rem;padding:12px;" onclick="this.closest('.clue-unlock-pop').remove();spawnConfetti();">🎉 Awesome! Keep Going!</button>
+    <button class="start-btn" style="max-width:220px;font-size:.9rem;padding:12px;" onclick="this.closest('.clue-unlock-pop').remove();spawnConfetti();">🎉 Awesome! <span class='th-inline'>เยี่ยม! สู้ต่อ!</span></button>
   </div>`;
   document.body.appendChild(overlay);
 }
@@ -3010,7 +3326,7 @@ function showGameOver(){
   const gc=document.getElementById('gc');
   gc.innerHTML=`<div class="gpanel" style="text-align:center;">
     <div style="font-size:3rem;margin-bottom:10px">💀</div>
-    <h3 style="font-size:1.3rem;margin-bottom:6px">Mission Failed!</h3>
+    <h3 style="font-size:1.3rem;margin-bottom:4px">Mission Failed! / ภารกิจล้มเหลว</h3>
     <div style="color:var(--muted);margin-bottom:18px;font-size:1rem;">You ran out of hearts. Practice makes perfect!<br><span style="font-size:.88em;">หัวใจหมดแล้ว — ฝึกซ้อมแล้วลองอีกครั้ง!</span></div>
     <button class="nxtbtn show" style="margin:0 auto;font-size:1.05rem;" onclick="startMission(S.curMission)">🔄 Try Again / ลองอีกครั้ง</button>
     <br><button class="back-btn" style="margin-top:10px;font-size:1rem;" onclick="exitGame()">← Back to Map / กลับแผนที่ดาว</button>
@@ -3344,6 +3660,11 @@ function showNxt(){const n=document.getElementById('nb');if(n)n.classList.add('s
 function renderIntro(tk,gc){
   const p=mkP(bi('📖 Mission Briefing','📖 บทสรุปภารกิจ'),bi('Read this before you start!','อ่านก่อนเริ่มภารกิจ!'));
   p.innerHTML+=`<div style="background:#0d1729;border:2px solid var(--border);border-radius:13px;padding:18px;margin:14px 0;font-size:1rem;line-height:1.8;color:var(--txt);text-align:left;">${tk.text}</div>`;
+  p.innerHTML+=`<div style="background:rgba(74,179,244,.07);border:1.5px solid rgba(74,179,244,.25);
+    border-radius:10px;padding:11px 15px;font-size:.85rem;color:var(--g3);line-height:1.7;margin-top:10px;">
+    💡 <strong>Tip / เคล็ดลับ:</strong> Listen carefully — notice how your mouth moves for each sound!<br>
+    <span style="color:var(--muted);">ฟังให้ดี — สังเกตว่าปากต้องทำอย่างไรสำหรับแต่ละเสียง!</span>
+  </div>`;
   const nb=mkNxt();nb.innerHTML=bi("Let's Go! →","ไปกันเลย! →");nb.classList.add('show');p.appendChild(nb);
   gc.appendChild(p);S.results.push(true);
 }
@@ -3358,7 +3679,10 @@ function renderMC(tk,gc){
     p.insertBefore(cb,p.firstChild);
   }
   const clue=document.createElement('div');clue.className='clue-box';
-  clue.innerHTML=`<div class="clue-emoji">${tk.clueEmoji}</div><div class="clue-ph">${tk.ph}</div><div class="clue-hint"><em>${tk.clueHint}</em></div>`;
+  clue.innerHTML=`<div class="clue-emoji">${tk.clueEmoji}</div>
+    <div class="clue-ph">${tk.ph}</div>
+    ${tk.ipa?`<div style="font-size:.72rem;color:var(--muted);margin-top:3px;font-family:'Noto Sans Thai','Noto Sans','Nunito',sans-serif;opacity:.7;">${tk.ipa}</div>`:''}
+    <div class="clue-hint"><em>${tk.clueHint}</em></div>`;
   if(tk.clueExtra)clue.innerHTML+=`<div style="font-size:.72rem;color:var(--muted);">${tk.clueExtra}</div>`;
   p.appendChild(clue);
   if(!isObstacle){
@@ -3415,10 +3739,13 @@ function chkPic(pic,tk,btn,all){
 function renderSpk(tk,gc){
   const p=mkP(bi('🎤 Speak & Record','🎤 พูดและบันทึกเสียง'),biQ(tk.q));
   const clue=document.createElement('div');clue.className='clue-box';
-  clue.innerHTML=`<div class="clue-emoji">${tk.clueEmoji}</div><div class="clue-ph">${tk.ph}</div><div class="clue-hint"><em>${tk.clueHint}</em></div>`;
+  clue.innerHTML=`<div class="clue-emoji">${tk.clueEmoji}</div>
+    <div class="clue-ph">${tk.ph}</div>
+    ${tk.ipa?`<div style="font-size:.72rem;color:var(--muted);margin-top:3px;font-family:'Noto Sans Thai','Noto Sans','Nunito',sans-serif;opacity:.7;">${tk.ipa}</div>`:''}
+    <div class="clue-hint"><em>${tk.clueHint}</em></div>`;
   p.appendChild(clue);
   const lb=document.createElement('button');lb.className='lbtn';
-  lb.innerHTML='🔊 Hear Example';lb.onclick=()=>sayWord(tk.word);p.appendChild(lb);
+  lb.innerHTML=bi('🔊 Hear Example','🔊 ฟังตัวอย่าง');lb.onclick=()=>sayWord(tk.word);p.appendChild(lb);
   const tb=document.createElement('div');tb.className='tip-box';tb.innerHTML='💡 Tip / เคล็ดลับ: '+tk.tip;p.appendChild(tb);
   const wf=document.createElement('div');wf.className='waveform';wf.id='wf';
   wf.innerHTML='<div class="wbar"></div>'.repeat(24);p.appendChild(wf);
@@ -3608,7 +3935,7 @@ function chkRapid(tk,og){
     if(tk.ans.includes(oi))b.classList.add('correct');
     else if(b.dataset.sel==='true')b.classList.add('wrong');});
   const _cWords=tk.words.filter((_,i)=>tk.ans.includes(i));
-  const _rfFb=ok?undefined:`<span style="font-size:.8em;display:block;margin-top:5px;color:var(--g2);">✅ Correct words: <strong>${_cWords.join(', ')}</strong> / คำที่ถูก</span>`;
+  const _rfFb=ok?undefined:`<span style="font-size:.8em;display:block;margin-top:5px;color:var(--g2);">✅ Correct words: <strong>${_cWords.join(', ')}</strong> / คำที่ถูกต้อง</span>`;
   showFb(ok,tk,_rfFb);
   if(ok){addXP(25);grantBadge('rapid');streak(true);}else{streak(false);loseLife();}
   S.results.push(ok);showNxt();
@@ -3657,8 +3984,8 @@ function renderSB(tk,gc){
   <div class="sbarea" id="sba"><span style="color:var(--muted);font-size:.79rem;">Tap words below to build…</span></div>
   <div class="wbank" id="wbk"></div>
   <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:7px;">
-    <button class="lbtn" onclick="chkSB('${tk.target}')">✓ Check</button>
-    <button class="lbtn" style="background:linear-gradient(135deg,var(--g4),#c0392b);" onclick="clrSB()">🗑 Clear</button>
+    <button class="lbtn" onclick="chkSB('${tk.target}',${JSON.stringify(tk.alts||[])})">✓ Check <span class='th-inline'>ตรวจ</span></button>
+    <button class="lbtn" style="background:linear-gradient(135deg,var(--g4),#c0392b);" onclick="clrSB()">🗑 Clear <span class='th-inline'>ล้าง</span></button>
   </div>`;
   p.appendChild(mkFb());p.appendChild(mkNxt());gc.appendChild(p);
   [...tk.words].sort(()=>Math.random()-.5).forEach(w=>{
@@ -3680,15 +4007,19 @@ function clrSB(){
   document.getElementById('sba').innerHTML='<span style="color:var(--muted);font-size:.79rem;">Tap words below to build…</span>';
   document.querySelectorAll('.bchip').forEach(c=>c.classList.remove('used'));
 }
-function chkSB(target){
+function chkSB(target,alts){
   const built=[...document.querySelectorAll('#sba .wchip')].map(c=>c.dataset.w).join(' ');
-  // Accept exact match OR case-insensitive match
-  const ok=built.toLowerCase()===target.toLowerCase();
+  const builtL=built.toLowerCase();
+  // Accept exact target OR any valid alternative arrangement
+  const validTargets=[target,...(alts||[])];
+  const ok=validTargets.some(t=>builtL===t.toLowerCase());
+  const showTarget=validTargets[0]; // show primary as correct
   const tk=S.curMission.tasks[S.task];
   const fbMsg=ok?undefined:
     `❌ Not quite! / ยังไม่ถูก!<br>
      <span style="font-size:.82em;">You built: <em>"${built}"</em></span><br>
-     <span style="font-size:.82em;color:var(--g2);">✅ Correct: <strong>"${target}"</strong></span>`;
+     <span style="font-size:.82em;color:var(--g2);">✅ Try this order: <strong>"${showTarget}"</strong></span><br>
+     <span style="font-size:.76em;color:var(--muted);">ลองเรียงแบบนี้ — ตรวจสอบไวยากรณ์และเสียงสระให้ถูกต้อง</span>`;
   showFb(ok,tk,fbMsg);
   if(ok){addXP(30);streak(true);showNxt();S.results.push(true);}
   else{streak(false);S.results.push(false);loseLife();}
@@ -3797,8 +4128,9 @@ function showLvlUp(lvl){
   o.innerHTML=`<div class="lubox">
     <div style="font-size:1.8rem;margin-bottom:4px">🆙 LEVEL UP!</div>
     <div class="lunum">${lvl}</div>
-    <p style="color:var(--muted);margin:8px 0 18px;">You reached Level ${lvl}!<br>You're an incredible explorer!</p>
-    <button class="start-btn" style="max-width:180px;font-size:.9rem;padding:11px;" onclick="this.closest('.luovl').remove()">🎉 Continue!</button>
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:4px;">เลเวลอัป!</div>
+    <p style="color:var(--muted);margin:8px 0 18px;">You reached Level ${lvl}! / ถึงเลเวล ${lvl} แล้ว!<br>You're an incredible explorer! / คุณเป็นนักสำรวจที่ยอดเยี่ยม!</p>
+    <button class="start-btn" style="max-width:180px;font-size:.9rem;padding:11px;" onclick="this.closest('.luovl').remove()">🎉 Continue! <span class='th-inline'>ต่อไป!</span></button>
   </div>`;
   document.body.appendChild(o);spawnConfetti();
 }
@@ -3814,7 +4146,7 @@ function grantBadge(id){
 }
 function showBdgPop(icon,lbl,name){
   const el=document.createElement('div');el.className='bdgpop';
-  el.innerHTML=`<span class="bpi">${icon}</span><div class="bpt"><strong>${lbl}</strong><span>${name}</span></div>`;
+  el.innerHTML=`<div style="font-size:.72rem;font-weight:800;color:var(--g1);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">🏅 Badge Unlocked! / ปลดล็อกป้าย!</div><span class="bpi">${icon}</span><div class="bpt"><strong>${lbl}</strong><span>${name}</span></div>`;
   document.body.appendChild(el);setTimeout(()=>el.remove(),3200);
 }
 function renderBadges(){
