@@ -34,7 +34,7 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 /* ═══════════════════════════════════════════════
    SCREENS
 ═══════════════════════════════════════════════ */
-.screen{position:relative;z-index:1;min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;}
+.screen{position:relative;z-index:1;min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:flex-start;}
 .screen.active{display:flex;}
 #scr-howto.active{display:block!important;overflow-y:auto;overflow-x:hidden;}
 
@@ -114,8 +114,8 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 .name-no-results{padding:14px 18px;color:var(--muted);font-size:.85rem;font-weight:700;text-align:center;}
 
 /* ─── SCREEN 3: MAIN APP ─── */
-#scr-app{display:none;flex-direction:column;align-items:stretch;padding:0;justify-content:flex-start;}
-#scr-app.active{display:flex;}
+#scr-app{display:none;flex-direction:column;align-items:stretch;padding:0;justify-content:flex-start;position:relative;z-index:1;}
+#scr-app.active{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important;}
 
 /* top bar */
 .topbar{position:sticky;top:0;z-index:100;background:rgba(7,9,15,.92);
@@ -531,7 +531,7 @@ footer span{color:var(--g3);}
   #char-card-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px;}
 }
 /* ─── SPACE VIDEO BG — ensure scr-app allows fixed children ─── */
-#scr-app{position:relative;z-index:1;}
+
 #scr-app .topbar{position:sticky;top:0;z-index:100;}
 /* ─── PLANET CARD PULSE ANIMATION (completed) ─── */
 @keyframes planetPulse{0%,100%{box-shadow:0 0 20px currentColor;}50%{box-shadow:0 0 40px currentColor;}}
@@ -721,6 +721,10 @@ footer span{color:var(--g3);}
   .sorter-chip .chip-emoji{font-size:1.5rem;}
   .favword-grid{grid-template-columns:repeat(3,1fr);}
 }
+
+#scr-intro.active{justify-content:center!important;align-items:center!important;}
+#scr-charsel.active{justify-content:center!important;align-items:center!important;}
+#scr-teacher.active{justify-content:flex-start!important;align-items:stretch!important;}
 </style>
 <!-- Firebase SDK (Realtime Database for live scoreboard) -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
