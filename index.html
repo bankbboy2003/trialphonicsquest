@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PhonicsQuest – Sound Adventure</title>
+<meta name="description" content="PhonicsQuest — A gamified ELT phonics learning platform for Thai EFL students. Explore the galaxy, master English vowel sounds, earn XP and badges!">
+<meta name="keywords" content="phonics, ELT, English learning, Thai students, gamified, vowels, education">
+<meta name="author" content="FL(EX) RELO Grantees">
+<meta property="og:title" content="PhonicsQuest — Sound Adventure">
+<meta property="og:description" content="A space-themed ELT phonics game for Thai EFL learners. Short & Long vowels, 8 planets, 56 tasks, bilingual Thai/English.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bankbboy2003.github.io/trialphonicsquest/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+<title>PhonicsQuest – Sound Adventure 🚀</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@400;600;700;800&display=swap;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
@@ -34,8 +42,9 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 /* ═══════════════════════════════════════════════
    SCREENS
 ═══════════════════════════════════════════════ */
-.screen{position:relative;z-index:1;min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:flex-start;}
-.screen.active{display:flex;}
+.screen{position:relative;z-index:1;min-height:100vh;display:none;}
+.screen.active{display:block;animation:screenFadeIn .3s ease;}
+@keyframes screenFadeIn{from{opacity:0;}to{opacity:1;}}
 #scr-howto.active{display:block!important;overflow-y:auto;overflow-x:hidden;}
 
 /* ─── SCREEN 1: LOGIN + FULLSCREEN VIDEO ─── */
@@ -114,8 +123,8 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 .name-no-results{padding:14px 18px;color:var(--muted);font-size:.85rem;font-weight:700;text-align:center;}
 
 /* ─── SCREEN 3: MAIN APP ─── */
-#scr-app{display:none;flex-direction:column;align-items:stretch;padding:0;justify-content:flex-start;position:relative;z-index:1;}
-#scr-app.active{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important;}
+#scr-app{display:none;position:relative;z-index:1;}
+#scr-app.active{display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:100vh;}
 
 /* top bar */
 .topbar{position:sticky;top:0;z-index:100;background:rgba(7,9,15,.92);
@@ -220,7 +229,8 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 
 /* game panel */
 .gpanel{background:var(--card);border:2px solid var(--border);border-radius:var(--r);
-  padding:clamp(14px,4vw,28px) 24px;margin-bottom:13px;text-align:center;animation:fadeUp .3s ease;}
+  padding:clamp(16px,4vw,28px) clamp(16px,4vw,28px);margin-bottom:14px;text-align:center;
+  animation:fadeUp .35s ease;box-shadow:0 4px 20px rgba(0,0,0,.3);}
 .gpanel h3{font-family:'Baloo 2',cursive;font-size:1.35rem;font-weight:700;margin-bottom:6px;}
 .gpsub{color:var(--muted);font-size:.95rem;margin-bottom:16px;line-height:1.6;font-family:'Noto Sans Thai','Nunito',sans-serif;}
 
@@ -249,7 +259,9 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 .obtn{background:#0d1729;border:2px solid var(--border);color:var(--txt);
   font-family:'Nunito',sans-serif;font-weight:700;font-size:clamp(.9rem,2.5vw,1.15rem);
   padding:clamp(10px,3vw,16px);border-radius:var(--rsm);cursor:pointer;transition:all .2s;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent;word-break:break-word;}
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;word-break:break-word;;letter-spacing:.2px;}
+.obtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.08);transform:translateY(-2px);}
+.obtn:active:not(:disabled){transform:translateY(0);}
 .obtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.08);transform:scale(1.03);}
 .obtn.correct{background:rgba(78,220,132,.13);border-color:var(--g2);color:var(--g2);animation:pop .35s ease;}
 .obtn.wrong{background:rgba(240,106,106,.13);border-color:var(--g4);color:var(--g4);animation:shake .4s ease;}
@@ -428,8 +440,8 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
   padding:8px 12px;margin-bottom:5px;font-size:.78rem;font-weight:700;display:flex;align-items:center;gap:8px;}
 
 /* ─── TEACHER DASHBOARD ─── */
-#scr-teacher{display:none;flex-direction:column;align-items:stretch;padding:0;min-height:100vh;}
-#scr-teacher.active{display:flex;}
+#scr-teacher{display:none;min-height:100vh;}
+#scr-teacher.active{display:flex;flex-direction:column;align-items:stretch;}
 .t-topbar{background:rgba(7,9,15,.95);backdrop-filter:blur(12px);border-bottom:2px solid var(--g5);
   display:flex;align-items:center;justify-content:space-between;padding:12px 24px;flex-wrap:wrap;gap:10px;}
 .t-logo{font-family:'Baloo 2',cursive;font-weight:900;font-size:1.3rem;color:var(--g5);}
@@ -722,9 +734,6 @@ footer span{color:var(--g3);}
   .favword-grid{grid-template-columns:repeat(3,1fr);}
 }
 
-#scr-intro.active{justify-content:center!important;align-items:center!important;}
-#scr-charsel.active{justify-content:center!important;align-items:center!important;}
-#scr-teacher.active{justify-content:flex-start!important;align-items:stretch!important;}
 </style>
 <!-- Firebase SDK (Realtime Database for live scoreboard) -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -734,7 +743,7 @@ footer span{color:var(--g3);}
 <canvas id="sky-canvas"></canvas>
 
 <!-- ═══════ SCREEN 1: LOGIN with FULLSCREEN BACKGROUND VIDEO ═══════ -->
-<div id="scr-intro" class="screen active" style="position:relative;overflow:hidden;padding:0;">
+<div id="scr-intro" class="screen" style="position:relative;overflow:hidden;padding:0;">
   <!-- Fullscreen background video -->
   <video id="intro-video" autoplay muted loop playsinline
     src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/Sequence%2001_1.mp4"
@@ -1465,6 +1474,11 @@ const MISSIONS=[
      q:"⚡ Rapid Round! Tap ALL words with the short /æ/ sound:",
      words:['cat','cup','hat','hot','map','mud','fan','fun','bat','bit'],
      ans:[0,2,4,6,8],
+     altWords:['mud','mad','dug','dig','pub','pab','hug','hag','jug','jag'],altAns:[0,2,4,6,8],
+     altWords:['fox','fix','cob','cab','rob','rub','mod','mad','sob','sub'],altAns:[0,2,4,6,8],
+     altWords:['kit','kite','his','hiss','dip','deep','him','home','bin','bean'],altAns:[0,2,4,6,8],
+     altWords:['jet','jot','net','not','leg','log','peg','pig','set','sit'],altAns:[0,2,4,6,8],
+     altWords:['sad','sun','ran','run','man','men','cap','cop','jam','gem'],altAns:[0,2,4,6,8],
      ok:"✅ cat, hat, map, fan, bat — all have /æ/! You're fast! ⚡",
      no:"❌ /æ/ words: cat, hat, map, fan, bat. Not cup(ʌ), hot(ɒ), mud(ʌ), fun(ʌ), bit(ɪ)!"},
     {t:'spk', ph:'Short A 🐱 · เสียง A สั้น',word:'cat',
@@ -2007,7 +2021,16 @@ const FINAL_CLUES=[
    SCREEN NAVIGATION
 ══════════════════════════════════════════════ */
 function goTo(screen){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  // Remove active class AND reset ALL display/visibility on every screen
+  document.querySelectorAll('.screen').forEach(s=>{
+    s.classList.remove('active');
+    s.style.display='none';    // force hide — stronger than clearing to ''
+    s.style.visibility='';     // reset any visibility overrides
+  });
+  // Always scroll to top when changing screens
+  window.scrollTo({top:0,behavior:'instant'});
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
   // Manage video backgrounds
   const spaceBg   = document.getElementById('space-bg-video');
   const spaceOvl  = document.getElementById('space-bg-overlay');
@@ -2021,27 +2044,39 @@ function goTo(screen){
     else { charselVid.style.display='none'; charselVid.pause(); }
   }
   if(screen==='login'||screen==='intro'){
-    document.getElementById('scr-intro').classList.add('active');
+    const introEl=document.getElementById('scr-intro');
+    introEl.style.display='block';
+    introEl.classList.add('active');
     buildLoginUI();
   }
   else if(screen==='charsel'){
-    document.getElementById('scr-charsel').classList.add('active');
-    buildCharacterSelection();   // async — fetches real filenames from GitHub API
+    const csEl=document.getElementById('scr-charsel');
+    csEl.style.display='block';
+    csEl.classList.add('active');
+    csEl.scrollTop=0;
+    buildCharacterSelection();
   }
   else if(screen==='howto'){
     const el=document.getElementById('scr-howto');
     if(el){
       el.classList.add('active');
-      el.style.display='block';  // force override any inline style conflict
+      el.style.display='block';
       el.style.minHeight='100vh';
-      el.scrollTop=0;            // scroll to top each time
+      el.scrollTop=0;
+      setTimeout(()=>{window.scrollTo({top:0,behavior:'instant'});},10);
     }
     // Show space video behind howto screen
     if(spaceBg){spaceBg.style.display='block'; try{spaceBg.play();}catch(e){}}
     if(spaceOvl) spaceOvl.style.display='block';
   }
   else if(screen==='app'){document.getElementById('scr-app').classList.add('active');showPanel('map');}
-  else if(screen==='teacher'){document.getElementById('scr-teacher').classList.add('active');showTPanel('students');}
+  else if(screen==='teacher'){
+    const tEl=document.getElementById('scr-teacher');
+    tEl.style.display='flex';
+    tEl.style.flexDirection='column';
+    tEl.classList.add('active');
+    showTPanel('students');
+  }
 }
 
 const ALL_PANELS=['map','game','scoreboard','profile','avatar','badges'];
@@ -2174,6 +2209,7 @@ document.addEventListener('click',function(e){
 
 // ── Init on page load ──
 document.addEventListener('DOMContentLoaded',function(){
+  goTo('intro');  // always start on login screen
   buildLoginUI();
 });
 function chkLoginReady(){
@@ -2189,6 +2225,9 @@ function toggleLoginMode(){
 function doStudentLogin(){
   const name=selectedStudentName;
   const pw=document.getElementById('stu-pw').value.trim();
+  // Show loading state on button
+  const loginBtn=document.getElementById('login-btn');
+  if(loginBtn){loginBtn.disabled=true;loginBtn.textContent='Loading... / กำลังโหลด...';}
   const student=STUDENTS.find(s=>s.name===name);
   if(!student||student.pw!==pw){
     document.getElementById('login-err').style.display='block';
@@ -2220,13 +2259,47 @@ function doTeacherLogin(){
   isTeacher=true;goTo('teacher');
 }
 function doLogout(){
+  // Save current student state before logging out
   if(currentUser) persistState();
-  currentUser=null;isTeacher=false;
-  loginMode='student';
-  selectedStudentName='';
-  document.getElementById('student-fields').style.display='block';
-  document.getElementById('teacher-fields').style.display='none';
-  document.getElementById('toggle-login').innerHTML='🧑‍🏫 Teacher Login';
+
+  // Reset all session variables
+  currentUser=null; isTeacher=false; loginMode='student';
+  selectedStudentName=''; selectedCharId=null;
+  selectedCharEmoji='🐱'; selectedCharImg='';
+
+  // Reset game state to defaults
+  Object.assign(S,{xp:0,level:1,avatar:'🐱',avatarImg:'',nickname:'',
+    badges:[],done:{},cluesUnlocked:[],uploads:[],
+    curMission:null,task:0,results:[],lives:3,
+    speakOk:0,streak:0,maxLives:3});
+
+  // Reset login form UI
+  const stuPw = document.getElementById('stu-pw');
+  if(stuPw) stuPw.value='';
+  const loginErr = document.getElementById('login-err');
+  if(loginErr) loginErr.style.display='none';
+  const nameDisplay = document.getElementById('name-display');
+  if(nameDisplay) nameDisplay.innerHTML = '🔍 Search name / ค้นหาชื่อ';
+  const tUser = document.getElementById('t-user');
+  if(tUser) tUser.value='';
+  const tPw = document.getElementById('t-pw');
+  if(tPw) tPw.value='';
+  const tErr = document.getElementById('t-login-err');
+  if(tErr) tErr.style.display='none';
+
+  // Reset login mode toggle
+  const stuFields = document.getElementById('student-fields');
+  const tFields = document.getElementById('teacher-fields');
+  const toggleBtn = document.getElementById('toggle-login');
+  if(stuFields) stuFields.style.display='block';
+  if(tFields) tFields.style.display='none';
+  if(toggleBtn) toggleBtn.innerHTML='🧑‍🏫 Teacher Login <span class="th-inline">ครู</span>';
+
+  // Stop any running game timers
+  if(window.rapidIv){ clearInterval(window.rapidIv); window.rapidIv=null; }
+  if(window._favIv){ clearInterval(window._favIv); window._favIv=null; }
+
+  // Go to login screen
   goTo('intro');
 }
 function persistState(){
@@ -3337,9 +3410,9 @@ function showGameOver(){
   </div>`;
 }
 function renderTask(){
-  if(!S.curMission||!S.curMission.tasks){console.error('No mission loaded');return;}
+  if(!S.curMission||!S.curMission.tasks){return;}
   const tk=S.curMission.tasks[S.task];
-  if(!tk){console.error('Task not found:',S.task);return;}
+  if(!tk){return;}
   const gtsk=document.getElementById('gtsk');
   if(gtsk)gtsk.textContent=`Task ${S.task+1} of ${S.curMission.tasks.length}`;
   updDots(S.task);
@@ -3708,7 +3781,27 @@ function chkMC(i,tk,btn,all){
   if(ok)all[tk.ans].classList.add('correct');
   showFb(ok,tk);
   if(ok){addXP(15);streak(true);showNxt();}
-  else{streak(false);const dead=loseLife();if(!dead)setTimeout(()=>{all.forEach(b=>{b.disabled=false;b.className='obtn';});hideFb();},2400);}
+  else{
+    streak(false);
+    if(!btn.dataset.tried){
+      // First wrong attempt — hint + free retry (no heart lost)
+      btn.dataset.tried='1';
+      btn.classList.add('wrong');
+      btn.disabled=true;
+      const fb=document.getElementById('fb');
+      if(fb){fb.className='fbbox show fbno';
+        fb.innerHTML='💡 Not quite — try again! / ลองใหม่! <span style="font-size:.78em;color:var(--muted);">Hint: listen again carefully!</span>';}
+      setTimeout(()=>{
+        // Re-enable remaining buttons for retry (not the wrong one)
+        all.forEach(b=>{if(!b.dataset.tried)b.disabled=false;});
+        hideFb();
+      },1800);
+    } else {
+      // Second wrong attempt — lose heart
+      const dead=loseLife();
+      if(!dead)setTimeout(()=>{all.forEach(b=>{b.disabled=false;b.className='obtn';delete b.dataset.tried;});hideFb();},2400);
+    }
+  }
   S.results.push(ok);
 }
 
@@ -3908,10 +4001,14 @@ function renderRapid(tk,gc){
   p.innerHTML+=`<div class="clue-ph" style="margin-bottom:10px;">${tk.ph}</div><div class="rtmr" id="rtmr">12</div>`;
   const og=document.createElement('div');og.className='ogrid';og.id='og';
   // Shuffle words so pattern is not always left=correct, right=wrong
-  const shuffledWords=[...tk.words.map((w,i)=>({w,i}))].sort(()=>Math.random()-.5);
+  // Pick alternate word set if player has seen this task before (replay detection)
+  const useAlt = tk.altWords && S.done && S.done[S.curMission?.id];
+  const wordPool = useAlt ? tk.altWords : tk.words;
+  const ansPool  = useAlt ? (tk.altAns||tk.ans) : tk.ans;
+  const shuffledWords=[...wordPool.map((w,i)=>({w,i,correct:ansPool.includes(i)}))].sort(()=>Math.random()-.5);
   shuffledWords.forEach(({w,i})=>{
     const b=document.createElement('button');b.className='obtn';b.textContent=w;
-    b.dataset.sel='false';b.dataset.origIdx=i;
+    b.dataset.sel='false';b.dataset.origIdx=i;b.dataset.correct=String(item.correct??ansPool.includes(i));
     b.onclick=()=>{b.dataset.sel=b.dataset.sel==='true'?'false':'true';
       b.style.borderColor=b.dataset.sel==='true'?'var(--g1)':'';
       b.style.background=b.dataset.sel==='true'?'rgba(247,201,72,.1)':'';};
