@@ -44,11 +44,12 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 ═══════════════════════════════════════════════ */
 .screen{position:relative;z-index:1;min-height:100vh;display:none;}
 .screen.active{display:block;animation:screenFadeIn .3s ease;}
+#scr-intro.active{display:flex!important;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;}
 @keyframes screenFadeIn{from{opacity:0;}to{opacity:1;}}
 #scr-howto.active{display:block!important;overflow-y:auto;overflow-x:hidden;}
 
 /* ─── SCREEN 1: LOGIN + FULLSCREEN VIDEO ─── */
-#scr-intro{background:linear-gradient(135deg,#030614,#0a1628,#07090f);justify-content:center;align-items:center;padding:0;position:relative;}
+#scr-intro{background:linear-gradient(135deg,#030614,#0a1628,#07090f);display:none;flex-direction:column;justify-content:center;align-items:center;padding:0;position:relative;min-height:100vh;overflow:hidden;}
 #intro-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
 .intro-logo-top{position:absolute;top:20px;left:50%;transform:translateX(-50%);
   font-family:'Baloo 2',cursive;font-weight:900;font-size:2.2rem;
@@ -743,7 +744,7 @@ footer span{color:var(--g3);}
 <canvas id="sky-canvas"></canvas>
 
 <!-- ═══════ SCREEN 1: LOGIN with FULLSCREEN BACKGROUND VIDEO ═══════ -->
-<div id="scr-intro" class="screen" style="position:relative;overflow:hidden;padding:0;">
+<div id="scr-intro" class="screen" style="position:relative;overflow:hidden;padding:0;min-height:100vh;">
   <!-- Fullscreen background video -->
   <video id="intro-video" autoplay muted loop playsinline
     src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/Sequence%2001_1.mp4"
@@ -752,7 +753,7 @@ footer span{color:var(--g3);}
   <!-- Dark overlay -->
   <div style="position:fixed;inset:0;background:rgba(0,0,0,0.54);z-index:1;pointer-events:none;"></div>
   <!-- Login card centred on top of video -->
-  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px 16px;">
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:24px 16px;">
     <img src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/PhonicsQuest%20typogra.png"
       alt="PhonicsQuest"
       style="max-width:480px;width:90%;margin-bottom:8px;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.85));display:block;"
@@ -2045,7 +2046,11 @@ function goTo(screen){
   }
   if(screen==='login'||screen==='intro'){
     const introEl=document.getElementById('scr-intro');
-    introEl.style.display='block';
+    introEl.style.display='flex';
+    introEl.style.flexDirection='column';
+    introEl.style.justifyContent='center';
+    introEl.style.alignItems='center';
+    introEl.style.minHeight='100vh';
     introEl.classList.add('active');
     buildLoginUI();
   }
@@ -3162,8 +3167,8 @@ function renderPlanetCards(pathId, missions, containerId){
   const wrap = document.getElementById(containerId);
   wrap.innerHTML = '';
   missions.forEach((m, i) => {
-    const allPrevDone = i === 0 || missions.slice(0, i).every(pm => S.done[pm.id]);
-    const unlocked = allPrevDone;
+    const allPrevDone = true; // PRESENTATION MODE: all planets unlocked
+    const unlocked = true;
     const comp = S.done[m.id];
     const imgSrc = PLANET_CARDS[m.id] || '';
 
@@ -3236,9 +3241,10 @@ const BLACKHOLE_IMG = 'https://raw.githubusercontent.com/bankbboy2003/Phonicsque
 ══════════════════════════════════════════════ */
 function renderFinalBox(){
   // Only check the 4 shown missions per galaxy
-  const allShortDone=MISSIONS.filter(m=>m.path==='short').slice(0,4).every(m=>S.done[m.id]);
-  const allLongDone=MISSIONS.filter(m=>m.path==='long').slice(0,4).every(m=>S.done[m.id]);
-  const allDone=allShortDone&&allLongDone;
+  // PRESENTATION MODE: final mission always visible
+  const allShortDone=true;
+  const allLongDone=true;
+  const allDone=true;
   if(allShortDone&&!S.cluesUnlocked.includes('short_clue')){
     S.cluesUnlocked.push('short_clue');grantBadge('short_done');showClueUnlock('short_clue');
   }
