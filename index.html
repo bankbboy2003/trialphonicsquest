@@ -1205,9 +1205,8 @@ footer span{color:var(--g3);}
     <div class="final-box" id="final-box" style="position:relative;z-index:1;">
       <span class="final-lock-icon" id="ficon">🔮</span>
       <h3>🏆 Final Mission — Speak to Your Teacher! <span style="display:block;font-size:.7em;color:var(--muted);margin-top:4px;">ภารกิจสุดท้าย — พูดกับคุณครู!</span></h3>
-      <p>Finish all planets to unlock secret clues. Then record yourself or upload your audio!<br><span class="th-inline">ทำทุกดาวเคราะห์เพื่อปลดล็อกเบาะแสลับ จากนั้นบันทึกเสียงหรืออัปโหลดเสียงของคุณ!</span></p>
-      <ul class="clue-list" id="clue-list"></ul>
-      <div id="upload-area-wrap"></div>
+      <ul class="clue-list" id="clue-list" style="display:none;"></ul>
+      <div id="upload-area-wrap" style="display:none;"></div>
     </div>
   </div>
 
@@ -2723,10 +2722,22 @@ function renderUploadSection(){
 }
 
 function switchUpMode(m,btn){
-  document.querySelectorAll('.upload-section .mode-tab').forEach(t=>t.classList.remove('active'));
+  // Find the closest upload-section and toggle only its tabs
+  const section=btn.closest('.upload-section')||document.querySelector('.upload-section');
+  if(section){section.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));}
   btn.classList.add('active');
-  document.getElementById('up-mode-upload').style.display=m==='upload'?'block':'none';
-  document.getElementById('up-mode-record').style.display=m==='record'?'block':'none';
+  // Show/hide mode content
+  const upMode=document.getElementById('up-mode-upload');
+  const recMode=document.getElementById('up-mode-record');
+  if(upMode) upMode.style.display=m==='upload'?'block':'none';
+  if(recMode) recMode.style.display=m==='record'?'block':'none';
+  // Init waveform bars if switching to record
+  if(m==='record'){
+    const wf=document.getElementById('up-wf');
+    if(wf&&wf.children.length===0){
+      for(let i=0;i<26;i++){const b=document.createElement('div');b.className='wbar';wf.appendChild(b);}
+    }
+  }
 }
 
 /* ── File upload handling ── */
