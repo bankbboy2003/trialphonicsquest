@@ -2575,56 +2575,56 @@ function showUploadPanel(){
   wrap.innerHTML = `
     <div class="upload-section">
       <div class="mode-tabs" style="margin-bottom:16px;">
-        <button class="mode-tab active" onclick="switchUpMode('upload',this)">📤 Upload Files <span class='th-inline'>อัปโหลดไฟล์</span></button>
-        <button class="mode-tab" onclick="switchUpMode('record',this)">🎙️ Live Recording <span class='th-inline'>บันทึกสด</span></button>
+        <button class="mode-tab active" onclick="switchPanMode('upload',this)">📤 Upload Files <span class='th-inline'>อัปโหลดไฟล์</span></button>
+        <button class="mode-tab" onclick="switchPanMode('record',this)">🎙️ Live Recording <span class='th-inline'>บันทึกสด</span></button>
       </div>
-      <div id="up-mode-upload">
+      <div id="pan-mode-upload">
         <div style="font-family:'Baloo 2',cursive;color:var(--g5);font-size:.95rem;margin-bottom:4px;">📤 Upload Audio Files</div>
         <div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-family:'Noto Sans Thai','Nunito',sans-serif;">เลือกไฟล์จากอุปกรณ์ (MP3, MP4, WAV · สูงสุด 25MB ต่อไฟล์)</div>
-        <div class="upload-drop" id="up-drop">
-          <input type="file" id="up-file-input" multiple accept=".mp3,.mp4,.avi,.wav" onchange="upHandleFiles(this.files)">
+        <div class="upload-drop" id="pan-drop">
+          <input type="file" id="pan-file-input" multiple accept=".mp3,.mp4,.avi,.wav" onchange="panHandleFiles(this.files)">
           <div style="font-size:2.5rem;margin-bottom:8px;">📂</div>
           <div style="font-size:.9rem;color:#e8f0ff;font-weight:700;">Tap to browse or drag files here</div>
           <div style="font-size:.78rem;color:var(--muted);margin-top:4px;font-family:'Noto Sans Thai','Nunito',sans-serif;">แตะเพื่อเลือกหรือลากไฟล์มาวาง — หลายไฟล์ได้</div>
         </div>
-        <div id="up-file-list"></div>
-        <div class="submit-bar-up" id="up-bar" style="display:none;">
-          <span style="font-size:.78rem;color:var(--muted);font-weight:700;" id="up-count">0 files</span>
-          <button class="sbtn" onclick="upSubmit('upload')">📤 Submit to Teacher <span class='th-inline'>ส่งให้ครู</span></button>
+        <div id="pan-file-list"></div>
+        <div class="submit-bar-up" id="pan-bar" style="display:none;">
+          <span style="font-size:.78rem;color:var(--muted);font-weight:700;" id="pan-count">0 files</span>
+          <button class="sbtn" onclick="panSubmit('upload')">📤 Submit to Teacher <span class='th-inline'>ส่งให้ครู</span></button>
         </div>
-        <div class="up-status" id="up-st-upload"></div>
-        <div class="up-progress" id="up-pg-upload"><div class="up-progress-fill" id="up-pf-upload"></div></div>
+        <div class="up-status" id="pan-st-upload"></div>
+        <div class="up-progress" id="pan-pg-upload"><div class="up-progress-fill" id="pan-pf-upload"></div></div>
       </div>
-      <div id="up-mode-record" style="display:none;">
+      <div id="pan-mode-record" style="display:none;">
         <div style="font-family:'Baloo 2',cursive;color:var(--g5);font-size:.95rem;margin-bottom:4px;">🎙️ Record Your Voice / บันทึกเสียง</div>
         <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px;font-family:'Noto Sans Thai','Nunito',sans-serif;">บันทึกเสียงตัวเองพูดคำและประโยค (สูงสุด 2 นาที)</div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-          <div class="waveform" id="up-wf"></div>
-          <div class="rec-timer-up" id="up-rtimer">0:00</div>
-          <button class="recbtn" id="up-recbtn" onclick="upToggleRec()">🎙️ Tap to Record / แตะเพื่อบันทึก</button>
+          <div class="waveform" id="pan-wf"></div>
+          <div class="rec-timer-up" id="pan-rtimer">0:00</div>
+          <button class="recbtn" id="pan-recbtn" onclick="panToggleRec()">🎙️ Tap to Record / แตะเพื่อบันทึก</button>
         </div>
-        <div id="up-rec-preview" style="display:none;margin:12px auto;max-width:340px;text-align:center;">
+        <div id="pan-rec-preview" style="display:none;margin:12px auto;max-width:340px;text-align:center;">
           <div style="font-size:.78rem;color:var(--muted);font-weight:700;margin-bottom:4px;">🔊 Preview / ฟังตัวอย่าง:</div>
-          <audio id="up-rec-audio" controls style="width:100%;height:36px;border-radius:8px;"></audio>
+          <audio id="pan-rec-audio" controls style="width:100%;height:36px;border-radius:8px;"></audio>
           <div style="display:flex;gap:8px;margin-top:10px;justify-content:center;">
-            <button class="action-pill discard" onclick="upDiscardRec()">🗑 Discard <span class='th-inline'>ยกเลิก</span></button>
-            <button class="action-pill keep" onclick="upKeepRec()">✓ Keep <span class='th-inline'>เก็บไว้</span></button>
+            <button class="action-pill discard" onclick="panDiscardRec()">🗑 Discard <span class='th-inline'>ยกเลิก</span></button>
+            <button class="action-pill keep" onclick="panKeepRec()">✓ Keep <span class='th-inline'>เก็บไว้</span></button>
           </div>
         </div>
-        <div id="up-rec-list"></div>
-        <div class="submit-bar-up" id="up-rbar" style="display:none;">
-          <span style="font-size:.78rem;color:var(--muted);font-weight:700;" id="up-rcount">0 recordings</span>
-          <button class="sbtn" onclick="upSubmit('record')">📤 Submit to Teacher <span class='th-inline'>ส่งให้ครู</span></button>
+        <div id="pan-rec-list"></div>
+        <div class="submit-bar-up" id="pan-rbar" style="display:none;">
+          <span style="font-size:.78rem;color:var(--muted);font-weight:700;" id="pan-rcount">0 recordings</span>
+          <button class="sbtn" onclick="panSubmit('record')">📤 Submit to Teacher <span class='th-inline'>ส่งให้ครู</span></button>
         </div>
-        <div class="up-status" id="up-st-record"></div>
-        <div class="up-progress" id="up-pg-record"><div class="up-progress-fill" id="up-pf-record"></div></div>
+        <div class="up-status" id="pan-st-record"></div>
+        <div class="up-progress" id="pan-pg-record"><div class="up-progress-fill" id="pan-pf-record"></div></div>
       </div>
     </div>`;
   // Init waveform
-  const wf=document.getElementById('up-wf');
+  const wf=document.getElementById('pan-wf');
   if(wf){for(let i=0;i<26;i++){const b=document.createElement('div');b.className='wbar';wf.appendChild(b);}}
   // Init drag-drop
-  const dz=document.getElementById('up-drop');
+  const dz=document.getElementById('pan-drop');
   if(dz){
     ['dragenter','dragover'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.style.borderColor='var(--g5)';}));
     ['dragleave','drop'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.style.borderColor='';}));
@@ -2783,32 +2783,58 @@ function upReplace(i){
 }
 
 /* ── Live recording ── */
-async function upToggleRec(){
-  const btn=document.getElementById('up-recbtn');
+async async function upToggleRec(isPan){
+  // Use pan- prefixed IDs when called from the upload panel
+  const prefix = isPan ? 'pan' : 'up';
+  const btn=document.getElementById(prefix+'-recbtn');
+  const wfId=prefix+'-wf';
+  const timerId=prefix+'-rtimer';
+  const previewId=prefix+'-rec-preview';
+  const audioId=prefix+'-rec-audio';
+
   if(mRec&&mRec.state==='recording'){
-    mRec.stop();btn.classList.remove('recording');btn.innerHTML=bi('🎙️ Tap to Record','🎙️ แตะเพื่อบันทึก');
+    mRec.stop();
+    if(btn){btn.classList.remove('recording');btn.innerHTML='🎙️ Tap to Record / แตะเพื่อบันทึก';}
     clearInterval(rIv);clearInterval(wIv2);
-    document.querySelectorAll('#up-wf .wbar').forEach(b=>b.style.height='6px');return;
+    document.querySelectorAll('#'+wfId+' .wbar').forEach(b=>b.style.height='6px');
+    return;
   }
   try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:true});
     aChunks=[];
-    const mime=['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4'].find(t=>MediaRecorder.isTypeSupported(t))||'';
+    const mime=['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4']
+      .find(t=>MediaRecorder.isTypeSupported(t))||'';
     mRec=new MediaRecorder(stream,mime?{mimeType:mime}:{});
     mRec.ondataavailable=e=>{if(e.data.size>0)aChunks.push(e.data);};
-    mRec.onstop=()=>{stream.getTracks().forEach(t=>t.stop());
+    mRec.onstop=()=>{
+      stream.getTracks().forEach(t=>t.stop());
       const blob=new Blob(aChunks,{type:mRec.mimeType});
-      document.getElementById('up-rec-audio').src=URL.createObjectURL(blob);
-      document.getElementById('up-rec-preview').style.display='block';
-      document.getElementById('up-rec-preview')._blob=blob;
-      document.getElementById('up-rec-preview')._dur=rSec;
+      const audioEl=document.getElementById(audioId);
+      const previewEl=document.getElementById(previewId);
+      if(audioEl) audioEl.src=URL.createObjectURL(blob);
+      if(previewEl){previewEl.style.display='block';previewEl._blob=blob;previewEl._dur=rSec;}
     };
-    mRec.start(100);btn.classList.add('recording');btn.innerHTML=bi('⏹ Stop Recording','⏹ หยุดบันทึก');
-    rSec=0;document.getElementById('up-rtimer').textContent='0:00';
-    rIv=setInterval(()=>{rSec++;const m=Math.floor(rSec/60),s=String(rSec%60).padStart(2,'0');
-      document.getElementById('up-rtimer').textContent=m+':'+s;if(rSec>=120)upToggleRec();},1000);
-    wIv2=setInterval(()=>document.querySelectorAll('#up-wf .wbar').forEach(b=>b.style.height=(Math.random()*36+5)+'px'),100);
-  }catch(e){upShowSt('record','❌ Microphone access denied. Allow mic in browser settings.','error');}
+    mRec.start(100);
+    if(btn){btn.classList.add('recording');btn.innerHTML='⏹ Stop Recording / หยุดบันทึก';}
+    rSec=0;
+    const timerEl=document.getElementById(timerId);
+    if(timerEl) timerEl.textContent='0:00';
+    rIv=setInterval(()=>{
+      rSec++;
+      const m=Math.floor(rSec/60),s=String(rSec%60).padStart(2,'0');
+      const te=document.getElementById(timerId);
+      if(te) te.textContent=m+':'+s;
+      if(rSec>=120) upToggleRec(isPan);
+    },1000);
+    wIv2=setInterval(()=>{
+      document.querySelectorAll('#'+wfId+' .wbar').forEach(b=>b.style.height=(Math.random()*36+5)+'px');
+    },100);
+  }catch(e){
+    const msg='❌ Microphone access denied / ไม่สามารถใช้ไมค์ได้ — Allow mic in browser settings / อนุญาตไมค์ในการตั้งค่าเบราว์เซอร์';
+    upShowSt('record',msg,'error');
+    const panSt=document.getElementById('pan-st-record');
+    if(panSt){panSt.textContent=msg;panSt.style.color='var(--g4)';}
+  }
 }
 
 function upDiscardRec(){document.getElementById('up-rec-preview').style.display='none';document.getElementById('up-rec-audio').src='';document.getElementById('up-rtimer').textContent='0:00';}
@@ -4448,8 +4474,7 @@ function showBdgPop(icon,lbl,name){
   document.body.appendChild(el);setTimeout(()=>el.remove(),3200);
 }
 function renderBadges(){
-  const bpnl=document.getElementById('pnl-badges');
-  if(bpnl){bpnl.style.display='block';bpnl.style.position='relative';bpnl.style.zIndex='2';}
+  // showPanel handles visibility — don't set display here
   const g=document.getElementById('bdg-grid');if(!g)return;g.innerHTML='';
   BADGES_DATA.forEach(b=>{
     const e=S.badges.includes(b.id);
@@ -4620,6 +4645,77 @@ function showHintBalloon(taskType){
   document.body.appendChild(el);
   // Auto-dismiss after 12 seconds
   setTimeout(()=>{ if(document.getElementById('hint-balloon')) clearHintTimer(); }, 12000);
+}
+
+
+function switchPanMode(m,btn){
+  const section=btn.closest('.upload-section');
+  if(section){section.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));}
+  btn.classList.add('active');
+  const upEl=document.getElementById('pan-mode-upload');
+  const recEl=document.getElementById('pan-mode-record');
+  if(upEl) upEl.style.display=m==='upload'?'block':'none';
+  if(recEl) recEl.style.display=m==='record'?'block':'none';
+  if(m==='record'){
+    const wf=document.getElementById('pan-wf');
+    if(wf&&wf.children.length===0){
+      for(let i=0;i<26;i++){const b=document.createElement('div');b.className='wbar';wf.appendChild(b);}
+    }
+  }
+}
+
+function panHandleFiles(files){
+  upFiles=[];
+  Array.from(files).forEach(f=>{
+    if(f.size>25*1024*1024){alert('File too large (max 25MB): '+f.name);return;}
+    upFiles.push({file:f,name:f.name,type:f.type});
+  });
+  const list=document.getElementById('pan-file-list');
+  const bar=document.getElementById('pan-bar');
+  const count=document.getElementById('pan-count');
+  if(list){
+    list.innerHTML=upFiles.map(f=>`<div style="font-size:.78rem;color:var(--g2);padding:4px 0;">✅ ${f.name}</div>`).join('');
+  }
+  if(bar) bar.style.display=upFiles.length?'flex':'none';
+  if(count) count.textContent=upFiles.length+' file'+(upFiles.length!==1?'s':'');
+}
+
+function panSubmit(mode){
+  upSubmit(mode,true); // true = use pan- IDs for status display
+}
+
+function panToggleRec(){upToggleRec(true);}
+function panDiscardRec(){
+  if(mRec&&mRec.state==='recording'){mRec.stop();}
+  clearInterval(rIv);clearInterval(wIv2);
+  const preview=document.getElementById('pan-rec-preview');
+  if(preview){preview.style.display='none';}
+  const btn=document.getElementById('pan-recbtn');
+  if(btn){btn.classList.remove('recording');btn.innerHTML='🎙️ Tap to Record / แตะเพื่อบันทึก';}
+  document.querySelectorAll('#pan-wf .wbar').forEach(b=>b.style.height='6px');
+  const timer=document.getElementById('pan-rtimer');
+  if(timer) timer.textContent='0:00';
+  mRec=null; aChunks=[];
+}
+function panKeepRec(){
+  const preview=document.getElementById('pan-rec-preview');
+  if(!preview||!preview._blob)return;
+  if(!recBlobs)recBlobs=[];
+  const n=recBlobs.length+1;
+  const ext=preview._blob.type.includes('ogg')?'ogg':preview._blob.type.includes('mp4')?'mp4':'webm';
+  recBlobs.push({blob:preview._blob,name:S.nickname+'_recording_'+n+'.'+ext,type:preview._blob.type,dur:preview._dur||0});
+  preview.style.display='none';
+  const list=document.getElementById('pan-rec-list');
+  if(list){
+    list.innerHTML+=`<div style="font-size:.78rem;color:var(--g2);padding:4px 0;">✅ Recording ${n} saved (${Math.round((preview._dur||0))}s)</div>`;
+  }
+  const rbar=document.getElementById('pan-rbar');
+  const rcount=document.getElementById('pan-rcount');
+  if(rbar) rbar.style.display='flex';
+  if(rcount) rcount.textContent=recBlobs.length+' recording'+(recBlobs.length!==1?'s':'');
+  mRec=null; aChunks=[];
+  const btn=document.getElementById('pan-recbtn');
+  if(btn){btn.classList.remove('recording');btn.innerHTML='🎙️ Record Again / บันทึกอีกครั้ง';}
 }
 
 </script>
