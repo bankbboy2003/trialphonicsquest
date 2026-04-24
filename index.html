@@ -2518,7 +2518,8 @@ function renderUploadSection(){
   // Only require the 4 SHOWN missions per galaxy (slice 0,4 matches renderRoadmaps)
   const shownShort=MISSIONS.filter(m=>m.path==='short').slice(0,4);
   const shownLong =MISSIONS.filter(m=>m.path==='long').slice(0,4);
-  const allDone=shownShort.every(m=>S.done[m.id])&&shownLong.every(m=>S.done[m.id]);
+  // PRESENTATION MODE: always show upload section
+  const allDone=true;
   if(!allDone){
     const shortDone=shownShort.filter(m=>S.done[m.id]).length;
     const longDone =shownLong.filter(m=>S.done[m.id]).length;
@@ -3363,12 +3364,14 @@ function showFinalMissionModal(){
   showPanel('map');
   setTimeout(()=>{
     renderFinalBox();
+    renderUploadSection();
     setTimeout(()=>{
       const el=document.getElementById('upload-area-wrap');
-      if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
-      else{window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
-    },400);
-  },100);
+      if(el){
+        el.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    },300);
+  },150);
 ">📤 Go to Upload Section / ไปที่ส่วนอัปโหลด</button>
   </div>`;
   document.body.appendChild(overlay);
