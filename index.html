@@ -1211,6 +1211,59 @@ footer span{color:var(--g3);}
     </div>
   </div>
 
+  <!-- ═══ UPLOAD PANEL — Full screen upload experience ═══ -->
+  <div id="pnl-upload" style="display:none;position:relative;z-index:2;min-height:80vh;padding:0 0 60px;">
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;background:rgba(10,22,40,.9);
+      border-bottom:2px solid rgba(176,124,248,.3);margin-bottom:0;position:sticky;top:0;z-index:10;">
+      <button onclick="showPanel('map')" style="background:rgba(176,124,248,.15);border:1.5px solid rgba(176,124,248,.4);
+        color:var(--g5);font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;
+        padding:8px 16px;border-radius:99px;cursor:pointer;touch-action:manipulation;">
+        ← Back / กลับ
+      </button>
+      <div style="flex:1;text-align:center;">
+        <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.2rem;
+          background:linear-gradient(135deg,var(--g5),var(--g3));
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+          🕳️ Final Mission — Upload Your Voice
+        </div>
+        <div style="font-size:.82rem;color:var(--muted);font-family:'Noto Sans Thai','Nunito',sans-serif;">
+          ภารกิจสุดท้าย — อัปโหลดเสียงของคุณ
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission reminder -->
+    <div style="max-width:680px;margin:20px auto;padding:0 16px;">
+      <div style="background:rgba(176,124,248,.1);border:1.5px solid rgba(176,124,248,.3);
+        border-radius:16px;padding:14px 18px;margin-bottom:20px;">
+        <div style="font-weight:800;font-size:.95rem;color:var(--g5);margin-bottom:8px;">
+          📋 Before you upload / ก่อนอัปโหลด:
+        </div>
+        <div style="font-size:.88rem;color:#e8f0ff;line-height:1.8;" id="upload-panel-clues">
+          1. Say these 5 words to your teacher: <strong>cat, bed, pig, dog, cup</strong><br>
+          2. Read this sentence: <em>'The train and a bee float by the light of the moon.'</em><br>
+          <span style="font-size:.8rem;color:var(--muted);font-family:'Noto Sans Thai','Nunito',sans-serif;">
+          พูด 5 คำและอ่านประโยคนี้ให้ครูฟัง แล้วอัปโหลดหรือบันทึกเสียง
+          </span>
+        </div>
+      </div>
+
+      <!-- Upload section content injected here -->
+      <div id="upload-panel-content"></div>
+
+      <!-- Back button at bottom -->
+      <div style="text-align:center;margin-top:32px;">
+        <button onclick="showPanel('map')" style="background:none;border:1.5px solid var(--border);
+          color:var(--muted);font-family:'Noto Sans Thai','Nunito',sans-serif;font-weight:700;
+          font-size:.88rem;padding:10px 24px;border-radius:99px;cursor:pointer;">
+          ← Return to Planet Map / กลับแผนที่ดาว
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ═══ END UPLOAD PANEL ═══ -->
+
   <div id="pnl-game" style="position:relative;z-index:2;padding:16px 20px 60px;"></div>
   <div id="pnl-scoreboard" style="position:relative;z-index:2;padding:16px 20px 60px;max-width:620px;margin:0 auto;width:100%;"></div>
   <div id="pnl-profile" style="position:relative;z-index:2;padding:16px 20px 60px;max-width:700px;margin:0 auto;width:100%;"></div>
@@ -2107,7 +2160,7 @@ function goTo(screen){
   }
 }
 
-const ALL_PANELS=['map','game','scoreboard','profile','avatar','badges'];
+const ALL_PANELS=['map','game','scoreboard','profile','avatar','badges','upload'];
 function showPanel(p){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.p===p));
   ALL_PANELS.forEach(id=>{
@@ -2511,6 +2564,74 @@ function buildScoreboardUI(pnl,allData,isLive){
 let upFiles=[], recBlobs=[], mRec=null, aChunks=[], rIv=null, rSec=0, wIv2=null;
 const UP_ALLOWED=['.mp3','.mp4','.avi','.wav'];
 const UP_MAX=25*1024*1024;
+
+function showUploadPanel(){
+  // Switch to upload panel
+  showPanel('upload');
+  window.scrollTo({top:0,behavior:'instant'});
+  // Populate the upload content area
+  const wrap = document.getElementById('upload-panel-content');
+  if(!wrap) return;
+  // Build full upload UI
+  wrap.innerHTML = `
+    <div class="upload-section">
+      <div class="mode-tabs" style="margin-bottom:16px;">
+        <button class="mode-tab active" onclick="switchUpMode('upload',this)">📤 Upload Files <span class='th-inline'>อัปโหลดไฟล์</span></button>
+        <button class="mode-tab" onclick="switchUpMode('record',this)">🎙️ Live Recording <span class='th-inline'>บันทึกสด</span></button>
+      </div>
+      <div id="up-mode-upload">
+        <div style="font-family:'Baloo 2',cursive;color:var(--g5);font-size:.95rem;margin-bottom:4px;">📤 Upload Audio Files</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-family:'Noto Sans Thai','Nunito',sans-serif;">เลือกไฟล์จากอุปกรณ์ (MP3, MP4, WAV · สูงสุด 25MB ต่อไฟล์)</div>
+        <div class="upload-drop" id="up-drop">
+          <input type="file" id="up-file-input" multiple accept=".mp3,.mp4,.avi,.wav" onchange="upHandleFiles(this.files)">
+          <div style="font-size:2.5rem;margin-bottom:8px;">📂</div>
+          <div style="font-size:.9rem;color:#e8f0ff;font-weight:700;">Tap to browse or drag files here</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:4px;font-family:'Noto Sans Thai','Nunito',sans-serif;">แตะเพื่อเลือกหรือลากไฟล์มาวาง — หลายไฟล์ได้</div>
+        </div>
+        <div id="up-file-list"></div>
+        <div class="submit-bar-up" id="up-bar" style="display:none;">
+          <span style="font-size:.78rem;color:var(--muted);font-weight:700;" id="up-count">0 files</span>
+          <button class="sbtn" onclick="upSubmit('upload')">📤 Submit to Teacher <span class='th-inline'>ส่งให้ครู</span></button>
+        </div>
+        <div class="up-status" id="up-st-upload"></div>
+        <div class="up-progress" id="up-pg-upload"><div class="up-progress-fill" id="up-pf-upload"></div></div>
+      </div>
+      <div id="up-mode-record" style="display:none;">
+        <div style="font-family:'Baloo 2',cursive;color:var(--g5);font-size:.95rem;margin-bottom:4px;">🎙️ Record Your Voice / บันทึกเสียง</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px;font-family:'Noto Sans Thai','Nunito',sans-serif;">บันทึกเสียงตัวเองพูดคำและประโยค (สูงสุด 2 นาที)</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+          <div class="waveform" id="up-wf"></div>
+          <div class="rec-timer-up" id="up-rtimer">0:00</div>
+          <button class="recbtn" id="up-recbtn" onclick="upToggleRec()">🎙️ Tap to Record / แตะเพื่อบันทึก</button>
+        </div>
+        <div id="up-rec-preview" style="display:none;margin:12px auto;max-width:340px;text-align:center;">
+          <div style="font-size:.78rem;color:var(--muted);font-weight:700;margin-bottom:4px;">🔊 Preview / ฟังตัวอย่าง:</div>
+          <audio id="up-rec-audio" controls style="width:100%;height:36px;border-radius:8px;"></audio>
+          <div style="display:flex;gap:8px;margin-top:10px;justify-content:center;">
+            <button class="action-pill discard" onclick="upDiscardRec()">🗑 Discard <span class='th-inline'>ยกเลิก</span></button>
+            <button class="action-pill keep" onclick="upKeepRec()">✓ Keep <span class='th-inline'>เก็บไว้</span></button>
+          </div>
+        </div>
+        <div id="up-rec-list"></div>
+        <div class="submit-bar-up" id="up-rbar" style="display:none;">
+          <span style="font-size:.78rem;color:var(--muted);font-weight:700;" id="up-rcount">0 recordings</span>
+          <button class="sbtn" onclick="upSubmit('record')">📤 Submit to Teacher <span class='th-inline'>ส่งให้ครู</span></button>
+        </div>
+        <div class="up-status" id="up-st-record"></div>
+        <div class="up-progress" id="up-pg-record"><div class="up-progress-fill" id="up-pf-record"></div></div>
+      </div>
+    </div>`;
+  // Init waveform
+  const wf=document.getElementById('up-wf');
+  if(wf){for(let i=0;i<26;i++){const b=document.createElement('div');b.className='wbar';wf.appendChild(b);}}
+  // Init drag-drop
+  const dz=document.getElementById('up-drop');
+  if(dz){
+    ['dragenter','dragover'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.style.borderColor='var(--g5)';}));
+    ['dragleave','drop'].forEach(e=>dz.addEventListener(e,ev=>{ev.preventDefault();dz.style.borderColor='';}));
+    dz.addEventListener('drop',ev=>{ev.preventDefault();upHandleFiles(ev.dataTransfer.files);});
+  }
+}
 
 function renderUploadSection(){
   const wrap=document.getElementById('upload-area-wrap');
@@ -3361,17 +3482,7 @@ function showFinalMissionModal(){
     <div id="modal-upload-wrap"></div>
     <button class="start-btn" style="margin-top:12px;font-size:.88rem;" onclick="
   this.closest('.t-modal-overlay').remove();
-  showPanel('map');
-  setTimeout(()=>{
-    renderFinalBox();
-    renderUploadSection();
-    setTimeout(()=>{
-      const el=document.getElementById('upload-area-wrap');
-      if(el){
-        el.scrollIntoView({behavior:'smooth',block:'start'});
-      }
-    },300);
-  },150);
+  showUploadPanel();
 ">📤 Go to Upload Section / ไปที่ส่วนอัปโหลด</button>
   </div>`;
   document.body.appendChild(overlay);
