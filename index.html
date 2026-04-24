@@ -2146,18 +2146,11 @@ function buildLoginUI(){
   }
   // Reset custom dropdown display
   selectedStudentName='';
-  // Update the display button to show selected name
-  const nameBtn=document.getElementById('name-display');
-  if(nameBtn){
-    const initials2=name.slice(0,2).toUpperCase();
-    nameBtn.innerHTML=`<span style="display:inline-flex;align-items:center;justify-content:center;
-      width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--g3),var(--g5));
-      color:#fff;font-weight:800;font-size:.75rem;margin-right:8px;flex-shrink:0;">${initials2}</span>
-      <span style="font-weight:700;color:var(--g1);">${name}</span>
-      <span id="name-arrow" style="margin-left:auto;font-size:.7rem;color:var(--muted);">▼</span>`;
-  }
+  // Just reset the placeholder text — selectStudentName() handles the name display
   const dt=document.getElementById('name-display-text');
-  if(dt){dt.textContent='— Choose your name —';dt.style.color='var(--muted)';}
+  if(dt){dt.innerHTML='🔍 Search name / ค้นหาชื่อ';dt.style.color='var(--muted)';}
+  const nameDisp=document.getElementById('name-display');
+  if(nameDisp){nameDisp.style.borderColor='var(--border)';}
   renderNameList('');
   // Close panel if open
   const panel=document.getElementById('name-panel');
@@ -2194,11 +2187,20 @@ function selectStudentName(name){
   const sel=document.getElementById('stu-name');
   if(sel)sel.value=name;
   // Update display
+  // Update the display button clearly with selected name
+  const nameDisplay=document.getElementById('name-display');
+  if(nameDisplay){
+    nameDisplay.style.borderColor='var(--g1)';
+  }
   const dt=document.getElementById('name-display-text');
   if(dt){
     const initials=name.slice(0,2).toUpperCase();
-    dt.innerHTML=`<span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--g3),var(--g5));font-size:.72rem;font-weight:900;color:#fff;margin-right:8px;flex-shrink:0;">${initials}</span>${name}`;
-    dt.style.color='var(--txt)';
+    dt.innerHTML=`<span style="display:inline-flex;align-items:center;justify-content:center;
+      width:28px;height:28px;border-radius:50%;
+      background:linear-gradient(135deg,var(--g3),var(--g5));
+      font-size:.75rem;font-weight:900;color:#fff;margin-right:10px;flex-shrink:0;">
+      ${initials}</span><strong style="color:var(--g1);font-size:1.05rem;">${name}</strong>`;
+    dt.style.color='var(--g1)';
   }
   // Close dropdown
   closeNameDropdown();
