@@ -125,7 +125,7 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 
 /* ─── SCREEN 3: MAIN APP ─── */
 #scr-app{display:none;position:relative;z-index:1;}
-#scr-app.active{display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:100vh;}
+#scr-app.active{display:flex!important;flex-direction:column!important;align-items:stretch!important;min-height:100vh;overflow-y:auto;}
 
 /* top bar */
 .topbar{position:sticky;top:0;z-index:100;background:rgba(7,9,15,.92);
@@ -205,7 +205,7 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 .clue-list li.locked-clue{color:var(--muted);opacity:.45;font-style:italic;}
 
 /* ─── GAME SCREEN ─── */
-#pnl-game{display:none;padding:20px 24px 60px;max-width:800px;margin:0 auto;width:100%;position:relative;z-index:2;}
+#pnl-game{display:none;padding:20px 24px 80px;max-width:800px;margin:0 auto;width:100%;position:relative;z-index:2;min-height:60vh;}
 .ghdr{display:flex;align-items:center;gap:11px;margin-bottom:16px;flex-wrap:wrap;}
 .back-btn{background:var(--card);border:2px solid var(--border);color:var(--txt);
   font-family:'Nunito',sans-serif;font-weight:700;padding:10px 20px;
@@ -257,8 +257,8 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 
 /* options */
 .ogrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;}
-.obtn{background:#0d1729;border:2px solid var(--border);color:var(--txt);
-  font-family:'Nunito',sans-serif;font-weight:700;font-size:clamp(.9rem,2.5vw,1.15rem);
+.obtn{background:#0d1729;border:2px solid var(--border);color:#e8f0ff;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:clamp(.95rem,2.5vw,1.15rem);text-shadow:0 1px 3px rgba(0,0,0,.6);
   padding:clamp(10px,3vw,16px);border-radius:var(--rsm);cursor:pointer;transition:all .2s;
   touch-action:manipulation;-webkit-tap-highlight-color:transparent;word-break:break-word;;letter-spacing:.2px;}
 .obtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.08);transform:translateY(-2px);}
@@ -319,7 +319,10 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 /* picture mc */
 .picgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:18px;}
 .picbtn{background:#0d1729;border:2px solid var(--border);border-radius:var(--rsm);
-  padding:18px 10px;cursor:pointer;transition:all .2s;text-align:center;font-weight:700;font-size:1rem;}
+  padding:18px 10px;cursor:pointer;transition:all .22s;text-align:center;font-weight:800;
+  font-size:1.1rem;color:#e8f0ff;letter-spacing:.3px;
+  text-shadow:0 1px 4px rgba(0,0,0,.8);}
+.picbtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.12);transform:translateY(-2px);}
 .picmoji{font-size:2.8rem;display:block;margin-bottom:6px;}
 .picbtn:hover:not(:disabled){border-color:var(--g3);transform:scale(1.04);}
 .picbtn.correct{border-color:var(--g2);background:rgba(78,220,132,.12);color:var(--g2);animation:pop .35s ease;}
@@ -346,7 +349,7 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
   border-radius:99px;font-size:clamp(.85rem,2.3vw,1rem);cursor:pointer;transition:all .2s;
   animation:pop .3s ease;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .wchip:hover{background:var(--g4);color:#fff;}
-.bchip{background:var(--card2);border:2px solid var(--border);color:var(--txt);
+.bchip{background:var(--card2);border:2px solid var(--border);color:#e8f0ff;font-weight:800;
   font-weight:700;padding:clamp(7px,2vw,9px) clamp(12px,3vw,18px);border-radius:99px;
   font-size:clamp(.85rem,2.3vw,1rem);cursor:pointer;transition:all .2s;
   touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
@@ -522,7 +525,8 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 .sec-title{font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:700;
   color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;margin-top:18px;}
 footer{position:relative;z-index:1;background:#05070d;border-top:1px solid var(--border);
-  padding:18px 20px;text-align:center;font-size:.73rem;color:var(--muted);font-weight:600;line-height:1.7;}
+  padding:14px 20px;text-align:center;font-size:.73rem;color:var(--muted);font-weight:600;line-height:1.7;
+  flex-shrink:0;}
 footer span{color:var(--g3);}
 .map-section-title{font-size:1.1rem;}.sb-podium{gap:6px;}.podium-bar{width:48px;}}
 
@@ -676,7 +680,7 @@ footer span{color:var(--g3);}
   box-shadow:0 0 12px rgba(247,201,72,.3);}
 .sorter-chip.chip-placed{opacity:.35;cursor:default;transform:none;}
 .sorter-chip .chip-emoji{font-size:1.8rem;display:block;line-height:1.2;}
-.sorter-chip .chip-word{font-size:.72rem;font-weight:700;color:var(--muted);
+.sorter-chip .chip-word{font-size:.78rem;font-weight:800;color:#c8d8f0;
   margin-top:3px;display:block;}
 .sorter-zones{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
 .sorter-zone{background:#0d1729;border:2px dashed var(--border);border-radius:12px;
@@ -735,6 +739,25 @@ footer span{color:var(--g3);}
   .favword-grid{grid-template-columns:repeat(3,1fr);}
 }
 
+
+/* ═══ HINT HELPER BALLOON ═══ */
+.hint-balloon{position:fixed;bottom:90px;right:20px;max-width:280px;z-index:9999;
+  background:linear-gradient(135deg,#1a0a3a,#2d1060);
+  border:2px solid var(--g5);border-radius:18px;padding:14px 16px;
+  box-shadow:0 8px 32px rgba(176,124,248,.4);
+  animation:balloonIn .4s cubic-bezier(.34,1.56,.64,1);}
+@keyframes balloonIn{from{transform:scale(.8) translateY(20px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
+.hint-balloon::after{content:'';position:absolute;bottom:-10px;right:30px;
+  border:10px solid transparent;border-top-color:#2d1060;border-bottom:0;}
+.hint-balloon-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.hint-balloon-icon{font-size:1.6rem;}
+.hint-balloon-title{font-size:.85rem;font-weight:800;color:var(--g5);}
+.hint-balloon-th{font-size:.78rem;color:var(--muted);font-family:'Noto Sans Thai','Nunito',sans-serif;}
+.hint-balloon-body{font-size:.88rem;color:#e8f0ff;line-height:1.6;margin-bottom:10px;}
+.hint-balloon-body-th{font-size:.8rem;color:var(--muted);font-family:'Noto Sans Thai','Nunito',sans-serif;line-height:1.5;margin-bottom:10px;}
+.hint-close{background:rgba(176,124,248,.2);border:none;color:var(--g5);font-size:.78rem;
+  padding:5px 12px;border-radius:99px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;
+  width:100%;touch-action:manipulation;}
 </style>
 <!-- Firebase SDK (Realtime Database for live scoreboard) -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1452,27 +1475,27 @@ const MISSIONS=[
   {id:'s1',path:'short',num:1,title:'Mission 1: Planet Earth',icon:'🏔️',col:'#f7c948',
    sub:'Short A Sound · เสียง A สั้น',lives:3,
    tasks:[
-    {t:'intro',text:"Welcome, Explorer! In this cave you'll learn the short /æ/ sound — like in 'cat'. Listen carefully and use clues to find the right word!"},
+    {t:'intro',text:"Welcome, Explorer! In this cave you'll learn the short Short A 🐱 sound — like in 'cat'. Listen carefully and use clues to find the right word!"},
     {t:'mc', ph:'Short A 🐱 · เสียง A สั้น',
-     clueEmoji:'🐱',clueHint:'This animal says meow!',clueExtra:'It has a short /æ/ in its name.',
-     q:'🔊 Listen — which word has the /æ/ sound like the animal above?',
-     ipa:'/æ/',word:'cat',opts:['cat','cut','cot','kit'],ans:0,
-     ok:"✅ Yes! 'cat' /kæt/ — short /æ/ sound! Open your mouth wide!",
-     no:"❌ Not quite! /æ/ is the short 'a' sound — like the meow animal! Listen again."},
+     clueEmoji:'🐱',clueHint:'This animal says meow!',clueExtra:'It has a Short A 🐱 in its name.',
+     q:'🔊 Listen — which word has the Short A 🐱 sound like the animal above?',
+     ipa:'Short A 🐱',word:'cat',opts:['cat','cut','cot','kit'],ans:0,
+     ok:"✅ Yes! 'cat' /kæt/ — short Short A 🐱 sound! Open your mouth wide!",
+     no:"❌ Not quite! Short A 🐱 is the short 'a' sound — like the meow animal! Listen again."},
     {t:'pic', ph:'Short A 🐱 · เสียง A สั้น',
-     q:'🔊 Listen — which picture\'s word has the /æ/ sound?',
+     q:'🔊 Listen — which picture\'s word has the Short A 🐱 sound?',
      word:'hat',
-     pics:[{e:'🎩',w:'hat /æ/',c:true},{e:'☕',w:'cup /ʌ/',c:false},{e:'🐝',w:'bee (Long E)',c:false},{e:'🚌',w:'bus /ʌ/',c:false}],
-     ok:"✅ 'hat' /hæt/ — open your mouth wide for /æ/! Also: bat, cat, map!",
-     no:"❌ /æ/ is in 'hat' — not 'cup' or 'bus'. Those have different vowels!"},
+     pics:[{e:'🎩',w:'hat Short A 🐱',c:true},{e:'☕',w:'cup Short U ☕',c:false},{e:'🐝',w:'bee (Long E)',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
+     ok:"✅ 'hat' /hæt/ — open your mouth wide for Short A 🐱! Also: bat, cat, map!",
+     no:"❌ Short A 🐱 is in 'hat' — not 'cup' or 'bus'. Those have different vowels!"},
     {t:'obstacle', title:'⚠️ Obstacle! Letter Swap',
-     desc:"A sneaky monster swapped letters! Unscramble the /æ/ word — the clue is the emoji below.",
+     desc:"A sneaky monster swapped letters! Unscramble the Short A 🐱 word — the clue is the emoji below.",
      clueEmoji:'🗺️',clueHint:'You use this to find your way.',
      word:'map',opts:['mop','map','mup','mip'],ans:1,
-     ok:"✅ 'map' /mæp/ — you beat the monster! 🗺️ Great /æ/ word!",
-     no:"❌ The monster tricked you! 'map' has /æ/ — not 'mop' (/ɒ/) or 'mup' (not a word)!"},
+     ok:"✅ 'map' /mæp/ — you beat the monster! 🗺️ Great Short A 🐱 word!",
+     no:"❌ The monster tricked you! 'map' has Short A 🐱 — not 'mop' (Short O 🐶) or 'mup' (not a word)!"},
     {t:'rapid', ph:'Short A 🐱 words',
-     q:"⚡ Rapid Round! Tap ALL words with the short /æ/ sound:",
+     q:"⚡ Rapid Round! Tap ALL words with the short Short A 🐱 sound:",
      words:['cat','cup','hat','hot','map','mud','fan','fun','bat','bit'],
      ans:[0,2,4,6,8],
      altWords:['mud','mad','dug','dig','pub','pab','hug','hag','jug','jag'],altAns:[0,2,4,6,8],
@@ -1480,460 +1503,460 @@ const MISSIONS=[
      altWords:['kit','kite','his','hiss','dip','deep','him','home','bin','bean'],altAns:[0,2,4,6,8],
      altWords:['jet','jot','net','not','leg','log','peg','pig','set','sit'],altAns:[0,2,4,6,8],
      altWords:['sad','sun','ran','run','man','men','cap','cop','jam','gem'],altAns:[0,2,4,6,8],
-     ok:"✅ cat, hat, map, fan, bat — all have /æ/! You're fast! ⚡",
-     no:"❌ /æ/ words: cat, hat, map, fan, bat. Not cup(ʌ), hot(ɒ), mud(ʌ), fun(ʌ), bit(ɪ)!"},
+     ok:"✅ cat, hat, map, fan, bat — all have Short A 🐱! You're fast! ⚡",
+     no:"❌ Short A 🐱 words: cat, hat, map, fan, bat. Not cup(ʌ), hot(ɒ), mud(ʌ), fun(ʌ), bit(ɪ)!"},
     {t:'spk', ph:'Short A 🐱 · เสียง A สั้น',word:'cat',
      clueEmoji:'🐱',clueHint:'Say the name of this animal!',
      q:'🎤 Now you try! Say the word shown by the clue:',
-     tip:"Open mouth, tongue low and flat: /k/-/æ/-/t/",
-     ok:"✅ Great /æ/! Your 'cat' is clear! 🐱",
+     tip:"Open mouth, tongue low and flat: /k/-Short A 🐱-/t/",
+     ok:"✅ Great Short A 🐱! Your 'cat' is clear! 🐱",
      no:"❌ Try again! Open your mouth wider — /kæt/. Short, flat vowel!"},
     {t:'sb', ph:'Short A sentence · ประโยค A สั้น',
      words:['The','cat','sat','on','a','fat','mat'],target:'The fat cat sat on a mat',
      alts:['The cat sat on a fat mat','A fat cat sat on a mat'],
      clueEmoji:'🐱',clueHint:"Describe the cat, then tell us where it sat! / อธิบายแมว แล้วบอกว่ามันนั่งที่ไหน!",
-     ok:"✅ Amazing! cat, sat, fat, mat — FOUR /æ/ words in one sentence! 🏆"}
+     ok:"✅ Amazing! cat, sat, fat, mat — FOUR Short A 🐱 words in one sentence! 🏆"}
    ]},
 
   {id:'s2',path:'short',num:2,title:'Mission 2: Planet Mars',icon:'🌿',col:'#4edc84',
    sub:'Short E Sound · เสียง E สั้น',lives:3,
    tasks:[
-    {t:'intro',text:"The /ɛ/ swamp! This short 'e' sound is in words like 'bed' and 'red'. Your mouth is half-open — not too wide, not too closed. Listen for clues!"},
+    {t:'intro',text:"The Short E 🛏️ swamp! This short 'e' sound is in words like 'bed' and 'red'. Your mouth is half-open — not too wide, not too closed. Listen for clues!"},
     {t:'mc', ph:'Short E 🛏️ · เสียง E สั้น',
      clueEmoji:'🛏️',clueHint:'You sleep on this at night.',
-     q:'🔊 Listen — which word matches this clue and has /ɛ/?',
-     ipa:'/ɛ/',word:'bed',opts:['bad','bid','bed','bud'],ans:2,
-     ok:"✅ 'bed' /bɛd/ — perfect short /ɛ/! Also: red, pen, ten!",
-     no:"❌ 'bad' has /æ/, 'bid' has /ɪ/, 'bud' has /ʌ/. 'bed' is /ɛ/!"},
+     q:'🔊 Listen — which word matches this clue and has Short E 🛏️?',
+     ipa:'Short E 🛏️',word:'bed',opts:['bad','bid','bed','bud'],ans:2,
+     ok:"✅ 'bed' /bɛd/ — perfect Short E 🛏️! Also: red, pen, ten!",
+     no:"❌ 'bad' has Short A 🐱, 'bid' has Short I 🐷, 'bud' has Short U ☕. 'bed' is Short E 🛏️!"},
     {t:'pic', ph:'Short E 🛏️ · เสียง E สั้น',
-     q:'🔊 Listen — which picture has the /ɛ/ sound?',word:'pen',
-     pics:[{e:'🖊️',w:'pen /ɛ/',c:true},{e:'🐷',w:'pig /ɪ/',c:false},{e:'☀️',w:'sun /ʌ/',c:false},{e:'🔥',w:'hot /ɒ/',c:false}],
-     ok:"✅ 'pen' /pɛn/ — short /ɛ/! You write with it! 🖊️",
-     no:"❌ 'pen' has /ɛ/. 'pig' has /ɪ/, 'sun' has /ʌ/, 'hot' has /ɒ/."},
+     q:'🔊 Listen — which picture has the Short E 🛏️ sound?',word:'pen',
+     pics:[{e:'🖊️',w:'pen Short E 🛏️',c:true},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☀️',w:'sun Short U ☕',c:false},{e:'🔥',w:'hot Short O 🐶',c:false}],
+     ok:"✅ 'pen' /pɛn/ — Short E 🛏️! You write with it! 🖊️",
+     no:"❌ 'pen' has Short E 🛏️. 'pig' has Short I 🐷, 'sun' has Short U ☕, 'hot' has Short O 🐶."},
     {t:'match', ph:'Short E 🛏️ matching',
-     q:'Match the clue emoji to its /ɛ/ word:',
+     q:'Match the clue emoji to its Short E 🛏️ word:',
      pairs:[{l:'🛏️',r:'bed'},{l:'🔴',r:'red'},{l:'🖊️',r:'pen'},{l:'🕸️',r:'web'}],
-     ok:"✅ All matched! bed, red, pen, web — all have short /ɛ/! 🌿",
+     ok:"✅ All matched! bed, red, pen, web — all have Short E 🛏️! 🌿",
      no:"❌ bed=🛏️, red=🔴, pen=🖊️, web=🕸️ — try again!"},
     {t:'obstacle', title:'⚠️ Obstacle! The Echo Cave',
-     desc:"The cave echoes wrong sounds! Which one truly has /ɛ/? Listen carefully!",
+     desc:"The cave echoes wrong sounds! Which one truly has Short E 🛏️? Listen carefully!",
      clueEmoji:'✈️',clueHint:'This flies very fast through the sky.',
      word:'jet',opts:['jot','jut','jet','jit'],ans:2,
      ok:"✅ 'jet' /dʒɛt/ — you escaped the echo cave! 🎉",
-     no:"❌ 'jet' has /ɛ/. 'jot'=/ɒ/, 'jut'=/ʌ/, 'jit' isn't a word!"},
+     no:"❌ 'jet' has Short E 🛏️. 'jot'=Short O 🐶, 'jut'=Short U ☕, 'jit' isn't a word!"},
     {t:'rapid', ph:'Short E 🛏️ words',
-     q:"⚡ Rapid! Tap ALL words with the /ɛ/ sound:",
+     q:"⚡ Rapid! Tap ALL words with the Short E 🛏️ sound:",
      words:['bed','bid','red','rod','pen','pan','ten','tin','web','wob'],
      ans:[0,2,4,6,8],
-     ok:"✅ bed, red, pen, ten, web — all /ɛ/! Superfast! ⚡",
-     no:"❌ /ɛ/ words: bed, red, pen, ten, web. Others have different vowels!"},
+     ok:"✅ bed, red, pen, ten, web — all Short E 🛏️! Superfast! ⚡",
+     no:"❌ Short E 🛏️ words: bed, red, pen, ten, web. Others have different vowels!"},
     {t:'spk', ph:'Short E 🛏️ · เสียง E สั้น',word:'red',
      clueEmoji:'🔴',clueHint:'Say the colour of this circle!',
      q:'🎤 Say the colour of this clue:',
-     tip:"Mouth half open, tongue mid-height: /r/-/ɛ/-/d/",
-     ok:"✅ Perfect 'red' — short /ɛ/ is clear! 🔴",
-     no:"❌ Try again! Half-open mouth for /ɛ/ — not too wide, not too narrow!"}
+     tip:"Mouth half open, tongue mid-height: /r/-Short E 🛏️-/d/",
+     ok:"✅ Perfect 'red' — Short E 🛏️ is clear! 🔴",
+     no:"❌ Try again! Half-open mouth for Short E 🛏️ — not too wide, not too narrow!"}
    ]},
 
   {id:'s3',path:'short',num:3,title:'Mission 3: Planet Venus',icon:'🌲',col:'#4ab3f4',
    sub:'Short I Sound · เสียง I สั้น',lives:3,
    tasks:[
-    {t:'intro',text:"Welcome to the /ɪ/ forest! This sound is short and small — like in 'sit' and 'pig'. Your mouth should be almost closed, slightly open at the corners!"},
+    {t:'intro',text:"Welcome to the Short I 🐷 forest! This sound is short and small — like in 'sit' and 'pig'. Your mouth should be almost closed, slightly open at the corners!"},
     {t:'mc', ph:'Short I 🐷 · เสียง I สั้น',
      clueEmoji:'🐷',clueHint:'This pink farm animal loves mud.',
      q:'🔊 Listen — which word matches this clue?',
-     ipa:'/ɪ/',word:'pig',opts:['peg','pig','pug','pog'],ans:1,
-     ok:"✅ 'pig' /pɪg/ — short /ɪ/, almost closed mouth! 🐷",
-     no:"❌ 'peg'=/ɛ/, 'pug'=/ʌ/, 'pog' isn't a word. 'pig' has /ɪ/!"},
+     ipa:'Short I 🐷',word:'pig',opts:['peg','pig','pug','pog'],ans:1,
+     ok:"✅ 'pig' /pɪg/ — Short I 🐷, almost closed mouth! 🐷",
+     no:"❌ 'peg'=Short E 🛏️, 'pug'=Short U ☕, 'pog' isn't a word. 'pig' has Short I 🐷!"},
     {t:'pic', ph:'Short I 🐷 · เสียง I สั้น',
-     q:'🔊 Listen — which picture has the /ɪ/ sound?',word:'sit',
-     pics:[{e:'🪑',w:'sit /ɪ/',c:true},{e:'🐶',w:'dog /ɒ/',c:false},{e:'🧢',w:'cap /æ/',c:false},{e:'🚌',w:'bus /ʌ/',c:false}],
-     ok:"✅ 'sit' /sɪt/ — you sit on a chair! Short /ɪ/! 🪑",
-     no:"❌ 'sit' has /ɪ/. Others have /ɒ/, /æ/, and /ʌ/!"},
+     q:'🔊 Listen — which picture has the Short I 🐷 sound?',word:'sit',
+     pics:[{e:'🪑',w:'sit Short I 🐷',c:true},{e:'🐶',w:'dog Short O 🐶',c:false},{e:'🧢',w:'cap Short A 🐱',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
+     ok:"✅ 'sit' /sɪt/ — you sit on a chair! Short Short I 🐷! 🪑",
+     no:"❌ 'sit' has Short I 🐷. Others have Short O 🐶, Short A 🐱, and Short U ☕!"},
     {t:'obstacle', title:'⚠️ Obstacle! Minimal Pair Minefield!',
-     desc:"Step carefully — /ɪ/ and /iː/ look similar but sound different! Pick the short /ɪ/ word!",
+     desc:"Step carefully — Short I 🐷 and Long E 🐝 look similar but sound different! Pick the Short I 🐷 word!",
      clueEmoji:'💡',clueHint:'A small pointed end — like at the top of a pencil.',
      word:'tip',opts:['tip (Short I)','teep','tape','type'],ans:0,
-     ok:"✅ 'tip' /tɪp/ — short /ɪ/. You dodged the /iː/ minefield! 💥",
-     no:"❌ Short /ɪ/ = 'tip'. The others are long vowels or wrong!"},
+     ok:"✅ 'tip' /tɪp/ — Short I 🐷. You dodged the Long E 🐝 minefield! 💥",
+     no:"❌ Short Short I 🐷 = 'tip'. The others are long vowels or wrong!"},
     {t:'rapid', ph:'Short I 🐷 words',
-     q:"⚡ Rapid! Tap ALL words with /ɪ/ sound:",
+     q:"⚡ Rapid! Tap ALL words with Short I 🐷 sound:",
      words:['sit','seat','big','beg','lip','leap','win','wine','tip','tape'],
      ans:[0,2,4,6,8],
-     ok:"✅ sit, big, lip, win, tip — all short /ɪ/! Amazing! ⚡",
-     no:"❌ /ɪ/ words: sit, big, lip, win, tip. Others have long /iː/ or different vowels!"},
+     ok:"✅ sit, big, lip, win, tip — all Short I 🐷! Amazing! ⚡",
+     no:"❌ Short I 🐷 words: sit, big, lip, win, tip. Others have long Long E 🐝 or different vowels!"},
     {t:'match', ph:'Short I 🐷 matching',
-     q:'Match emoji clue to its /ɪ/ word:',
+     q:'Match emoji clue to its Short I 🐷 word:',
      pairs:[{l:'🐷',r:'pig'},{l:'🪑',r:'sit'},{l:'💡',r:'tip'},{l:'🏆',r:'win'}],
-     ok:"✅ pig, sit, tip, win — all short /ɪ/! Forest cleared! 🌲",
+     ok:"✅ pig, sit, tip, win — all Short I 🐷! Forest cleared! 🌲",
      no:"❌ pig=🐷, sit=🪑, tip=💡, win=🏆 — try again!"},
     {t:'spk', ph:'Short I 🐷 · เสียง I สั้น',word:'big',
      clueEmoji:'📦',clueHint:"Say the opposite of 'small' — this box is ___!",
      q:"🎤 Complete the phrase: 'This box is ___'",
-     tip:"Almost closed mouth, corners slightly apart: /b/-/ɪ/-/g/",
-     ok:"✅ 'big' — short /ɪ/ perfectly! 📦",
+     tip:"Almost closed mouth, corners slightly apart: /b/-Short I 🐷-/g/",
+     ok:"✅ 'big' — Short I 🐷 perfectly! 📦",
      no:"❌ Try again! Almost closed mouth: /bɪg/. Don't stretch the vowel!"}
    ]},
 
   {id:'s4',path:'short',num:4,title:'Mission 4: Planet Neptune',icon:'🌋',col:'#f06a6a',
    sub:'Short O Sound · เสียง O สั้น',lives:3,
    tasks:[
-    {t:'intro',text:"The volcano of /ɒ/! This hot short 'o' sound needs a rounded, open mouth — like when a doctor says 'say ahh!'. Words: hot, dog, box, pot!"},
+    {t:'intro',text:"The volcano of Short O 🐶! This hot short 'o' sound needs a rounded, open mouth — like when a doctor says 'say ahh!'. Words: hot, dog, box, pot!"},
     {t:'mc', ph:'Short O 🐶 · เสียง O สั้น',
      clueEmoji:'🔥',clueHint:'The opposite of cold — the volcano is very ___!',
      q:'🔊 Listen — which word matches this clue?',
-     ipa:'/ɒ/',word:'hot',opts:['hot','hat','hit','hut'],ans:0,
-     ok:"✅ 'hot' /hɒt/ — round lips, open mouth for /ɒ/! 🔥",
-     no:"❌ 'hat'=/æ/, 'hit'=/ɪ/, 'hut'=/ʌ/. 'hot' has /ɒ/ — round your lips!"},
+     ipa:'Short O 🐶',word:'hot',opts:['hot','hat','hit','hut'],ans:0,
+     ok:"✅ 'hot' /hɒt/ — round lips, open mouth for Short O 🐶! 🔥",
+     no:"❌ 'hat'=Short A 🐱, 'hit'=Short I 🐷, 'hut'=Short U ☕. 'hot' has Short O 🐶 — round your lips!"},
     {t:'pic', ph:'Short O 🐶 · เสียง O สั้น',
-     q:'🔊 Listen — which picture has the /ɒ/ sound?',word:'dog',
-     pics:[{e:'🐶',w:'dog /ɒ/',c:true},{e:'🐛',w:'bug /ʌ/',c:false},{e:'🎩',w:'hat /æ/',c:false},{e:'🐷',w:'pig /ɪ/',c:false}],
-     ok:"✅ 'dog' /dɒg/ — rounded mouth for /ɒ/! 🐶",
-     no:"❌ 'dog' has /ɒ/. Bug=/ʌ/, hat=/æ/, pig=/ɪ/!"},
+     q:'🔊 Listen — which picture has the Short O 🐶 sound?',word:'dog',
+     pics:[{e:'🐶',w:'dog Short O 🐶',c:true},{e:'🐛',w:'bug Short U ☕',c:false},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🐷',w:'pig Short I 🐷',c:false}],
+     ok:"✅ 'dog' /dɒg/ — rounded mouth for Short O 🐶! 🐶",
+     no:"❌ 'dog' has Short O 🐶. Bug=Short U ☕, hat=Short A 🐱, pig=Short I 🐷!"},
     {t:'obstacle', title:'⚠️ Obstacle! Lava Jump — 4 Vowels!',
-     desc:"Jump over lava! Only the /ɒ/ word is safe. Others will burn you!",
+     desc:"Jump over lava! Only the Short O 🐶 word is safe. Others will burn you!",
      clueEmoji:'📦',clueHint:'You put things inside this square container.',
      word:'box',opts:['bax (Short A)','box (Short O)','bix (Short I)','bux (Short U)'],ans:1,
      ok:"✅ 'box' /bɒks/ — you jumped the lava! Safe! 📦🌋",
-     no:"❌ Only 'box' /ɒ/ is safe! bax(/æ/), bix(/ɪ/), bux(/ʌ/) — all wrong!"},
+     no:"❌ Only 'box' Short O 🐶 is safe! bax(Short A 🐱), bix(Short I 🐷), bux(Short U ☕) — all wrong!"},
     {t:'rapid', ph:'Short O 🐶 words',
-     q:"⚡ Rapid! Tap ALL words with /ɒ/ sound:",
+     q:"⚡ Rapid! Tap ALL words with Short O 🐶 sound:",
      words:['hot','hat','dog','dig','box','bus','pot','put','top','tip'],
      ans:[0,2,4,6,8],
-     ok:"✅ hot, dog, box, pot, top — all /ɒ/! Volcano survived! 🌋",
-     no:"❌ /ɒ/ words: hot, dog, box, pot, top. Others have /æ/,/ɪ/,/ʌ/!"},
+     ok:"✅ hot, dog, box, pot, top — all Short O 🐶! Volcano survived! 🌋",
+     no:"❌ Short O 🐶 words: hot, dog, box, pot, top. Others have Short A 🐱,Short I 🐷,Short U ☕!"},
     {t:'match', ph:'Short O 🐶 · จับคู่',
-     q:'Match emoji to /ɒ/ word:',
+     q:'Match emoji to Short O 🐶 word:',
      pairs:[{l:'🔥',r:'hot'},{l:'🐶',r:'dog'},{l:'📦',r:'box'},{l:'🦊',r:'fox'}],
-     ok:"✅ hot, dog, box, fox — all /ɒ/! Volcano conquered! 🌋",
+     ok:"✅ hot, dog, box, fox — all Short O 🐶! Volcano conquered! 🌋",
      no:"❌ hot=🔥, dog=🐶, box=📦, fox=🦊 — try again!"},
     {t:'spk', ph:'Short O 🐶 · เสียง O สั้น',word:'hot',
      clueEmoji:'🔥',clueHint:"Say how the volcano feels — it's very ___!",
      q:"🎤 Complete: 'The volcano is ___'",
-     tip:"Round your lips, open mouth: /h/-/ɒ/-/t/",
-     ok:"✅ 'hot' — beautiful /ɒ/! Round mouth perfectly! 🔥",
+     tip:"Round your lips, open mouth: /h/-Short O 🐶-/t/",
+     ok:"✅ 'hot' — beautiful Short O 🐶! Round mouth perfectly! 🔥",
      no:"❌ Round your lips and open wide: /hɒt/. Like saying 'awe'!"}
    ]},
 
   {id:'s5',path:'short',num:5,title:'Mission 5: Planet Kepler',icon:'🏜️',col:'#b07cf8',
    sub:'Short U Sound · เสียง U สั้น',lives:3,
    tasks:[
-    {t:'intro',text:"Desert of /ʌ/! This sound is like a grunt — 'uh'. Your mouth is relaxed and slightly open. Words: cup, sun, run, bus, bug!"},
+    {t:'intro',text:"Desert of Short U ☕! This sound is like a grunt — 'uh'. Your mouth is relaxed and slightly open. Words: cup, sun, run, bus, bug!"},
     {t:'mc', ph:'Short U ☕ · เสียง U สั้น',
      clueEmoji:'☀️',clueHint:'It shines in the sky every day.',
      q:'🔊 Listen — which word matches this clue?',
      word:'sun',opts:['son/sun','sin','san','sen'],ans:0,
-     ok:"✅ 'sun' /sʌn/ — relaxed, open mouth for /ʌ/! ☀️",
-     no:"❌ 'sun' has /ʌ/. 'sin'=/ɪ/, 'san'=/æ/, 'sen'=/ɛ/ — relax your mouth!"},
+     ok:"✅ 'sun' /sʌn/ — relaxed, open mouth for Short U ☕! ☀️",
+     no:"❌ 'sun' has Short U ☕. 'sin'=Short I 🐷, 'san'=Short A 🐱, 'sen'=Short E 🛏️ — relax your mouth!"},
     {t:'pic', ph:'Short U ☕ · เสียง U สั้น',
-     q:'🔊 Listen — which picture has /ʌ/?',word:'cup',
-     pics:[{e:'☕',w:'cup /ʌ/',c:true},{e:'🎩',w:'cap /æ/',c:false},{e:'🛏️',w:'bed /ɛ/',c:false},{e:'📦',w:'box /ɒ/',c:false}],
-     ok:"✅ 'cup' /kʌp/ — relaxed /ʌ/ sound! ☕",
-     no:"❌ 'cup' has /ʌ/. Cap=/æ/, bed=/ɛ/, box=/ɒ/."},
+     q:'🔊 Listen — which picture has Short U ☕?',word:'cup',
+     pics:[{e:'☕',w:'cup Short U ☕',c:true},{e:'🎩',w:'cap Short A 🐱',c:false},{e:'🛏️',w:'bed Short E 🛏️',c:false},{e:'📦',w:'box Short O 🐶',c:false}],
+     ok:"✅ 'cup' /kʌp/ — relaxed Short U ☕ sound! ☕",
+     no:"❌ 'cup' has Short U ☕. Cap=Short A 🐱, bed=Short E 🛏️, box=Short O 🐶."},
     {t:'obstacle', title:'⚠️ Obstacle! Desert Mirage!',
-     desc:"Things aren't what they seem in the desert! Which word truly has /ʌ/? Don't be tricked!",
+     desc:"Things aren't what they seem in the desert! Which word truly has Short U ☕? Don't be tricked!",
      clueEmoji:'🚌',clueHint:'Many people ride this to school.',
      word:'bus',opts:['bis','bas','bus','bos'],ans:2,
      ok:"✅ 'bus' /bʌs/ — you saw through the mirage! 🚌",
-     no:"❌ Only 'bus' has /ʌ/! bis=/ɪ/, bas=/æ/, bos=/ɒ/!"},
+     no:"❌ Only 'bus' has Short U ☕! bis=Short I 🐷, bas=Short A 🐱, bos=Short O 🐶!"},
     {t:'rapid', ph:'Short U ☕ words',
-     q:"⚡ Rapid! Tap ALL /ʌ/ words:",
+     q:"⚡ Rapid! Tap ALL Short U ☕ words:",
      words:['cup','cap','sun','sin','run','ran','bus','bit','bug','bag'],
      ans:[0,2,4,6,8],
-     ok:"✅ cup, sun, run, bus, bug — all /ʌ/! Desert crossed! 🏜️",
-     no:"❌ /ʌ/ words: cup, sun, run, bus, bug. Others have /æ/, /ɪ/!"},
+     ok:"✅ cup, sun, run, bus, bug — all Short U ☕! Desert crossed! 🏜️",
+     no:"❌ Short U ☕ words: cup, sun, run, bus, bug. Others have Short A 🐱, Short I 🐷!"},
     {t:'sb', ph:'Short U sentence · ประโยค U สั้น',
      words:['The','sun','is','fun','but','a','bus','runs'],target:'The sun is fun but a bus runs',
      alts:['A bus runs in the sun','The fun bus runs in the sun'],
      clueEmoji:'☀️🚌',clueHint:"Build a sentence using the sun and a bus!",
-     ok:"✅ sun, fun, but, bus, runs — FIVE /ʌ/ words! You're unstoppable! 🏆"},
+     ok:"✅ sun, fun, but, bus, runs — FIVE Short U ☕ words! You're unstoppable! 🏆"},
     {t:'spk', ph:'Short U ☕ · เสียง U สั้น',word:'run',
      clueEmoji:'🏃',clueHint:"Say what this person is doing!",
      q:"🎤 What is this person doing? Say the word!",
-     tip:"Relax completely, grunt slightly: /r/-/ʌ/-/n/",
-     ok:"✅ 'run' — short /ʌ/, effortless! You're a desert runner! 🏃",
+     tip:"Relax completely, grunt slightly: /r/-Short U ☕-/n/",
+     ok:"✅ 'run' — Short U ☕, effortless! You're a desert runner! 🏃",
      no:"❌ Relax your mouth completely — /rʌn/. No lip rounding!"}
    ]},
 
   {id:'s6',path:'short',num:6,title:'Mission 6: Planet Core BOSS',icon:'⚔️',col:'#f7c948',
    sub:'All 5 Short Vowels — BOSS LEVEL!',lives:3,
    tasks:[
-    {t:'intro',text:"BOSS LEVEL! 🏆 All 5 short vowels in one arena: Short A, E, I, O /ʌ/. You've trained hard — now prove you know them all! Listen carefully to every clue!"},
+    {t:'intro',text:"BOSS LEVEL! 🏆 All 5 short vowels in one arena: Short A, E, I, O Short U ☕. You've trained hard — now prove you know them all! Listen carefully to every clue!"},
     {t:'mc', ph:'Which vowel? · เสียงอะไร?',
      clueEmoji:'🎩',clueHint:'You wear this on your head.',
      q:'🔊 Listen — which vowel sound is in this word?',
      word:'hat',opts:['Short A 🐱 like cat','Short E 🛏️ like bed','Short I 🐷 like sit','Short O 🐶 like hot'],ans:0,
-     ok:"✅ 'hat' /hæt/ — /æ/ like cat! Open wide! 🎩",
-     no:"❌ 'hat' has /æ/ — the wide open, flat sound like 'cat'."},
+     ok:"✅ 'hat' /hæt/ — Short A 🐱 like cat! Open wide! 🎩",
+     no:"❌ 'hat' has Short A 🐱 — the wide open, flat sound like 'cat'."},
     {t:'obstacle', title:'⚠️ BOSS OBSTACLE! Sound Maze',
      desc:"Match the CORRECT vowel to each emoji clue! Maze activated — no peeking at words!",
      clueEmoji:'🐶',clueHint:'This pet wags its tail.',
      word:'dog',opts:['Short A 🐱 cat','Short E 🛏️ bed','Short I 🐷 sit','Short O 🐶 hot'],ans:3,
-     ok:"✅ 'dog' has /ɒ/! You found the path in the Sound Maze! 🐶",
-     no:"❌ 'dog' has /ɒ/ — the rounded, open sound like 'hot'!"},
+     ok:"✅ 'dog' has Short O 🐶! You found the path in the Sound Maze! 🐶",
+     no:"❌ 'dog' has Short O 🐶 — the rounded, open sound like 'hot'!"},
     {t:'match', ph:'All Short Vowels · สระสั้นทั้ง 5',
      q:'Match each emoji clue to its vowel sound:',
-     pairs:[{l:'🐱 cat',r:'/æ/'},{l:'🛏️ bed',r:'/ɛ/'},{l:'🐷 pig',r:'/ɪ/'},{l:'🐶 dog',r:'/ɒ/'}],
+     pairs:[{l:'🐱 cat',r:'Short A 🐱'},{l:'🛏️ bed',r:'Short E 🛏️'},{l:'🐷 pig',r:'Short I 🐷'},{l:'🐶 dog',r:'Short O 🐶'}],
      ok:"✅ All vowels matched! You know all 5 short vowels! 🏆",
-     no:"❌ cat=/æ/, bed=/ɛ/, pig=/ɪ/, dog=/ɒ/ — try the maze again!"},
+     no:"❌ cat=Short A 🐱, bed=Short E 🛏️, pig=Short I 🐷, dog=Short O 🐶 — try the maze again!"},
     {t:'rapid', ph:'All Short Vowels · สระสั้น',
      q:"⚡ BOSS RAPID! Tap words with SHORT vowels only (not long!):",
      words:['cat','cake','bed','bead','pig','pie','dog','doge','cup','cube'],
      ans:[0,2,4,6,8],
-     ok:"✅ cat/æ/, bed/ɛ/, pig/ɪ/, dog/ɒ/, cup/ʌ/ — you beat the boss! 🏆",
+     ok:"✅ catShort A 🐱, bedShort E 🛏️, pigShort I 🐷, dogShort O 🐶, cupShort U ☕ — you beat the boss! 🏆",
      no:"❌ Short vowels: cat(æ), bed(ɛ), pig(ɪ), dog(ɒ), cup(ʌ). Others are long!"},
     {t:'spk', ph:'All Short Vowels · สระสั้น',word:'top',
      clueEmoji:'⬆️',clueHint:"The very highest point — the ___ of the mountain.",
      q:"🎤 Say the word this clue describes:",
-     tip:"Round, open, short: /t/-/ɒ/-/p/",
-     ok:"✅ 'top' /tɒp/ — short /ɒ/ perfectly! Arena champion! 🏆",
-     no:"❌ Round your lips for /ɒ/: 'top'. Not 'tape' or 'tip'!"},
+     tip:"Round, open, short: /t/-Short O 🐶-/p/",
+     ok:"✅ 'top' /tɒp/ — Short O 🐶 perfectly! Arena champion! 🏆",
+     no:"❌ Round your lips for Short O 🐶: 'top'. Not 'tape' or 'tip'!"},
     {t:'sb', ph:'Mixed Short Vowels · สระสั้นผสม',
      words:['A','big','red','cat','sat','on','a','hot','box'],target:'A big red cat sat on a hot box',
      alts:['The big red cat sat on a hot box'],
      clueEmoji:'🐱📦',clueHint:"Where did the big red cat sit? Build the sentence!",
-     ok:"✅ big(/ɪ/) red(/ɛ/) cat(/æ/) sat(/æ/) hot(/ɒ/) box(/ɒ/) — BOSS DEFEATED! 🏆🎉"}
+     ok:"✅ big(Short I 🐷) red(Short E 🛏️) cat(Short A 🐱) sat(Short A 🐱) hot(Short O 🐶) box(Short O 🐶) — BOSS DEFEATED! 🏆🎉"}
    ]},
 
   /* ── LONG VOWEL MISSIONS ── */
   {id:'l1',path:'long',num:1,title:'Mission 1: Planet Jupiter',icon:'🏝️',col:'#f7c948',
    sub:'Long A Sound · เสียง A ยาว',lives:3,
    tasks:[
-    {t:'intro',text:"Float up to the Sky Island! The long /eɪ/ sound glides — hold it longer than short /æ/. Spellings: ai (rain) and ay (play). Listen for the glide!"},
+    {t:'intro',text:"Float up to the Sky Island! The long Long A 🌧️ sound glides — hold it longer than Short A 🐱. Spellings: ai (rain) and ay (play). Listen for the glide!"},
     {t:'mc', ph:'Long A 🌧️ · ai, ay',
      clueEmoji:'🌧️',clueHint:'Water falls from the sky on a cloudy day.',
      q:'🔊 Listen — which word matches this clue?',
-     ipa:'/eɪ/',word:'rain',opts:['rain','ran','run','rin'],ans:0,
-     ok:"✅ 'rain' /reɪn/ — long /eɪ/ gliding sound! Hold it: raaaaain! ☔",
-     no:"❌ 'rain' has the long /eɪ/. 'ran' has short /æ/ — very different!"},
+     ipa:'Long A 🌧️',word:'rain',opts:['rain','ran','run','rin'],ans:0,
+     ok:"✅ 'rain' /reɪn/ — long Long A 🌧️ gliding sound! Hold it: raaaaain! ☔",
+     no:"❌ 'rain' has the long Long A 🌧️. 'ran' has Short A 🐱 — very different!"},
     {t:'pic', ph:'Long A 🌧️ · ay',
-     q:'🔊 Listen — which picture has the /eɪ/ sound?',word:'play',
-     pics:[{e:'🎮',w:'play /eɪ/',c:true},{e:'🐷',w:'pig /ɪ/',c:false},{e:'☀️',w:'sun /ʌ/',c:false},{e:'🐶',w:'dog /ɒ/',c:false}],
-     ok:"✅ 'play' /pleɪ/ — long /eɪ/ at the end! plaaaay! 🎮",
-     no:"❌ 'play' has /eɪ/. The others have short vowels!"},
+     q:'🔊 Listen — which picture has the Long A 🌧️ sound?',word:'play',
+     pics:[{e:'🎮',w:'play Long A 🌧️',c:true},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☀️',w:'sun Short U ☕',c:false},{e:'🐶',w:'dog Short O 🐶',c:false}],
+     ok:"✅ 'play' /pleɪ/ — long Long A 🌧️ at the end! plaaaay! 🎮",
+     no:"❌ 'play' has Long A 🌧️. The others have short vowels!"},
     {t:'obstacle', title:'⚠️ Sky Storm! Short vs Long A',
-     desc:"A storm mixes up /æ/ (short) and /eɪ/ (long)! Pick only the LONG /eɪ/ word!",
+     desc:"A storm mixes up Short A 🐱 (short) and Long A 🌧️ (long)! Pick only the LONG Long A 🌧️ word!",
      clueEmoji:'🚂',clueHint:'This vehicle runs on railway tracks.',
      word:'train',opts:['tan (Short A)','tin (Short I)','train (Long A)','ton (Short O)'],ans:2,
-     ok:"✅ 'train' /treɪn/ — long /eɪ/! You flew through the storm! 🚂",
-     no:"❌ Only 'train' has the long /eɪ/! Others have short vowels."},
+     ok:"✅ 'train' /treɪn/ — long Long A 🌧️! You flew through the storm! 🚂",
+     no:"❌ Only 'train' has the long Long A 🌧️! Others have short vowels."},
     {t:'match', ph:'Long A 🌧️ · spellings',
-     q:'Match the emoji to its long /eɪ/ word:',
+     q:'Match the emoji to its long Long A 🌧️ word:',
      pairs:[{l:'🌧️',r:'rain'},{l:'🚂',r:'train'},{l:'🎮',r:'play'},{l:'☀️',r:'day'}],
-     ok:"✅ rain, train, play, day — all long /eɪ/! Sky island conquered! 🏝️",
+     ok:"✅ rain, train, play, day — all long Long A 🌧️! Sky island conquered! 🏝️",
      no:"❌ rain=🌧️, train=🚂, play=🎮, day=☀️ — try again!"},
     {t:'rapid', ph:'Long A 🌧️ words',
-     q:"⚡ Rapid! Tap ONLY long /eɪ/ words:",
+     q:"⚡ Rapid! Tap ONLY long Long A 🌧️ words:",
      words:['rain','ran','play','plan','day','dad','train','tan','say','sat'],
      ans:[0,2,4,6,8],
-     ok:"✅ rain, play, day, train, say — all /eɪ/! Cloud-fast! ⚡",
-     no:"❌ /eɪ/ words: rain, play, day, train, say. Others have short /æ/!"},
+     ok:"✅ rain, play, day, train, say — all Long A 🌧️! Cloud-fast! ⚡",
+     no:"❌ Long A 🌧️ words: rain, play, day, train, say. Others have Short A 🐱!"},
     {t:'spk', ph:'Long A 🌧️ · เสียง A ยาว',word:'play',
      clueEmoji:'🎮',clueHint:"What kids love to do after school!",
      q:"🎤 Say what this emoji represents — hold the vowel!",
-     tip:"Glide from /e/ to /ɪ/ — hold it: plaaaay",
-     ok:"✅ Beautiful /eɪ/ glide! Your 'play' sounds natural! 🎮",
+     tip:"Glide from /e/ to Short I 🐷 — hold it: plaaaay",
+     ok:"✅ Beautiful Long A 🌧️ glide! Your 'play' sounds natural! 🎮",
      no:"❌ Hold the vowel longer — 'plaaaay'. It glides, don't cut it short!"}
    ]},
 
   {id:'l2',path:'long',num:2,title:'Mission 2: Planet Saturn',icon:'🌊',col:'#4ab3f4',
    sub:'Long E Sound · เสียง E ยาว',lives:3,
    tasks:[
-    {t:'intro',text:"Dive into the /iː/ Deep Sea! This sound is long and stretched — like a smile! Spellings: ee (tree, bee) and ea (sea, leaf). Stretchhh it!"},
+    {t:'intro',text:"Dive into the Long E 🐝 Deep Sea! This sound is long and stretched — like a smile! Spellings: ee (tree, bee) and ea (sea, leaf). Stretchhh it!"},
     {t:'mc', ph:'Long E 🐝 · ee, ea',
      clueEmoji:'🌳',clueHint:'A tall plant with branches and leaves.',
      q:'🔊 Listen — which word matches this clue?',
-     ipa:'/iː/',word:'tree',opts:['tree','trip','tray','try'],ans:0,
-     ok:"✅ 'tree' /triː/ — long /iː/, smile wide! 🌳 Also: bee, see, feel!",
-     no:"❌ 'tree' has long /iː/. 'trip'=/ɪ/ (short), 'tray'=/eɪ/ — different!"},
+     ipa:'Long E 🐝',word:'tree',opts:['tree','trip','tray','try'],ans:0,
+     ok:"✅ 'tree' /triː/ — long Long E 🐝, smile wide! 🌳 Also: bee, see, feel!",
+     no:"❌ 'tree' has long Long E 🐝. 'trip'=Short I 🐷 (short), 'tray'=Long A 🌧️ — different!"},
     {t:'pic', ph:'Long E 🐝 · ee',
-     q:'🔊 Listen — which picture has the /iː/ sound?',word:'bee',
-     pics:[{e:'🐝',w:'bee (Long E)',c:true},{e:'📦',w:'box /ɒ/',c:false},{e:'🎩',w:'hat /æ/',c:false},{e:'🏃',w:'run /ʌ/',c:false}],
+     q:'🔊 Listen — which picture has the Long E 🐝 sound?',word:'bee',
+     pics:[{e:'🐝',w:'bee (Long E)',c:true},{e:'📦',w:'box Short O 🐶',c:false},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🏃',w:'run Short U ☕',c:false}],
      ok:"✅ 'bee' /biː/ — hold the smile and stretch: beeee! 🐝",
-     no:"❌ 'bee' has /iː/. Box=/ɒ/, hat=/æ/, run=/ʌ/ — all short!"},
+     no:"❌ 'bee' has Long E 🐝. Box=Short O 🐶, hat=Short A 🐱, run=Short U ☕ — all short!"},
     {t:'obstacle', title:'⚠️ Deep Sea! Short I vs Long E',
-     desc:"The pressure is high! /ɪ/ and /iː/ sound VERY similar. Pick the LONG /iː/ word!",
+     desc:"The pressure is high! Short I 🐷 and Long E 🐝 sound VERY similar. Pick the LONG Long E 🐝 word!",
      clueEmoji:'👣',clueHint:'You walk on these — at the bottom of your legs.',
      word:'feet',opts:['fit (Short I)','feet (Long E)','fat (Short A)','fut'],ans:1,
-     ok:"✅ 'feet' /fiːt/ — long /iː/! You resisted the pressure! 👣",
-     no:"❌ 'feet' = long /iː/. 'fit' = short /ɪ/. They sound similar — hold /iː/ longer!"},
+     ok:"✅ 'feet' /fiːt/ — long Long E 🐝! You resisted the pressure! 👣",
+     no:"❌ 'feet' = long Long E 🐝. 'fit' = Short I 🐷. They sound similar — hold Long E 🐝 longer!"},
     {t:'match', ph:'Long E 🐝 · words',
-     q:'Match emoji to its long /iː/ word:',
+     q:'Match emoji to its long Long E 🐝 word:',
      pairs:[{l:'🌳',r:'tree'},{l:'🐝',r:'bee'},{l:'👣',r:'feet'},{l:'🌱',r:'seed'}],
-     ok:"✅ tree, bee, feet, seed — all long /iː/! Deep sea explored! 🌊",
+     ok:"✅ tree, bee, feet, seed — all long Long E 🐝! Deep sea explored! 🌊",
      no:"❌ tree=🌳, bee=🐝, feet=👣, seed=🌱 — try again!"},
     {t:'rapid', ph:'Long E 🐝 words',
-     q:"⚡ Rapid! Tap ONLY long /iː/ words:",
+     q:"⚡ Rapid! Tap ONLY long Long E 🐝 words:",
      words:['tree','trip','bee','bit','feet','fit','seed','sit','week','wick'],
      ans:[0,2,4,6,8],
-     ok:"✅ tree, bee, feet, seed, week — all long /iː/! Deep diver! ⚡",
-     no:"❌ /iː/ words: tree, bee, feet, seed, week. Others have short /ɪ/!"},
+     ok:"✅ tree, bee, feet, seed, week — all long Long E 🐝! Deep diver! ⚡",
+     no:"❌ Long E 🐝 words: tree, bee, feet, seed, week. Others have Short I 🐷!"},
     {t:'spk', ph:'Long E 🐝 · เสียง E ยาว',word:'tree',
      clueEmoji:'🌳',clueHint:"Name this tall plant that grows in forests!",
      q:"🎤 Name this clue — stretch the vowel!",
-     tip:"Wide smile, stretch it long: /t/-/riː/. Hold the /iː/!",
-     ok:"✅ 'tree' — long /iː/ stretched beautifully! 🌳",
-     no:"❌ Stretch more — treeeee. Your /iː/ should be at least twice as long as /ɪ/!"}
+     tip:"Wide smile, stretch it long: /t/-/riː/. Hold the Long E 🐝!",
+     ok:"✅ 'tree' — long Long E 🐝 stretched beautifully! 🌳",
+     no:"❌ Stretch more — treeeee. Your Long E 🐝 should be at least twice as long as Short I 🐷!"}
    ]},
 
   {id:'l3',path:'long',num:3,title:'Mission 3: Planet Uranus',icon:'⛰️',col:'#4edc84',
    sub:'Long O Sound · เสียง O ยาว',lives:3,
    tasks:[
-    {t:'intro',text:"Climb the /oʊ/ Mountain! This sound rounds your lips and glides — from 'oh' to a small 'oo'. Spellings: oa (boat) and ow (snow, low). Round and glide!"},
+    {t:'intro',text:"Climb the Long O ⛵ Mountain! This sound rounds your lips and glides — from 'oh' to a small 'oo'. Spellings: oa (boat) and ow (snow, low). Round and glide!"},
     {t:'mc', ph:'Long O ⛵ · oa',
      clueEmoji:'⛵',clueHint:'This floats on water with a sail.',
      q:'🔊 Listen — which word matches this clue?',
-     ipa:'/oʊ/',word:'boat',opts:['boat','bat','bit','but'],ans:0,
+     ipa:'Long O ⛵',word:'boat',opts:['boat','bat','bit','but'],ans:0,
      ok:"✅ 'boat' /boʊt/ — round lips glide to /ʊ/! Also: coat, road, toad! ⛵",
-     no:"❌ 'boat' has long /oʊ/. 'bat'=/æ/, 'bit'=/ɪ/, 'but'=/ʌ/ — all short!"},
+     no:"❌ 'boat' has long Long O ⛵. 'bat'=Short A 🐱, 'bit'=Short I 🐷, 'but'=Short U ☕ — all short!"},
     {t:'pic', ph:'Long O ⛵ · oa, ow',
-     q:'🔊 Listen — which picture has /oʊ/?',word:'coat',
-     pics:[{e:'🧥',w:'coat /oʊ/',c:true},{e:'🐱',w:'cat /æ/',c:false},{e:'☕',w:'cup /ʌ/',c:false},{e:'🐷',w:'pig /ɪ/',c:false}],
-     ok:"✅ 'coat' /koʊt/ — long /oʊ/, round your lips! 🧥",
-     no:"❌ 'coat' has /oʊ/. Cat=/æ/, cup=/ʌ/, pig=/ɪ/ — all short!"},
+     q:'🔊 Listen — which picture has Long O ⛵?',word:'coat',
+     pics:[{e:'🧥',w:'coat Long O ⛵',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'☕',w:'cup Short U ☕',c:false},{e:'🐷',w:'pig Short I 🐷',c:false}],
+     ok:"✅ 'coat' /koʊt/ — long Long O ⛵, round your lips! 🧥",
+     no:"❌ 'coat' has Long O ⛵. Cat=Short A 🐱, cup=Short U ☕, pig=Short I 🐷 — all short!"},
     {t:'obstacle', title:'⚠️ Mountain Wind! Short O vs Long O',
-     desc:"Strong winds mix up short /ɒ/ and long /oʊ/! Pick the LONG one!",
+     desc:"Strong winds mix up Short O 🐶 and long Long O ⛵! Pick the LONG one!",
      clueEmoji:'🐸',clueHint:'A green jumping amphibian that lives near ponds.',
      word:'toad',opts:['tod (Short O)','toad (Long O)','tid (Short I)','tud (Short U)'],ans:1,
-     ok:"✅ 'toad' /toʊd/ — long /oʊ/! You climbed through the wind! 🐸",
-     no:"❌ 'toad' has long /oʊ/. 'tod' would be short /ɒ/ — hear the difference!"},
+     ok:"✅ 'toad' /toʊd/ — long Long O ⛵! You climbed through the wind! 🐸",
+     no:"❌ 'toad' has long Long O ⛵. 'tod' would be Short O 🐶 — hear the difference!"},
     {t:'match', ph:'Long O ⛵ · words',
-     q:'Match emoji to its long /oʊ/ word:',
+     q:'Match emoji to its long Long O ⛵ word:',
      pairs:[{l:'⛵',r:'boat'},{l:'🧥',r:'coat'},{l:'🛣️',r:'road'},{l:'🐸',r:'toad'}],
-     ok:"✅ boat, coat, road, toad — all /oʊ/! Mountain summit! ⛰️",
+     ok:"✅ boat, coat, road, toad — all Long O ⛵! Mountain summit! ⛰️",
      no:"❌ boat=⛵, coat=🧥, road=🛣️, toad=🐸 — try again!"},
     {t:'rapid', ph:'Long O ⛵ words',
-     q:"⚡ Rapid! Tap ONLY /oʊ/ words:",
+     q:"⚡ Rapid! Tap ONLY Long O ⛵ words:",
      words:['boat','bat','coat','cat','road','rod','toad','top','goat','got'],
      ans:[0,2,4,6,8],
-     ok:"✅ boat, coat, road, toad, goat — all long /oʊ/! Summit reached! ⚡",
-     no:"❌ /oʊ/ words: boat, coat, road, toad, goat. Others have /æ/, /ɒ/!"},
+     ok:"✅ boat, coat, road, toad, goat — all long Long O ⛵! Summit reached! ⚡",
+     no:"❌ Long O ⛵ words: boat, coat, road, toad, goat. Others have Short A 🐱, Short O 🐶!"},
     {t:'spk', ph:'Long O ⛵ · เสียง O ยาว',word:'road',
      clueEmoji:'🛣️',clueHint:"Cars drive on this. Say its name!",
      q:"🎤 Name this clue — round your lips!",
-     tip:"Round lips, glide: /r/-/oʊ/-/d/. Feel the lip rounding!",
-     ok:"✅ 'road' — beautiful /oʊ/ glide! Mountain conquered! ⛰️",
+     tip:"Round lips, glide: /r/-Long O ⛵-/d/. Feel the lip rounding!",
+     ok:"✅ 'road' — beautiful Long O ⛵ glide! Mountain conquered! ⛰️",
      no:"❌ Round your lips and glide: /roʊd/. Don't keep lips flat!"}
    ]},
 
   {id:'l4',path:'long',num:4,title:'Mission 4: Planet Mercury',icon:'⭐',col:'#b07cf8',
    sub:'Long I Sound · เสียง I ยาว',lives:3,
    tasks:[
-    {t:'intro',text:"Reach for the stars with /aɪ/! This long 'i' sound is a diphthong — it glides from /a/ to /ɪ/. Spellings: igh (light, night) and i_e (like, time). Listen to the glide!"},
+    {t:'intro',text:"Reach for the stars with Long I 💡! This long 'i' sound is a diphthong — it glides from /a/ to Short I 🐷. Spellings: igh (light, night) and i_e (like, time). Listen to the glide!"},
     {t:'mc', ph:'Long I 💡 · igh',
      clueEmoji:'💡',clueHint:'It glows in the dark and helps you see.',
      q:'🔊 Listen — which word matches this clue?',
-     ipa:'/aɪ/',word:'light',opts:['light','lit','let','lot'],ans:0,
-     ok:"✅ 'light' /laɪt/ — /aɪ/ glides from /a/ to /ɪ/! 💡",
-     no:"❌ 'light' has /aɪ/. 'lit'=/ɪ/, 'let'=/ɛ/, 'lot'=/ɒ/ — all short!"},
+     ipa:'Long I 💡',word:'light',opts:['light','lit','let','lot'],ans:0,
+     ok:"✅ 'light' /laɪt/ — Long I 💡 glides from /a/ to Short I 🐷! 💡",
+     no:"❌ 'light' has Long I 💡. 'lit'=Short I 🐷, 'let'=Short E 🛏️, 'lot'=Short O 🐶 — all short!"},
     {t:'pic', ph:'Long I 💡 · igh',
-     q:'🔊 Listen — which picture has /aɪ/?',word:'night',
-     pics:[{e:'🌙',w:'night /aɪ/',c:true},{e:'🐝',w:'bee (Long E)',c:false},{e:'🚌',w:'bus /ʌ/',c:false},{e:'🔥',w:'hot /ɒ/',c:false}],
-     ok:"✅ 'night' /naɪt/ — long /aɪ/ diphthong! 🌙",
-     no:"❌ 'night' has /aɪ/. Bee=/iː/, bus=/ʌ/, hot=/ɒ/!"},
+     q:'🔊 Listen — which picture has Long I 💡?',word:'night',
+     pics:[{e:'🌙',w:'night Long I 💡',c:true},{e:'🐝',w:'bee (Long E)',c:false},{e:'🚌',w:'bus Short U ☕',c:false},{e:'🔥',w:'hot Short O 🐶',c:false}],
+     ok:"✅ 'night' /naɪt/ — long Long I 💡 diphthong! 🌙",
+     no:"❌ 'night' has Long I 💡. Bee=Long E 🐝, bus=Short U ☕, hot=Short O 🐶!"},
     {t:'obstacle', title:'⚠️ Meteor Shower! Short I vs Long I',
-     desc:"Meteors of /ɪ/ are falling! Only the /aɪ/ words are safe shields!",
+     desc:"Meteors of Short I 🐷 are falling! Only the Long I 💡 words are safe shields!",
      clueEmoji:'✅',clueHint:"The direction on the right — it means correct!",
      word:'right',opts:['rit (Short I)','right (Long I)','ret (Short E)','rot (Short O)'],ans:1,
      ok:"✅ 'right' /raɪt/ — your shield held! Meteor blocked! ✅",
-     no:"❌ 'right' has /aɪ/. Don't confuse with 'rit'(/ɪ/) — it's not even a word!"},
+     no:"❌ 'right' has Long I 💡. Don't confuse with 'rit'(Short I 🐷) — it's not even a word!"},
     {t:'match', ph:'Long I 💡 · words',
-     q:'Match emoji to long /aɪ/ word:',
+     q:'Match emoji to long Long I 💡 word:',
      pairs:[{l:'💡',r:'light'},{l:'🌙',r:'night'},{l:'✅',r:'right'},{l:'💪',r:'might'}],
-     ok:"✅ light, night, right, might — all /aɪ/! Star navigator! ⭐",
+     ok:"✅ light, night, right, might — all Long I 💡! Star navigator! ⭐",
      no:"❌ light=💡, night=🌙, right=✅, might=💪 — try again!"},
     {t:'rapid', ph:'Long I 💡 words',
-     q:"⚡ Rapid! Tap ONLY /aɪ/ words:",
+     q:"⚡ Rapid! Tap ONLY Long I 💡 words:",
      words:['light','lit','night','nit','right','rit','sight','sit','might','mit'],
      ans:[0,2,4,6,8],
-     ok:"✅ light, night, right, sight, might — all /aɪ/! Shooting star! ⚡",
-     no:"❌ /aɪ/ words: light, night, right, sight, might. Others have short /ɪ/!"},
+     ok:"✅ light, night, right, sight, might — all Long I 💡! Shooting star! ⚡",
+     no:"❌ Long I 💡 words: light, night, right, sight, might. Others have Short I 🐷!"},
     {t:'spk', ph:'Long I 💡 · เสียง I ยาว',word:'night',
      clueEmoji:'🌙',clueHint:"The time when it's dark and stars appear!",
      q:"🎤 Name this time of day from the clue!",
-     tip:"Glide: start with open /a/, move to /ɪ/ — /naɪt/",
-     ok:"✅ 'night' — gorgeous /aɪ/ glide! You're a star! 🌙⭐",
-     no:"❌ Feel the glide: /naɪt/. Start open, close toward /ɪ/. Don't keep it short!"}
+     tip:"Glide: start with open /a/, move to Short I 🐷 — /naɪt/",
+     ok:"✅ 'night' — gorgeous Long I 💡 glide! You're a star! 🌙⭐",
+     no:"❌ Feel the glide: /naɪt/. Start open, close toward Short I 🐷. Don't keep it short!"}
    ]},
 
   {id:'l5',path:'long',num:5,title:'Mission 5: Planet Pluto',icon:'❄️',col:'#4ab3f4',
    sub:'Long U Sound · เสียง U ยาว',lives:3,
    tasks:[
-    {t:'intro',text:"Enter the Ice Palace of /uː/! Tight, forward lips, long sound. Spellings: oo (moon, food) and ue (blue, clue). Round your lips and push them forward!"},
+    {t:'intro',text:"Enter the Ice Palace of Long U 🌕! Tight, forward lips, long sound. Spellings: oo (moon, food) and ue (blue, clue). Round your lips and push them forward!"},
     {t:'mc', ph:'Long U 🌕 · oo',
      clueEmoji:'🌕',clueHint:'It glows in the sky at night — big and round.',
      q:'🔊 Listen — which word matches this clue?',
-     ipa:'/uː/',word:'moon',opts:['moon','man','men','min'],ans:0,
-     ok:"✅ 'moon' /muːn/ — tight forward lips for /uː/! 🌕",
-     no:"❌ 'moon' has /uː/. 'man'=/æ/, 'men'=/ɛ/, 'min'=/ɪ/ — all short!"},
+     ipa:'Long U 🌕',word:'moon',opts:['moon','man','men','min'],ans:0,
+     ok:"✅ 'moon' /muːn/ — tight forward lips for Long U 🌕! 🌕",
+     no:"❌ 'moon' has Long U 🌕. 'man'=Short A 🐱, 'men'=Short E 🛏️, 'min'=Short I 🐷 — all short!"},
     {t:'pic', ph:'Long U 🌕 · oo',
-     q:'🔊 Listen — which picture has /uː/?',word:'food',
-     pics:[{e:'🍎',w:'food /uː/',c:true},{e:'🎩',w:'hat /æ/',c:false},{e:'🐷',w:'pig /ɪ/',c:false},{e:'🔥',w:'hot /ɒ/',c:false}],
-     ok:"✅ 'food' /fuːd/ — tight lips forward for /uː/! 🍎",
-     no:"❌ 'food' has /uː/. Hat=/æ/, pig=/ɪ/, hot=/ɒ/ — all different!"},
+     q:'🔊 Listen — which picture has Long U 🌕?',word:'food',
+     pics:[{e:'🍎',w:'food Long U 🌕',c:true},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'🔥',w:'hot Short O 🐶',c:false}],
+     ok:"✅ 'food' /fuːd/ — tight lips forward for Long U 🌕! 🍎",
+     no:"❌ 'food' has Long U 🌕. Hat=Short A 🐱, pig=Short I 🐷, hot=Short O 🐶 — all different!"},
     {t:'obstacle', title:'⚠️ Ice Crack! Short U vs Long U',
-     desc:"The ice has two vowels hidden: short /ʊ/ (as in 'book') and long /uː/. Pick the LONG /uː/!",
+     desc:"The ice has two vowels hidden: short /ʊ/ (as in 'book') and long Long U 🌕. Pick the LONG Long U 🌕!",
      clueEmoji:'🔵',clueHint:'This colour is the colour of the sky and ocean.',
      word:'blue',opts:['book (Short U)','bull (Short U)','blue (Long U)','boot (Long U)'],ans:2,
-     ok:"✅ 'blue' /bluː/ — long /uː/! Ice palace safe! 🔵",
-     no:"❌ 'blue' has the long /uː/. 'book'/'bull' have short /ʊ/ — slightly different!"},
+     ok:"✅ 'blue' /bluː/ — long Long U 🌕! Ice palace safe! 🔵",
+     no:"❌ 'blue' has the long Long U 🌕. 'book'/'bull' have short /ʊ/ — slightly different!"},
     {t:'match', ph:'Long U 🌕 · words',
-     q:'Match emoji to long /uː/ word:',
+     q:'Match emoji to long Long U 🌕 word:',
      pairs:[{l:'🌕',r:'moon'},{l:'🍎',r:'food'},{l:'🔵',r:'blue'},{l:'📅',r:'soon'}],
-     ok:"✅ moon, food, blue, soon — all /uː/! Ice palace conquered! ❄️",
+     ok:"✅ moon, food, blue, soon — all Long U 🌕! Ice palace conquered! ❄️",
      no:"❌ moon=🌕, food=🍎, blue=🔵, soon=📅 — try again!"},
     {t:'rapid', ph:'Long U 🌕 words',
-     q:"⚡ Rapid! Tap ONLY /uː/ words:",
+     q:"⚡ Rapid! Tap ONLY Long U 🌕 words:",
      words:['moon','man','food','fed','blue','bad','soon','sun','cool','cup'],
      ans:[0,2,4,6,8],
-     ok:"✅ moon, food, blue, soon, cool — all /uː/! Ice champion! ⚡",
-     no:"❌ /uː/ words: moon, food, blue, soon, cool. Others have short vowels!"},
+     ok:"✅ moon, food, blue, soon, cool — all Long U 🌕! Ice champion! ⚡",
+     no:"❌ Long U 🌕 words: moon, food, blue, soon, cool. Others have short vowels!"},
     {t:'spk', ph:'Long U 🌕 · เสียง U ยาว',word:'cool',
      clueEmoji:'❄️',clueHint:"The opposite of warm — the ice palace is very ___!",
      q:"🎤 Complete: 'The ice palace is ___'",
-     tip:"Tight forward lips, long sound: /k/-/uː/-/l/",
-     ok:"✅ 'cool' — tight /uː/ perfectly! You're ice cool! ❄️",
+     tip:"Tight forward lips, long sound: /k/-Long U 🌕-/l/",
+     ok:"✅ 'cool' — tight Long U 🌕 perfectly! You're ice cool! ❄️",
      no:"❌ Push lips forward more: /kuːl/. Tight, forward, long!"}
    ]},
 
   {id:'l6',path:'long',num:6,title:'Mission 6: Galactic BOSS',icon:'🌌',col:'#f7c948',
    sub:'All Long Vowels — BOSS LEVEL!',lives:3,
    tasks:[
-    {t:'intro',text:"GALAXY BOSS LEVEL! 🌌 All long vowels: Long A, E, O, I /uː/. You've explored 5 worlds — now prove you command them all! The galaxy awaits!"},
+    {t:'intro',text:"GALAXY BOSS LEVEL! 🌌 All long vowels: Long A, E, O, I Long U 🌕. You've explored 5 worlds — now prove you command them all! The galaxy awaits!"},
     {t:'mc', ph:'Which long vowel? · สระยาวอะไร?',
      clueEmoji:'⛵',clueHint:'It floats on water.',
      q:'🔊 Listen — which long vowel sound is in this word?',
      word:'boat',opts:['Long A 🌧️ rain','Long E 🐝 tree','Long O ⛵ boat','Long I 💡 night'],ans:2,
-     ok:"✅ 'boat' has /oʊ/ — round lip glide! 🌌",
-     no:"❌ 'boat' /boʊt/ has /oʊ/ — not /eɪ/, /iː/, or /aɪ/!"},
+     ok:"✅ 'boat' has Long O ⛵ — round lip glide! 🌌",
+     no:"❌ 'boat' /boʊt/ has Long O ⛵ — not Long A 🌧️, Long E 🐝, or Long I 💡!"},
     {t:'obstacle', title:'⚠️ GALAXY BOSS! Mixed Vowel Nebula',
-     desc:"All short and long vowels swirl together! Find ONLY the long /iː/ word!",
+     desc:"All short and long vowels swirl together! Find ONLY the long Long E 🐝 word!",
      clueEmoji:'🐝',clueHint:'A flying insect that makes honey.',
      word:'bee',opts:['bee (Long E)','bay (Long A)','bow (Long O)','buy (Long I)'],ans:0,
-     ok:"✅ 'bee' /biː/ — long /iː/! You navigated the nebula! 🐝🌌",
-     no:"❌ 'bee' has /iː/. 'bay'=/eɪ/, 'bow'=/oʊ/, 'buy'=/aɪ/ — all different!"},
+     ok:"✅ 'bee' /biː/ — long Long E 🐝! You navigated the nebula! 🐝🌌",
+     no:"❌ 'bee' has Long E 🐝. 'bay'=Long A 🌧️, 'bow'=Long O ⛵, 'buy'=Long I 💡 — all different!"},
     {t:'match', ph:'All Long Vowels · สระยาว',
      q:'Match emoji to its long vowel sound:',
-     pairs:[{l:'🌧️ rain',r:'/eɪ/'},{l:'🌳 tree',r:'/iː/'},{l:'⛵ boat',r:'/oʊ/'},{l:'💡 light',r:'/aɪ/'}],
-     ok:"✅ rain/eɪ/, tree/iː/, boat/oʊ/, light/aɪ/ — Galaxy Master! 🌌",
-     no:"❌ rain=/eɪ/, tree=/iː/, boat=/oʊ/, light=/aɪ/ — try again!"},
+     pairs:[{l:'🌧️ rain',r:'Long A 🌧️'},{l:'🌳 tree',r:'Long E 🐝'},{l:'⛵ boat',r:'Long O ⛵'},{l:'💡 light',r:'Long I 💡'}],
+     ok:"✅ rainLong A 🌧️, treeLong E 🐝, boatLong O ⛵, lightLong I 💡 — Galaxy Master! 🌌",
+     no:"❌ rain=Long A 🌧️, tree=Long E 🐝, boat=Long O ⛵, light=Long I 💡 — try again!"},
     {t:'rapid', ph:'Long Vowels Only · สระยาวเท่านั้น',
      q:"⚡ GALAXY RAPID! Tap ONLY long vowel words:",
      words:['rain','ran','tree','trip','boat','bat','light','lit','moon','man'],
      ans:[0,2,4,6,8],
-     ok:"✅ rain/eɪ/ tree/iː/ boat/oʊ/ light/aɪ/ moon/uː/ — GALAXY CONQUERED! 🌌🏆",
+     ok:"✅ rainLong A 🌧️ treeLong E 🐝 boatLong O ⛵ lightLong I 💡 moonLong U 🌕 — GALAXY CONQUERED! 🌌🏆",
      no:"❌ Long vowels: rain(eɪ), tree(iː), boat(oʊ), light(aɪ), moon(uː)!"},
     {t:'spk', ph:'Long A 🌧️',word:'train',
      clueEmoji:'🚂',clueHint:"This vehicle travels on rails across the country!",
      q:"🎤 Name this vehicle from the clue — hold the vowel!",
-     tip:"Glide /eɪ/: /tr/-/eɪ/-/n/. Like saying 'eh-ee' quickly!",
-     ok:"✅ 'train' — beautiful /eɪ/ glide! Galaxy champion! 🚂🌌",
-     no:"❌ Hold the glide: /treɪn/. Start with /e/ and slide to /ɪ/!"},
+     tip:"Glide Long A 🌧️: /tr/-Long A 🌧️-/n/. Like saying 'eh-ee' quickly!",
+     ok:"✅ 'train' — beautiful Long A 🌧️ glide! Galaxy champion! 🚂🌌",
+     no:"❌ Hold the glide: /treɪn/. Start with /e/ and slide to Short I 🐷!"},
     {t:'sb', ph:'Mixed Long Vowels · สระยาวผสม',
      words:['The','train','and','a','bee','float','by','the','light'],target:'The train and a bee float by the light',
      alts:['A bee and the train float by the light','The bee and a train float by the light'],
      clueEmoji:'🚂🐝💡',clueHint:"Use train, bee, float and light in one sentence! / ใช้ train, bee, float และ light ในประโยคเดียว!",
-     ok:"✅ train/eɪ/ bee/iː/ float/oʊ/ light/aɪ/ — FOUR long vowels! GALAXY DEFEATED! 🌌🏆🎉"}
+     ok:"✅ trainLong A 🌧️ beeLong E 🐝 floatLong O ⛵ lightLong I 💡 — FOUR long vowels! GALAXY DEFEATED! 🌌🏆🎉"}
    ]}
 ,
     {t:'sorter',ph:'Short A 🐱 · เสียง A สั้น',
@@ -1974,9 +1997,9 @@ const MISSIONS=[
 ══════════════════════════════════════════════ */
 const FINAL_CLUES=[
   {id:'short_clue',needs:'short_done',
-   text:"🔤 Short Vowel Clue: Say these 5 words clearly to your teacher — cat /æ/, bed /ɛ/, pig /ɪ/, dog /ɒ/, cup /ʌ/ — and explain which vowel sound each one has!"},
+   text:"🔤 Short Vowel Clue: Say these 5 words clearly to your teacher — cat (Short A 🐱), bed (Short E 🛏️), pig (Short I 🐷), dog (Short O 🐶), cup (Short U ☕) — and explain which vowel sound each word has!<br><span style=\"font-size:.88em;color:#d4aaff;font-family:'Noto Sans Thai',sans-serif;\">🇹🇭 พูดคำเหล่านี้ให้ครูฟัง 5 คำ แล้วอธิบายว่าแต่ละคำมีเสียงสระสั้นอะไร!</span>"},
   {id:'long_clue',needs:'long_done',
-   text:"🌊 Long Vowel Clue: Read this sentence to your teacher: 'The train and a bee float by the light of the moon.' — Tell them which long vowel pattern each highlighted word uses!"}
+   text:"🌊 Long Vowel Clue: Read this sentence to your teacher:<br><em style=\"color:#ffd700;\">'The <u>train</u> and a <u>bee</u> <u>float</u> by the <u>light</u> of the <u>moon</u>.'</em><br>Tell them which long vowel pattern each underlined word uses!<br><span style=\"font-size:.88em;color:#d4aaff;font-family:'Noto Sans Thai',sans-serif;\">🇹🇭 อ่านประโยคนี้ให้ครูฟัง แล้วบอกว่าคำที่ขีดเส้นใต้แต่ละคำใช้รูปแบบสระยาวอะไร!</span>"}
 ];
 
 /* ══════════════════════════════════════════════
@@ -2091,11 +2114,10 @@ function showPanel(p){
     const el=document.getElementById('pnl-'+id);
     if(!el) return;
     if(id===p){
-      el.setAttribute('style', el.getAttribute('style')||'');
-      el.style.cssText = el.style.cssText.replace(/display\s*:[^;]+;?/gi,'');
       el.style.display='block';
       el.style.position='relative';
       el.style.zIndex='2';
+      if(id==='game'){el.style.minHeight='60vh';}
     } else {
       el.style.display='none';
     }
@@ -2124,6 +2146,16 @@ function buildLoginUI(){
   }
   // Reset custom dropdown display
   selectedStudentName='';
+  // Update the display button to show selected name
+  const nameBtn=document.getElementById('name-display');
+  if(nameBtn){
+    const initials2=name.slice(0,2).toUpperCase();
+    nameBtn.innerHTML=`<span style="display:inline-flex;align-items:center;justify-content:center;
+      width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--g3),var(--g5));
+      color:#fff;font-weight:800;font-size:.75rem;margin-right:8px;flex-shrink:0;">${initials2}</span>
+      <span style="font-weight:700;color:var(--g1);">${name}</span>
+      <span id="name-arrow" style="margin-left:auto;font-size:.7rem;color:var(--muted);">▼</span>`;
+  }
   const dt=document.getElementById('name-display-text');
   if(dt){dt.textContent='— Choose your name —';dt.style.color='var(--muted)';}
   renderNameList('');
@@ -2235,8 +2267,14 @@ function doStudentLogin(){
   if(loginBtn){loginBtn.disabled=true;loginBtn.textContent='Loading... / กำลังโหลด...';}
   const student=STUDENTS.find(s=>s.name===name);
   if(!student||student.pw!==pw){
-    document.getElementById('login-err').style.display='block';
-    setTimeout(()=>document.getElementById('login-err').style.display='none',3000);
+    // Reset button immediately on failure
+    if(loginBtn){loginBtn.disabled=false;loginBtn.innerHTML='🚀 Enter the Adventure! / เข้าสู่การผจญภัย!';}
+    const errEl=document.getElementById('login-err');
+    if(errEl){
+      errEl.textContent = !name ? '⚠️ Please select your name first / กรุณาเลือกชื่อก่อน!' : '❌ Wrong password / รหัสผ่านไม่ถูกต้อง — try again / ลองใหม่!';
+      errEl.style.display='block';
+      setTimeout(()=>errEl.style.display='none',3000);
+    }
     return;
   }
   currentUser=name;isTeacher=false;
@@ -3312,11 +3350,24 @@ function showFinalMissionModal(){
     <div style="text-align:center;margin-bottom:16px;">
       <span style="font-size:3.5rem;">🕳️</span>
       <h2 style="font-family:'Baloo 2',cursive;color:var(--g5);margin:8px 0 4px;">Final Mission Unlocked!</h2>
+      <div style="font-size:.9rem;color:var(--g5);font-family:'Noto Sans Thai','Nunito',sans-serif;margin-bottom:8px;text-align:center;">ปลดล็อกภารกิจสุดท้ายแล้ว! 🎉</div>
       <p style="font-size:.85rem;color:var(--muted);">You've conquered all planets! Now speak to your teacher.</p>
+      <p style="color:var(--muted);font-size:.85rem;margin-bottom:16px;font-family:'Noto Sans Thai','Nunito',sans-serif;text-align:center;">คุณพิชิตดาวทุกดวงแล้ว! ตอนนี้พูดกับครูได้เลย 🌟</p>
     </div>
     <ul class="clue-list" style="margin-bottom:18px;" id="modal-clue-list"></ul>
     <div id="modal-upload-wrap"></div>
-    <button class="start-btn" style="margin-top:12px;font-size:.88rem;" onclick="this.closest('.t-modal-overlay').remove();showPanel('map');setTimeout(()=>{document.getElementById('upload-area-wrap').scrollIntoView({behavior:'smooth'})},300);">📤 Go to Upload Section</button>
+    <button class="start-btn" style="margin-top:12px;font-size:.88rem;" onclick="
+  this.closest('.t-modal-overlay').remove();
+  showPanel('map');
+  setTimeout(()=>{
+    renderFinalBox();
+    setTimeout(()=>{
+      const el=document.getElementById('upload-area-wrap');
+      if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+      else{window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
+    },400);
+  },100);
+">📤 Go to Upload Section / ไปที่ส่วนอัปโหลด</button>
   </div>`;
   document.body.appendChild(overlay);
   // Populate clues in modal
@@ -3335,8 +3386,10 @@ function showClueUnlock(clueId){
   if(!clue)return;
   const overlay=document.createElement('div');overlay.className='clue-unlock-pop';
   overlay.innerHTML=`<div class="cup-box">
-    <span class="cup-icon">🔮</span><h2>Clue Unlocked!</h2>
-    <p>You've earned a secret clue for your teacher presentation:</p>
+    <span class="cup-icon">🔮</span>
+    <h2>Clue Unlocked! / ปลดล็อกเบาะแสแล้ว!</h2>
+    <p>You've earned a secret clue for your teacher presentation:<br>
+    <span style="font-size:.85em;color:var(--g5);font-family:'Noto Sans Thai',sans-serif;">คุณได้รับเบาะแสลับสำหรับการนำเสนอให้ครู!</span></p>
     <div class="cup-clue">${clue.text}</div>
     <button class="start-btn" style="max-width:220px;font-size:.9rem;padding:12px;" onclick="this.closest('.clue-unlock-pop').remove();spawnConfetti();">🎉 Awesome! <span class='th-inline'>เยี่ยม! สู้ต่อ!</span></button>
   </div>`;
@@ -3363,8 +3416,13 @@ function startMission(m){
       <div class="lives" id="lives-display" style="display:flex;gap:6px;margin-left:auto;"></div>
       <div class="pdots" id="pdots" style="display:flex;gap:7px;flex-wrap:wrap;"></div>
     </div>
-    <div id="gc" style="max-width:680px;margin:0 auto;"></div>`;
+    <div id="gc" style="max-width:680px;margin:0 auto;min-height:50vh;padding-bottom:40px;"></div>`;
   renderDots(m.tasks.length);renderLives();renderTask();
+  // Ensure game content is scrolled into view
+  setTimeout(()=>{
+    const gc=document.getElementById('gc');
+    if(gc) gc.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
 }
 function exitGame(){
   clearInterval(S.rapidIv);clearInterval(S.waveIv);clearTimeout(S.recTO);
@@ -3419,6 +3477,7 @@ function renderTask(){
   if(!S.curMission||!S.curMission.tasks){return;}
   const tk=S.curMission.tasks[S.task];
   if(!tk){return;}
+  startHintTimer(); // 15-second hint helper
   const gtsk=document.getElementById('gtsk');
   if(gtsk)gtsk.textContent=`Task ${S.task+1} of ${S.curMission.tasks.length}`;
   updDots(S.task);
@@ -3742,7 +3801,11 @@ function showNxt(){const n=document.getElementById('nb');if(n)n.classList.add('s
 /* ── INTRO CARD ── */
 function renderIntro(tk,gc){
   const p=mkP(bi('📖 Mission Briefing','📖 บทสรุปภารกิจ'),bi('Read this before you start!','อ่านก่อนเริ่มภารกิจ!'));
-  p.innerHTML+=`<div style="background:#0d1729;border:2px solid var(--border);border-radius:13px;padding:18px;margin:14px 0;font-size:1rem;line-height:1.8;color:var(--txt);text-align:left;">${tk.text}</div>`;
+  p.innerHTML+=`<div style="background:#0d1729;border:2px solid var(--border);border-radius:13px;padding:18px;margin:14px 0;font-size:1rem;line-height:1.8;color:var(--txt);text-align:left;">${tk.text}</div>
+  <div style="background:rgba(176,124,248,.08);border:1.5px solid rgba(176,124,248,.25);border-radius:10px;padding:11px 15px;margin-top:6px;font-size:.92rem;color:var(--g5);line-height:1.7;text-align:left;font-family:'Noto Sans Thai','Nunito',sans-serif;">
+    🇹🇭 <strong>ภารกิจ:</strong> ฟังเสียงในแต่ละคำให้ดี — เลือกคำตอบที่ถูกต้อง หรือพูดออกเสียง!<br>
+    <span style="font-size:.85em;color:var(--muted);">ใช้เบาะแส emoji และเสียงที่ได้ยินเพื่อช่วยหาคำตอบ</span>
+  </div>`;
   p.innerHTML+=`<div style="background:rgba(74,179,244,.07);border:1.5px solid rgba(74,179,244,.25);
     border-radius:10px;padding:11px 15px;font-size:.85rem;color:var(--g3);line-height:1.7;margin-top:10px;">
     💡 <strong>Tip / เคล็ดลับ:</strong> Listen carefully — notice how your mouth moves for each sound!<br>
@@ -4088,7 +4151,7 @@ function renderSB(tk,gc){
   p.innerHTML+=`<div class="clue-box" style="margin-bottom:8px;">
     <div class="clue-emoji">${tk.clueEmoji}</div><div class="clue-ph">${tk.ph}</div>
     <div class="clue-hint"><em>${tk.clueHint}</em></div></div>
-  <div class="sbarea" id="sba"><span style="color:var(--muted);font-size:.79rem;">Tap words below to build…</span></div>
+  <div class="sbarea" id="sba"><span style="color:var(--muted);font-size:.79rem;">Tap words below / แตะคำเพื่อสร้างประโยค</span></div>
   <div class="wbank" id="wbk"></div>
   <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:7px;">
     <button class="lbtn" onclick="chkSB('${tk.target}',${JSON.stringify(tk.alts||[])})">✓ Check <span class='th-inline'>ตรวจ</span></button>
@@ -4136,6 +4199,7 @@ function chkSB(target,alts){
    NEXT TASK / FINISH
 ══════════════════════════════════════════════ */
 function nextTask(){
+  clearHintTimer();
   S.task++;
   if(!S.curMission)return;
   if(S.task>=S.curMission.tasks.length)finishMission();else renderTask();
@@ -4373,6 +4437,64 @@ function spawnConfetti(){
     });
   }
 })();
+
+/* ═══ HINT HELPER SYSTEM ═══ */
+let _hintTimer = null;
+let _hintShown = false;
+
+const TASK_HINTS = {
+  'intro':   {en:"Read the mission briefing carefully, then click Let's Go!", th:"อ่านบทสรุปภารกิจแล้วคลิก ไปเลย!"},
+  'mc':      {en:"Listen to the word again 🔊, then look at each option carefully!", th:"ฟังคำอีกครั้ง 🔊 แล้วดูแต่ละตัวเลือกให้ดี!"},
+  'pic':     {en:"Tap Play Sound 🔊 to hear the word, then match it to the right picture!", th:"แตะ เล่นเสียง 🔊 ฟังคำ แล้วจับคู่กับรูปที่ถูกต้อง!"},
+  'obstacle':{en:"Listen carefully to find the DIFFERENCE between the two sounds!", th:"ฟังให้ดีเพื่อหาความแตกต่างระหว่างสองเสียง!"},
+  'rapid':   {en:"Tap ALL words that have the target sound before time runs out!", th:"แตะคำทุกคำที่มีเสียงเป้าหมายก่อนหมดเวลา!"},
+  'match':   {en:"Tap a word on the left, then tap its matching word on the right!", th:"แตะคำด้านซ้าย แล้วแตะคำที่ตรงกันด้านขวา!"},
+  'sb':      {en:"Tap the words in order to build the sentence — Subject first!", th:"แตะคำตามลำดับเพื่อสร้างประโยค — ประธานก่อน!"},
+  'spk':     {en:"Tap the mic button 🎤 and say the word out loud clearly!", th:"แตะปุ่มไมค์ 🎤 แล้วพูดคำออกเสียงดังๆ ให้ชัด!"},
+  'sorter':  {en:"Tap a word chip, then tap YES or NO — does it have this sound?", th:"แตะคำ แล้วแตะ YES หรือ NO — มีเสียงนี้ไหม?"},
+  'favword': {en:"Pick the word YOU like most, then tap Record and say it!", th:"เลือกคำที่คุณชอบ แล้วแตะบันทึกและพูดมัน!"},
+};
+
+function startHintTimer(){
+  clearHintTimer();
+  _hintShown = false;
+  _hintTimer = setTimeout(()=>{
+    if(!S.curMission) return;
+    const tk = S.curMission.tasks[S.task];
+    if(!tk) return;
+    showHintBalloon(tk.t);
+  }, 15000);
+}
+
+function clearHintTimer(){
+  if(_hintTimer){ clearTimeout(_hintTimer); _hintTimer=null; }
+  const existing = document.getElementById('hint-balloon');
+  if(existing) existing.remove();
+}
+
+function showHintBalloon(taskType){
+  if(_hintShown) return;
+  _hintShown = true;
+  const hint = TASK_HINTS[taskType] || TASK_HINTS['mc'];
+  const el = document.createElement('div');
+  el.className = 'hint-balloon';
+  el.id = 'hint-balloon';
+  el.innerHTML = `
+    <div class="hint-balloon-head">
+      <span class="hint-balloon-icon">🤖</span>
+      <div>
+        <div class="hint-balloon-title">Need a hint? / ต้องการความช่วยเหลือ?</div>
+      </div>
+    </div>
+    <div class="hint-balloon-body">${hint.en}</div>
+    <div class="hint-balloon-body-th">${hint.th}</div>
+    <button class="hint-close" onclick="clearHintTimer()">Got it! / เข้าใจแล้ว! ✓</button>
+  `;
+  document.body.appendChild(el);
+  // Auto-dismiss after 12 seconds
+  setTimeout(()=>{ if(document.getElementById('hint-balloon')) clearHintTimer(); }, 12000);
+}
+
 </script>
 </body>
 </html>
