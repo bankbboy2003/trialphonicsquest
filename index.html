@@ -4231,9 +4231,9 @@ function renderRapid(tk,gc){
   const wordPool = useAlt ? tk.altWords : tk.words;
   const ansPool  = useAlt ? (tk.altAns||tk.ans) : tk.ans;
   const shuffledWords=[...wordPool.map((w,i)=>({w,i,correct:ansPool.includes(i)}))].sort(()=>Math.random()-.5);
-  shuffledWords.forEach(({w,i})=>{
+  shuffledWords.forEach(({w,i,correct})=>{
     const b=document.createElement('button');b.className='obtn';b.textContent=w;
-    b.dataset.sel='false';b.dataset.origIdx=i;b.dataset.correct=String(item.correct??ansPool.includes(i));
+    b.dataset.sel='false';b.dataset.origIdx=i;b.dataset.correct=String(correct);
     b.onclick=()=>{b.dataset.sel=b.dataset.sel==='true'?'false':'true';
       b.style.borderColor=b.dataset.sel==='true'?'var(--g1)':'';
       b.style.background=b.dataset.sel==='true'?'rgba(247,201,72,.1)':'';};
