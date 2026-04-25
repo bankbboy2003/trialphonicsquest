@@ -839,7 +839,7 @@ footer span{color:var(--g3);}
   <video id="charsel-video" autoplay muted loop playsinline
     src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
     style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;"
-    onerror="this.style.display='none';initCharStars();">
+    onerror="this.style.display='none';if(typeof initCharStars==='function')initCharStars();">
   </video>
   <div style="position:fixed;inset:0;background:rgba(3,6,20,0.65);z-index:1;pointer-events:none;"></div>
   <!-- Fallback star canvas if video fails -->
@@ -1302,6 +1302,113 @@ footer span{color:var(--g3);}
 </div>
 
 <script>
+
+function initCharStars(){
+  // Called only if charsel video fails to load
+  const canvas = document.getElementById('char-stars');
+  if(!canvas || canvas._running) return;
+  canvas.style.display = 'block';
+  canvas._running = true;
+  const ctx = canvas.getContext('2d');
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const stars = Array.from({length:180},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.3,a:Math.random(),da:(Math.random()*.008+.003)*(Math.random()<.5?1:-1)}));
+  function drawCS(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle='#07090f'; ctx.fillRect(0,0,canvas.width,canvas.height);
+    stars.forEach(s=>{
+      s.a+=s.da; if(s.a<=0||s.a>=1) s.da*=-1;
+      ctx.save(); ctx.globalAlpha=Math.max(0,Math.min(1,s.a))*.9;
+      ctx.fillStyle='#fff'; ctx.beginPath();
+      ctx.arc(s.x*canvas.width, s.y*canvas.height, s.r, 0, Math.PI*2);
+      ctx.fill(); ctx.restore();
+    });
+    requestAnimationFrame(drawCS);
+  }
+  drawCS();
+}
+
+/* ══════════════════════════════════════════════
+   PLANET CARD MAP RENDERER (replaces SVG road)
+══════════════════════════════════════════════ */
+/* Planet cards loaded live from GitHub API — real filenames auto-discovered */
+let PLANET_CARDS = {};   // filled by loadPlanetCards()
+let _planetCardsLoaded = false;
+
+async function loadPlanetCards(){
+  if(_planetCardsLoaded) return;
+  try{
+    const res = await fetch('https://api.github.com/repos/bankbboy2003/Phonicsquest/contents/Planet%20cards',
+      {headers:{'Accept':'application/vnd.github.v3+json'}});
+    if(res.ok){
+      const files = await res.json();
+      const imgFiles = files.filter(f=>/\.(png|jpe?g|webp)$/i.test(f.name));
+      // Match by filename keywords — much more reliable than positional order
+      const keyMap = {
+        's1':['short_a','short-a','shorta','earth'],
+        's2':['short_e','short-e','shorte','mars'],
+        's3':['short_i','short-i','shorti','venus'],
+        's4':['short_o','short-o','shorto','neptune'],
+        's5':['short_u','short-u','shortu','kepler'],
+        's6':['boss','core','boss_short'],
+        'l1':['long_a','long-a','longa','jupiter'],
+        'l2':['long_e','long-e','longe','saturn'],
+        'l3':['long_o','long-o','longo','uranus'],
+        'l4':['long_i','long-i','longi','mercury'],
+        'l5':['long_u','long-u','longu','pluto'],
+        'l6':['boss_long','galactic'],
+      };
+      imgFiles.forEach(f=>{
+        const nameLower = f.name.toLowerCase();
+        for(const [id, keys] of Object.entries(keyMap)){
+          if(keys.some(k=>nameLower.includes(k))){
+            PLANET_CARDS[id] = f.download_url; break;
+          }
+        }
+      });
+      // Any unmatched? Fill by position as fallback
+      const order=['s1','s2','s3','s4','s5','s6','l1','l2','l3','l4','l5','l6'];
+      const matched = imgFiles.filter(f=>{
+        const n=f.name.toLowerCase();
+        return !Object.values(keyMap).flat().some(k=>n.includes(k));
+      });
+      let mi=0;
+      order.forEach(id=>{ if(!PLANET_CARDS[id]&&matched[mi]) PLANET_CARDS[id]=matched[mi++].download_url; });
+      _planetCardsLoaded = true;
+      console.log('Planet cards loaded from GitHub:', imgs.length,'images');
+    }
+  }catch(e){ console.warn('Planet cards API failed, using fallback'); }
+  // Fallback hardcoded URLs if API fails
+  if(!_planetCardsLoaded){
+    const BASE='https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/Planet%20cards/';
+    PLANET_CARDS={
+      's1':BASE+'Gemini_Generated_Image_short_a.jpeg',
+      's2':BASE+'Gemini_Generated_Image_short_e.jpeg',
+      's3':BASE+'Gemini_Generated_Image_short_i.jpeg',
+      's4':BASE+'Gemini_Generated_Image_short_o.jpeg',
+      's5':BASE+'Gemini_Generated_Image_short_u.jpeg',
+      's6':BASE+'Gemini_Generated_Image_short_boss.jpeg',
+      'l1':BASE+'Gemini_Generated_Image_long_ai.jpeg',
+      'l2':BASE+'Gemini_Generated_Image_long_ee.jpeg',
+      'l3':BASE+'Gemini_Generated_Image_long_oa.jpeg',
+      'l4':BASE+'Gemini_Generated_Image_long_igh.jpeg',
+      'l5':BASE+'Gemini_Generated_Image_long_u.jpeg',
+      'l6':BASE+'Gemini_Generated_Image_long_boss.jpeg',
+    };
+    _planetCardsLoaded = true;
+  }
+}
+
+async function renderRoadmaps(){
+  await loadPlanetCards();   // ensure images are loaded from GitHub API
+  // Fix 4: Show 4 per galaxy (first 4 of each path)
+  const shortMissions = MISSIONS.filter(m=>m.path==='short').slice(0,4);
+  const longMissions  = MISSIONS.filter(m=>m.path==='long').slice(0,4);
+  renderPlanetCards('short', shortMissions, 'rm-short');
+  renderPlanetCards('long',  longMissions,  'rm-long');
+}
+
+
 /* ══════════════════════════════════════════════
    CONFIGURATION & STUDENT ROSTER
    ── Teacher updates STUDENTS array here ──
@@ -2783,58 +2890,59 @@ function upReplace(i){
 }
 
 /* ── Live recording ── */
-async async function upToggleRec(isPan){
-  // Use pan- prefixed IDs when called from the upload panel
-  const prefix = isPan ? 'pan' : 'up';
-  const btn=document.getElementById(prefix+'-recbtn');
-  const wfId=prefix+'-wf';
-  const timerId=prefix+'-rtimer';
-  const previewId=prefix+'-rec-preview';
-  const audioId=prefix+'-rec-audio';
-
+function upToggleRec(isPan){
+  var prefix=isPan?'pan':'up';
+  var btn=document.getElementById(prefix+'-recbtn');
+  var wfId=prefix+'-wf';
+  var timerId=prefix+'-rtimer';
+  var previewId=prefix+'-rec-preview';
+  var audioId=prefix+'-rec-audio';
   if(mRec&&mRec.state==='recording'){
     mRec.stop();
     if(btn){btn.classList.remove('recording');btn.innerHTML='🎙️ Tap to Record / แตะเพื่อบันทึก';}
     clearInterval(rIv);clearInterval(wIv2);
-    document.querySelectorAll('#'+wfId+' .wbar').forEach(b=>b.style.height='6px');
+    document.querySelectorAll('#'+wfId+' .wbar').forEach(function(b){b.style.height='6px';});
     return;
   }
-  try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    alert('Please use Chrome browser for recording. / กรุณาใช้ Chrome สำหรับการบันทึก');return;
+  }
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
     aChunks=[];
-    const mime=['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4']
-      .find(t=>MediaRecorder.isTypeSupported(t))||'';
+    var mimes=['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4'];
+    var mime=mimes.find(function(t){return MediaRecorder.isTypeSupported(t);})||'';
     mRec=new MediaRecorder(stream,mime?{mimeType:mime}:{});
-    mRec.ondataavailable=e=>{if(e.data.size>0)aChunks.push(e.data);};
-    mRec.onstop=()=>{
-      stream.getTracks().forEach(t=>t.stop());
-      const blob=new Blob(aChunks,{type:mRec.mimeType});
-      const audioEl=document.getElementById(audioId);
-      const previewEl=document.getElementById(previewId);
-      if(audioEl) audioEl.src=URL.createObjectURL(blob);
+    mRec.ondataavailable=function(e){if(e.data.size>0)aChunks.push(e.data);};
+    mRec.onstop=function(){
+      stream.getTracks().forEach(function(t){t.stop();});
+      var blob=new Blob(aChunks,{type:mRec.mimeType});
+      var audioEl=document.getElementById(audioId);
+      var previewEl=document.getElementById(previewId);
+      if(audioEl)audioEl.src=URL.createObjectURL(blob);
       if(previewEl){previewEl.style.display='block';previewEl._blob=blob;previewEl._dur=rSec;}
     };
     mRec.start(100);
-    if(btn){btn.classList.add('recording');btn.innerHTML='⏹ Stop Recording / หยุดบันทึก';}
+    if(btn){btn.classList.add('recording');btn.innerHTML='⏹ Stop / หยุดบันทึก';}
     rSec=0;
-    const timerEl=document.getElementById(timerId);
-    if(timerEl) timerEl.textContent='0:00';
-    rIv=setInterval(()=>{
+    var timerEl=document.getElementById(timerId);
+    if(timerEl)timerEl.textContent='0:00';
+    rIv=setInterval(function(){
       rSec++;
-      const m=Math.floor(rSec/60),s=String(rSec%60).padStart(2,'0');
-      const te=document.getElementById(timerId);
-      if(te) te.textContent=m+':'+s;
-      if(rSec>=120) upToggleRec(isPan);
+      var m=Math.floor(rSec/60),s=String(rSec%60).padStart(2,'0');
+      var te=document.getElementById(timerId);
+      if(te)te.textContent=m+':'+s;
+      if(rSec>=120)upToggleRec(isPan);
     },1000);
-    wIv2=setInterval(()=>{
-      document.querySelectorAll('#'+wfId+' .wbar').forEach(b=>b.style.height=(Math.random()*36+5)+'px');
+    wIv2=setInterval(function(){
+      document.querySelectorAll('#'+wfId+' .wbar').forEach(function(b){
+        b.style.height=(Math.random()*36+5)+'px';
+      });
     },100);
-  }catch(e){
-    const msg='❌ Microphone access denied / ไม่สามารถใช้ไมค์ได้ — Allow mic in browser settings / อนุญาตไมค์ในการตั้งค่าเบราว์เซอร์';
-    upShowSt('record',msg,'error');
-    const panSt=document.getElementById('pan-st-record');
-    if(panSt){panSt.textContent=msg;panSt.style.color='var(--g4)';}
-  }
+  }).catch(function(){
+    var msg='❌ Microphone blocked / ไมค์ถูกบล็อก — Click the 🔒 lock icon in browser address bar and allow mic';
+    var st=document.getElementById(prefix+'-st-record');
+    if(st){st.style.display='block';st.textContent=msg;st.style.color='var(--g4)';}
+  });
 }
 
 function upDiscardRec(){document.getElementById('up-rec-preview').style.display='none';document.getElementById('up-rec-audio').src='';document.getElementById('up-rtimer').textContent='0:00';}
@@ -3255,111 +3363,6 @@ function confirmCharacter(){
   renderBadges();
   spawnConfetti();
   showBdgPop('🌟','Welcome!',`Hello, ${S.nickname}! 🚀`);
-}
-
-function initCharStars(){
-  // Called only if charsel video fails to load
-  const canvas = document.getElementById('char-stars');
-  if(!canvas || canvas._running) return;
-  canvas.style.display = 'block';
-  canvas._running = true;
-  const ctx = canvas.getContext('2d');
-  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  const stars = Array.from({length:180},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.3,a:Math.random(),da:(Math.random()*.008+.003)*(Math.random()<.5?1:-1)}));
-  function drawCS(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle='#07090f'; ctx.fillRect(0,0,canvas.width,canvas.height);
-    stars.forEach(s=>{
-      s.a+=s.da; if(s.a<=0||s.a>=1) s.da*=-1;
-      ctx.save(); ctx.globalAlpha=Math.max(0,Math.min(1,s.a))*.9;
-      ctx.fillStyle='#fff'; ctx.beginPath();
-      ctx.arc(s.x*canvas.width, s.y*canvas.height, s.r, 0, Math.PI*2);
-      ctx.fill(); ctx.restore();
-    });
-    requestAnimationFrame(drawCS);
-  }
-  drawCS();
-}
-
-/* ══════════════════════════════════════════════
-   PLANET CARD MAP RENDERER (replaces SVG road)
-══════════════════════════════════════════════ */
-/* Planet cards loaded live from GitHub API — real filenames auto-discovered */
-let PLANET_CARDS = {};   // filled by loadPlanetCards()
-let _planetCardsLoaded = false;
-
-async function loadPlanetCards(){
-  if(_planetCardsLoaded) return;
-  try{
-    const res = await fetch('https://api.github.com/repos/bankbboy2003/Phonicsquest/contents/Planet%20cards',
-      {headers:{'Accept':'application/vnd.github.v3+json'}});
-    if(res.ok){
-      const files = await res.json();
-      const imgFiles = files.filter(f=>/\.(png|jpe?g|webp)$/i.test(f.name));
-      // Match by filename keywords — much more reliable than positional order
-      const keyMap = {
-        's1':['short_a','short-a','shorta','earth'],
-        's2':['short_e','short-e','shorte','mars'],
-        's3':['short_i','short-i','shorti','venus'],
-        's4':['short_o','short-o','shorto','neptune'],
-        's5':['short_u','short-u','shortu','kepler'],
-        's6':['boss','core','boss_short'],
-        'l1':['long_a','long-a','longa','jupiter'],
-        'l2':['long_e','long-e','longe','saturn'],
-        'l3':['long_o','long-o','longo','uranus'],
-        'l4':['long_i','long-i','longi','mercury'],
-        'l5':['long_u','long-u','longu','pluto'],
-        'l6':['boss_long','galactic'],
-      };
-      imgFiles.forEach(f=>{
-        const nameLower = f.name.toLowerCase();
-        for(const [id, keys] of Object.entries(keyMap)){
-          if(keys.some(k=>nameLower.includes(k))){
-            PLANET_CARDS[id] = f.download_url; break;
-          }
-        }
-      });
-      // Any unmatched? Fill by position as fallback
-      const order=['s1','s2','s3','s4','s5','s6','l1','l2','l3','l4','l5','l6'];
-      const matched = imgFiles.filter(f=>{
-        const n=f.name.toLowerCase();
-        return !Object.values(keyMap).flat().some(k=>n.includes(k));
-      });
-      let mi=0;
-      order.forEach(id=>{ if(!PLANET_CARDS[id]&&matched[mi]) PLANET_CARDS[id]=matched[mi++].download_url; });
-      _planetCardsLoaded = true;
-      console.log('Planet cards loaded from GitHub:', imgs.length,'images');
-    }
-  }catch(e){ console.warn('Planet cards API failed, using fallback'); }
-  // Fallback hardcoded URLs if API fails
-  if(!_planetCardsLoaded){
-    const BASE='https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/Planet%20cards/';
-    PLANET_CARDS={
-      's1':BASE+'Gemini_Generated_Image_short_a.jpeg',
-      's2':BASE+'Gemini_Generated_Image_short_e.jpeg',
-      's3':BASE+'Gemini_Generated_Image_short_i.jpeg',
-      's4':BASE+'Gemini_Generated_Image_short_o.jpeg',
-      's5':BASE+'Gemini_Generated_Image_short_u.jpeg',
-      's6':BASE+'Gemini_Generated_Image_short_boss.jpeg',
-      'l1':BASE+'Gemini_Generated_Image_long_ai.jpeg',
-      'l2':BASE+'Gemini_Generated_Image_long_ee.jpeg',
-      'l3':BASE+'Gemini_Generated_Image_long_oa.jpeg',
-      'l4':BASE+'Gemini_Generated_Image_long_igh.jpeg',
-      'l5':BASE+'Gemini_Generated_Image_long_u.jpeg',
-      'l6':BASE+'Gemini_Generated_Image_long_boss.jpeg',
-    };
-    _planetCardsLoaded = true;
-  }
-}
-
-async function renderRoadmaps(){
-  await loadPlanetCards();   // ensure images are loaded from GitHub API
-  // Fix 4: Show 4 per galaxy (first 4 of each path)
-  const shortMissions = MISSIONS.filter(m=>m.path==='short').slice(0,4);
-  const longMissions  = MISSIONS.filter(m=>m.path==='long').slice(0,4);
-  renderPlanetCards('short', shortMissions, 'rm-short');
-  renderPlanetCards('long',  longMissions,  'rm-long');
 }
 
 function renderPlanetCards(pathId, missions, containerId){
