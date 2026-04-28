@@ -758,6 +758,38 @@ footer span{color:var(--g3);}
 .hint-close{background:rgba(176,124,248,.2);border:none;color:var(--g5);font-size:.78rem;
   padding:5px 12px;border-radius:99px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;
   width:100%;touch-action:manipulation;}
+
+/* ═══ GUARDIAN CARD ═══ */
+.guardian-card:hover .guardian-emoji {
+  transform: scale(1.1);
+}
+@keyframes guardianGlow {
+  from { box-shadow: 0 0 10px var(--glow); }
+  to   { box-shadow: 0 0 30px var(--glow); }
+}
+
+/* ═══ ROAD MAP STOPS ═══ */
+.road-stop-active {
+  border-color: var(--g3) !important;
+  background: rgba(22,33,62,.95) !important;
+}
+
+/* ═══ MISSION SCROLL ═══ */
+#mission-scroll-overlay {
+  backdrop-filter: blur(4px);
+}
+
+/* ═══ CITY PLANNER ═══ */
+.city-cat-active {
+  background: rgba(22,33,62,.9) !important;
+}
+
+/* ═══ CHAR CONFIRM ═══ */
+#scr-confirm .stat-badge {
+  background: rgba(22,33,62,.9);
+  border-radius: 14px;
+  padding: 12px 20px;
+}
 </style>
 <!-- Firebase SDK (Realtime Database for live scoreboard) -->
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -860,7 +892,76 @@ footer span{color:var(--g3);}
 
 
 <!-- ═══════ HOW TO PLAY SCREEN ═══════ -->
-<div id="scr-howto" class="screen" style="position:relative;overflow-y:auto;min-height:100vh;background:#07090f;">
+
+  <!-- ══════════════════════════════════════════════
+       CONFIRMATION SCREEN — "Ready, [name]!"
+  ══════════════════════════════════════════════ -->
+  <div id="scr-confirm" class="screen" style="position:relative;overflow:hidden;min-height:100vh;background:#07090f;">
+    <video autoplay muted loop playsinline id="confirm-video"
+      src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
+      style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.35;"
+      onerror="this.style.display='none';">
+    </video>
+    <div style="position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;">
+      <!-- Character portrait -->
+      <div id="confirm-portrait" style="width:140px;height:140px;border-radius:50%;border:4px solid #f7c948;
+        display:flex;align-items:center;justify-content:center;font-size:5rem;
+        background:rgba(22,33,62,.9);margin-bottom:20px;
+        box-shadow:0 0 40px rgba(247,201,72,.5);animation:pulse 2s ease-in-out infinite alternate;">
+        🐱
+      </div>
+      <!-- Ready text -->
+      <div id="confirm-ready" style="font-family:'Baloo 2',cursive;font-weight:900;font-size:2.4rem;
+        background:linear-gradient(135deg,#f7c948,#ff9f43);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        background-clip:text;margin-bottom:8px;">Ready, Explorer!</div>
+      <div id="confirm-subtitle" style="font-size:1rem;color:var(--muted);margin-bottom:24px;
+        font-family:'Noto Sans Thai','Nunito',sans-serif;">Guardian stands beside you.</div>
+      <!-- Stats row -->
+      <div style="display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap;justify-content:center;">
+        <div style="background:rgba(22,33,62,.9);border:1.5px solid rgba(247,201,72,.3);
+          border-radius:14px;padding:12px 20px;min-width:100px;">
+          <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Explorer</div>
+          <div id="confirm-explorer" style="font-size:1rem;font-weight:800;color:#f7c948;">Student</div>
+        </div>
+        <div style="background:rgba(22,33,62,.9);border:1.5px solid rgba(176,124,248,.3);
+          border-radius:14px;padding:12px 20px;min-width:100px;">
+          <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Guardian</div>
+          <div id="confirm-guardian" style="font-size:1rem;font-weight:800;color:#b07cf8;">COSMO CAT</div>
+        </div>
+        <div style="background:rgba(22,33,62,.9);border:1.5px solid rgba(74,179,244,.3);
+          border-radius:14px;padding:12px 20px;min-width:120px;">
+          <div style="font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Type</div>
+          <div id="confirm-type" style="font-size:1rem;font-weight:800;color:#4ab3f4;">🌟 Star Guardian</div>
+        </div>
+      </div>
+      <!-- Bio -->
+      <div id="confirm-bio" style="font-size:.9rem;color:var(--muted);font-style:italic;
+        max-width:340px;line-height:1.7;margin-bottom:32px;
+        background:rgba(22,33,62,.6);border-radius:12px;padding:12px 18px;">
+        Master of vowel sounds, born from starlight.
+      </div>
+      <!-- Buttons -->
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <button onclick="goTo('charsel')" style="background:rgba(22,33,62,.9);border:1.5px solid rgba(106,130,171,.4);
+          color:var(--muted);font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;
+          padding:13px 28px;border-radius:99px;cursor:pointer;touch-action:manipulation;">
+          ← Back / กลับ
+        </button>
+        <button id="confirm-next-btn" onclick="proceedAfterConfirm()"
+          style="background:linear-gradient(135deg,#f7c948,#ff9f43);color:#1a0800;
+          font-family:'Baloo 2',cursive;font-weight:900;font-size:1.05rem;
+          padding:13px 36px;border-radius:99px;border:none;cursor:pointer;
+          touch-action:manipulation;box-shadow:0 6px 24px rgba(247,201,72,.5);
+          animation:pulse 2s ease-in-out infinite alternate;">
+          ▶ Next / ถัดไป
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- END CONFIRMATION SCREEN -->
+
+  <div id="scr-howto" class="screen" style="position:relative;overflow-y:auto;min-height:100vh;background:#07090f;">
   <video autoplay muted loop playsinline
     src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
     style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.35;display:none;"
@@ -1170,47 +1271,112 @@ footer span{color:var(--g3);}
     <button class="tab" data-p="badges" onclick="showPanel('badges')">🏅 Badges <span class="th-inline" style="font-size:.78em;">ป้าย</span></button>
   </div>
 
-  <div id="pnl-map" style="position:relative;z-index:2;padding:clamp(10px,3vw,20px) clamp(10px,3vw,16px) 60px;">
-    <!-- SHORT VOWEL PLANETS -->
-    <div style="position:relative;z-index:1;margin:8px 0 16px;">
-  <div style="height:1px;background:linear-gradient(90deg,transparent,var(--g1),transparent);margin-bottom:12px;"></div>
-  <div style="display:flex;align-items:center;gap:12px;padding:12px 18px;
-    background:linear-gradient(135deg,rgba(247,201,72,.08),rgba(74,179,244,.05));
-    border:1.5px solid rgba(247,201,72,.2);border-radius:14px;">
-    <span style="font-size:1.8rem;">🔤</span>
-    <div>
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.3rem;color:var(--g1);">Galaxy 1: Short Vowels</div>
-      <div style="font-size:.95rem;color:var(--g1);font-weight:600;opacity:.8;font-family:'Noto Sans Thai','Nunito',sans-serif;">กาแล็กซีที่ 1 · 4 planets · Short A, E, I, O</div>
+  <div id="pnl-map" style="display:none;position:relative;z-index:2;min-height:80vh;">
+  <!-- ══════════ ROAD MAP ══════════ -->
+  <div style="display:flex;min-height:80vh;">
+
+    <!-- SIDEBAR -->
+    <div id="roadmap-sidebar" style="width:220px;flex-shrink:0;background:rgba(7,9,15,.92);
+      border-right:1.5px solid rgba(176,124,248,.2);padding:16px 14px;overflow-y:auto;
+      display:flex;flex-direction:column;gap:12px;">
+
+      <!-- Student profile mini -->
+      <div style="text-align:center;padding:10px;background:rgba(22,33,62,.8);
+        border-radius:14px;border:1px solid rgba(176,124,248,.2);">
+        <div id="rm-avatar" style="font-size:2.5rem;margin-bottom:4px;">🐱</div>
+        <div id="rm-name" style="font-family:'Baloo 2',cursive;font-weight:900;font-size:.9rem;color:var(--g1);">Explorer</div>
+        <div id="rm-level" style="font-size:.72rem;color:var(--muted);">Level 1</div>
+      </div>
+
+      <!-- Mission progress -->
+      <div style="background:rgba(22,33,62,.8);border-radius:14px;border:1px solid rgba(247,201,72,.15);padding:10px;">
+        <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+          color:var(--g1);margin-bottom:8px;">🏆 Mission Progress</div>
+        <div id="rm-progress-list" style="display:flex;flex-direction:column;gap:6px;">
+          <!-- Populated by renderRoadmaps -->
+        </div>
+      </div>
+
+      <!-- XP Bar -->
+      <div style="background:rgba(22,33,62,.8);border-radius:14px;border:1px solid rgba(74,179,244,.15);padding:10px;">
+        <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+          color:var(--g3);margin-bottom:6px;">⚡ Total XP</div>
+        <div id="rm-xp-label" style="font-size:.78rem;font-weight:700;color:#e8f0ff;margin-bottom:4px;">0 / 300</div>
+        <div style="background:rgba(7,9,15,.6);border-radius:99px;height:8px;overflow:hidden;">
+          <div id="rm-xp-bar" style="height:8px;border-radius:99px;
+            background:linear-gradient(90deg,var(--g3),var(--g5));width:0%;transition:width .5s;"></div>
+        </div>
+      </div>
+
+      <!-- Badges mini -->
+      <div style="background:rgba(22,33,62,.8);border-radius:14px;border:1px solid rgba(78,220,132,.15);padding:10px;">
+        <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;
+          color:var(--g2);margin-bottom:6px;">🏅 Badges</div>
+        <div id="rm-badges-mini" style="display:flex;flex-wrap:wrap;gap:4px;">
+          <div style="font-size:.72rem;color:var(--muted);">Complete missions to earn badges!</div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-    <div class="map-section-sub" style="position:relative;z-index:1;">Complete all planets to unlock Short Vowel Clue! <span class="th-inline">ทำทุกดาวเคราะห์ให้ครบเพื่อปลดล็อกเบาะแสสระเสียงสั้น!</span></div>
-    <div id="rm-short" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px;max-width:960px;margin:0 auto 40px;position:relative;z-index:1;"></div>
-    <!-- LONG VOWEL PLANETS -->
-    <div style="position:relative;z-index:1;margin:24px 0 16px;">
-  <div style="height:1px;background:linear-gradient(90deg,transparent,var(--g3),transparent);margin-bottom:12px;"></div>
-  <div style="display:flex;align-items:center;gap:12px;padding:12px 18px;
-    background:linear-gradient(135deg,rgba(74,179,244,.08),rgba(176,124,248,.05));
-    border:1.5px solid rgba(74,179,244,.2);border-radius:14px;">
-    <span style="font-size:1.8rem;">🌊</span>
-    <div>
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.3rem;color:var(--g3);">Galaxy 2: Long Vowels</div>
-      <div style="font-size:.95rem;color:var(--g3);font-weight:600;opacity:.8;font-family:'Noto Sans Thai','Nunito',sans-serif;">กาแล็กซีที่ 2 · 4 planets · Long A, E, O, I</div>
-    </div>
-  </div>
-</div>
-    <div class="map-section-sub" style="position:relative;z-index:1;">Complete all planets to unlock Long Vowel Clue! <span class="th-inline">ทำทุกดาวเคราะห์ให้ครบเพื่อปลดล็อกเบาะแสสระเสียงยาว!</span></div>
-    <div id="rm-long" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px;max-width:960px;margin:0 auto 40px;position:relative;z-index:1;"></div>
-    <!-- FINAL MISSION: BLACKHOLE -->
-    <div class="final-box" id="final-box" style="position:relative;z-index:1;">
-      <span class="final-lock-icon" id="ficon">🔮</span>
-      <h3>🏆 Final Mission — Speak to Your Teacher! <span style="display:block;font-size:.7em;color:var(--muted);margin-top:4px;">ภารกิจสุดท้าย — พูดกับคุณครู!</span></h3>
-      <ul class="clue-list" id="clue-list" style="display:none;"></ul>
-      <div id="upload-area-wrap" style="display:none;"></div>
+
+    <!-- MAIN MAP AREA -->
+    <div style="flex:1;position:relative;overflow:hidden;">
+      <!-- Space background video -->
+      <video autoplay muted loop playsinline
+        src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.4;"
+        onerror="this.style.display='none';">
+      </video>
+      <div style="position:absolute;inset:0;z-index:1;overflow-y:auto;padding:20px 20px 100px;">
+
+        <!-- Galaxy 1 section -->
+        <div style="margin-bottom:28px;">
+          <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.1rem;
+            color:var(--g1);margin-bottom:4px;display:flex;align-items:center;gap:8px;">
+            🌌 Galaxy 1: Short Vowels
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">Galaxy 1 · 4 planets · Short A, E, I, O</div>
+          <!-- Planet road stops -->
+          <div id="rm-short" style="display:flex;flex-direction:column;gap:0;"></div>
+        </div>
+
+        <!-- Galaxy 2 section -->
+        <div style="margin-bottom:28px;">
+          <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.1rem;
+            color:var(--g3);margin-bottom:4px;display:flex;align-items:center;gap:8px;">
+            🌌 Galaxy 2: Long Vowels
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">Galaxy 2 · 4 planets · Long A, E, O, I</div>
+          <div id="rm-long" style="display:flex;flex-direction:column;gap:0;"></div>
+        </div>
+
+        <!-- Final Mission -->
+        <div id="final-box" style="margin-top:8px;"></div>
+
+        <!-- Student Planets section -->
+        <div id="rm-student-planets" style="margin-top:20px;display:none;">
+          <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.1rem;
+            color:#f4c0d1;margin-bottom:4px;">✨ My Planet</div>
+          <div id="rm-student-planet-list" style="display:flex;flex-direction:column;gap:0;"></div>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <!-- ═══ UPLOAD PANEL — Full screen upload experience ═══ -->
+  <!-- UPLOAD AREA (hidden, populated by renderUploadSection) -->
+  <ul class="clue-list" id="clue-list" style="display:none;"></ul>
+  <div id="upload-area-wrap" style="display:none;"></div>
+
+  <!-- MISSION SCROLL POPUP OVERLAY -->
+  <div id="mission-scroll-overlay" style="display:none;position:fixed;inset:0;z-index:500;
+    background:rgba(0,0,0,.75);align-items:center;justify-content:center;"
+    onclick="if(event.target===this)closeMissionScroll();">
+  </div>
+  </div><!-- end pnl-map flex -->
+
+<!-- ═══ UPLOAD PANEL — Full screen upload experience ═══ -->
   <div id="pnl-upload" style="display:none;position:relative;z-index:2;min-height:80vh;padding:0 0 60px;">
     <!-- Header -->
     <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;background:rgba(10,22,40,.9);
@@ -1400,13 +1566,462 @@ async function loadPlanetCards(){
 }
 
 async function renderRoadmaps(){
-  await loadPlanetCards();   // ensure images are loaded from GitHub API
-  // Fix 4: Show 4 per galaxy (first 4 of each path)
+  await loadPlanetCards();
   const shortMissions = MISSIONS.filter(m=>m.path==='short').slice(0,4);
   const longMissions  = MISSIONS.filter(m=>m.path==='long').slice(0,4);
-  renderPlanetCards('short', shortMissions, 'rm-short');
-  renderPlanetCards('long',  longMissions,  'rm-long');
+
+  // Update sidebar
+  const rmAvatar = document.getElementById('rm-avatar');
+  const rmName   = document.getElementById('rm-name');
+  const rmLevel  = document.getElementById('rm-level');
+  const rmXpLbl  = document.getElementById('rm-xp-label');
+  const rmXpBar  = document.getElementById('rm-xp-bar');
+  if(rmAvatar) rmAvatar.textContent = S.avatar || '🐱';
+  if(rmName)   rmName.textContent = currentUser || 'Explorer';
+  if(rmLevel)  rmLevel.textContent = 'Level ' + (S.level||1);
+  if(rmXpLbl)  rmXpLbl.textContent = (S.xp||0) + ' / ' + (S.xpThr[S.level]||300);
+  if(rmXpBar)  rmXpBar.style.width = Math.min(100, ((S.xp||0)/(S.xpThr[S.level]||300)*100)) + '%';
+
+  // Sidebar mission progress
+  const pList = document.getElementById('rm-progress-list');
+  if(pList){
+    pList.innerHTML = '';
+    [...shortMissions,...longMissions].forEach(m=>{
+      const done = S.done && S.done[m.id];
+      const pct  = done ? 100 : 0;
+      pList.innerHTML += `<div style="margin-bottom:4px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
+          <span style="font-size:.68rem;color:${done?m.col:'var(--muted)'};font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;">${m.icon} ${m.title.replace('Mission '+m.num+': ','')}</span>
+          <span style="font-size:.65rem;color:var(--muted);">${pct}%</span>
+        </div>
+        <div style="background:rgba(7,9,15,.6);border-radius:99px;height:4px;">
+          <div style="height:4px;border-radius:99px;background:${m.col};width:${pct}%;transition:width .5s;"></div>
+        </div></div>`;
+    });
+  }
+
+  // Badges mini
+  const bMini = document.getElementById('rm-badges-mini');
+  if(bMini){
+    const earned = (S.badges||[]);
+    if(earned.length){
+      bMini.innerHTML = earned.map(id=>{
+        const b = BADGES_DATA.find(x=>x.id===id);
+        return b ? `<span title="${b.name}" style="font-size:1.2rem;">${b.icon}</span>` : '';
+      }).join('');
+    }
+  }
+
+  // Render road stops
+  renderRoadStops('short', shortMissions, 'rm-short');
+  renderRoadStops('long',  longMissions,  'rm-long');
+  renderFinalBox();
+  renderUploadSection();
+
+  // Student planets
+  renderStudentPlanets();
 }
+
+function renderRoadStops(pathId, missions, containerId){
+  const wrap = document.getElementById(containerId);
+  if(!wrap) return;
+  wrap.innerHTML = '';
+
+  missions.forEach((m, i) => {
+    const unlocked = true; // PRESENTATION MODE
+    const done = S.done && S.done[m.id];
+    const imgSrc = PLANET_CARDS[m.id] || '';
+
+    // Road connector (not for first item)
+    if(i > 0){
+      const connector = document.createElement('div');
+      connector.style.cssText = `display:flex;align-items:center;padding:0 0 0 28px;height:24px;`;
+      connector.innerHTML = `<div style="width:2px;height:24px;background:linear-gradient(to bottom,${done?m.col:'rgba(106,130,171,.3)'},rgba(106,130,171,.15));"></div>`;
+      wrap.appendChild(connector);
+    }
+
+    // Planet stop row
+    const row = document.createElement('div');
+    row.style.cssText = `display:flex;align-items:center;gap:14px;padding:10px 12px;
+      background:${done?`rgba(22,33,62,.9)`:`rgba(10,16,30,.6)`};
+      border:1.5px solid ${done?m.col:unlocked?m.col+'44':'rgba(106,130,171,.15)'};
+      border-radius:16px;cursor:${unlocked?'pointer':'default'};
+      transition:all .22s;opacity:${unlocked?1:.4};position:relative;`;
+
+    if(unlocked){
+      row.onmouseenter = ()=>{ row.style.borderColor = m.col; row.style.background = `rgba(22,33,62,.95)`; row.style.transform = 'translateX(4px)'; };
+      row.onmouseleave = ()=>{ row.style.borderColor = done?m.col:m.col+'44'; row.style.background = done?`rgba(22,33,62,.9)`:`rgba(10,16,30,.6)`; row.style.transform = 'translateX(0)'; };
+      row.onclick = ()=>{ openMissionScroll(m); };
+    }
+
+    // Planet circle
+    const circle = document.createElement('div');
+    circle.style.cssText = `width:58px;height:58px;border-radius:50%;flex-shrink:0;
+      border:2.5px solid ${done?m.col:m.col+'55'};overflow:hidden;position:relative;
+      background:radial-gradient(circle,${m.col}22,#0a1628);
+      ${done?`box-shadow:0 0 16px ${m.col}55`:''};`;
+    if(imgSrc){
+      circle.innerHTML = `<img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span style=\'font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%;\' >${m.icon}</span>'">`;
+    } else {
+      circle.innerHTML = `<span style="font-size:2rem;display:flex;align-items:center;justify-content:center;height:100%;">${m.icon}</span>`;
+    }
+
+    // Status ring
+    if(done){
+      const ring = document.createElement('div');
+      ring.style.cssText = `position:absolute;top:-2px;right:-2px;width:18px;height:18px;
+        background:${m.col};border-radius:50%;display:flex;align-items:center;justify-content:center;
+        font-size:.65rem;border:2px solid #07090f;`;
+      ring.textContent = '⭐';
+      circle.appendChild(ring);
+    }
+
+    // Info
+    const info = document.createElement('div');
+    info.style.cssText = 'flex:1;min-width:0;';
+    const planetName = m.title.replace('Mission '+m.num+': ','');
+    const tasksTotal = m.tasks ? m.tasks.length : 7;
+    const tasksDone  = done ? tasksTotal : 0;
+    info.innerHTML = `
+      <div style="font-family:'Baloo 2',cursive;font-weight:800;font-size:.95rem;
+        color:${unlocked?'#e8f0ff':'#555'};margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+        ${m.icon} ${planetName}
+      </div>
+      <div style="font-size:.72rem;color:${m.col};font-weight:700;margin-bottom:5px;
+        font-family:'Noto Sans Thai','Nunito',sans-serif;">${m.sub}</div>
+      <div style="display:flex;gap:2px;align-items:center;">
+        ${Array.from({length:tasksTotal},(_,ti)=>`<div style="width:${100/tasksTotal - 1}%;height:3px;border-radius:99px;background:${ti<tasksDone?m.col:'rgba(106,130,171,.2)'}"></div>`).join('')}
+      </div>
+      <div style="font-size:.65rem;color:var(--muted);margin-top:3px;">${tasksDone}/${tasksTotal} tasks</div>`;
+
+    // Status badge
+    const badge = document.createElement('div');
+    badge.style.cssText = `font-size:.72rem;font-weight:700;padding:5px 10px;border-radius:99px;
+      white-space:nowrap;flex-shrink:0;
+      ${done?`background:${m.col}33;color:${m.col};border:1px solid ${m.col}66;`
+            :unlocked?`background:rgba(74,179,244,.1);color:var(--g3);border:1px solid rgba(74,179,244,.3);`
+            :`background:rgba(106,130,171,.1);color:var(--muted);`}`;
+    badge.textContent = done ? '✅ Done' : unlocked ? '▶ Play' : '🔒';
+
+    row.appendChild(circle);
+    row.appendChild(info);
+    row.appendChild(badge);
+    wrap.appendChild(row);
+  });
+}
+
+/* ══════════════════════════════════════════════
+   MISSION SCROLL POPUP — Image 5 style
+══════════════════════════════════════════════ */
+function openMissionScroll(m){
+  const overlay = document.getElementById('mission-scroll-overlay');
+  if(!overlay) return;
+
+  const tasksTotal = m.tasks ? m.tasks.length : 7;
+  const tasksDone  = S.done && S.done[m.id] ? tasksTotal : 0;
+
+  const TASK_LABELS = ['intro','mc','pic','obstacle','rapid','match','spk','sb','sorter','favword'];
+  const TASK_NAMES  = ['Mission Briefing','Listen & Choose','Picture Match','Obstacle','Rapid Fire','Match Pairs','Speak & Record','Sentence Builder','Sound Sorter','Fav Word'];
+  const TASK_ICONS  = ['📖','👂','🖼️','⚡','🔥','🔗','🎤','✏️','🔀','⭐'];
+
+  const stops = (m.tasks||[]).map((tk,i)=>({
+    idx:i, type:tk.t,
+    name: TASK_NAMES[TASK_LABELS.indexOf(tk.t)] || tk.t,
+    icon: TASK_ICONS[TASK_LABELS.indexOf(tk.t)] || '📋',
+    done: i < tasksDone,
+    current: i === tasksDone,
+  }));
+
+  overlay.style.display = 'flex';
+  overlay.innerHTML = `
+    <div style="position:relative;max-width:560px;width:94%;max-height:90vh;overflow-y:auto;
+      background:linear-gradient(135deg,#0d0a1a,#0a1628,#07090f);
+      border:2px solid ${m.col}66;border-radius:24px;padding:24px 20px 20px;
+      box-shadow:0 0 60px ${m.col}33,0 24px 64px rgba(0,0,0,.8);">
+
+      <!-- Header -->
+      <button onclick="closeMissionScroll()" style="position:absolute;top:14px;right:14px;
+        background:rgba(106,130,171,.2);border:none;color:#e8f0ff;font-size:1.1rem;
+        width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="font-size:3rem;margin-bottom:8px;">${m.icon}</div>
+        <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.4rem;color:${m.col};">${m.title.replace('Mission '+m.num+': ','')}</div>
+        <div style="font-size:.82rem;color:var(--muted);margin-top:4px;font-family:'Noto Sans Thai','Nunito',sans-serif;">${m.sub}</div>
+        <div style="margin-top:10px;background:rgba(22,33,62,.6);border-radius:99px;height:6px;overflow:hidden;">
+          <div style="height:6px;border-radius:99px;background:${m.col};width:${(tasksDone/tasksTotal*100)}%;transition:width .5s;"></div>
+        </div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:4px;">${tasksDone}/${tasksTotal} tasks completed</div>
+      </div>
+
+      <!-- Mission path stops -->
+      <div style="position:relative;padding:0 0 8px;">
+        ${stops.map((stop,i)=>`
+          <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:${i<stops.length-1?'0':'0'};">
+            <!-- Line + dot -->
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px;">
+              ${i>0?`<div style="width:2px;height:16px;background:${stops[i-1].done?m.col:'rgba(106,130,171,.2)'};"></div>`:''}
+              <div style="width:44px;height:44px;border-radius:50%;
+                background:${stop.done?m.col:stop.current?`rgba(22,33,62,.9)`:`rgba(10,16,30,.6)`};
+                border:2.5px solid ${stop.done?m.col:stop.current?m.col:'rgba(106,130,171,.2)'};
+                display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+                ${stop.current?`box-shadow:0 0 16px ${m.col}77;`:''}
+                transition:all .2s;">
+                ${stop.done?'✅':stop.icon}
+              </div>
+              ${i<stops.length-1?`<div style="width:2px;height:16px;background:${stop.done?m.col:'rgba(106,130,171,.2)'};"></div>`:''}
+            </div>
+            <!-- Stop info -->
+            <div style="flex:1;padding:8px 0;display:flex;align-items:center;justify-content:space-between;
+              border-radius:12px;${stop.current?`background:rgba(22,33,62,.6);border:1px solid ${m.col}44;padding:8px 12px;`:''}">
+              <div>
+                <div style="font-size:.88rem;font-weight:700;color:${stop.done?m.col:stop.current?'#e8f0ff':'#666'};">
+                  ${stop.current?'▶ ':''}Task ${i+1}: ${stop.name}
+                </div>
+                <div style="font-size:.72rem;color:var(--muted);">
+                  ${stop.done?'Completed ✓':stop.current?'Current task':'Locked'}
+                </div>
+              </div>
+              ${stop.current||stop.done?`<div style="font-size:.65rem;padding:3px 8px;border-radius:99px;
+                background:${stop.done?m.col+'33':m.col+'22'};color:${m.col};border:1px solid ${m.col}44;
+                font-weight:700;">${stop.done?'Done':'Start'}</div>`:''}
+            </div>
+          </div>`).join('')}
+      </div>
+
+      <!-- Launch button -->
+      <button onclick="closeMissionScroll();startMission(window._scrollMission);"
+        style="width:100%;margin-top:16px;padding:15px;border-radius:99px;border:none;
+        background:linear-gradient(135deg,${m.col},${m.col}cc);color:#1a0800;
+        font-family:'Baloo 2',cursive;font-weight:900;font-size:1.05rem;
+        cursor:pointer;box-shadow:0 6px 24px ${m.col}44;touch-action:manipulation;">
+        🚀 Launch Mission / เริ่มภารกิจ
+      </button>
+      ${tasksDone>0&&tasksDone<tasksTotal?`
+      <div style="text-align:center;margin-top:8px;font-size:.78rem;color:var(--muted);">
+        Resume from Task ${tasksDone+1} / เริ่มต่อจากงานที่ ${tasksDone+1}
+      </div>`:''}
+    </div>`;
+
+  window._scrollMission = m;
+}
+
+function closeMissionScroll(){
+  const overlay = document.getElementById('mission-scroll-overlay');
+  if(overlay){ overlay.style.display = 'none'; overlay.innerHTML = ''; }
+  delete window._scrollMission;
+}
+
+/* ══════════════════════════════════════════════
+   STUDENT PLANET (City Planner) SYSTEM
+══════════════════════════════════════════════ */
+const CITY_BUILDINGS = {
+  eatery:[
+    {id:'b1',name:'Noodle Shop',emoji:'🍜',cost:8},
+    {id:'b2',name:'Tea House',emoji:'☕',cost:5},
+    {id:'b3',name:'Food Cart',emoji:'🛒',cost:3},
+    {id:'b4',name:'Bakery',emoji:'🥐',cost:6},
+    {id:'b5',name:'Dessert Shop',emoji:'🍰',cost:5},
+    {id:'b6',name:'Fruit Stall',emoji:'🍎',cost:4},
+  ],
+  nature:[
+    {id:'b7',name:'Garden',emoji:'🌳',cost:6},
+    {id:'b8',name:'Fountain',emoji:'⛲',cost:8},
+    {id:'b9',name:'Flower Park',emoji:'🌸',cost:5},
+    {id:'b10',name:'Solar Panel',emoji:'☀️',cost:10},
+  ],
+  culture:[
+    {id:'b11',name:'Temple',emoji:'⛩️',cost:12},
+    {id:'b12',name:'Library',emoji:'📚',cost:10},
+    {id:'b13',name:'Music Hall',emoji:'🎵',cost:9},
+    {id:'b14',name:'Art Gallery',emoji:'🖼️',cost:8},
+  ],
+  infra:[
+    {id:'b15',name:'School',emoji:'🏫',cost:15},
+    {id:'b16',name:'Hospital',emoji:'🏥',cost:12},
+    {id:'b17',name:'Bridge',emoji:'🌉',cost:7},
+    {id:'b18',name:'Park',emoji:'🎡',cost:6},
+  ],
+};
+
+let cityState = { grid:{}, flowers: 0, missionId: null };
+let selectedBuilding = null;
+
+function openCityPlanner(missionId){
+  // Load existing city from S
+  cityState.missionId = missionId;
+  cityState.grid = (S.cities&&S.cities[missionId]&&S.cities[missionId].grid) || {};
+  cityState.flowers = (S.cities&&S.cities[missionId]&&S.cities[missionId].flowers) || 50;
+
+  showPanel('upload'); // reuse panel slot
+  const wrap = document.getElementById('upload-panel-content');
+  if(!wrap) return;
+
+  wrap.innerHTML = `
+    <div style="max-width:760px;margin:0 auto;padding:16px;">
+      <!-- Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+        <div>
+          <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.2rem;color:var(--g5);">🏗️ My Planet City</div>
+          <div style="font-size:.78rem;color:var(--muted);font-family:'Noto Sans Thai','Nunito',sans-serif;">สร้างเมืองของคุณเอง!</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="background:rgba(247,201,72,.15);border:1.5px solid rgba(247,201,72,.3);
+            border-radius:99px;padding:6px 14px;font-weight:700;font-size:.88rem;color:var(--g1);">
+            🌸 <span id="city-flowers">${cityState.flowers}</span> flowers
+          </div>
+          <button onclick="saveCityAndBack()" style="background:linear-gradient(135deg,var(--g2),#27ae60);
+            color:#fff;border:none;border-radius:99px;padding:8px 16px;font-weight:700;cursor:pointer;">
+            💾 Save & Back
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div id="city-grid" style="display:grid;grid-template-columns:repeat(8,1fr);gap:3px;
+        background:rgba(10,16,30,.8);border:1.5px solid rgba(78,220,132,.2);
+        border-radius:16px;padding:10px;margin-bottom:14px;min-height:200px;"></div>
+
+      <!-- Building palette -->
+      <div style="background:rgba(22,33,62,.8);border-radius:14px;border:1px solid rgba(176,124,248,.2);padding:12px;">
+        <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+          ${['eatery','nature','culture','infra'].map((cat,ci)=>`
+            <button onclick="switchCityTab('${cat}',this)"
+              class="city-cat-btn${ci===0?' city-cat-active':''}"
+              style="padding:5px 12px;border-radius:99px;font-size:.75rem;font-weight:700;cursor:pointer;
+              border:1.5px solid ${['rgba(247,201,72,.5)','rgba(78,220,132,.5)','rgba(176,124,248,.5)','rgba(74,179,244,.5)'][ci]};
+              background:${ci===0?'rgba(247,201,72,.15)':'rgba(7,9,15,.5)'};
+              color:${['var(--g1)','var(--g2)','var(--g5)','var(--g3)'][ci]};">
+              ${'🍜🌳⛩️🏫'[ci*2]}${'🍜🌳⛩️🏫'[ci*2+1]||''} ${['Eatery','Nature','Culture','Infra'][ci]}
+            </button>`).join('')}
+        </div>
+        <div id="city-palette" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+      </div>
+
+      <div style="font-size:.72rem;color:var(--muted);margin-top:8px;text-align:center;
+        font-family:'Noto Sans Thai','Nunito',sans-serif;">
+        Tap a building to select, then tap a grid cell to place it. / แตะอาคารแล้วแตะช่องเพื่อวาง
+      </div>
+    </div>`;
+
+  buildCityGrid();
+  switchCityTab('eatery', document.querySelector('.city-cat-btn'));
+}
+
+function buildCityGrid(){
+  const grid = document.getElementById('city-grid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  const cols = 8, rows = 5;
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const key = `${r}-${c}`;
+      const cell = document.createElement('div');
+      cell.style.cssText = `aspect-ratio:1;border-radius:8px;display:flex;align-items:center;
+        justify-content:center;font-size:1.4rem;cursor:pointer;
+        background:${cityState.grid[key]?'rgba(78,220,132,.08)':'rgba(22,33,62,.4)'};
+        border:1px solid ${cityState.grid[key]?'rgba(78,220,132,.3)':'rgba(106,130,171,.1)'};
+        transition:all .15s;`;
+      cell.textContent = cityState.grid[key]?.emoji || '';
+      cell.title = cityState.grid[key]?.name || 'Empty';
+      cell.onclick = ()=>{
+        if(!selectedBuilding){ cell.style.borderColor='rgba(240,106,106,.5)'; setTimeout(()=>cell.style.borderColor='rgba(106,130,171,.1)',500); return; }
+        if(cityState.grid[key]){ // already occupied — remove?
+          if(confirm('Remove '+cityState.grid[key].name+'?')){
+            cityState.flowers += cityState.grid[key].cost;
+            delete cityState.grid[key];
+            buildCityGrid();
+            document.getElementById('city-flowers').textContent = cityState.flowers;
+          }
+          return;
+        }
+        if(cityState.flowers < selectedBuilding.cost){
+          cell.style.background='rgba(240,106,106,.2)'; setTimeout(()=>{cell.style.background='rgba(22,33,62,.4)';},500);
+          return;
+        }
+        cityState.flowers -= selectedBuilding.cost;
+        cityState.grid[key] = {emoji:selectedBuilding.emoji,name:selectedBuilding.name,cost:selectedBuilding.cost};
+        document.getElementById('city-flowers').textContent = cityState.flowers;
+        buildCityGrid();
+      };
+      cell.onmouseenter=()=>{if(!cityState.grid[key])cell.style.background='rgba(78,220,132,.12)';};
+      cell.onmouseleave=()=>{if(!cityState.grid[key])cell.style.background='rgba(22,33,62,.4)';};
+      grid.appendChild(cell);
+    }
+  }
+}
+
+function switchCityTab(cat, btn){
+  document.querySelectorAll('.city-cat-btn').forEach(b=>{ b.style.background='rgba(7,9,15,.5)'; b.classList.remove('city-cat-active'); });
+  if(btn){ btn.style.background='rgba(22,33,62,.9)'; btn.classList.add('city-cat-active'); }
+  const palette = document.getElementById('city-palette');
+  if(!palette) return;
+  const buildings = CITY_BUILDINGS[cat]||[];
+  palette.innerHTML = buildings.map(b=>`
+    <div onclick="selectBuilding('${b.id}')" id="bld-${b.id}"
+      style="background:rgba(22,33,62,.8);border:1.5px solid rgba(106,130,171,.2);border-radius:12px;
+      padding:10px 14px;cursor:pointer;text-align:center;min-width:70px;transition:all .2s;">
+      <div style="font-size:1.8rem;">${b.emoji}</div>
+      <div style="font-size:.68rem;color:#e8f0ff;font-weight:700;margin-top:3px;">${b.name}</div>
+      <div style="font-size:.62rem;color:var(--g1);font-weight:700;">🌸 ${b.cost}</div>
+    </div>`).join('');
+}
+
+function selectBuilding(id){
+  const allBuildings = Object.values(CITY_BUILDINGS).flat();
+  selectedBuilding = allBuildings.find(b=>b.id===id)||null;
+  document.querySelectorAll('[id^="bld-"]').forEach(el=>{
+    el.style.borderColor = el.id===`bld-${id}` ? 'var(--g2)' : 'rgba(106,130,171,.2)';
+    el.style.background  = el.id===`bld-${id}` ? 'rgba(78,220,132,.15)' : 'rgba(22,33,62,.8)';
+  });
+}
+
+function saveCityAndBack(){
+  if(!S.cities) S.cities = {};
+  S.cities[cityState.missionId] = {grid:cityState.grid, flowers:cityState.flowers, savedAt:Date.now()};
+  persistState();
+  selectedBuilding = null;
+  showPanel('map');
+  renderRoadmaps();
+}
+
+function renderStudentPlanets(){
+  const section = document.getElementById('rm-student-planets');
+  const list    = document.getElementById('rm-student-planet-list');
+  if(!section||!list) return;
+  const cities = S.cities || {};
+  const entries = Object.entries(cities);
+  if(!entries.length){ section.style.display='none'; return; }
+  section.style.display='block';
+  list.innerHTML = '';
+  entries.forEach(([mId, city])=>{
+    const mission = MISSIONS.find(m=>m.id===mId);
+    if(!mission) return;
+    const buildingCount = Object.keys(city.grid||{}).length;
+    const row = document.createElement('div');
+    row.style.cssText = `display:flex;align-items:center;gap:12px;padding:10px 12px;
+      background:rgba(22,16,40,.8);border:1.5px solid rgba(244,192,209,.3);
+      border-radius:14px;margin-bottom:0;cursor:pointer;transition:all .2s;`;
+    row.onmouseenter=()=>row.style.borderColor='rgba(244,192,209,.7)';
+    row.onmouseleave=()=>row.style.borderColor='rgba(244,192,209,.3)';
+    row.onclick=()=>openCityPlanner(mId);
+    row.innerHTML = `
+      <div style="font-size:2.2rem;">🏙️</div>
+      <div style="flex:1;">
+        <div style="font-weight:700;font-size:.88rem;color:#f4c0d1;">My ${mission.icon} City</div>
+        <div style="font-size:.7rem;color:var(--muted);">${buildingCount} buildings placed · 🌸 ${city.flowers||0} flowers left</div>
+      </div>
+      <div style="font-size:.72rem;color:rgba(244,192,209,.7);padding:4px 8px;border-radius:99px;
+        border:1px solid rgba(244,192,209,.3);">Edit</div>`;
+    const connector = document.createElement('div');
+    connector.style.cssText = 'display:flex;align-items:center;padding:0 0 0 28px;height:20px;';
+    connector.innerHTML = '<div style="width:2px;height:20px;background:rgba(244,192,209,.2);"></div>';
+    if(list.children.length > 0) list.appendChild(connector);
+    list.appendChild(row);
+  });
+}
+
+
 
 
 /* ══════════════════════════════════════════════
@@ -2235,6 +2850,13 @@ function goTo(screen){
     introEl.style.minHeight='100vh';
     introEl.classList.add('active');
     buildLoginUI();
+  }
+  else if(screen==='confirm'){
+    const csEl=document.getElementById('scr-confirm');
+    csEl.style.display='flex';
+    csEl.style.flexDirection='column';
+    csEl.classList.add('active');
+    csEl.scrollTop=0;
   }
   else if(screen==='charsel'){
     const csEl=document.getElementById('scr-charsel');
@@ -3230,208 +3852,160 @@ let _charImagesLoaded = false;   // cache so we only probe once
 
 /* Character names/emojis in display order — images auto-discovered */
 const CHAR_META = [
-  {id:'c1', name:'Cosmo Cat',   emoji:'🐱'},
-  {id:'c2', name:'Star Fox',    emoji:'🦊'},
-  {id:'c3', name:'Space Dog',   emoji:'🐶'},
-  {id:'c4', name:'Moon Bunny',  emoji:'🐰'},
-  {id:'c5', name:'Dino Jet',    emoji:'🦖'},
-  {id:'c6', name:'Robo Owl',    emoji:'🦉'},
-  {id:'c7', name:'Galaxy Bee',  emoji:'🐝'},
-  {id:'c8', name:'Comet Panda', emoji:'🐼'},
+  {id:'c1', name:'Cosmo Cat',   emoji:'🐱', role:'Sound Guardian',  type:'🌟 Star Guardian',   color:'#f7c948', bio:'Master of vowel sounds, born from starlight'},
+  {id:'c2', name:'Star Fox',    emoji:'🦊', role:'Speed Guardian',  type:'⚡ Speed Guardian',  color:'#ff9f43', bio:'Fastest reader in the galaxy, lightning quick'},
+  {id:'c3', name:'Space Dog',   emoji:'🐶', role:'Earth Guardian',  type:'🏔️ Earth Guardian',  color:'#4edC84', bio:'Loyal protector of all phonics knowledge'},
+  {id:'c4', name:'Moon Bunny',  emoji:'🐰', role:'Moon Guardian',   type:'🌙 Moon Guardian',   color:'#b07cf8', bio:'Wise oracle who speaks in perfect vowels'},
+  {id:'c5', name:'Dino Jet',    emoji:'🦖', role:'Fire Guardian',   type:'🔥 Fire Guardian',   color:'#f06a6a', bio:'Ancient warrior with the loudest roar'},
+  {id:'c6', name:'Robo Owl',    emoji:'🦉', role:'Wind Guardian',   type:'💨 Wind Guardian',   color:'#4ab3f4', bio:'Silent but precise — every sound perfectly placed'},
+  {id:'c7', name:'Galaxy Bee',  emoji:'🐝', role:'Nature Guardian', type:'🌸 Nature Guardian', color:'#ffd32a', bio:'Buzzes through words with unstoppable energy'},
+  {id:'c8', name:'Comet Panda', emoji:'🐼', role:'Ice Guardian',    type:'❄️ Ice Guardian',    color:'#a8e6cf', bio:'Cool and calm — never loses focus under pressure'},
 ];
 
 async function buildCharacterSelection(){
   const grid = document.getElementById('char-card-grid');
   if(!grid) return;
-  grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);font-weight:700;">Loading characters…</div>';
+
+  // Click sound effect
+  const clickSound = ()=>{
+    try{
+      const ctx = new (window.AudioContext||window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.setValueAtTime(880, ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.1);
+      g.gain.setValueAtTime(0.3, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+      o.start(ctx.currentTime); o.stop(ctx.currentTime + 0.2);
+    }catch(e){}
+  };
+
+  const confirmSound = ()=>{
+    try{
+      const ctx = new (window.AudioContext||window.webkitAudioContext)();
+      [523,659,784,1047].forEach((freq,i)=>{
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(0.25, ctx.currentTime + i*0.08);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i*0.08 + 0.15);
+        o.start(ctx.currentTime + i*0.08);
+        o.stop(ctx.currentTime + i*0.08 + 0.15);
+      });
+    }catch(e){}
+  };
+
   selectedCharId = null;
-  document.getElementById('char-confirm-btn').disabled = true;
+  const confirmBtn = document.getElementById('char-confirm-btn');
+  if(confirmBtn) confirmBtn.disabled = true;
 
-  // Fetch real file list from GitHub API
-  let imageFiles = [];
-  try {
-    const apiUrl = 'https://api.github.com/repos/bankbboy2003/Phonicsquest/contents/Characters%27%20cards';
-    const res = await fetch(apiUrl, {headers:{'Accept':'application/vnd.github.v3+json'}});
-    if(res.ok){
-      const files = await res.json();
-      imageFiles = files
-        .filter(f => /\.(png|jpe?g|webp|gif)$/i.test(f.name))
-        .map(f => ({
-          url: f.download_url,
-          name: f.name
-        }));
-    }
-  } catch(e){ console.warn('GitHub API unavailable, using fallback URLs'); }
-
-  // Ensure we always have 8 characters — pad with CHAR_META fallbacks if GitHub returns fewer
-  if(!imageFiles.length){
-    imageFiles = CHARACTER_CARDS.map(c => ({url: c.img, name: c.id}));
-  }
-  // If GitHub returned fewer than CHAR_META count, pad with emoji fallbacks
-  while(imageFiles.length < CHAR_META.length){
-    const i = imageFiles.length;
-    imageFiles.push({url: '', name: CHAR_META[i]?.id || 'c'+(i+1)});
-  }
-  // Cap at CHAR_META count (8)
-  imageFiles = imageFiles.slice(0, CHAR_META.length);
-
-  // Render grid — force 3 columns directly in JS (most reliable)
+  // Build Guardian cards
   grid.innerHTML = '';
-  grid.style.cssText = 'display:flex;flex-wrap:wrap;justify-content:center;gap:16px;width:100%;max-width:900px;margin-bottom:30px;';
-  imageFiles.forEach((file, i) => {
-    const meta = CHAR_META[i] || {id:'c'+(i+1), name:'Hero '+(i+1), emoji:'⭐'};
+  grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;padding:8px;';
+
+  CHAR_META.forEach((ch, idx2) => {
     const card = document.createElement('div');
-    card.id = 'charcard-' + meta.id;
-    card.style.cssText = `background:rgba(22,33,62,0.82);border:3px solid var(--border);border-radius:18px;
-      padding:10px;text-align:center;cursor:pointer;transition:all .25s;position:relative;backdrop-filter:blur(8px);
-      width:calc(33.333% - 12px);min-width:180px;max-width:280px;flex-shrink:0;`;
+    card.className = 'guardian-card';
+    card.dataset.id = ch.id;
+    card.style.cssText = `
+      background:rgba(22,33,62,.9);
+      border:2px solid rgba(106,130,171,.25);
+      border-radius:20px;padding:20px 16px;text-align:center;
+      cursor:pointer;transition:all .25s;position:relative;overflow:hidden;
+      animation:fadeUp .3s ease ${idx2*0.05}s both;`;
 
     card.innerHTML = `
-      <div style="width:100%;padding-top:100%;position:relative;border-radius:12px;overflow:hidden;background:#0a1628;margin-bottom:8px;">
-        <img src="${file.url}" alt="${meta.name}"
-          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;"
-          loading="lazy" onload="this.style.opacity='1'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;
-          font-size:3.8rem;background:radial-gradient(circle,#16213e,#07090f);">${meta.emoji}</div>
-      </div>
-      <div style="font-family:'Baloo 2',cursive;font-weight:800;font-size:.85rem;color:var(--txt);">${meta.name}</div>
-      <div id="charcheck-${meta.id}" style="display:none;position:absolute;top:8px;right:8px;
-        background:var(--g1);border-radius:50%;width:26px;height:26px;align-items:center;
-        justify-content:center;font-size:.9rem;font-weight:900;color:#1a0800;">✓</div>`;
+      <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;
+        color:${ch.color};margin-bottom:8px;opacity:.8;">${ch.type}</div>
+      <div style="width:80px;height:80px;border-radius:50%;margin:0 auto 12px;
+        background:radial-gradient(circle,${ch.color}33,rgba(7,9,15,.8));
+        border:3px solid ${ch.color}66;display:flex;align-items:center;justify-content:center;
+        font-size:2.8rem;transition:transform .2s;">${ch.emoji}</div>
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.05rem;
+        color:#e8f0ff;margin-bottom:4px;">${ch.name}</div>
+      <div style="font-size:.72rem;color:var(--muted);font-style:italic;line-height:1.4;">${ch.bio}</div>
+      <div class="guardian-selected-ring" style="display:none;position:absolute;inset:0;
+        border-radius:20px;border:3px solid ${ch.color};
+        box-shadow:inset 0 0 20px ${ch.color}22,0 0 20px ${ch.color}44;pointer-events:none;"></div>`;
 
-    card.onclick = () => selectCharacter(meta.id, meta.emoji, file.url, imageFiles.length);
+    card.onclick = ()=>{
+      clickSound();
+      // Deselect all
+      document.querySelectorAll('.guardian-card').forEach(c=>{
+        c.style.borderColor = 'rgba(106,130,171,.25)';
+        c.style.background = 'rgba(22,33,62,.9)';
+        c.style.transform = 'scale(1)';
+        c.querySelector('.guardian-selected-ring').style.display = 'none';
+      });
+      // Select this
+      card.style.borderColor = ch.color;
+      card.style.background = `rgba(22,33,62,1)`;
+      card.style.transform = 'scale(1.04)';
+      card.querySelector('.guardian-selected-ring').style.display = 'block';
+      selectedCharId = ch.id;
+      selectedCharEmoji = ch.emoji;
+      selectedCharImg = '';
+      S.nickname = ch.name;
+      S.avatar = ch.emoji;
+      // Update confirm button
+      if(confirmBtn){
+        confirmBtn.disabled = false;
+        confirmBtn.innerHTML = `✓ Confirm ${ch.name} / ยืนยัน`;
+        confirmBtn.style.background = `linear-gradient(135deg,${ch.color},${ch.color}cc)`;
+        confirmBtn.style.color = '#1a0800';
+      }
+    };
+
+    card.onmouseenter = ()=>{ if(selectedCharId !== ch.id) card.style.borderColor = ch.color+'88'; };
+    card.onmouseleave = ()=>{ if(selectedCharId !== ch.id) card.style.borderColor = 'rgba(106,130,171,.25)'; };
+
     grid.appendChild(card);
   });
 
-  // If API returned nothing and CHARACTER_CARDS also failed, show fallback emoji cards
-  if(!imageFiles.length){
-    grid.innerHTML = '';
-    CHAR_META.forEach(meta => {
-      const card = document.createElement('div');
-      card.id = 'charcard-' + meta.id;
-      card.style.cssText = `background:rgba(22,33,62,0.82);border:3px solid var(--border);border-radius:18px;
-        padding:10px;text-align:center;cursor:pointer;transition:all .25s;position:relative;`;
-      card.innerHTML = `
-        <div style="width:100%;padding-top:100%;position:relative;border-radius:12px;overflow:hidden;background:radial-gradient(circle,#16213e,#07090f);margin-bottom:8px;display:flex;align-items:center;justify-content:center;">
-          <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:4rem;">${meta.emoji}</span>
-        </div>
-        <div style="font-family:'Baloo 2',cursive;font-weight:800;font-size:.85rem;color:var(--txt);">${meta.name}</div>
-        <div id="charcheck-${meta.id}" style="display:none;position:absolute;top:8px;right:8px;
-          background:var(--g1);border-radius:50%;width:26px;height:26px;align-items:center;
-          justify-content:center;font-size:.9rem;font-weight:900;color:#1a0800;">✓</div>`;
-      card.onclick = () => selectCharacter(meta.id, meta.emoji, '', 0);
-      grid.appendChild(card);
+  // Update confirm button to show confirmation screen
+  if(confirmBtn){
+    confirmBtn.onclick = ()=>{
+      if(!selectedCharId) return;
+      confirmSound();
+      const ch = CHAR_META.find(c=>c.id===selectedCharId);
+      if(!ch) return;
+      // Populate confirmation screen
+      document.getElementById('confirm-portrait').textContent = ch.emoji;
+      document.getElementById('confirm-portrait').style.borderColor = ch.color;
+      document.getElementById('confirm-portrait').style.boxShadow = `0 0 40px ${ch.color}77`;
+      document.getElementById('confirm-ready').textContent = `Ready, ${currentUser || 'Explorer'}!`;
+      document.getElementById('confirm-subtitle').textContent = `Guardian ${ch.name.toUpperCase()} stands beside you.`;
+      document.getElementById('confirm-explorer').textContent = currentUser || 'Explorer';
+      document.getElementById('confirm-guardian').textContent = ch.name.toUpperCase();
+      document.getElementById('confirm-type').textContent = ch.type;
+      document.getElementById('confirm-bio').textContent = ch.bio;
+      document.getElementById('confirm-next-btn').style.background = `linear-gradient(135deg,${ch.color},${ch.color}cc)`;
+      goTo('confirm');
+    };
+  }
+}
+
+function proceedAfterConfirm(){
+  // Play confirm fanfare
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    [392,523,659,784,1047].forEach((freq,i)=>{
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = freq;
+      g.gain.setValueAtTime(0.2, ctx.currentTime + i*0.07);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i*0.07 + 0.25);
+      o.start(ctx.currentTime + i*0.07);
+      o.stop(ctx.currentTime + i*0.07 + 0.25);
     });
-  }
-}
-
-function selectCharacter(id, emoji, imgUrl, total){
-  selectedCharId = id;
-  selectedCharEmoji = emoji;
-  selectedCharImg = imgUrl || '';
-  // Visual update — iterate all rendered cards
-  const grid = document.getElementById('char-card-grid');
-  if(!grid) return;
-  grid.querySelectorAll('[id^="charcard-"]').forEach(card => {
-    const isMe = card.id === 'charcard-' + id;
-    card.style.border = isMe ? '3px solid var(--g1)' : '3px solid var(--border)';
-    card.style.boxShadow = isMe ? '0 0 32px rgba(247,201,72,.55)' : 'none';
-    card.style.transform = isMe ? 'scale(1.06)' : 'scale(1)';
-    const check = card.querySelector('[id^="charcheck-"]');
-    if(check) check.style.display = isMe ? 'flex' : 'none';
-  });
-  document.getElementById('char-confirm-btn').disabled = false;
-}
-
-function confirmCharacter(){
-  if(!selectedCharId) return;
-  S.avatar    = selectedCharEmoji;
-  S.avatarImg = selectedCharImg || '';
-  // Update HUD avatar button with real image if available
-  const avbtn = document.getElementById('avbtn');
-  if(avbtn){
-    if(S.avatarImg){
-      avbtn.innerHTML = `<img src="${S.avatarImg}" alt="avatar"
-        style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
-        onerror="this.style.display='none';this.parentElement.textContent='${S.avatar}';">`;
-    } else {
-      avbtn.textContent = S.avatar;
-    }
-  }
+  }catch(e){}
   goTo('howto');
-  updateHUD();
-  renderBadges();
-  spawnConfetti();
-  showBdgPop('🌟','Welcome!',`Hello, ${S.nickname}! 🚀`);
 }
 
-function renderPlanetCards(pathId, missions, containerId){
-  const wrap = document.getElementById(containerId);
-  wrap.innerHTML = '';
-  missions.forEach((m, i) => {
-    const allPrevDone = true; // PRESENTATION MODE: all planets unlocked
-    const unlocked = true;
-    const comp = S.done[m.id];
-    const imgSrc = PLANET_CARDS[m.id] || '';
-
-    const card = document.createElement('div');
-    card.style.cssText = `position:relative;border-radius:18px;overflow:hidden;cursor:${unlocked?'pointer':'default'};
-      border:3px solid ${comp?m.col:unlocked?m.col+'66':'#333'};
-      box-shadow:${comp?`0 0 24px ${m.col}55`:'none'};
-      transition:all .25s;background:#0a1628;
-      opacity:${unlocked?'1':'.45'};`;
-    
-    if(unlocked){
-      card.onmouseenter=()=>{card.style.transform='scale(1.06)';card.style.boxShadow=`0 0 32px ${m.col}88`;};
-      card.onmouseleave=()=>{card.style.transform='scale(1)';card.style.boxShadow=comp?`0 0 24px ${m.col}55`:'none';};
-      card.onclick=()=>startMission(m);
-    }
-
-    // Planet image with emoji fallback
-    const imgWrap = document.createElement('div');
-    imgWrap.style.cssText = 'width:100%;padding-top:100%;position:relative;';
-    imgWrap.innerHTML = `
-      <img src="${imgSrc}" alt="${m.title}"
-        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
-        loading="lazy" onload="this.style.opacity='1'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:radial-gradient(circle,${m.col}22,#0a1628);">
-        <span style="font-size:3rem;">${m.icon}</span>
-        <span style="font-size:.7rem;font-weight:700;color:${m.col};text-align:center;padding:0 6px;">${m.sub}</span>
-      </div>`;
-    card.appendChild(imgWrap);
-
-    // Info bar below image
-    const info = document.createElement('div');
-    info.style.cssText = `padding:8px 10px;background:rgba(7,9,15,.85);`;
-    const statusEN = comp?'✅ Complete!':unlocked?'▶ Tap to Play':'🔒 Locked';
-    const statusTH = comp?'สำเร็จแล้ว!':unlocked?'แตะเพื่อเล่น':'ล็อกอยู่';
-    const cardName = m.title.replace('Mission '+m.num+': ','');
-    info.innerHTML = `
-      <div style="font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:${unlocked?'var(--txt)':'#666'};margin-bottom:4px;line-height:1.3;">${m.icon} ${cardName}</div>
-      <div style="font-size:.82rem;color:${unlocked?m.col:'#555'};font-weight:700;">${statusEN} <span style="opacity:.75;font-size:.75em;">${statusTH}</span></div>`;
-    card.appendChild(info);
-
-    // Lock overlay
-    if(!unlocked){
-      const lock = document.createElement('div');
-      lock.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;background:rgba(0,0,0,.35);border-radius:18px;';
-      lock.textContent = '🔒';
-      card.appendChild(lock);
-    }
-    // Completion star badge
-    if(comp){
-      const star = document.createElement('div');
-      star.style.cssText = `position:absolute;top:8px;right:8px;background:${m.col};border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.9rem;box-shadow:0 2px 8px rgba(0,0,0,.5);`;
-      star.textContent = '⭐';
-      card.appendChild(star);
-    }
-    wrap.appendChild(card);
-  });
-}
-
-/* renderPath is kept as no-op for safety */
-function renderPath(){}
-function renderRoadmap_legacy(){}
 
 /* ══════════════════════════════════════════════
    FINAL MISSION BLACKHOLE CARD
