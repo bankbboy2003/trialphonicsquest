@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://bankbboy2003.github.io/trialphonicsquest/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 <title>PhonicsQuest – Sound Adventure 🚀</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@400;600;700;800&display=swap;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
    TOKENS
@@ -222,8 +222,6 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
   animation:dotPulse .8s ease-in-out infinite alternate;}
 .dot.ca-dot-base{border-color:rgba(176,124,248,.4);}
 @keyframes dotPulse{from{transform:scale(1);}to{transform:scale(1.3);}}
-.dot.done{background:var(--g2);}
-.dot.active{background:var(--g1);box-shadow:0 0 8px var(--g1);}
 .lives{display:flex;gap:5px;align-items:center;}
 .heart{font-size:1.5rem;transition:all .3s;}
 .heart.lost{opacity:.2;filter:grayscale(1);}
@@ -260,10 +258,9 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
 .obtn{background:#0d1729;border:2px solid var(--border);color:#e8f0ff;
   font-family:'Nunito',sans-serif;font-weight:800;font-size:clamp(.95rem,2.5vw,1.15rem);text-shadow:0 1px 3px rgba(0,0,0,.6);
   padding:clamp(10px,3vw,16px);border-radius:var(--rsm);cursor:pointer;transition:all .2s;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent;word-break:break-word;;letter-spacing:.2px;}
-.obtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.08);transform:translateY(-2px);}
-.obtn:active:not(:disabled){transform:translateY(0);}
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;word-break:break-word;letter-spacing:.2px;}
 .obtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.08);transform:scale(1.03);}
+.obtn:active:not(:disabled){transform:translateY(0);}
 .obtn.correct{background:rgba(78,220,132,.13);border-color:var(--g2);color:var(--g2);animation:pop .35s ease;}
 .obtn.wrong{background:rgba(240,106,106,.13);border-color:var(--g4);color:var(--g4);animation:shake .4s ease;}
 @keyframes pop{0%{transform:scale(1);}50%{transform:scale(1.07);}100%{transform:scale(1);}}
@@ -322,9 +319,8 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
   padding:18px 10px;cursor:pointer;transition:all .22s;text-align:center;font-weight:800;
   font-size:1.1rem;color:#e8f0ff;letter-spacing:.3px;
   text-shadow:0 1px 4px rgba(0,0,0,.8);}
-.picbtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.12);transform:translateY(-2px);}
 .picmoji{font-size:2.8rem;display:block;margin-bottom:6px;}
-.picbtn:hover:not(:disabled){border-color:var(--g3);transform:scale(1.04);}
+.picbtn:hover:not(:disabled){border-color:var(--g3);background:rgba(74,179,244,.12);transform:scale(1.04);}
 .picbtn.correct{border-color:var(--g2);background:rgba(78,220,132,.12);color:var(--g2);animation:pop .35s ease;}
 .picbtn.wrong{border-color:var(--g4);background:rgba(240,106,106,.12);animation:shake .4s ease;}
 
@@ -349,8 +345,7 @@ body{font-family:'Nunito','Noto Sans Thai',sans-serif;background:var(--bg);color
   border-radius:99px;font-size:clamp(.85rem,2.3vw,1rem);cursor:pointer;transition:all .2s;
   animation:pop .3s ease;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .wchip:hover{background:var(--g4);color:#fff;}
-.bchip{background:var(--card2);border:2px solid var(--border);color:#e8f0ff;font-weight:800;
-  font-weight:700;padding:clamp(7px,2vw,9px) clamp(12px,3vw,18px);border-radius:99px;
+.bchip{background:var(--card2);border:2px solid var(--border);color:#e8f0ff;font-weight:800;padding:clamp(7px,2vw,9px) clamp(12px,3vw,18px);border-radius:99px;
   font-size:clamp(.85rem,2.3vw,1rem);cursor:pointer;transition:all .2s;
   touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .bchip:hover{border-color:var(--g3);transform:scale(1.04);}
@@ -545,9 +540,10 @@ footer span{color:var(--g3);}
   grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
 }
 
-  #char-card-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px;}
-}
 /* ─── SPACE VIDEO BG — ensure scr-app allows fixed children ─── */
+@media(max-width:600px){
+  #roadmap-sidebar{display:none!important;}
+}
 
 #scr-app .topbar{position:sticky;top:0;z-index:100;}
 /* ─── PLANET CARD PULSE ANIMATION (completed) ─── */
@@ -1458,7 +1454,7 @@ footer span{color:var(--g3);}
   <div class="t-tabs">
     <button class="t-tab active" onclick="showTPanel('students')">📋 Students <span class='th-inline'>นักเรียน</span></button>
     <button class="t-tab" onclick="showTPanel('analytics')">📊 Analytics <span class='th-inline'>วิเคราะห์</span></button>
-    <button class="t-tab" onclick="showTPanel('passwords')">🔑 Password / รหัสผ่านs</button>
+    <button class="t-tab" onclick="showTPanel('passwords')">🔑 Passwords / รหัสผ่าน</button>
     <button class="t-tab" onclick="showTPanel('uploads')">📁 Uploads <span class='th-inline'>ไฟล์</span></button>
   </div>
   <div class="t-panel" id="t-pnl-students"></div>
@@ -1541,7 +1537,7 @@ async function loadPlanetCards(){
       let mi=0;
       order.forEach(id=>{ if(!PLANET_CARDS[id]&&matched[mi]) PLANET_CARDS[id]=matched[mi++].download_url; });
       _planetCardsLoaded = true;
-      console.log('Planet cards loaded from GitHub:', imgs.length,'images');
+      console.log('Planet cards loaded from GitHub:', imgFiles.length,'images');
     }
   }catch(e){ console.warn('Planet cards API failed, using fallback'); }
   // Fallback hardcoded URLs if API fails
@@ -1567,8 +1563,8 @@ async function loadPlanetCards(){
 
 async function renderRoadmaps(){
   await loadPlanetCards();
-  const shortMissions = MISSIONS.filter(m=>m.path==='short').slice(0,4);
-  const longMissions  = MISSIONS.filter(m=>m.path==='long').slice(0,4);
+  const shortMissions = MISSIONS.filter(m=>m.path==='short');
+  const longMissions  = MISSIONS.filter(m=>m.path==='long');
 
   // Update sidebar
   const rmAvatar = document.getElementById('rm-avatar');
@@ -1628,7 +1624,7 @@ function renderRoadStops(pathId, missions, containerId){
   wrap.innerHTML = '';
 
   missions.forEach((m, i) => {
-    const unlocked = true; // PRESENTATION MODE
+    const unlocked = i === 0 || (S.done && S.done[missions[i-1].id]);
     const done = S.done && S.done[m.id];
     const imgSrc = PLANET_CARDS[m.id] || '';
 
@@ -2272,10 +2268,6 @@ const MISSIONS=[
      q:"⚡ Rapid Round! Tap ALL words with the short Short A 🐱 sound:",
      words:['cat','cup','hat','hot','map','mud','fan','fun','bat','bit'],
      ans:[0,2,4,6,8],
-     altWords:['mud','mad','dug','dig','pub','pab','hug','hag','jug','jag'],altAns:[0,2,4,6,8],
-     altWords:['fox','fix','cob','cab','rob','rub','mod','mad','sob','sub'],altAns:[0,2,4,6,8],
-     altWords:['kit','kite','his','hiss','dip','deep','him','home','bin','bean'],altAns:[0,2,4,6,8],
-     altWords:['jet','jot','net','not','leg','log','peg','pig','set','sit'],altAns:[0,2,4,6,8],
      altWords:['sad','sun','ran','run','man','men','cap','cop','jam','gem'],altAns:[0,2,4,6,8],
      ok:"✅ cat, hat, map, fan, bat — all have Short A 🐱! You're fast! ⚡",
      no:"❌ Short A 🐱 words: cat, hat, map, fan, bat. Not cup(ʌ), hot(ɒ), mud(ʌ), fun(ʌ), bit(ɪ)!"},
@@ -2345,14 +2337,14 @@ const MISSIONS=[
     {t:'pic', ph:'Short I 🐷 · เสียง I สั้น',
      q:'🔊 Listen — which picture has the Short I 🐷 sound?',word:'sit',
      pics:[{e:'🪑',w:'sit Short I 🐷',c:true},{e:'🐶',w:'dog Short O 🐶',c:false},{e:'🧢',w:'cap Short A 🐱',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
-     ok:"✅ 'sit' /sɪt/ — you sit on a chair! Short Short I 🐷! 🪑",
+     ok:"✅ 'sit' /sɪt/ — you sit on a chair! Short I 🐷! 🪑",
      no:"❌ 'sit' has Short I 🐷. Others have Short O 🐶, Short A 🐱, and Short U ☕!"},
     {t:'obstacle', title:'⚠️ Obstacle! Minimal Pair Minefield!',
      desc:"Step carefully — Short I 🐷 and Long E 🐝 look similar but sound different! Pick the Short I 🐷 word!",
      clueEmoji:'💡',clueHint:'A small pointed end — like at the top of a pencil.',
      word:'tip',opts:['tip (Short I)','teep','tape','type'],ans:0,
      ok:"✅ 'tip' /tɪp/ — Short I 🐷. You dodged the Long E 🐝 minefield! 💥",
-     no:"❌ Short Short I 🐷 = 'tip'. The others are long vowels or wrong!"},
+     no:"❌ Short I 🐷 = 'tip'. The others are long vowels or wrong!"},
     {t:'rapid', ph:'Short I 🐷 words',
      q:"⚡ Rapid! Tap ALL words with Short I 🐷 sound:",
      words:['sit','seat','big','beg','lip','leap','win','wine','tip','tape'],
@@ -2477,7 +2469,7 @@ const MISSIONS=[
      q:"⚡ BOSS RAPID! Tap words with SHORT vowels only (not long!):",
      words:['cat','cake','bed','bead','pig','pie','dog','doge','cup','cube'],
      ans:[0,2,4,6,8],
-     ok:"✅ catShort A 🐱, bedShort E 🛏️, pigShort I 🐷, dogShort O 🐶, cupShort U ☕ — you beat the boss! 🏆",
+     ok:"✅ cat (Short A 🐱), bed (Short E 🛏️), pig (Short I 🐷), dog (Short O 🐶), cup (Short U ☕) — you beat the boss! 🏆",
      no:"❌ Short vowels: cat(æ), bed(ɛ), pig(ɪ), dog(ɒ), cup(ʌ). Others are long!"},
     {t:'spk', ph:'All Short Vowels · สระสั้น',word:'top',
      clueEmoji:'⬆️',clueHint:"The very highest point — the ___ of the mountain.",
@@ -2903,7 +2895,7 @@ function showPanel(p){
       el.style.display='none';
     }
   });
-  if(p==='map'){renderRoadmaps();renderFinalBox();}
+  if(p==='map'){renderRoadmaps();}
   if(p==='avatar')renderAvatarPanel();
   if(p==='badges')renderBadges();
   if(p==='profile')renderProfile();
@@ -2929,7 +2921,7 @@ function buildLoginUI(){
   selectedStudentName='';
   // Just reset the placeholder text — selectStudentName() handles the name display
   const dt=document.getElementById('name-display-text');
-  if(dt){dt.innerHTML='🔍 Search name / ค้นหาชื่อ';dt.style.color='var(--muted)';}
+  if(dt){dt.innerHTML='— Choose your name —';dt.style.color='var(--muted)';}
   const nameDisp=document.getElementById('name-display');
   if(nameDisp){nameDisp.style.borderColor='var(--border)';}
   renderNameList('');
@@ -3105,7 +3097,10 @@ function doLogout(){
   const loginErr = document.getElementById('login-err');
   if(loginErr) loginErr.style.display='none';
   const nameDisplay = document.getElementById('name-display');
-  if(nameDisplay) nameDisplay.innerHTML = '🔍 Search name / ค้นหาชื่อ';
+  if(nameDisplay){
+    const txt = nameDisplay.querySelector('#name-display-text');
+    if(txt){ txt.textContent = '— Choose your name —'; txt.style.color='var(--muted)'; }
+  }
   const tUser = document.getElementById('t-user');
   if(tUser) tUser.value='';
   const tPw = document.getElementById('t-pw');
@@ -4017,10 +4012,9 @@ const BLACKHOLE_IMG = 'https://raw.githubusercontent.com/bankbboy2003/Phonicsque
 ══════════════════════════════════════════════ */
 function renderFinalBox(){
   // Only check the 4 shown missions per galaxy
-  // PRESENTATION MODE: final mission always visible
-  const allShortDone=true;
-  const allLongDone=true;
-  const allDone=true;
+  const allShortDone=MISSIONS.filter(m=>m.path==='short').every(m=>S.done&&S.done[m.id]);
+  const allLongDone=MISSIONS.filter(m=>m.path==='long').every(m=>S.done&&S.done[m.id]);
+  const allDone=allShortDone&&allLongDone;
   if(allShortDone&&!S.cluesUnlocked.includes('short_clue')){
     S.cluesUnlocked.push('short_clue');grantBadge('short_done');showClueUnlock('short_clue');
   }
@@ -4156,12 +4150,16 @@ function startMission(m){
 }
 function exitGame(){
   clearInterval(S.rapidIv);clearInterval(S.waveIv);clearTimeout(S.recTO);
-  // Clear any active recording
+  if(window.rapidIv){clearInterval(window.rapidIv);window.rapidIv=null;}
+  // Stop any active speech recognition
+  if(S._spkRecog){try{S._spkRecog.stop();}catch(e){} S._spkRecog=null;}
+  // Clear any active recording UI
   const recbtn=document.getElementById('recbtn');
   if(recbtn&&recbtn.classList.contains('recording')){
     recbtn.classList.remove('recording');
     document.querySelectorAll('.wbar').forEach(b=>b.style.height='6px');
   }
+  clearHintTimer();
   persistState();showPanel('map');
 }
 function renderDots(n){
@@ -4830,11 +4828,14 @@ function chkRapid(tk,og){
   // Use origIdx to handle shuffled order
   const chosen=[];btns.forEach(b=>{if(b.dataset.sel==='true')chosen.push(parseInt(b.dataset.origIdx||0));});
   btns.forEach(b=>b.disabled=true);
-  const ok=JSON.stringify(chosen.sort())===JSON.stringify([...tk.ans].sort());
+  const useAlt = tk.altWords && S.done && S.done[S.curMission?.id];
+  const ansPool  = useAlt ? (tk.altAns||tk.ans) : tk.ans;
+  const wordPool = useAlt ? tk.altWords : tk.words;
+  const ok=JSON.stringify(chosen.sort())===JSON.stringify([...ansPool].sort());
   btns.forEach(b=>{const oi=parseInt(b.dataset.origIdx||0);
-    if(tk.ans.includes(oi))b.classList.add('correct');
+    if(ansPool.includes(oi))b.classList.add('correct');
     else if(b.dataset.sel==='true')b.classList.add('wrong');});
-  const _cWords=tk.words.filter((_,i)=>tk.ans.includes(i));
+  const _cWords=wordPool.filter((_,i)=>ansPool.includes(i));
   const _rfFb=ok?undefined:`<span style="font-size:.8em;display:block;margin-top:5px;color:var(--g2);">✅ Correct words: <strong>${_cWords.join(', ')}</strong> / คำที่ถูกต้อง</span>`;
   showFb(ok,tk,_rfFb);
   if(ok){addXP(25);grantBadge('rapid');streak(true);}else{streak(false);loseLife();}
@@ -4884,9 +4885,13 @@ function renderSB(tk,gc){
   <div class="sbarea" id="sba"><span style="color:var(--muted);font-size:.79rem;">Tap words below / แตะคำเพื่อสร้างประโยค</span></div>
   <div class="wbank" id="wbk"></div>
   <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:7px;">
-    <button class="lbtn" onclick="chkSB('${tk.target}',${JSON.stringify(tk.alts||[])})">✓ Check <span class='th-inline'>ตรวจ</span></button>
+    <button class="lbtn" id="sb-check-btn">✓ Check <span class='th-inline'>ตรวจ</span></button>
     <button class="lbtn" style="background:linear-gradient(135deg,var(--g4),#c0392b);" onclick="clrSB()">🗑 Clear <span class='th-inline'>ล้าง</span></button>
   </div>`;
+  p.appendChild(mkFb());p.appendChild(mkNxt());gc.appendChild(p);
+  // Attach check handler safely (avoids quote-escaping issues with inline onclick)
+  const sbCheckBtn = document.getElementById('sb-check-btn');
+  if(sbCheckBtn) sbCheckBtn.onclick = ()=>chkSB(tk.target, tk.alts||[]);
   p.appendChild(mkFb());p.appendChild(mkNxt());gc.appendChild(p);
   [...tk.words].sort(()=>Math.random()-.5).forEach(w=>{
     const c=document.createElement('div');c.className='bchip';c.textContent=w;c.dataset.w=w;
@@ -4930,6 +4935,7 @@ function chkSB(target,alts){
 ══════════════════════════════════════════════ */
 function nextTask(){
   clearHintTimer();
+  clearInterval(S.rapidIv); S.rapidIv = null;
   S.task++;
   if(!S.curMission)return;
   if(S.task>=S.curMission.tasks.length)finishMission();else renderTask();
@@ -4941,8 +4947,8 @@ function finishMission(){
   if(!S.done[id])S.done[id]={pass,total};
   if(pass===total)grantBadge('noerror');
   grantBadge('first');
-  const allShort=MISSIONS.filter(m=>m.path==='short').slice(0,4).every(m=>S.done[m.id]);
-  const allLong=MISSIONS.filter(m=>m.path==='long').slice(0,4).every(m=>S.done[m.id]);
+  const allShort=MISSIONS.filter(m=>m.path==='short').every(m=>S.done[m.id]);
+  const allLong=MISSIONS.filter(m=>m.path==='long').every(m=>S.done[m.id]);
   if(allShort)grantBadge('short_done');
   if(allLong)grantBadge('long_done');
   persistState();
@@ -5129,7 +5135,7 @@ function saveNick(){
 ══════════════════════════════════════════════ */
 function sayWord(w){
   if(!window.speechSynthesis)return;
-  const b=document.getElementById('lbtn');
+  const b=document.querySelector('.lbtn');
   if(b){b.classList.add('playing');setTimeout(()=>b.classList.remove('playing'),1700);}
   const u=new SpeechSynthesisUtterance(w);
   u.lang='en-US';u.rate=0.68;u.pitch=1;
@@ -5258,7 +5264,56 @@ function panHandleFiles(files){
 }
 
 function panSubmit(mode){
-  upSubmit(mode,true); // true = use pan- IDs for status display
+  // Map pan- element IDs to a compatible submit flow
+  const files = mode === 'upload'
+    ? upFiles.map(f=>({file:f.file,name:f.name,type:f.type}))
+    : recBlobs.map(r=>({file:r.blob,name:r.name,type:r.type}));
+  if(!files.length) return;
+
+  const stEl = document.getElementById('pan-st-' + mode);
+  const pgEl = document.getElementById('pan-pg-' + mode);
+  const pfEl = document.getElementById('pan-pf-' + mode);
+
+  function showSt(msg, type){
+    if(!stEl) return;
+    stEl.className = 'up-status show ' + type;
+    stEl.textContent = msg;
+    if(type==='success'||type==='info') setTimeout(()=>stEl.classList.remove('show'), 5000);
+  }
+
+  if(!APPS_SCRIPT_URL){
+    showSt('⚠️ Upload not configured. Contact your teacher. / ติดต่อคุณครูเพื่อตั้งค่า','info');
+    files.forEach(f=>{
+      const reader=new FileReader(); reader.onload=ev=>{
+        if(!S.uploads)S.uploads=[];
+        S.uploads.push({name:f.name,size:f.file?f.file.size:0,type:f.type,date:new Date().toLocaleDateString(),data:ev.target.result});
+        persistState();
+      }; reader.readAsDataURL(f.file||f.blob||new Blob());
+    });
+    setTimeout(()=>{ showSt(`✅ ${files.length} file${files.length>1?'s':''} saved locally.`,'success'); spawnConfetti(); }, 600);
+    return;
+  }
+
+  showSt('📤 Uploading to Google Drive…','uploading');
+  if(pgEl) pgEl.classList.add('show');
+  (async()=>{
+    for(let i=0;i<files.length;i++){
+      if(pfEl) pfEl.style.width = Math.round(i/files.length*100)+'%';
+      showSt(`📤 Uploading ${i+1}/${files.length}: ${files[i].name}…`,'uploading');
+      try{
+        const b64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(files[i].file||files[i].blob);});
+        await fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({fileName:`${currentUser||'Student'}_${files[i].name}`,mimeType:files[i].type,fileData:b64})});
+      }catch(e){ showSt(`❌ Upload error: ${e.message}`,'error'); if(pgEl) pgEl.classList.remove('show'); return; }
+    }
+    if(pfEl) pfEl.style.width='100%';
+    setTimeout(()=>{
+      showSt(`✅ ${files.length} file${files.length>1?'s':''} sent to teacher! 🎉`,'success');
+      if(pgEl) pgEl.classList.remove('show');
+      if(mode==='upload'){ upFiles=[]; } else { recBlobs=[]; }
+      spawnConfetti();
+    }, 500);
+  })();
 }
 
 function panToggleRec(){upToggleRec(true);}
