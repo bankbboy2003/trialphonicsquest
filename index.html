@@ -1425,7 +1425,7 @@ footer span{color:var(--g3);}
   </div>
   <!-- ═══ END UPLOAD PANEL ═══ -->
 
-  <div id="pnl-game" style="position:relative;z-index:2;padding:16px 20px 60px;"></div>
+  <div id="pnl-game" style="display:none;position:relative;z-index:2;padding:16px 20px 60px;"></div>
   <div id="pnl-scoreboard" style="position:relative;z-index:2;padding:16px 20px 60px;max-width:620px;margin:0 auto;width:100%;"></div>
   <div id="pnl-profile" style="position:relative;z-index:2;padding:16px 20px 60px;max-width:700px;margin:0 auto;width:100%;"></div>
   <div id="pnl-avatar" style="position:relative;z-index:2;padding:20px 24px 60px;max-width:800px;margin:0 auto;width:100%;">
@@ -1728,15 +1728,18 @@ function openMissionScroll(m){
     current: i === tasksDone,
   }));
 
+  // Store BEFORE building innerHTML so the launch button can reference it safely
+  window._scrollMission = m;
+
   overlay.style.display = 'flex';
   overlay.innerHTML = `
-    <div style="position:relative;max-width:560px;width:94%;max-height:90vh;overflow-y:auto;
+    <div id="mission-scroll-card" style="position:relative;max-width:560px;width:94%;max-height:90vh;overflow-y:auto;
       background:linear-gradient(135deg,#0d0a1a,#0a1628,#07090f);
       border:2px solid ${m.col}66;border-radius:24px;padding:24px 20px 20px;
       box-shadow:0 0 60px ${m.col}33,0 24px 64px rgba(0,0,0,.8);">
 
       <!-- Header -->
-      <button onclick="closeMissionScroll()" style="position:absolute;top:14px;right:14px;
+      <button id="msc-close-btn" style="position:absolute;top:14px;right:14px;
         background:rgba(106,130,171,.2);border:none;color:#e8f0ff;font-size:1.1rem;
         width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
 
@@ -1753,8 +1756,7 @@ function openMissionScroll(m){
       <!-- Mission path stops -->
       <div style="position:relative;padding:0 0 8px;">
         ${stops.map((stop,i)=>`
-          <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:${i<stops.length-1?'0':'0'};">
-            <!-- Line + dot -->
+          <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:4px;">
             <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px;">
               ${i>0?`<div style="width:2px;height:16px;background:${stops[i-1].done?m.col:'rgba(106,130,171,.2)'};"></div>`:''}
               <div style="width:44px;height:44px;border-radius:50%;
@@ -1767,15 +1769,14 @@ function openMissionScroll(m){
               </div>
               ${i<stops.length-1?`<div style="width:2px;height:16px;background:${stop.done?m.col:'rgba(106,130,171,.2)'};"></div>`:''}
             </div>
-            <!-- Stop info -->
             <div style="flex:1;padding:8px 0;display:flex;align-items:center;justify-content:space-between;
               border-radius:12px;${stop.current?`background:rgba(22,33,62,.6);border:1px solid ${m.col}44;padding:8px 12px;`:''}">
               <div>
-                <div style="font-size:.88rem;font-weight:700;color:${stop.done?m.col:stop.current?'#e8f0ff':'#666'};">
+                <div style="font-size:.88rem;font-weight:700;color:${stop.done?m.col:stop.current?'#e8f0ff':'#6a82ab'};">
                   ${stop.current?'▶ ':''}Task ${i+1}: ${stop.name}
                 </div>
                 <div style="font-size:.72rem;color:var(--muted);">
-                  ${stop.done?'Completed ✓':stop.current?'Current task':'Locked'}
+                  ${stop.done?'Completed ✓':stop.current?'Current task ▶':'Locked 🔒'}
                 </div>
               </div>
               ${stop.current||stop.done?`<div style="font-size:.65rem;padding:3px 8px;border-radius:99px;
@@ -1785,21 +1786,34 @@ function openMissionScroll(m){
           </div>`).join('')}
       </div>
 
-      <!-- Launch button -->
-      <button onclick="closeMissionScroll();startMission(window._scrollMission);"
+      <!-- Launch button (id-based so JS can attach handler safely) -->
+      <button id="msc-launch-btn"
         style="width:100%;margin-top:16px;padding:15px;border-radius:99px;border:none;
         background:linear-gradient(135deg,${m.col},${m.col}cc);color:#1a0800;
         font-family:'Baloo 2',cursive;font-weight:900;font-size:1.05rem;
-        cursor:pointer;box-shadow:0 6px 24px ${m.col}44;touch-action:manipulation;">
+        cursor:pointer;box-shadow:0 6px 24px ${m.col}44;touch-action:manipulation;
+        transition:transform .2s;">
         🚀 Launch Mission / เริ่มภารกิจ
       </button>
       ${tasksDone>0&&tasksDone<tasksTotal?`
       <div style="text-align:center;margin-top:8px;font-size:.78rem;color:var(--muted);">
-        Resume from Task ${tasksDone+1} / เริ่มต่อจากงานที่ ${tasksDone+1}
+        ▶ Resume from Task ${tasksDone+1} / เริ่มต่อจากงานที่ ${tasksDone+1}
       </div>`:''}
     </div>`;
 
-  window._scrollMission = m;
+  // Attach handlers via JS (avoids inline-onclick timing & escaping issues)
+  const launchBtn = document.getElementById('msc-launch-btn');
+  const closeBtn  = document.getElementById('msc-close-btn');
+  if(launchBtn){
+    launchBtn.onmouseenter = ()=>{ launchBtn.style.transform='scale(1.03)'; };
+    launchBtn.onmouseleave = ()=>{ launchBtn.style.transform='scale(1)'; };
+    launchBtn.onclick = ()=>{
+      const mission = window._scrollMission;
+      closeMissionScroll();
+      if(mission) startMission(mission);
+    };
+  }
+  if(closeBtn){ closeBtn.onclick = ()=>closeMissionScroll(); }
 }
 
 function closeMissionScroll(){
@@ -5350,6 +5364,289 @@ function panKeepRec(){
   if(btn){btn.classList.remove('recording');btn.innerHTML='🎙️ Record Again / บันทึกอีกครั้ง';}
 }
 
+</script>
+
+<!-- ═══ BACKGROUND MUSIC SYSTEM (Web Audio API — no external files) ═══ -->
+<script>
+(function(){
+  /* ── Music state ── */
+  let bgCtx = null, bgPlaying = false, bgNodes = [], bgGain = null;
+  const MUSIC_VOL_KEY = 'pq_music_vol';
+  const MUSIC_ON_KEY  = 'pq_music_on';
+
+  // Restore user preference (default: ON, vol 0.38)
+  let savedOn  = localStorage.getItem(MUSIC_ON_KEY);
+  let savedVol = parseFloat(localStorage.getItem(MUSIC_VOL_KEY)) || 0.38;
+  let musicEnabled = savedOn === null ? true : savedOn === '1';
+
+  /* ── Build the floating music button ── */
+  function buildMusicBtn(){
+    const btn = document.createElement('div');
+    btn.id = 'music-btn';
+    btn.title = 'Toggle background music / เปิด-ปิดเพลง';
+    btn.style.cssText = `
+      position:fixed;bottom:22px;left:18px;z-index:9998;
+      width:46px;height:46px;border-radius:50%;
+      background:rgba(22,33,62,.92);border:2px solid rgba(176,124,248,.5);
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;transition:all .25s;box-shadow:0 4px 18px rgba(0,0,0,.5);
+      user-select:none;-webkit-tap-highlight-color:transparent;`;
+    btn.innerHTML = `<span id="music-icon" style="font-size:1.3rem;">🎵</span>`;
+
+    // Volume slider popup
+    const popup = document.createElement('div');
+    popup.id = 'music-popup';
+    popup.style.cssText = `
+      position:fixed;bottom:76px;left:12px;z-index:9999;
+      background:rgba(16,24,48,.97);border:1.5px solid rgba(176,124,248,.4);
+      border-radius:14px;padding:12px 14px;min-width:160px;
+      box-shadow:0 8px 32px rgba(0,0,0,.6);display:none;
+      flex-direction:column;gap:8px;animation:fadeUp .2s ease;`;
+    popup.innerHTML = `
+      <div style="font-size:.72rem;font-weight:800;color:var(--g5);text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px;">🎵 Music / เพลง</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:.75rem;color:var(--muted);">🔈</span>
+        <input id="music-vol-slider" type="range" min="0" max="100" value="${Math.round(savedVol*100)}"
+          style="flex:1;accent-color:#b07cf8;height:4px;cursor:pointer;">
+        <span style="font-size:.75rem;color:var(--muted);">🔊</span>
+      </div>
+      <div style="font-size:.68rem;color:var(--muted);text-align:center;font-family:'Noto Sans Thai','Nunito',sans-serif;">
+        แตะปุ่มเพื่อเปิด/ปิดเพลง
+      </div>`;
+
+    document.body.appendChild(popup);
+    document.body.appendChild(btn);
+
+    btn.onclick = (e)=>{
+      e.stopPropagation();
+      if(bgCtx && bgCtx.state === 'suspended') bgCtx.resume();
+      toggleMusic();
+      updateBtn();
+      // Brief popup flash on toggle
+      popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+      setTimeout(()=>{ popup.style.display = 'none'; }, 3000);
+    };
+    btn.onmouseenter = ()=>{ btn.style.transform='scale(1.12)'; btn.style.borderColor='rgba(176,124,248,.9)'; };
+    btn.onmouseleave = ()=>{ btn.style.transform='scale(1)'; btn.style.borderColor='rgba(176,124,248,.5)'; };
+
+    // Volume slider
+    const slider = popup.querySelector('#music-vol-slider');
+    slider.oninput = ()=>{
+      savedVol = parseInt(slider.value) / 100;
+      localStorage.setItem(MUSIC_VOL_KEY, savedVol);
+      if(bgGain) bgGain.gain.setTargetAtTime(musicEnabled ? savedVol : 0, bgCtx.currentTime, 0.1);
+    };
+    document.addEventListener('click', (e)=>{
+      if(!btn.contains(e.target) && !popup.contains(e.target)) popup.style.display='none';
+    });
+    updateBtn();
+  }
+
+  function updateBtn(){
+    const icon = document.getElementById('music-icon');
+    const btn  = document.getElementById('music-btn');
+    if(!icon || !btn) return;
+    icon.textContent = musicEnabled ? '🎵' : '🔇';
+    btn.style.borderColor = musicEnabled ? 'rgba(176,124,248,.7)' : 'rgba(106,130,171,.3)';
+    btn.style.opacity = musicEnabled ? '1' : '0.6';
+  }
+
+  function toggleMusic(){
+    musicEnabled = !musicEnabled;
+    localStorage.setItem(MUSIC_ON_KEY, musicEnabled ? '1' : '0');
+    if(!bgCtx){ if(musicEnabled) startMusic(); return; }
+    if(bgGain){
+      bgGain.gain.cancelScheduledValues(bgCtx.currentTime);
+      bgGain.gain.setTargetAtTime(musicEnabled ? savedVol : 0, bgCtx.currentTime, 0.3);
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     GENERATIVE AMBIENT MUSIC ENGINE
+     Soft space-ELT theme:
+     — Slow pad chords (pentatonic, child-friendly)
+     — Gentle arpeggiated melody
+     — Low-frequency pulse / heartbeat
+     — Sparkle high notes
+  ═══════════════════════════════════════════ */
+  function startMusic(){
+    if(bgCtx) return;
+    try{
+      bgCtx = new (window.AudioContext || window.webkitAudioContext)();
+    } catch(e){ console.warn('Web Audio not supported'); return; }
+
+    bgGain = bgCtx.createGain();
+    bgGain.gain.setValueAtTime(musicEnabled ? savedVol : 0, bgCtx.currentTime);
+    bgGain.connect(bgCtx.destination);
+
+    // ── Master reverb (convolver simulation via feedback delay) ──
+    const convDly = bgCtx.createDelay(2.5);
+    const convFb  = bgCtx.createGain(); convFb.gain.value = 0.38;
+    const convLPF = bgCtx.createBiquadFilter(); convLPF.type='lowpass'; convLPF.frequency.value=900;
+    convDly.delayTime.value = 0.55;
+    convDly.connect(convFb); convFb.connect(convLPF); convLPF.connect(convDly);
+    convDly.connect(bgGain);
+
+    // ── Chord pad engine ──
+    // Child-friendly C pentatonic maj7 voicings: C E G B D
+    const CHORDS = [
+      [261.63, 329.63, 392.00, 493.88],  // Cmaj7
+      [293.66, 369.99, 440.00, 523.25],  // Dmaj7-ish
+      [392.00, 493.88, 587.33, 698.46],  // Gmaj7
+      [349.23, 440.00, 523.25, 659.25],  // Fmaj7
+    ];
+    let chordIdx = 0;
+    let chordOscs = [];
+
+    function playChord(time, dur){
+      // Release old chord oscillators
+      chordOscs.forEach(o=>{ try{ o.gain.gain.setTargetAtTime(0, time, 0.4); o.osc.stop(time+2); }catch(e){} });
+      chordOscs = [];
+      const freqs = CHORDS[chordIdx % CHORDS.length];
+      freqs.forEach((f, i)=>{
+        const osc  = bgCtx.createOscillator();
+        const gain = bgCtx.createGain();
+        const lpf  = bgCtx.createBiquadFilter();
+        osc.type = i < 2 ? 'sine' : 'triangle';
+        osc.frequency.value = f * (i === 0 ? 0.5 : 1); // bass note an octave lower
+        lpf.type = 'lowpass'; lpf.frequency.value = 800 + i*120;
+        gain.gain.setValueAtTime(0, time);
+        gain.gain.linearRampToValueAtTime(0.06 - i*0.008, time + 0.8);
+        gain.gain.setTargetAtTime(0.045 - i*0.006, time + dur - 1.5, 0.6);
+        osc.connect(lpf); lpf.connect(gain); gain.connect(convDly); gain.connect(bgGain);
+        osc.start(time); osc.stop(time + dur + 2.5);
+        chordOscs.push({osc, gain});
+      });
+      chordIdx++;
+    }
+
+    // ── Gentle arpeggio melody ──
+    // Pentatonic scale: C D E G A (C major pentatonic)
+    const PENTA = [261.63, 293.66, 329.63, 392.00, 440.00,
+                   523.25, 587.33, 659.25, 783.99, 880.00];
+    const ARP_PATS = [
+      [0,2,4,6,4,2, 1,3,5,7,5,3],
+      [0,1,3,5,3,1, 2,4,6,4,2,0],
+      [4,6,7,9,7,6, 4,2,1,0,1,2],
+      [0,3,5,7,5,3, 0,2,4,6,4,2],
+    ];
+    let arpPat = 0;
+
+    function scheduleArp(startTime){
+      const pat = ARP_PATS[arpPat % ARP_PATS.length];
+      arpPat++;
+      const noteLen = 0.45;
+      pat.forEach((ni, step)=>{
+        const t = startTime + step * noteLen;
+        const freq = PENTA[ni % PENTA.length];
+        const osc  = bgCtx.createOscillator();
+        const gain = bgCtx.createGain();
+        const lpf  = bgCtx.createBiquadFilter();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq * 2, t); // melody 2 octaves up
+        // slight vibrato
+        osc.frequency.setTargetAtTime(freq * 2 * 1.004, t + 0.12, 0.08);
+        lpf.type = 'lowpass'; lpf.frequency.value = 3500;
+        gain.gain.setValueAtTime(0, t);
+        gain.gain.linearRampToValueAtTime(0.028, t + 0.04);
+        gain.gain.setTargetAtTime(0, t + noteLen * 0.65, 0.08);
+        osc.connect(lpf); lpf.connect(gain); gain.connect(convDly); gain.connect(bgGain);
+        osc.start(t); osc.stop(t + noteLen + 0.3);
+      });
+    }
+
+    // ── Soft pulse / heartbeat bass ──
+    function playPulse(time){
+      const osc  = bgCtx.createOscillator();
+      const gain = bgCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = 65.41; // C2
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(0.055, time + 0.06);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.55);
+      osc.connect(gain); gain.connect(bgGain);
+      osc.start(time); osc.stop(time + 0.6);
+    }
+
+    // ── Sparkle high notes (random twinkles) ──
+    function playSparkle(time){
+      const freqs = [1046.5, 1318.5, 1568, 2093, 2637];
+      const freq = freqs[Math.floor(Math.random()*freqs.length)];
+      const osc  = bgCtx.createOscillator();
+      const gain = bgCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(0.018, time + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+      osc.connect(gain); gain.connect(convDly); gain.connect(bgGain);
+      osc.start(time); osc.stop(time + 0.55);
+    }
+
+    // ── Master scheduler ──
+    const CHORD_DUR    = 8;   // seconds per chord
+    const ARP_CYCLE    = 5.4; // arpeggio phrase = 12 notes × 0.45s
+    const PULSE_BEAT   = 2.0; // bass pulse every 2s
+    const SPARKLE_PROB = 0.35;
+
+    let now = bgCtx.currentTime + 0.1;
+    let scheduleAhead = 0.3;
+    let chordTime = now;
+    let arpTime   = now;
+    let pulseTime = now;
+
+    function scheduler(){
+      const look = bgCtx.currentTime + scheduleAhead;
+
+      // Chords
+      while(chordTime < look){
+        playChord(chordTime, CHORD_DUR);
+        chordTime += CHORD_DUR;
+      }
+      // Arpeggio
+      while(arpTime < look){
+        scheduleArp(arpTime);
+        arpTime += ARP_CYCLE;
+      }
+      // Bass pulse
+      while(pulseTime < look){
+        playPulse(pulseTime);
+        if(Math.random() < SPARKLE_PROB) playSparkle(pulseTime + PULSE_BEAT * 0.7);
+        pulseTime += PULSE_BEAT;
+      }
+
+      scheduleAhead = Math.min(scheduleAhead + 0.02, 1.2);
+      setTimeout(scheduler, 200);
+    }
+    scheduler();
+    bgPlaying = true;
+  }
+
+  /* ── Start music after first user interaction (browser policy) ── */
+  function onFirstInteraction(){
+    if(!bgCtx && musicEnabled){
+      startMusic();
+    } else if(bgCtx && bgCtx.state === 'suspended'){
+      bgCtx.resume();
+    }
+    document.removeEventListener('click', onFirstInteraction);
+    document.removeEventListener('keydown', onFirstInteraction);
+    document.removeEventListener('touchstart', onFirstInteraction);
+  }
+  document.addEventListener('click',     onFirstInteraction, {once:true});
+  document.addEventListener('keydown',   onFirstInteraction, {once:true});
+  document.addEventListener('touchstart',onFirstInteraction, {once:true, passive:true});
+
+  /* ── Build UI on DOM ready ── */
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', buildMusicBtn);
+  } else {
+    buildMusicBtn();
+  }
+
+  // Expose toggle to global scope for any external use
+  window.toggleBGMusic = toggleMusic;
+})();
 </script>
 </body>
 </html>
