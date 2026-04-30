@@ -594,7 +594,7 @@ footer span{color:var(--g3);}
   .tabs,.t-tabs{padding:10px 12px 0;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;}
   .tabs::-webkit-scrollbar,.t-tabs::-webkit-scrollbar{display:none;}
   .tab{font-size:.78rem;padding:8px 12px;white-space:nowrap;flex-shrink:0;}
-  #char-card-grid{grid-template-columns:repeat(4,1fr)!important;gap:10px;}
+  #char-card-grid{grid-template-columns:repeat(3,1fr)!important;gap:8px;}
   #rm-short,#rm-long{grid-template-columns:repeat(3,1fr);gap:14px;}
   .av-grid-lg{grid-template-columns:repeat(3,1fr);gap:10px;}
   .sb-podium{gap:8px;}.podium-bar{width:52px;}.podium-name{font-size:.7rem;}
@@ -892,11 +892,11 @@ footer span{color:var(--g3);}
     <!-- Character grid — fills remaining vertical space -->
     <div id="char-card-grid" style="
       display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:clamp(6px,1.2vw,14px);
-      width:100%;max-width:860px;
+      grid-template-columns:repeat(5,1fr);
+      gap:clamp(5px,1vw,12px);
+      width:100%;max-width:1000px;
       flex:1;align-content:center;
-      padding:8px 0;
+      padding:6px 0;
     "></div>
 
     <!-- Preview strip — shows selected character info inline, no modal -->
@@ -3882,31 +3882,35 @@ const GH = 'https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/';
 const CHAR_DIR = GH + 'Characters%27%20cards/';   // Characters' cards  (' = %27, space = %20)
 
 const CHARACTER_CARDS = [
-  {id:'c1', name:'Cosmo Cat',   img: CHAR_DIR + 'Gemini_Generated_Image_1e10so1e10so1e10.jpeg',  emoji:'🐱'},
-  {id:'c2', name:'Space Dog',   img: CHAR_DIR + 'Gemini_Generated_Image_3v4kw53v4kw53v4k.jpeg',  emoji:'🐶'},
-  {id:'c3', name:'Star Fox',    img: CHAR_DIR + 'Gemini_Generated_Image_6vc7ws6vc7ws6vc7.jpeg',  emoji:'🦊'},
-  {id:'c4', name:'Moon Bunny',  img: CHAR_DIR + 'Gemini_Generated_Image_9z0ax89z0ax89z0a.jpeg',  emoji:'🐰'},
-  {id:'c5', name:'Dino Jet',    img: CHAR_DIR + 'Gemini_Generated_Image_cy3wbccy3wbccy3w.jpeg',  emoji:'🦖'},
-  {id:'c6', name:'Robo Owl',    img: CHAR_DIR + 'Gemini_Generated_Image_fo0xrffo0xrffo0x.jpeg',  emoji:'🦉'},
-  {id:'c7', name:'Galaxy Bee',  img: CHAR_DIR + 'Gemini_Generated_Image_o3isuoo3isuoo3is.jpeg',  emoji:'🐝'},
-  {id:'c8', name:'Comet Panda', img: CHAR_DIR + 'Gemini_Generated_Image_r9t7usr9t7usr9t7.jpeg',  emoji:'🐼'},
+  {id:'c1',  name:'Dr. Lyra Vox',    img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_1.jpg',  emoji:'🧬'},
+  {id:'c2',  name:'Beed',            img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_3.jpg',  emoji:'🤖'},
+  {id:'c3',  name:'Zane',            img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_4.jpg',  emoji:'🛡️'},
+  {id:'c4',  name:'Nova',            img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_5.jpg',  emoji:'👽'},
+  {id:'c5',  name:'Captain Orion',   img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_6.jpg',  emoji:'⭐'},
+  {id:'c6',  name:'Elder Sian',      img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_8.jpg',  emoji:'🔮'},
+  {id:'c7',  name:'Vorg',            img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_9.jpg',  emoji:'🦎'},
+  {id:'c8',  name:'Valkyrie',        img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_10.jpg', emoji:'⚔️'},
+  {id:'c9',  name:'Mira',            img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_11.jpg', emoji:'🌌'},
+  {id:'c10', name:'Kaelen',          img: CHAR_DIR + 'LINE_ALBUM_UI_card_260408_12.jpg', emoji:'⚡'},
 ];
 
 let selectedCharId = null;
-let selectedCharEmoji = '🐱';
+let selectedCharEmoji = '🧬';
 let selectedCharImg = '';
-let _charImagesLoaded = false;   // cache so we only probe once
+let _charImagesLoaded = false;
 
 /* Character names/emojis in display order — images auto-discovered */
 const CHAR_META = [
-  {id:'c1', name:'Cosmo Cat',   emoji:'🐱', role:'Sound Guardian',  type:'🌟 Star Guardian',   color:'#f7c948', bio:'Master of vowel sounds, born from starlight'},
-  {id:'c2', name:'Star Fox',    emoji:'🦊', role:'Speed Guardian',  type:'⚡ Speed Guardian',  color:'#ff9f43', bio:'Fastest reader in the galaxy, lightning quick'},
-  {id:'c3', name:'Space Dog',   emoji:'🐶', role:'Earth Guardian',  type:'🏔️ Earth Guardian',  color:'#4edC84', bio:'Loyal protector of all phonics knowledge'},
-  {id:'c4', name:'Moon Bunny',  emoji:'🐰', role:'Moon Guardian',   type:'🌙 Moon Guardian',   color:'#b07cf8', bio:'Wise oracle who speaks in perfect vowels'},
-  {id:'c5', name:'Dino Jet',    emoji:'🦖', role:'Fire Guardian',   type:'🔥 Fire Guardian',   color:'#f06a6a', bio:'Ancient warrior with the loudest roar'},
-  {id:'c6', name:'Robo Owl',    emoji:'🦉', role:'Wind Guardian',   type:'💨 Wind Guardian',   color:'#4ab3f4', bio:'Silent but precise — every sound perfectly placed'},
-  {id:'c7', name:'Galaxy Bee',  emoji:'🐝', role:'Nature Guardian', type:'🌸 Nature Guardian', color:'#ffd32a', bio:'Buzzes through words with unstoppable energy'},
-  {id:'c8', name:'Comet Panda', emoji:'🐼', role:'Ice Guardian',    type:'❄️ Ice Guardian',    color:'#a8e6cf', bio:'Cool and calm — never loses focus under pressure'},
+  {id:'c1',  name:'Dr. Lyra Vox',   emoji:'🧬', role:'Biomedical Researcher', type:'💚 Science',        color:'#2ecc9a', bio:'Bio-Regeneration: Heal — restores HP with every correct answer'},
+  {id:'c2',  name:'Beed',           emoji:'🤖', role:'Friendly Spherical Bot', type:'🔵 Tech Bot',       color:'#4ab3f4', bio:'Laser Pulse: Targeted Blast — pinpoint accuracy on every word'},
+  {id:'c3',  name:'Zane',           emoji:'🛡️', role:'Genius Technician',      type:'🟢 Engineering',    color:'#4edc84', bio:'Force Shield: Temporary — protects against wrong answers'},
+  {id:'c4',  name:'Nova',           emoji:'👽', role:'Friendly Alien Scout',   type:'🟣 Celestial Nav.', color:'#b07cf8', bio:'Phantom Ghost: Invisibility — slips past obstacles unseen'},
+  {id:'c5',  name:'Capt. Orion',    emoji:'⭐', role:'Veteran Commander',      type:'🟡 Strategy',       color:'#f7c948', bio:'Command Order: Battle Call — boosts whole fleet power'},
+  {id:'c6',  name:'Elder Sian',     emoji:'🔮', role:'Ancient Alien Elder',    type:'🔵 Exalted',        color:'#74b9ff', bio:'Starfall: Meteor Shower — direct area damage to all enemies'},
+  {id:'c7',  name:'Vorg',           emoji:'🦎', role:'Warring Reptilian',      type:'🔴 Devastation',    color:'#e17055', bio:'Seismic Smash: Cracked Ground — area damage, none survive'},
+  {id:'c8',  name:'Valkyrie',       emoji:'⚔️', role:'Fierce Human Warrior',   type:'🔴 Aerial Assault', color:'#d63031', bio:'Blade Dance: Lethal Area Damage — crimson blades everywhere'},
+  {id:'c9',  name:'Mira',           emoji:'🌌', role:'Mage-Pilot',             type:'🟣 Cosmic Nav.',    color:'#a29bfe', bio:'Cosmic Vortex: Area Damage — bends space around every word'},
+  {id:'c10', name:'Kaelen',         emoji:'⚡', role:'Fast-Moving Star Pilot', type:'🟡 Superluminal',   color:'#f9ca24', bio:'Speed Burst: Hyper-Fast — immediate boost, never slows down'},
 ];
 
 async function buildCharacterSelection(){
@@ -3930,92 +3934,172 @@ async function buildCharacterSelection(){
   const confirmBtn = document.getElementById('char-confirm-btn');
   if(confirmBtn) confirmBtn.disabled = true;
 
-  // Responsive columns: 4 for desktop, 4 for tablet, 2 for phone
+  // 10 chars → 5 columns; auto-scales for smaller counts
   const count = CHAR_META.length;
   const cols = count <= 4 ? count : count <= 6 ? 3 : count <= 8 ? 4 : 5;
   grid.style.cssText = `
     display:grid;
     grid-template-columns:repeat(${cols},1fr);
-    gap:clamp(6px,1.2vw,14px);
-    width:100%;max-width:860px;
+    gap:clamp(5px,1vw,12px);
+    width:100%;max-width:1000px;
     flex:1;align-content:center;
-    padding:8px 0;`;
+    padding:6px 0;`;
 
   grid.innerHTML = '';
 
+  // Find matching CHARACTER_CARDS entry for image URL
+  const cardImg = (id) => {
+    const entry = CHARACTER_CARDS.find(c => c.id === id);
+    return entry ? entry.img : '';
+  };
+
   CHAR_META.forEach((ch, idx2) => {
+    const imgUrl = cardImg(ch.id);
     const card = document.createElement('div');
     card.className = 'guardian-card';
     card.dataset.id = ch.id;
     card.style.cssText = `
-      background:rgba(22,33,62,.85);
-      border:2px solid rgba(106,130,171,.22);
-      border-radius:clamp(12px,1.5vw,18px);
-      padding:clamp(8px,1.5vh,14px) clamp(6px,1vw,12px);
-      text-align:center;cursor:pointer;transition:all .22s;
       position:relative;overflow:hidden;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-      animation:fadeUp .3s ease ${idx2*0.04}s both;
-      aspect-ratio:1/1.05;`;
+      border-radius:clamp(10px,1.2vw,16px);
+      border:2px solid ${ch.color}44;
+      cursor:pointer;transition:all .22s cubic-bezier(.34,1.3,.64,1);
+      animation:fadeUp .3s ease ${idx2*0.045}s both;
+      aspect-ratio:3/4.2;
+      background:#0d1422;`;
 
     card.innerHTML = `
-      <!-- Glow orb behind emoji -->
+      <!-- Full artwork background -->
+      <div class="ch-img-bg" style="
+        position:absolute;inset:0;
+        background-image:url('${imgUrl}');
+        background-size:cover;background-position:top center;
+        transition:transform .3s ease;border-radius:inherit;">
+      </div>
+
+      <!-- Dark gradient overlay — stronger at bottom for text legibility -->
       <div style="position:absolute;inset:0;border-radius:inherit;
-        background:radial-gradient(ellipse at 50% 30%,${ch.color}14,transparent 70%);
-        pointer-events:none;"></div>
-      <!-- Emoji bubble -->
-      <div class="ch-emoji-wrap" style="
-        width:clamp(42px,7vw,64px);height:clamp(42px,7vw,64px);
-        border-radius:50%;margin:0 auto;
-        background:radial-gradient(circle,${ch.color}2a,rgba(7,9,15,.7));
-        border:2.5px solid ${ch.color}55;
-        display:flex;align-items:center;justify-content:center;
-        font-size:clamp(1.4rem,3vw,2.2rem);
-        transition:transform .2s;flex-shrink:0;">
-        ${ch.emoji}
+        background:linear-gradient(
+          to bottom,
+          rgba(0,0,0,.08) 0%,
+          rgba(0,0,0,.0) 35%,
+          rgba(0,0,0,.55) 65%,
+          rgba(5,8,20,.95) 100%
+        );pointer-events:none;"></div>
+
+      <!-- Top badge: role -->
+      <div style="position:absolute;top:0;left:0;right:0;
+        padding:5px 6px 3px;
+        background:linear-gradient(to bottom,rgba(0,0,0,.7),transparent);
+        border-radius:inherit inherit 0 0;">
+        <div style="font-size:clamp(.42rem,.75vw,.58rem);font-weight:800;
+          text-transform:uppercase;letter-spacing:.5px;
+          color:${ch.color};text-align:center;
+          text-shadow:0 0 8px ${ch.color}88;">
+          ${ch.role}
+        </div>
       </div>
-      <!-- Name -->
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;
-        font-size:clamp(.68rem,1.3vw,.88rem);color:#e8f0ff;line-height:1.2;
-        margin-top:2px;">${ch.name}</div>
-      <!-- Role pill -->
-      <div style="font-size:clamp(.5rem,.9vw,.65rem);font-weight:800;
-        padding:2px 6px;border-radius:99px;
-        background:${ch.color}20;color:${ch.color};
-        border:1px solid ${ch.color}44;letter-spacing:.4px;
-        white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;">
-        ${ch.role}
+
+      <!-- Bottom info panel -->
+      <div style="position:absolute;bottom:0;left:0;right:0;
+        padding:clamp(4px,.8vh,8px) clamp(5px,.8vw,8px);
+        border-radius:0 0 inherit inherit;">
+        <!-- Name -->
+        <div style="font-family:'Baloo 2',cursive;font-weight:900;
+          font-size:clamp(.6rem,1.1vw,.82rem);
+          color:#fff;line-height:1.15;text-align:center;
+          text-shadow:0 0 12px ${ch.color}cc,0 1px 4px rgba(0,0,0,.9);">
+          ${ch.name}
+        </div>
+        <!-- Type pill -->
+        <div style="font-size:clamp(.4rem,.65vw,.55rem);font-weight:800;
+          margin-top:3px;padding:2px 5px;border-radius:99px;
+          background:${ch.color}28;color:${ch.color};
+          border:1px solid ${ch.color}55;text-align:center;
+          white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+          letter-spacing:.3px;backdrop-filter:blur(4px);">
+          ${ch.type}
+        </div>
       </div>
-      <!-- Selected ring overlay -->
+
+      <!-- Sci-fi corner accents -->
+      <div style="position:absolute;top:4px;left:4px;width:10px;height:10px;
+        border-top:2px solid ${ch.color}88;border-left:2px solid ${ch.color}88;
+        border-radius:2px 0 0 0;pointer-events:none;"></div>
+      <div style="position:absolute;top:4px;right:4px;width:10px;height:10px;
+        border-top:2px solid ${ch.color}88;border-right:2px solid ${ch.color}88;
+        border-radius:0 2px 0 0;pointer-events:none;"></div>
+      <div style="position:absolute;bottom:4px;left:4px;width:10px;height:10px;
+        border-bottom:2px solid ${ch.color}88;border-left:2px solid ${ch.color}88;
+        border-radius:0 0 0 2px;pointer-events:none;"></div>
+      <div style="position:absolute;bottom:4px;right:4px;width:10px;height:10px;
+        border-bottom:2px solid ${ch.color}88;border-right:2px solid ${ch.color}88;
+        border-radius:0 0 2px 0;pointer-events:none;"></div>
+
+      <!-- Selected glow ring (hidden by default) -->
       <div class="guardian-selected-ring" style="display:none;position:absolute;inset:0;
-        border-radius:inherit;border:3px solid ${ch.color};
-        box-shadow:inset 0 0 18px ${ch.color}22,0 0 18px ${ch.color}44;pointer-events:none;"></div>
-      <!-- Checkmark badge -->
-      <div class="guardian-check" style="display:none;position:absolute;top:6px;right:8px;
-        font-size:.9rem;animation:popIn .2s ease;">✅</div>`;
+        border-radius:inherit;
+        border:3px solid ${ch.color};
+        box-shadow:inset 0 0 20px ${ch.color}33,0 0 22px ${ch.color}66;
+        pointer-events:none;"></div>
+
+      <!-- Selected checkmark badge -->
+      <div class="guardian-check" style="display:none;position:absolute;top:6px;
+        left:50%;transform:translateX(-50%);
+        background:${ch.color};color:#000;font-size:.6rem;font-weight:900;
+        padding:1px 7px;border-radius:99px;letter-spacing:.5px;
+        animation:popIn .2s ease;white-space:nowrap;">
+        ✓ SELECTED
+      </div>
+
+      <!-- Emoji fallback (shown if image fails to load) -->
+      <div class="ch-emoji-fallback" style="display:none;position:absolute;inset:0;
+        align-items:center;justify-content:center;font-size:clamp(2rem,4vw,3.5rem);
+        background:radial-gradient(circle,${ch.color}22,rgba(7,9,15,.9));
+        border-radius:inherit;">
+        ${ch.emoji}
+      </div>`;
+
+    // Handle image load failure — show emoji fallback
+    const imgBg = card.querySelector('.ch-img-bg');
+    const fallback = card.querySelector('.ch-emoji-fallback');
+    if(imgUrl){
+      const testImg = new Image();
+      testImg.onerror = ()=>{
+        if(imgBg) imgBg.style.display = 'none';
+        if(fallback){ fallback.style.display = 'flex'; }
+      };
+      testImg.src = imgUrl;
+    } else {
+      if(imgBg) imgBg.style.display = 'none';
+      if(fallback) fallback.style.display = 'flex';
+    }
 
     card.onclick = ()=>{
       clickSound();
       // Deselect all
       document.querySelectorAll('.guardian-card').forEach(c=>{
-        c.style.borderColor = 'rgba(106,130,171,.22)';
-        c.style.background = 'rgba(22,33,62,.85)';
         c.style.transform = 'scale(1)';
-        c.querySelector('.guardian-selected-ring').style.display = 'none';
-        c.querySelector('.guardian-check').style.display = 'none';
-        c.querySelector('.ch-emoji-wrap').style.transform = 'scale(1)';
+        c.style.borderColor = CHAR_META.find(m=>m.id===c.dataset.id)?.color+'44' || 'rgba(106,130,171,.22)';
+        c.style.boxShadow = 'none';
+        const ring = c.querySelector('.guardian-selected-ring');
+        const chk  = c.querySelector('.guardian-check');
+        const imgb = c.querySelector('.ch-img-bg');
+        if(ring) ring.style.display = 'none';
+        if(chk)  chk.style.display  = 'none';
+        if(imgb) imgb.style.transform = 'scale(1)';
       });
-      // Select this
-      card.style.borderColor = ch.color;
-      card.style.background = `rgba(22,33,62,1)`;
+      // Select this card
       card.style.transform = 'scale(1.06)';
+      card.style.borderColor = ch.color;
+      card.style.boxShadow = `0 0 24px ${ch.color}66, 0 8px 32px rgba(0,0,0,.6)`;
       card.querySelector('.guardian-selected-ring').style.display = 'block';
       card.querySelector('.guardian-check').style.display = 'block';
-      card.querySelector('.ch-emoji-wrap').style.transform = 'scale(1.12)';
+      const imgBgEl = card.querySelector('.ch-img-bg');
+      if(imgBgEl) imgBgEl.style.transform = 'scale(1.06)';
 
       selectedCharId = ch.id;
       selectedCharEmoji = ch.emoji;
-      selectedCharImg = '';
+      selectedCharImg = imgUrl;
       S.nickname = ch.name;
       S.avatar = ch.emoji;
 
@@ -4023,7 +4107,8 @@ async function buildCharacterSelection(){
       const bar = document.getElementById('char-preview-bar');
       if(bar){
         bar.style.opacity = '1';
-        bar.style.borderColor = ch.color + '55';
+        bar.style.borderColor = ch.color + '66';
+        bar.style.background = `rgba(22,33,62,.92)`;
         document.getElementById('cpb-emoji').textContent = ch.emoji;
         document.getElementById('cpb-name').textContent = ch.name;
         document.getElementById('cpb-name').style.color = ch.color;
@@ -4035,21 +4120,37 @@ async function buildCharacterSelection(){
         document.getElementById('cpb-bio').textContent = ch.bio;
       }
 
-      // Enable & wire confirm button
+      // Enable confirm button
       if(confirmBtn){
         confirmBtn.disabled = false;
+        confirmBtn.style.background = `linear-gradient(135deg,${ch.color},${ch.color}bb)`;
+        confirmBtn.style.color = '#0a0f1e';
         confirmBtn.onclick = ()=>confirmCharacter();
       }
     };
 
-    // Hover lift
-    card.onmouseenter = ()=>{ if(card.dataset.id !== selectedCharId) card.style.transform='scale(1.04)'; };
-    card.onmouseleave = ()=>{ if(card.dataset.id !== selectedCharId) card.style.transform='scale(1)'; };
+    // Hover: zoom image slightly, lift card
+    card.onmouseenter = ()=>{
+      if(card.dataset.id === selectedCharId) return;
+      card.style.transform = 'scale(1.04) translateY(-2px)';
+      card.style.borderColor = ch.color + '88';
+      card.style.boxShadow = `0 6px 20px ${ch.color}44`;
+      const imgb = card.querySelector('.ch-img-bg');
+      if(imgb) imgb.style.transform = 'scale(1.04)';
+    };
+    card.onmouseleave = ()=>{
+      if(card.dataset.id === selectedCharId) return;
+      card.style.transform = 'scale(1)';
+      card.style.borderColor = ch.color + '44';
+      card.style.boxShadow = 'none';
+      const imgb = card.querySelector('.ch-img-bg');
+      if(imgb) imgb.style.transform = 'scale(1)';
+    };
 
     grid.appendChild(card);
   });
 
-  // Wire up confirm button (JS-owned, avoids timing/escaping issues)
+  // Wire confirm button
   if(confirmBtn){
     confirmBtn.disabled = true;
     confirmBtn.onclick = ()=>confirmCharacter();
