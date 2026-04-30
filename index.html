@@ -548,6 +548,7 @@ footer span{color:var(--g3);}
 #scr-app .topbar{position:sticky;top:0;z-index:100;}
 /* ─── PLANET CARD PULSE ANIMATION (completed) ─── */
 @keyframes planetPulse{0%,100%{box-shadow:0 0 20px currentColor;}50%{box-shadow:0 0 40px currentColor;}}
+@keyframes popIn{0%{transform:scale(0) rotate(-15deg);opacity:0;}70%{transform:scale(1.3) rotate(5deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
 /* ─── BLACKHOLE CARD GLOW ANIMATION ─── */
 @keyframes bhPulse{0%,100%{box-shadow:0 0 40px rgba(176,124,248,.6),0 0 80px rgba(176,124,248,.2);}50%{box-shadow:0 0 60px rgba(176,124,248,.9),0 0 120px rgba(176,124,248,.4);}}
 
@@ -593,7 +594,7 @@ footer span{color:var(--g3);}
   .tabs,.t-tabs{padding:10px 12px 0;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;}
   .tabs::-webkit-scrollbar,.t-tabs::-webkit-scrollbar{display:none;}
   .tab{font-size:.78rem;padding:8px 12px;white-space:nowrap;flex-shrink:0;}
-  #char-card-grid{grid-template-columns:repeat(3,1fr)!important;gap:10px;}
+  #char-card-grid{grid-template-columns:repeat(4,1fr)!important;gap:10px;}
   #rm-short,#rm-long{grid-template-columns:repeat(3,1fr);gap:14px;}
   .av-grid-lg{grid-template-columns:repeat(3,1fr);gap:10px;}
   .sb-podium{gap:8px;}.podium-bar{width:52px;}.podium-name{font-size:.7rem;}
@@ -862,27 +863,64 @@ footer span{color:var(--g3);}
 </div>
 
 <!-- ═══════ SCREEN 1.5: CHARACTER SELECTION ═══════ -->
-<div id="scr-charsel" class="screen" style="background:#07090f;padding:0;min-height:100vh;">
-  <!-- Same space video background as game page -->
+<div id="scr-charsel" class="screen" style="background:#07090f;padding:0;height:100vh;overflow:hidden;">
   <video id="charsel-video" autoplay muted loop playsinline
     src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
     style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;"
     onerror="this.style.display='none';if(typeof initCharStars==='function')initCharStars();">
   </video>
-  <div style="position:fixed;inset:0;background:rgba(3,6,20,0.65);z-index:1;pointer-events:none;"></div>
-  <!-- Fallback star canvas if video fails -->
+  <div style="position:fixed;inset:0;background:rgba(3,6,20,0.72);z-index:1;pointer-events:none;"></div>
   <canvas id="char-stars" style="position:fixed;inset:0;z-index:0;pointer-events:none;display:none;"></canvas>
 
-  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:30px 16px 60px;">
-    <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:2.2rem;
-      background:linear-gradient(135deg,var(--g1),var(--g3));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      margin-bottom:4px;text-align:center;text-shadow:none;">Choose Your Hero! <span style="font-size:.55em;font-weight:700;color:var(--muted);">เลือกตัวละครของคุณ!</span></div>
-    <div style="color:#c8d8f0;font-weight:700;font-size:.95rem;margin-bottom:28px;text-align:center;
-      text-shadow:0 1px 8px rgba(0,0,0,.8);">Pick the character who will join you on this space adventure 🚀<br><span class="th-inline">เลือกตัวละครที่จะร่วมเดินทางกับคุณในอวกาศ</span></div>
-    <div id="char-card-grid" style="display:grid;grid-template-columns:repeat(3,1fr);
-      gap:16px;width:100%;max-width:900px;margin-bottom:30px;"></div>
-    <button id="char-confirm-btn" class="start-btn" style="max-width:320px;" disabled onclick="confirmCharacter()">✨ Let's Go! <span style='font-family:"Noto Sans Thai",sans-serif;font-size:.85em;opacity:.85;'>ไปเลย!</span> →</button>
+  <!-- One-page container: flex column filling exactly the viewport -->
+  <div style="position:relative;z-index:2;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:clamp(10px,2vh,22px) 16px clamp(8px,1.5vh,16px);">
+
+    <!-- Header (compact) -->
+    <div style="text-align:center;flex-shrink:0;">
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:clamp(1.3rem,3.5vw,2rem);
+        background:linear-gradient(135deg,var(--g1),var(--g3));
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        line-height:1.1;margin-bottom:2px;">
+        Choose Your Hero!
+        <span style="font-size:.52em;font-weight:700;-webkit-text-fill-color:var(--muted);background:none;color:var(--muted);">เลือกตัวละคร</span>
+      </div>
+      <div style="color:#c8d8f0;font-weight:600;font-size:clamp(.72rem,1.6vw,.85rem);opacity:.85;">
+        Pick your space guardian 🚀 <span style="font-family:'Noto Sans Thai',sans-serif;">เลือกผู้พิทักษ์ของคุณ</span>
+      </div>
+    </div>
+
+    <!-- Character grid — fills remaining vertical space -->
+    <div id="char-card-grid" style="
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:clamp(6px,1.2vw,14px);
+      width:100%;max-width:860px;
+      flex:1;align-content:center;
+      padding:8px 0;
+    "></div>
+
+    <!-- Preview strip — shows selected character info inline, no modal -->
+    <div id="char-preview-bar" style="
+      flex-shrink:0;width:100%;max-width:860px;
+      background:rgba(22,33,62,.82);border:1.5px solid rgba(106,130,171,.2);
+      border-radius:16px;padding:clamp(6px,1.2vh,10px) 16px;
+      display:flex;align-items:center;gap:14px;min-height:52px;
+      transition:all .3s;opacity:0;">
+      <div id="cpb-emoji" style="font-size:2rem;flex-shrink:0;">🌟</div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span id="cpb-name" style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1rem;color:#e8f0ff;"></span>
+          <span id="cpb-type" style="font-size:.65rem;padding:2px 8px;border-radius:99px;font-weight:700;"></span>
+        </div>
+        <div id="cpb-bio" style="font-size:.75rem;color:var(--muted);font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+      </div>
+      <button id="char-confirm-btn" class="start-btn"
+        style="flex-shrink:0;padding:10px 22px;font-size:.9rem;border-radius:99px;margin:0;max-width:none;white-space:nowrap;"
+        disabled>
+        ✨ Let's Go! <span style='font-family:"Noto Sans Thai",sans-serif;font-size:.85em;opacity:.85;'>ไปเลย!</span>
+      </button>
+    </div>
+
   </div>
 </div>
 
@@ -3875,12 +3913,10 @@ async function buildCharacterSelection(){
   const grid = document.getElementById('char-card-grid');
   if(!grid) return;
 
-  // Click sound effect
   const clickSound = ()=>{
     try{
       const ctx = new (window.AudioContext||window.webkitAudioContext)();
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
+      const o = ctx.createOscillator(), g = ctx.createGain();
       o.connect(g); g.connect(ctx.destination);
       o.frequency.setValueAtTime(880, ctx.currentTime);
       o.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.1);
@@ -3890,128 +3926,181 @@ async function buildCharacterSelection(){
     }catch(e){}
   };
 
-  const confirmSound = ()=>{
-    try{
-      const ctx = new (window.AudioContext||window.webkitAudioContext)();
-      [523,659,784,1047].forEach((freq,i)=>{
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.connect(g); g.connect(ctx.destination);
-        o.frequency.value = freq;
-        g.gain.setValueAtTime(0.25, ctx.currentTime + i*0.08);
-        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i*0.08 + 0.15);
-        o.start(ctx.currentTime + i*0.08);
-        o.stop(ctx.currentTime + i*0.08 + 0.15);
-      });
-    }catch(e){}
-  };
-
   selectedCharId = null;
   const confirmBtn = document.getElementById('char-confirm-btn');
   if(confirmBtn) confirmBtn.disabled = true;
 
-  // Build Guardian cards
+  // Responsive columns: 4 for desktop, 4 for tablet, 2 for phone
+  const count = CHAR_META.length;
+  const cols = count <= 4 ? count : count <= 6 ? 3 : count <= 8 ? 4 : 5;
+  grid.style.cssText = `
+    display:grid;
+    grid-template-columns:repeat(${cols},1fr);
+    gap:clamp(6px,1.2vw,14px);
+    width:100%;max-width:860px;
+    flex:1;align-content:center;
+    padding:8px 0;`;
+
   grid.innerHTML = '';
-  grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;padding:8px;';
 
   CHAR_META.forEach((ch, idx2) => {
     const card = document.createElement('div');
     card.className = 'guardian-card';
     card.dataset.id = ch.id;
     card.style.cssText = `
-      background:rgba(22,33,62,.9);
-      border:2px solid rgba(106,130,171,.25);
-      border-radius:20px;padding:20px 16px;text-align:center;
-      cursor:pointer;transition:all .25s;position:relative;overflow:hidden;
-      animation:fadeUp .3s ease ${idx2*0.05}s both;`;
+      background:rgba(22,33,62,.85);
+      border:2px solid rgba(106,130,171,.22);
+      border-radius:clamp(12px,1.5vw,18px);
+      padding:clamp(8px,1.5vh,14px) clamp(6px,1vw,12px);
+      text-align:center;cursor:pointer;transition:all .22s;
+      position:relative;overflow:hidden;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+      animation:fadeUp .3s ease ${idx2*0.04}s both;
+      aspect-ratio:1/1.05;`;
 
     card.innerHTML = `
-      <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;
-        color:${ch.color};margin-bottom:8px;opacity:.8;">${ch.type}</div>
-      <div style="width:80px;height:80px;border-radius:50%;margin:0 auto 12px;
-        background:radial-gradient(circle,${ch.color}33,rgba(7,9,15,.8));
-        border:3px solid ${ch.color}66;display:flex;align-items:center;justify-content:center;
-        font-size:2.8rem;transition:transform .2s;">${ch.emoji}</div>
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:1.05rem;
-        color:#e8f0ff;margin-bottom:4px;">${ch.name}</div>
-      <div style="font-size:.72rem;color:var(--muted);font-style:italic;line-height:1.4;">${ch.bio}</div>
+      <!-- Glow orb behind emoji -->
+      <div style="position:absolute;inset:0;border-radius:inherit;
+        background:radial-gradient(ellipse at 50% 30%,${ch.color}14,transparent 70%);
+        pointer-events:none;"></div>
+      <!-- Emoji bubble -->
+      <div class="ch-emoji-wrap" style="
+        width:clamp(42px,7vw,64px);height:clamp(42px,7vw,64px);
+        border-radius:50%;margin:0 auto;
+        background:radial-gradient(circle,${ch.color}2a,rgba(7,9,15,.7));
+        border:2.5px solid ${ch.color}55;
+        display:flex;align-items:center;justify-content:center;
+        font-size:clamp(1.4rem,3vw,2.2rem);
+        transition:transform .2s;flex-shrink:0;">
+        ${ch.emoji}
+      </div>
+      <!-- Name -->
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;
+        font-size:clamp(.68rem,1.3vw,.88rem);color:#e8f0ff;line-height:1.2;
+        margin-top:2px;">${ch.name}</div>
+      <!-- Role pill -->
+      <div style="font-size:clamp(.5rem,.9vw,.65rem);font-weight:800;
+        padding:2px 6px;border-radius:99px;
+        background:${ch.color}20;color:${ch.color};
+        border:1px solid ${ch.color}44;letter-spacing:.4px;
+        white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;">
+        ${ch.role}
+      </div>
+      <!-- Selected ring overlay -->
       <div class="guardian-selected-ring" style="display:none;position:absolute;inset:0;
-        border-radius:20px;border:3px solid ${ch.color};
-        box-shadow:inset 0 0 20px ${ch.color}22,0 0 20px ${ch.color}44;pointer-events:none;"></div>`;
+        border-radius:inherit;border:3px solid ${ch.color};
+        box-shadow:inset 0 0 18px ${ch.color}22,0 0 18px ${ch.color}44;pointer-events:none;"></div>
+      <!-- Checkmark badge -->
+      <div class="guardian-check" style="display:none;position:absolute;top:6px;right:8px;
+        font-size:.9rem;animation:popIn .2s ease;">✅</div>`;
 
     card.onclick = ()=>{
       clickSound();
       // Deselect all
       document.querySelectorAll('.guardian-card').forEach(c=>{
-        c.style.borderColor = 'rgba(106,130,171,.25)';
-        c.style.background = 'rgba(22,33,62,.9)';
+        c.style.borderColor = 'rgba(106,130,171,.22)';
+        c.style.background = 'rgba(22,33,62,.85)';
         c.style.transform = 'scale(1)';
         c.querySelector('.guardian-selected-ring').style.display = 'none';
+        c.querySelector('.guardian-check').style.display = 'none';
+        c.querySelector('.ch-emoji-wrap').style.transform = 'scale(1)';
       });
       // Select this
       card.style.borderColor = ch.color;
       card.style.background = `rgba(22,33,62,1)`;
-      card.style.transform = 'scale(1.04)';
+      card.style.transform = 'scale(1.06)';
       card.querySelector('.guardian-selected-ring').style.display = 'block';
+      card.querySelector('.guardian-check').style.display = 'block';
+      card.querySelector('.ch-emoji-wrap').style.transform = 'scale(1.12)';
+
       selectedCharId = ch.id;
       selectedCharEmoji = ch.emoji;
       selectedCharImg = '';
       S.nickname = ch.name;
       S.avatar = ch.emoji;
-      // Update confirm button
+
+      // Update preview bar
+      const bar = document.getElementById('char-preview-bar');
+      if(bar){
+        bar.style.opacity = '1';
+        bar.style.borderColor = ch.color + '55';
+        document.getElementById('cpb-emoji').textContent = ch.emoji;
+        document.getElementById('cpb-name').textContent = ch.name;
+        document.getElementById('cpb-name').style.color = ch.color;
+        const typeEl = document.getElementById('cpb-type');
+        typeEl.textContent = ch.type;
+        typeEl.style.background = ch.color + '22';
+        typeEl.style.color = ch.color;
+        typeEl.style.border = `1px solid ${ch.color}44`;
+        document.getElementById('cpb-bio').textContent = ch.bio;
+      }
+
+      // Enable & wire confirm button
       if(confirmBtn){
         confirmBtn.disabled = false;
-        confirmBtn.innerHTML = `✓ Confirm ${ch.name} / ยืนยัน`;
-        confirmBtn.style.background = `linear-gradient(135deg,${ch.color},${ch.color}cc)`;
-        confirmBtn.style.color = '#1a0800';
+        confirmBtn.onclick = ()=>confirmCharacter();
       }
     };
 
-    card.onmouseenter = ()=>{ if(selectedCharId !== ch.id) card.style.borderColor = ch.color+'88'; };
-    card.onmouseleave = ()=>{ if(selectedCharId !== ch.id) card.style.borderColor = 'rgba(106,130,171,.25)'; };
+    // Hover lift
+    card.onmouseenter = ()=>{ if(card.dataset.id !== selectedCharId) card.style.transform='scale(1.04)'; };
+    card.onmouseleave = ()=>{ if(card.dataset.id !== selectedCharId) card.style.transform='scale(1)'; };
 
     grid.appendChild(card);
   });
 
-  // Update confirm button to show confirmation screen
+  // Wire up confirm button (JS-owned, avoids timing/escaping issues)
   if(confirmBtn){
-    confirmBtn.onclick = ()=>{
-      if(!selectedCharId) return;
-      confirmSound();
-      const ch = CHAR_META.find(c=>c.id===selectedCharId);
-      if(!ch) return;
-      // Populate confirmation screen
-      document.getElementById('confirm-portrait').textContent = ch.emoji;
-      document.getElementById('confirm-portrait').style.borderColor = ch.color;
-      document.getElementById('confirm-portrait').style.boxShadow = `0 0 40px ${ch.color}77`;
-      document.getElementById('confirm-ready').textContent = `Ready, ${currentUser || 'Explorer'}!`;
-      document.getElementById('confirm-subtitle').textContent = `Guardian ${ch.name.toUpperCase()} stands beside you.`;
-      document.getElementById('confirm-explorer').textContent = currentUser || 'Explorer';
-      document.getElementById('confirm-guardian').textContent = ch.name.toUpperCase();
-      document.getElementById('confirm-type').textContent = ch.type;
-      document.getElementById('confirm-bio').textContent = ch.bio;
-      document.getElementById('confirm-next-btn').style.background = `linear-gradient(135deg,${ch.color},${ch.color}cc)`;
-      goTo('confirm');
-    };
+    confirmBtn.disabled = true;
+    confirmBtn.onclick = ()=>confirmCharacter();
   }
 }
 
-function proceedAfterConfirm(){
+/* ─── confirmCharacter ─────────────────────────────────────────────────────
+   Single source of truth called by both the preview-bar button and the
+   card's per-selection onclick. Guards against no selection. */
+function confirmCharacter(){
+  if(!selectedCharId) return;
+  const ch = CHAR_META.find(c => c.id === selectedCharId);
+  if(!ch) return;
+
   // Play confirm fanfare
   try{
     const ctx = new (window.AudioContext||window.webkitAudioContext)();
-    [392,523,659,784,1047].forEach((freq,i)=>{
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = 'sine';
+    [523,659,784,1047].forEach((freq,i)=>{
+      const o = ctx.createOscillator(), g = ctx.createGain();
       o.connect(g); g.connect(ctx.destination);
       o.frequency.value = freq;
-      g.gain.setValueAtTime(0.2, ctx.currentTime + i*0.07);
-      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i*0.07 + 0.25);
-      o.start(ctx.currentTime + i*0.07);
-      o.stop(ctx.currentTime + i*0.07 + 0.25);
+      g.gain.setValueAtTime(0.25, ctx.currentTime + i*0.08);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i*0.08 + 0.15);
+      o.start(ctx.currentTime + i*0.08);
+      o.stop(ctx.currentTime + i*0.08 + 0.2);
     });
   }catch(e){}
+
+  // Populate the confirmation screen
+  const portrait  = document.getElementById('confirm-portrait');
+  const ready     = document.getElementById('confirm-ready');
+  const subtitle  = document.getElementById('confirm-subtitle');
+  const explorer  = document.getElementById('confirm-explorer');
+  const guardian  = document.getElementById('confirm-guardian');
+  const typeEl    = document.getElementById('confirm-type');
+  const bioEl     = document.getElementById('confirm-bio');
+  const nextBtn   = document.getElementById('confirm-next-btn');
+
+  if(portrait){ portrait.textContent = ch.emoji; portrait.style.borderColor = ch.color; portrait.style.boxShadow = `0 0 40px ${ch.color}77`; }
+  if(ready)    ready.textContent    = `Ready, ${currentUser || 'Explorer'}!`;
+  if(subtitle) subtitle.textContent = `${ch.name} stands beside you.`;
+  if(explorer) explorer.textContent = currentUser || 'Explorer';
+  if(guardian) guardian.textContent = ch.name.toUpperCase();
+  if(typeEl)   typeEl.textContent   = ch.type;
+  if(bioEl)    bioEl.textContent    = ch.bio;
+  if(nextBtn)  nextBtn.style.background = `linear-gradient(135deg,${ch.color},${ch.color}cc)`;
+
+  goTo('confirm');
+}
+
+function proceedAfterConfirm(){
   goTo('howto');
 }
 
