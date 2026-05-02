@@ -872,74 +872,83 @@ footer span{color:var(--g3);}
   <div style="position:fixed;inset:0;background:rgba(3,6,20,0.72);z-index:1;pointer-events:none;"></div>
   <canvas id="char-stars" style="position:fixed;inset:0;z-index:0;pointer-events:none;display:none;"></canvas>
 
-  <!-- Outer wrapper: 3-row grid — header | cards | preview bar — all locked inside 100vh -->
+  <!-- Main layout: fills exactly 100vh, nothing can overflow -->
   <div style="
     position:relative;z-index:2;
-    height:100vh;
-    display:grid;
-    grid-template-rows:auto 1fr auto;
-    align-items:start;
-    padding:clamp(8px,1.5vh,18px) clamp(12px,2vw,24px) clamp(6px,1vh,12px);
+    width:100%;height:100vh;
+    display:flex;flex-direction:column;
+    padding:clamp(8px,1.5vh,16px) clamp(10px,2vw,24px) clamp(6px,1vh,10px);
     box-sizing:border-box;
-    gap:clamp(4px,.8vh,10px);
+    gap:clamp(4px,.6vh,8px);
+    overflow:hidden;
   ">
 
-    <!-- Row 1: Header (compact, fixed height) -->
-    <div style="text-align:center;">
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:clamp(1.2rem,3vw,1.9rem);
+    <!-- Header -->
+    <div style="text-align:center;flex-shrink:0;">
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;
+        font-size:clamp(1.1rem,2.8vw,1.8rem);
         background:linear-gradient(135deg,var(--g1),var(--g3));
         -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-        line-height:1.1;margin-bottom:2px;">
+        line-height:1.1;margin-bottom:1px;">
         Choose Your Hero!
-        <span style="font-size:.52em;font-weight:700;-webkit-text-fill-color:var(--muted);background:none;color:var(--muted);">เลือกตัวละคร</span>
+        <span style="font-size:.5em;font-weight:700;-webkit-text-fill-color:var(--muted);
+          background:none;color:var(--muted);">เลือกตัวละคร</span>
       </div>
-      <div style="color:#c8d8f0;font-weight:600;font-size:clamp(.68rem,1.4vw,.82rem);opacity:.85;">
-        Pick your space guardian 🚀 <span style="font-family:'Noto Sans Thai',sans-serif;">เลือกผู้พิทักษ์ของคุณ</span>
+      <div style="color:#c8d8f0;font-weight:600;
+        font-size:clamp(.62rem,1.3vw,.78rem);opacity:.85;">
+        Pick your space guardian 🚀
+        <span style="font-family:'Noto Sans Thai',sans-serif;">เลือกผู้พิทักษ์ของคุณ</span>
       </div>
     </div>
 
-    <!-- Row 2: Character grid — stretches to fill ALL remaining space between header and bar -->
+    <!-- Card grid: flex:1 = takes ALL remaining vertical space -->
     <div id="char-card-grid" style="
+      flex:1;
       display:grid;
       grid-template-columns:repeat(5,1fr);
       grid-template-rows:repeat(2,1fr);
-      gap:clamp(5px,.8vw,10px);
+      gap:clamp(4px,.7vw,9px);
       width:100%;max-width:1100px;
-      height:100%;
       margin:0 auto;
-      box-sizing:border-box;
+      min-height:0;
       overflow:hidden;
     "></div>
 
-    <!-- Row 3: Preview bar (always reserves its space so it never overlaps) -->
-    <div id="char-preview-bar" style="
-      width:100%;max-width:1100px;margin:0 auto;
-      background:rgba(22,33,62,.88);
-      border:1.5px solid rgba(106,130,171,.2);
-      border-radius:14px;
-      padding:clamp(5px,.8vh,9px) clamp(10px,1.5vw,18px);
-      display:flex;align-items:center;gap:12px;
-      min-height:48px;
-      transition:opacity .3s,border-color .3s;
-      opacity:0;
-      box-sizing:border-box;
-    ">
-      <div id="cpb-emoji" style="font-size:1.7rem;flex-shrink:0;">🌟</div>
-      <div style="flex:1;min-width:0;">
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <span id="cpb-name" style="font-family:'Baloo 2',cursive;font-weight:900;font-size:.95rem;color:#e8f0ff;"></span>
-          <span id="cpb-type" style="font-size:.6rem;padding:2px 7px;border-radius:99px;font-weight:700;"></span>
-        </div>
-        <div id="cpb-bio" style="font-size:.7rem;color:var(--muted);font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
-      </div>
-      <button id="char-confirm-btn" class="start-btn"
-        style="flex-shrink:0;padding:9px 20px;font-size:.85rem;border-radius:99px;margin:0;max-width:none;white-space:nowrap;"
-        disabled>
-        ✨ Let's Go! <span style='font-family:"Noto Sans Thai",sans-serif;font-size:.85em;opacity:.85;'>ไปเลย!</span>
-      </button>
-    </div>
-
   </div>
+
+  <!-- ── PREVIEW BAR: fixed overlay, slides up from bottom on selection ── -->
+  <div id="char-preview-bar" style="
+    position:fixed;
+    bottom:0;left:0;right:0;
+    z-index:200;
+    transform:translateY(100%);
+    transition:transform .35s cubic-bezier(.34,1.2,.64,1);
+    padding:clamp(6px,1vh,10px) clamp(10px,2vw,20px);
+    background:linear-gradient(to top,rgba(5,8,22,.97) 60%,rgba(5,8,22,.85));
+    border-top:2px solid rgba(106,130,171,.25);
+    display:flex;align-items:center;gap:12px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  ">
+    <div id="cpb-emoji" style="font-size:1.8rem;flex-shrink:0;">🌟</div>
+    <div style="flex:1;min-width:0;">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span id="cpb-name" style="font-family:'Baloo 2',cursive;font-weight:900;
+          font-size:clamp(.85rem,1.8vw,1rem);color:#e8f0ff;"></span>
+        <span id="cpb-type" style="font-size:.6rem;padding:2px 8px;
+          border-radius:99px;font-weight:700;"></span>
+      </div>
+      <div id="cpb-bio" style="font-size:.68rem;color:var(--muted);
+        font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+    </div>
+    <button id="char-confirm-btn" class="start-btn"
+      style="flex-shrink:0;padding:9px 22px;font-size:.85rem;
+        border-radius:99px;margin:0;max-width:none;white-space:nowrap;"
+      disabled>
+      ✨ Let's Go! <span style='font-family:"Noto Sans Thai",sans-serif;
+        font-size:.85em;opacity:.85;'>ไปเลย!</span>
+    </button>
+  </div>
+
 </div>
 
 
@@ -3965,18 +3974,17 @@ async function buildCharacterSelection(){
   const confirmBtn = document.getElementById('char-confirm-btn');
   if(confirmBtn) confirmBtn.disabled = true;
 
-  // 10 chars → 5 cols × 2 rows; fills the grid area completely
   const count = CHAR_META.length;
   const cols = count <= 4 ? count : count <= 6 ? 3 : count <= 8 ? 4 : 5;
   grid.style.cssText = `
+    flex:1;
     display:grid;
     grid-template-columns:repeat(${cols},1fr);
     grid-template-rows:repeat(2,1fr);
-    gap:clamp(5px,.8vw,10px);
+    gap:clamp(4px,.7vw,9px);
     width:100%;max-width:1100px;
-    height:100%;
     margin:0 auto;
-    box-sizing:border-box;
+    min-height:0;
     overflow:hidden;`;
 
   grid.innerHTML = '';
@@ -4138,12 +4146,11 @@ async function buildCharacterSelection(){
       S.nickname = ch.name;
       S.avatar = ch.emoji;
 
-      // Update preview bar
+      // Slide up the preview bar
       const bar = document.getElementById('char-preview-bar');
       if(bar){
-        bar.style.opacity = '1';
-        bar.style.borderColor = ch.color + '66';
-        bar.style.background = `rgba(22,33,62,.92)`;
+        bar.style.transform = 'translateY(0)';
+        bar.style.borderTopColor = ch.color + '66';
         document.getElementById('cpb-emoji').textContent = ch.emoji;
         document.getElementById('cpb-name').textContent = ch.name;
         document.getElementById('cpb-name').style.color = ch.color;
