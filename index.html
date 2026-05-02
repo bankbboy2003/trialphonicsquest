@@ -796,12 +796,9 @@ footer span{color:var(--g3);}
 <canvas id="sky-canvas"></canvas>
 
 <!-- ═══════ SCREEN 1: LOGIN with FULLSCREEN BACKGROUND VIDEO ═══════ -->
-<div id="scr-intro" class="screen" style="position:relative;overflow:hidden;padding:0;min-height:100vh;">
+<div id="scr-intro" class="screen" style="position:relative;overflow:hidden;padding:0;min-height:100vh;;background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);">
   <!-- Fullscreen background video -->
-  <video id="intro-video" autoplay muted loop playsinline
-    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/Sequence%2001_1.mp4"
-    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;">
-  </video>
+  <!-- video removed: galaxy background used instead -->
   <!-- Dark overlay -->
   <div style="position:fixed;inset:0;background:rgba(0,0,0,0.54);z-index:1;pointer-events:none;"></div>
   <!-- Login card centred on top of video -->
@@ -863,12 +860,32 @@ footer span{color:var(--g3);}
 </div>
 
 <!-- ═══════ SCREEN 1.5: CHARACTER SELECTION ═══════ -->
-<div id="scr-charsel" class="screen" style="background:#07090f;padding:0;height:100vh;overflow:hidden;">
-  <video id="charsel-video" autoplay muted loop playsinline
-    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;"
-    onerror="this.style.display='none';if(typeof initCharStars==='function')initCharStars();">
-  </video>
+<div id="scr-charsel" class="screen" style="background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);padding:0;height:100vh;overflow:hidden;">
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
+    <div style="position:absolute;width:1px;height:1px;background:#fff;border-radius:50%;opacity:.7;top:5%;left:10%;
+      box-shadow:120px 40px 0 1px rgba(255,255,255,.8),240px 80px 0 1px rgba(255,255,255,.5),
+      80px 120px 0 1px rgba(255,255,255,.9),360px 20px 0 2px rgba(255,255,255,.6),
+      440px 100px 0 1px rgba(255,255,255,.4),560px 60px 0 1px rgba(255,255,255,.8),
+      640px 140px 0 1px rgba(255,255,255,.5),720px 30px 0 2px rgba(255,255,255,.7),
+      800px 110px 0 1px rgba(255,255,255,.9),100px 200px 0 1px rgba(255,255,255,.5),
+      300px 180px 0 1px rgba(255,255,255,.8),500px 160px 0 1px rgba(255,255,255,.4),
+      700px 190px 0 1px rgba(255,255,255,.7),200px 280px 0 1px rgba(255,255,255,.6),
+      400px 260px 0 2px rgba(255,255,255,.8),600px 240px 0 1px rgba(255,255,255,.9),
+      50px 320px 0 1px rgba(255,255,255,.5),250px 350px 0 1px rgba(255,255,255,.4),
+      450px 300px 0 1px rgba(255,255,255,.8),650px 370px 0 1px rgba(255,255,255,.6),
+      150px 420px 0 2px rgba(255,255,255,.9),350px 400px 0 1px rgba(255,255,255,.7),
+      550px 440px 0 1px rgba(255,255,255,.5),750px 410px 0 1px rgba(255,255,255,.8),
+      850px 200px 0 1px rgba(255,255,255,.6),950px 300px 0 1px rgba(255,255,255,.7),
+      1050px 150px 0 2px rgba(255,255,255,.8),1150px 350px 0 1px rgba(255,255,255,.5),
+      1250px 80px 0 1px rgba(255,255,255,.9),1350px 280px 0 1px rgba(255,255,255,.6);"></div>
+    <div style="position:absolute;width:300px;height:200px;border-radius:50%;top:0;right:15%;
+      background:radial-gradient(circle,rgba(176,124,248,.12) 0%,transparent 70%);"></div>
+    <div style="position:absolute;width:250px;height:180px;border-radius:50%;bottom:15%;left:5%;
+      background:radial-gradient(circle,rgba(74,179,244,.08) 0%,transparent 70%);"></div>
+    <div style="position:absolute;width:200px;height:150px;border-radius:50%;top:40%;right:5%;
+      background:radial-gradient(circle,rgba(78,220,132,.07) 0%,transparent 70%);"></div>
+  </div>
+  <!-- video removed: galaxy background used instead -->
   <div style="position:fixed;inset:0;background:rgba(3,6,20,0.72);z-index:1;pointer-events:none;"></div>
   <canvas id="char-stars" style="position:fixed;inset:0;z-index:0;pointer-events:none;display:none;"></canvas>
 
@@ -918,16 +935,18 @@ footer span{color:var(--g3);}
 
   <!-- ── PREVIEW BAR: fixed overlay, slides up from bottom on selection ── -->
   <div id="char-preview-bar" style="
-    position:fixed;
-    bottom:0;left:0;right:0;
-    z-index:200;
-    transform:translateY(100%);
-    transition:transform .35s cubic-bezier(.34,1.2,.64,1);
-    padding:clamp(6px,1vh,10px) clamp(10px,2vw,20px);
+    position:relative;
+    bottom:auto;left:auto;right:auto;
+    z-index:10;
+    transform:translateY(0);
+    max-height:0;overflow:hidden;
+    transition:max-height .35s cubic-bezier(.34,1.2,.64,1),padding .35s;
+    padding:0 clamp(10px,2vw,20px);
     background:linear-gradient(to top,rgba(5,8,22,.97) 60%,rgba(5,8,22,.85));
-    border-top:2px solid rgba(106,130,171,.25);
+    border-top:2px solid transparent;
     display:flex;align-items:center;gap:12px;
     backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    flex-shrink:0;
   ">
     <div id="cpb-emoji" style="font-size:1.8rem;flex-shrink:0;">🌟</div>
     <div style="flex:1;min-width:0;">
@@ -957,19 +976,15 @@ footer span{color:var(--g3);}
   <!-- ══════════════════════════════════════════════
        CONFIRMATION SCREEN — "Ready, [name]!"
   ══════════════════════════════════════════════ -->
-  <div id="scr-confirm" class="screen" style="position:relative;overflow:hidden;min-height:100vh;background:#07090f;">
-    <video autoplay muted loop playsinline id="confirm-video"
-      src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-      style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.35;"
-      onerror="this.style.display='none';">
-    </video>
+  <div id="scr-confirm" class="screen" style="position:relative;overflow:hidden;min-height:100vh;background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);">
+    <!-- video removed: galaxy background used instead -->
     <div style="position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;">
       <!-- Character portrait -->
-      <div id="confirm-portrait" style="width:140px;height:140px;border-radius:50%;border:4px solid #f7c948;
+      <div id="confirm-portrait" style="width:160px;height:160px;border-radius:50%;border:4px solid #f7c948;
         display:flex;align-items:center;justify-content:center;font-size:5rem;
-        background:rgba(22,33,62,.9);margin-bottom:20px;
-        box-shadow:0 0 40px rgba(247,201,72,.5);animation:pulse 2s ease-in-out infinite alternate;">
-        🐱
+        background:rgba(22,33,62,.9);margin-bottom:20px;overflow:hidden;
+        box-shadow:0 0 40px rgba(247,201,72,.5),0 0 0 4px rgba(247,201,72,.2);
+        animation:pulse 2s ease-in-out infinite alternate;">
       </div>
       <!-- Ready text -->
       <div id="confirm-ready" style="font-family:'Baloo 2',cursive;font-weight:900;font-size:2.4rem;
@@ -1022,317 +1037,156 @@ footer span{color:var(--g3);}
   </div>
   <!-- END CONFIRMATION SCREEN -->
 
-  <div id="scr-howto" class="screen" style="position:relative;overflow-y:auto;min-height:100vh;background:#07090f;">
-  <video autoplay muted loop playsinline
-    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.35;display:none;"
-    onerror="this.style.display='none';">
-  </video>
+  <div id="scr-howto" class="screen" style="position:relative;overflow:hidden;min-height:100vh;
+  background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);">
+  <!-- Static galaxy stars (CSS only — no motion sickness) -->
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
+    <div style="position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.8;top:8%;left:15%;box-shadow:120px 40px #fff8,240px 80px #fff6,80px 120px #fff9,360px 20px #fff7,440px 100px #fff5,560px 60px #fff8,640px 140px #fff6,720px 30px #fff7,800px 110px #fff9,100px 200px #fff6,300px 180px #fff8,500px 160px #fff5,700px 190px #fff7,200px 280px #fff6,400px 260px #fff8,600px 240px #fff9,50px 320px #fff7,250px 350px #fff5,450px 300px #fff8,650px 370px #fff6,150px 420px #fff9,350px 400px #fff7,550px 440px #fff5,750px 410px #fff8,50px 480px #fff6,850px 200px #fff7,900px 350px #fff8,950px 100px #fff6,1000px 280px #fff9,1100px 160px #fff7,1200px 380px #fff5,1300px 50px #fff8,1400px 320px #fff6;"></div>
+    <!-- Purple nebula glow -->
+    <div style="position:absolute;width:400px;height:300px;border-radius:50%;
+      background:radial-gradient(circle,rgba(176,124,248,.15) 0%,transparent 70%);
+      top:-50px;right:10%;pointer-events:none;"></div>
+    <!-- Blue nebula -->
+    <div style="position:absolute;width:300px;height:200px;border-radius:50%;
+      background:radial-gradient(circle,rgba(74,179,244,.1) 0%,transparent 70%);
+      bottom:10%;left:5%;pointer-events:none;"></div>
+  </div>
 
-  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;padding:32px 20px 60px;">
+  <div style="position:relative;z-index:2;max-width:900px;margin:0 auto;
+    height:100vh;display:flex;flex-direction:column;padding:clamp(10px,2vh,20px) clamp(16px,3vw,28px);
+    box-sizing:border-box;overflow:hidden;">
 
-    <!-- Header -->
-    <div style="text-align:center;margin-bottom:36px;padding-top:20px;">
-      <div style="font-size:3.5rem;margin-bottom:12px;">🚀</div>
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:2.8rem;
+    <!-- Header (compact) -->
+    <div style="text-align:center;flex-shrink:0;margin-bottom:clamp(6px,1.5vh,14px);">
+      <div style="font-size:2.2rem;margin-bottom:4px;">🚀</div>
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;
+        font-size:clamp(1.2rem,3vw,1.8rem);
         background:linear-gradient(135deg,var(--g1),var(--g3));
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-        background-clip:text;margin-bottom:8px;line-height:1.2;">How to Play</div>
-      <div style="font-size:1.4rem;font-weight:700;color:var(--g3);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        line-height:1.1;margin-bottom:2px;">How to Play</div>
+      <div style="font-size:clamp(.72rem,1.4vw,.85rem);color:var(--g3);font-weight:700;
         font-family:'Noto Sans Thai','Nunito',sans-serif;">วิธีเล่น PhonicsQuest</div>
     </div>
 
-    <!-- Step cards -->
-    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+    <!-- Steps grid — 2 columns on laptop, 1 column on mobile -->
+    <div style="flex:1;display:grid;
+      grid-template-columns:repeat(2,1fr);
+      grid-template-rows:repeat(3,1fr);
+      gap:clamp(6px,1.2vh,10px);
+      min-height:0;overflow:hidden;">
 
       <!-- Step 1 -->
-      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(247,201,72,.5);
-        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
-        backdrop-filter:blur(10px);">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--g1);
-          color:#1a0800;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
-          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(247,201,72,.5);">1</div>
-        <div style="flex:1;">
-          <div style="font-weight:800;font-size:1.25rem;color:var(--g1);margin-bottom:8px;
-            font-family:'Baloo 2',cursive;">
-            🌍 Choose Your Planet / เลือกดาวเคราะห์
-          </div>
-          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
-            Tap any unlocked planet on the map to start a mission.
-          </div>
-          <div style="font-size:1rem;color:var(--g3);margin-top:6px;line-height:1.7;
-            font-family:'Noto Sans Thai','Nunito',sans-serif;">
-            แตะดาวเคราะห์ที่ปลดล็อกแล้วบนแผนที่เพื่อเริ่มภารกิจ
-          </div>
+      <div style="background:rgba(22,33,62,.85);border:1.5px solid rgba(247,201,72,.4);
+        border-radius:14px;padding:clamp(8px,1.5vh,14px) clamp(10px,2vw,16px);
+        display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:34px;height:34px;border-radius:50%;background:var(--g1);
+          color:#1a0800;font-weight:900;font-size:.95rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;">1</div>
+        <div>
+          <div style="font-weight:800;font-size:clamp(.75rem,1.4vw,.9rem);color:var(--g1);margin-bottom:3px;
+            font-family:'Baloo 2',cursive;">🌍 Choose Your Planet / เลือกดาวเคราะห์</div>
+          <div style="font-size:clamp(.65rem,1.2vw,.78rem);color:#e8f0ff;line-height:1.5;">Tap any unlocked planet to start a mission.</div>
+          <div style="font-size:clamp(.6rem,1.1vw,.72rem);color:var(--g1);margin-top:2px;font-family:'Noto Sans Thai','Nunito',sans-serif;">แตะดาวที่ปลดล็อกเพื่อเริ่มภารกิจ</div>
         </div>
       </div>
 
       <!-- Step 2 -->
-      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(74,179,244,.5);
-        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
-        backdrop-filter:blur(10px);">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--g3);
-          color:#031525;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
-          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(74,179,244,.5);">2</div>
-        <div style="flex:1;">
-          <div style="font-weight:800;font-size:1.25rem;color:var(--g3);margin-bottom:8px;
-            font-family:'Baloo 2',cursive;">
-            👂 Listen Carefully / ฟังให้ดี
-          </div>
-          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
-            Tap 🔊 to hear a word. Then choose the correct answer or say it out loud!
-          </div>
-          <div style="font-size:1rem;color:var(--g3);margin-top:6px;line-height:1.7;
-            font-family:'Noto Sans Thai','Nunito',sans-serif;">
-            แตะ 🔊 เพื่อฟังคำ แล้วเลือกคำตอบที่ถูกต้องหรือพูดออกเสียง!
-          </div>
+      <div style="background:rgba(22,33,62,.85);border:1.5px solid rgba(74,179,244,.4);
+        border-radius:14px;padding:clamp(8px,1.5vh,14px) clamp(10px,2vw,16px);
+        display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:34px;height:34px;border-radius:50%;background:var(--g3);
+          color:#031525;font-weight:900;font-size:.95rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;">2</div>
+        <div>
+          <div style="font-weight:800;font-size:clamp(.75rem,1.4vw,.9rem);color:var(--g3);margin-bottom:3px;
+            font-family:'Baloo 2',cursive;">👂 Listen Carefully / ฟังให้ดี</div>
+          <div style="font-size:clamp(.65rem,1.2vw,.78rem);color:#e8f0ff;line-height:1.5;">Tap 🔊 to hear a word. Choose the correct answer or say it out loud!</div>
+          <div style="font-size:clamp(.6rem,1.1vw,.72rem);color:var(--g3);margin-top:2px;font-family:'Noto Sans Thai','Nunito',sans-serif;">แตะ 🔊 ฟังคำ แล้วเลือกหรือพูดออกเสียง!</div>
         </div>
       </div>
 
       <!-- Step 3 -->
-      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(78,220,132,.5);
-        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
-        backdrop-filter:blur(10px);">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--g2);
-          color:#041208;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
-          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(78,220,132,.5);">3</div>
-        <div style="flex:1;">
-          <div style="font-weight:800;font-size:1.25rem;color:var(--g2);margin-bottom:8px;
-            font-family:'Baloo 2',cursive;">
-            ❤️ Don't Lose All Hearts! / อย่าให้หมดหัวใจ!
-          </div>
-          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
-            You have 3 hearts per mission. Wrong answers cost a heart. Lose all 3 and restart!
-          </div>
-          <div style="font-size:1rem;color:var(--g2);margin-top:6px;line-height:1.7;
-            font-family:'Noto Sans Thai','Nunito',sans-serif;">
-            คุณมี 3 หัวใจต่อภารกิจ — ตอบผิด = เสีย 1 หัวใจ — หมดทั้ง 3 = เริ่มใหม่!
-          </div>
+      <div style="background:rgba(22,33,62,.85);border:1.5px solid rgba(78,220,132,.4);
+        border-radius:14px;padding:clamp(8px,1.5vh,14px) clamp(10px,2vw,16px);
+        display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:34px;height:34px;border-radius:50%;background:var(--g2);
+          color:#041208;font-weight:900;font-size:.95rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;">3</div>
+        <div>
+          <div style="font-weight:800;font-size:clamp(.75rem,1.4vw,.9rem);color:var(--g2);margin-bottom:3px;
+            font-family:'Baloo 2',cursive;">❤️ Don't Lose All Hearts! / อย่าให้หมดหัวใจ!</div>
+          <div style="font-size:clamp(.65rem,1.2vw,.78rem);color:#e8f0ff;line-height:1.5;">3 hearts per mission. Wrong = lose a heart. Lose all 3 = restart!</div>
+          <div style="font-size:clamp(.6rem,1.1vw,.72rem);color:var(--g2);margin-top:2px;font-family:'Noto Sans Thai','Nunito',sans-serif;">3 หัวใจต่อภารกิจ — ผิด = เสีย 1 — หมด = เริ่มใหม่!</div>
         </div>
       </div>
 
       <!-- Step 4 -->
-      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(176,124,248,.5);
-        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
-        backdrop-filter:blur(10px);">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--g5);
-          color:#fff;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
-          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(176,124,248,.5);">4</div>
-        <div style="flex:1;">
-          <div style="font-weight:800;font-size:1.25rem;color:var(--g5);margin-bottom:8px;
-            font-family:'Baloo 2',cursive;">
-            ⚡ Earn XP &amp; Level Up! / สะสม XP และเลเวลอัป!
-          </div>
-          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
-            Every correct answer gives XP. Fill the bar to level up and unlock badges!
-          </div>
-          <div style="font-size:1rem;color:var(--g5);margin-top:6px;line-height:1.7;
-            font-family:'Noto Sans Thai','Nunito',sans-serif;">
-            ตอบถูกทุกข้อ = ได้ XP — เต็มบาร์ = เลเวลอัป และปลดล็อกป้าย!
-          </div>
+      <div style="background:rgba(22,33,62,.85);border:1.5px solid rgba(176,124,248,.4);
+        border-radius:14px;padding:clamp(8px,1.5vh,14px) clamp(10px,2vw,16px);
+        display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:34px;height:34px;border-radius:50%;background:var(--g5);
+          color:#fff;font-weight:900;font-size:.95rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;">4</div>
+        <div>
+          <div style="font-weight:800;font-size:clamp(.75rem,1.4vw,.9rem);color:var(--g5);margin-bottom:3px;
+            font-family:'Baloo 2',cursive;">⚡ Earn XP &amp; Level Up! / สะสม XP!</div>
+          <div style="font-size:clamp(.65rem,1.2vw,.78rem);color:#e8f0ff;line-height:1.5;">Correct answers give XP. Fill the bar to level up and unlock badges!</div>
+          <div style="font-size:clamp(.6rem,1.1vw,.72rem);color:var(--g5);margin-top:2px;font-family:'Noto Sans Thai','Nunito',sans-serif;">ตอบถูก = ได้ XP — เต็มบาร์ = เลเวลอัป!</div>
         </div>
       </div>
 
       <!-- Step 5 -->
-      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(240,106,106,.5);
-        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
-        backdrop-filter:blur(10px);">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--g4);
-          color:#fff;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
-          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(240,106,106,.5);">5</div>
-        <div style="flex:1;">
-          <div style="font-weight:800;font-size:1.25rem;color:var(--g4);margin-bottom:8px;
-            font-family:'Baloo 2',cursive;">
-            🌟 Planet Challenge at the End! / ภารกิจพิเศษตอนท้าย!
-          </div>
-          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
-            Every planet ends with a creative task — sort sounds or record your favourite word!
-          </div>
-          <div style="font-size:1rem;color:var(--g4);margin-top:6px;line-height:1.7;
+      <div style="background:rgba(22,33,62,.85);border:1.5px solid rgba(240,106,106,.4);
+        border-radius:14px;padding:clamp(8px,1.5vh,14px) clamp(10px,2vw,16px);
+        display:flex;align-items:flex-start;gap:10px;">
+        <div style="width:34px;height:34px;border-radius:50%;background:var(--g4);
+          color:#fff;font-weight:900;font-size:.95rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;">5</div>
+        <div>
+          <div style="font-weight:800;font-size:clamp(.75rem,1.4vw,.9rem);color:var(--g4);margin-bottom:3px;
+            font-family:'Baloo 2',cursive;">🌟 Planet Challenge! / ภารกิจพิเศษ!</div>
+          <div style="font-size:clamp(.65rem,1.2vw,.78rem);color:#e8f0ff;line-height:1.5;">Every planet ends with a creative task. Sort sounds or record your favourite word!</div>
+          <div style="font-size:clamp(.6rem,1.1vw,.72rem);color:var(--g4);margin-top:2px;font-family:'Noto Sans Thai','Nunito',sans-serif;">ทุกดาวมีงานสร้างสรรค์ตอนท้าย — ไม่เสียหัวใจ!</div>
+        </div>
+      </div>
+
+      <!-- Step 6 — Tips + Start button -->
+      <div style="background:rgba(247,201,72,.06);border:1.5px solid rgba(247,201,72,.3);
+        border-radius:14px;padding:clamp(8px,1.5vh,14px) clamp(10px,2vw,16px);
+        display:flex;flex-direction:column;justify-content:space-between;gap:6px;">
+        <div>
+          <div style="font-weight:800;font-size:clamp(.72rem,1.3vw,.85rem);color:var(--g1);margin-bottom:4px;
+            font-family:'Baloo 2',cursive;">💡 Quick Tips / เคล็ดลับ</div>
+          <div style="font-size:clamp(.58rem,1vw,.7rem);color:#e8f0ff;line-height:1.6;
             font-family:'Noto Sans Thai','Nunito',sans-serif;">
-            ทุกดาวมีงานสร้างสรรค์ตอนท้าย — จัดเรียงเสียงหรือบันทึกคำโปรด! ไม่เสียหัวใจ!
+            🔊 Always tap <strong style="color:var(--g1);">Play Sound</strong> first!<br>
+            🎤 Use Chrome for speaking tasks<br>
+            🔥 Answer correctly in a row for streaks!
           </div>
         </div>
+        <button onclick="goTo('app');renderRoadmaps();"
+          style="width:100%;background:linear-gradient(135deg,var(--g1),#ff9f43);
+            color:#1a0800;border:none;font-family:'Baloo 2',cursive;font-weight:900;
+            font-size:clamp(.8rem,1.5vw,.95rem);padding:10px;border-radius:99px;cursor:pointer;
+            touch-action:manipulation;box-shadow:0 4px 16px rgba(247,201,72,.4);">
+          🚀 Start Playing! / เริ่มเล่นได้เลย!
+        </button>
       </div>
 
-    </div><!-- end steps -->
+    </div><!-- end steps grid -->
 
-    <!-- Task type legend -->
-    <div style="background:rgba(22,33,62,.92);border:2px solid rgba(247,201,72,.35);
-      border-radius:20px;padding:20px 22px;margin-bottom:24px;backdrop-filter:blur(10px);">
-      <div style="font-weight:800;font-size:1.2rem;color:var(--g1);margin-bottom:16px;
-        text-align:center;font-family:'Baloo 2',cursive;">
-        📋 Task Types / ประเภทงาน
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
-          border-radius:12px;padding:10px 12px;">
-          <span style="font-size:1.5rem;">👂</span>
-          <div>
-            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Listen &amp; Choose</div>
-            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">ฟังและเลือก</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
-          border-radius:12px;padding:10px 12px;">
-          <span style="font-size:1.5rem;">🖼️</span>
-          <div>
-            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Picture Match</div>
-            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จับคู่รูปภาพ</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
-          border-radius:12px;padding:10px 12px;">
-          <span style="font-size:1.5rem;">⚡</span>
-          <div>
-            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Rapid Fire</div>
-            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">รอบด่วน 12 วินาที</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
-          border-radius:12px;padding:10px 12px;">
-          <span style="font-size:1.5rem;">🔗</span>
-          <div>
-            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Match Pairs</div>
-            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จับคู่</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
-          border-radius:12px;padding:10px 12px;">
-          <span style="font-size:1.5rem;">✏️</span>
-          <div>
-            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Sentence Builder</div>
-            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">สร้างประโยค</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
-          border-radius:12px;padding:10px 12px;">
-          <span style="font-size:1.5rem;">🎤</span>
-          <div>
-            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Speak &amp; Record</div>
-            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">พูดและบันทึกเสียง</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(176,124,248,.15);
-          border-radius:12px;padding:10px 12px;border:1px solid rgba(176,124,248,.3);">
-          <span style="font-size:1.5rem;">🔀</span>
-          <div>
-            <div style="font-weight:700;color:var(--g5);font-size:1rem;">Sound Sorter ⭐</div>
-            <div style="color:var(--g5);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จัดเรียงเสียง</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:rgba(176,124,248,.15);
-          border-radius:12px;padding:10px 12px;border:1px solid rgba(176,124,248,.3);">
-          <span style="font-size:1.5rem;">⭐</span>
-          <div>
-            <div style="font-weight:700;color:var(--g5);font-size:1rem;">Favourite Word ⭐</div>
-            <div style="color:var(--g5);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">คำโปรดของฉัน</div>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top:14px;font-size:1rem;color:var(--g5);text-align:center;
-        font-family:'Noto Sans Thai','Nunito',sans-serif;font-weight:700;">
-        ⭐ Planet Challenge = Creative Task / งานสร้างสรรค์ — ไม่เสียหัวใจ!
-      </div>
-    </div>
-
-    <!-- Tips -->
-    <div style="background:rgba(247,201,72,.08);border:2px solid rgba(247,201,72,.35);
-      border-radius:20px;padding:18px 22px;margin-bottom:32px;backdrop-filter:blur(10px);">
-      <div style="font-weight:800;font-size:1.15rem;color:var(--g1);margin-bottom:12px;
-        font-family:'Baloo 2',cursive;">
-        💡 Quick Tips / เคล็ดลับ
-      </div>
-      <div style="font-size:1rem;color:#e8f0ff;line-height:2.1;
-        font-family:'Noto Sans Thai','Nunito',sans-serif;">
-        🔊 Always tap <strong style="color:var(--g1);">Hear Example</strong> first!
-        <span style="color:var(--g3);"> / แตะ "ฟังตัวอย่าง" ก่อนเสมอ!</span><br>
-        🎤 Chrome browser works best for speaking tasks
-        <span style="color:var(--g3);"> / ใช้ Chrome ดีที่สุดสำหรับงานพูด</span><br>
-        🔥 Answer correctly in a row to build a streak!
-        <span style="color:var(--g3);"> / ตอบถูกติดกันเพื่อสร้าง streak!</span><br>
-        🌟 Complete all planets to unlock the Final Mission
-        <span style="color:var(--g3);"> / ทำทุกดาวเพื่อปลดล็อกภารกิจสุดท้าย!</span>
-      </div>
-    </div>
-
-    <!-- Start button -->
-    <button onclick="goTo('app');renderRoadmaps();"
-      style="width:100%;background:linear-gradient(135deg,var(--g1),#ff9f43);
-        color:#1a0800;border:none;font-family:'Baloo 2',cursive;font-weight:900;
-        font-size:1.4rem;padding:22px;border-radius:99px;cursor:pointer;
-        touch-action:manipulation;box-shadow:0 8px 28px rgba(247,201,72,.5);
-        transition:all .2s;animation:pulse 2s ease-in-out infinite alternate;
-        margin-bottom:12px;">
-      🚀 Start Playing! / เริ่มเล่นได้เลย!
-    </button>
-
-    <!-- Skip -->
-    <div style="text-align:center;">
+    <!-- Mobile: skip link -->
+    <div style="text-align:center;flex-shrink:0;margin-top:6px;">
       <button onclick="goTo('app');renderRoadmaps();"
-        style="background:none;border:none;color:rgba(106,130,171,.8);
-          font-family:'Noto Sans Thai','Nunito',sans-serif;
-          font-size:.95rem;cursor:pointer;text-decoration:underline;padding:10px;">
-        Already know how to play? Skip / รู้วิธีเล่นแล้ว? ข้ามได้
+        style="background:none;border:none;color:rgba(106,130,171,.7);
+          font-size:clamp(.6rem,1.1vw,.72rem);cursor:pointer;
+          font-family:'Noto Sans Thai','Nunito',sans-serif;">
+        Already know? Skip / รู้วิธีแล้ว? ข้ามได้
       </button>
     </div>
 
   </div>
-</div>
 
-<!-- ═══════ END HOW TO PLAY ═══════ -->
-
-<!-- ═══════ SCREEN 2: LOGIN (kept for compatibility, hidden) ═══════ -->
-<div id="scr-login" class="screen" style="display:none!important;"></div>
-
-<!-- ═══════ SCREEN 3: MAIN APP ═══════ -->
-<div id="scr-app" class="screen">
-  <!-- Space background video for game page -->
-  <video id="space-bg-video" autoplay muted loop playsinline
-    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;display:none;"
-    onerror="this.style.display='none';">
-  </video>
-  <div id="space-bg-overlay" style="position:fixed;inset:0;background:rgba(3,6,20,0.60);z-index:0;pointer-events:none;display:none;"></div>
-
-  <div class="topbar" style="position:sticky;top:0;z-index:100;">
-    <img src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/PhonicsQuest%20typogra.png"
-      alt="PhonicsQuest"
-      style="height:58px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.6));display:block;"
-      onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-    <div class="logo" style="display:none;">🌟 PhonicsQuest</div>
-    <div class="hud">
-      <div class="hud-name" id="hudname">Player</div>
-      <div class="xpw">
-        <div class="xpl">XP · <span id="xpn">0</span>/<span id="xpm">300</span></div>
-        <div class="xpbar"><div class="xpfill" id="xpf" style="width:0%"></div></div>
-      </div>
-      <div class="lvlbdg" id="lvlb">Lv 1</div>
-      <div id="hud-streak" style="display:none;align-items:center;
-        background:rgba(247,201,72,.2);border:1.5px solid rgba(247,201,72,.4);
-        color:var(--g1);font-weight:800;font-size:.85rem;padding:5px 12px;
-        border-radius:99px;white-space:nowrap;"></div>
-      <div class="avbtn" id="avbtn" onclick="showPanel('profile')">🐱</div>
-      <button onclick="doLogout()"
-        style="background:rgba(240,106,106,.18);border:2px solid var(--g4);color:var(--g4);
-               font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;
-               padding:8px 16px;border-radius:99px;cursor:pointer;transition:all .2s;
-               white-space:nowrap;line-height:1;"
-        onmouseenter="this.style.background='rgba(240,106,106,.38)'"
-        onmouseleave="this.style.background='rgba(240,106,106,.18)'">
-        🚪 Logout<span class="th-inline" style="font-size:.72em;margin-top:2px;">ออกจากระบบ</span>
-      </button>
-    </div>
-  </div>
-  <div class="tabs" style="position:relative;z-index:10;background:rgba(7,9,15,.7);padding:14px 24px 14px;backdrop-filter:blur(8px);">
-    <button class="tab active" data-p="map" onclick="showPanel('map')">🪐 Planet Map<br><span style="font-size:.7em;font-weight:600;opacity:.8;">แผนที่ดาว</span></button>
-    <!-- Scoreboard tab removed per teacher request — students use Profile for progress -->
-    <button class="tab" data-p="profile" onclick="showPanel('profile')">👤 Profile <span class="th-inline" style="font-size:.78em;">โปรไฟล์</span></button>
-    <button class="tab" data-p="avatar" onclick="showPanel('avatar')">🎨 My Hero <span class="th-inline" style="font-size:.78em;">ตัวละคร</span></button>
-    <button class="tab" data-p="badges" onclick="showPanel('badges')">🏅 Badges <span class="th-inline" style="font-size:.78em;">ป้าย</span></button>
-  </div>
-
-  <div id="pnl-map" style="display:none;position:relative;z-index:2;min-height:80vh;">
   <!-- ══════════ ROAD MAP ══════════ -->
   <div style="display:flex;min-height:80vh;">
 
@@ -1382,11 +1236,7 @@ footer span{color:var(--g3);}
     <!-- MAIN MAP AREA -->
     <div style="flex:1;position:relative;overflow:hidden;">
       <!-- Space background video -->
-      <video autoplay muted loop playsinline
-        src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.4;"
-        onerror="this.style.display='none';">
-      </video>
+      <!-- video removed: galaxy background used instead -->
       <div style="position:absolute;inset:0;z-index:1;overflow-y:auto;padding:20px 20px 100px;">
 
         <!-- Galaxy 1 section -->
@@ -1493,7 +1343,7 @@ footer span{color:var(--g3);}
   <div id="pnl-game" style="display:none;position:relative;z-index:2;padding:16px 20px 60px;"></div>
   <div id="pnl-scoreboard" style="position:relative;z-index:2;padding:16px 20px 60px;max-width:620px;margin:0 auto;width:100%;"></div>
   <div id="pnl-profile" style="position:relative;z-index:2;padding:16px 20px 60px;max-width:700px;margin:0 auto;width:100%;"></div>
-  <div id="pnl-avatar" style="position:relative;z-index:2;padding:20px 24px 60px;max-width:800px;margin:0 auto;width:100%;">
+  <div id="pnl-avatar" style="display:none!important;position:relative;z-index:2;padding:20px 24px 60px;max-width:800px;margin:0 auto;width:100%;">
     <div class="sec-title" style="font-size:1.1rem;margin-bottom:16px;">🎭 Change Your Hero / เปลี่ยนตัวละคร</div>
     <div class="av-grid-lg" id="av-grid-lg"></div>
     <div class="sec-title" style="font-size:1rem;margin-bottom:12px;margin-top:24px;">✏️ Nickname / ชื่อเล่น</div>
@@ -2959,7 +2809,7 @@ function goTo(screen){
   }
 }
 
-const ALL_PANELS=['map','game','scoreboard','profile','avatar','badges','upload'];
+const ALL_PANELS=['map','game','scoreboard','profile','badges','upload'];
 function showPanel(p){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.p===p));
   ALL_PANELS.forEach(id=>{
@@ -3979,10 +3829,10 @@ async function buildCharacterSelection(){
   grid.style.cssText = `
     flex:1;
     display:grid;
-    grid-template-columns:repeat(${cols},1fr);
+    grid-template-columns:repeat(5,1fr);
     grid-template-rows:repeat(2,1fr);
-    gap:clamp(4px,.7vw,9px);
-    width:100%;max-width:1100px;
+    gap:clamp(6px,.8vw,12px);
+    width:100%;max-width:1200px;
     margin:0 auto;
     min-height:0;
     overflow:hidden;`;
@@ -4149,7 +3999,7 @@ async function buildCharacterSelection(){
       // Slide up the preview bar
       const bar = document.getElementById('char-preview-bar');
       if(bar){
-        bar.style.transform = 'translateY(0)';
+        bar.style.maxHeight = '80px'; bar.style.padding = 'clamp(6px,1vh,10px) clamp(10px,2vw,20px)'; bar.style.borderTopColor = 'rgba(106,130,171,.25)';
         bar.style.borderTopColor = ch.color + '66';
         document.getElementById('cpb-emoji').textContent = ch.emoji;
         document.getElementById('cpb-name').textContent = ch.name;
@@ -4231,7 +4081,19 @@ function confirmCharacter(){
   const bioEl     = document.getElementById('confirm-bio');
   const nextBtn   = document.getElementById('confirm-next-btn');
 
-  if(portrait){ portrait.textContent = ch.emoji; portrait.style.borderColor = ch.color; portrait.style.boxShadow = `0 0 40px ${ch.color}77`; }
+  if(portrait){
+    portrait.style.borderColor = ch.color;
+    portrait.style.boxShadow = `0 0 40px ${ch.color}77`;
+    // Show character image if available, else emoji fallback
+    const imgUrl = (window.CHAR_IMGS && CHAR_IMGS[ch.id]) ? CHAR_IMGS[ch.id] : '';
+    if(imgUrl){
+      portrait.innerHTML = `<div style="width:100%;height:100%;border-radius:50%;
+        background:url('${imgUrl}') center top/cover no-repeat;"></div>`;
+    } else {
+      portrait.textContent = ch.emoji;
+      portrait.style.fontSize = '5rem';
+    }
+  }
   if(ready)    ready.textContent    = `Ready, ${currentUser || 'Explorer'}!`;
   if(subtitle) subtitle.textContent = `${ch.name} stands beside you.`;
   if(explorer) explorer.textContent = currentUser || 'Explorer';
@@ -5644,7 +5506,7 @@ function panKeepRec(){
       </div>
       <div style="font-size:.68rem;color:var(--muted);text-align:center;font-family:'Noto Sans Thai','Nunito',sans-serif;">
         แตะปุ่มเพื่อเปิด/ปิดเพลง
-      </div>`;
+      `;
 
     document.body.appendChild(popup);
     document.body.appendChild(btn);
