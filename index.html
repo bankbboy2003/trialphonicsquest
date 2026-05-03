@@ -914,123 +914,103 @@ function getContrastiveFeedback(wrongWord, correctWord, targetSound){
 </div>
 
 <!-- ═══════ SCREEN 1.5: CHARACTER SELECTION ═══════ -->
-<div id="scr-charsel" class="screen" style="background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);padding:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;">
-  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
-    <div style="position:absolute;width:1px;height:1px;background:#fff;border-radius:50%;opacity:.7;top:5%;left:10%;
-      box-shadow:120px 40px 0 1px rgba(255,255,255,.8),240px 80px 0 1px rgba(255,255,255,.5),
-      80px 120px 0 1px rgba(255,255,255,.9),360px 20px 0 2px rgba(255,255,255,.6),
-      440px 100px 0 1px rgba(255,255,255,.4),560px 60px 0 1px rgba(255,255,255,.8),
-      640px 140px 0 1px rgba(255,255,255,.5),720px 30px 0 2px rgba(255,255,255,.7),
-      800px 110px 0 1px rgba(255,255,255,.9),100px 200px 0 1px rgba(255,255,255,.5),
-      300px 180px 0 1px rgba(255,255,255,.8),500px 160px 0 1px rgba(255,255,255,.4),
-      700px 190px 0 1px rgba(255,255,255,.7),200px 280px 0 1px rgba(255,255,255,.6),
-      400px 260px 0 2px rgba(255,255,255,.8),600px 240px 0 1px rgba(255,255,255,.9),
-      50px 320px 0 1px rgba(255,255,255,.5),250px 350px 0 1px rgba(255,255,255,.4),
-      450px 300px 0 1px rgba(255,255,255,.8),650px 370px 0 1px rgba(255,255,255,.6),
-      150px 420px 0 2px rgba(255,255,255,.9),350px 400px 0 1px rgba(255,255,255,.7),
-      550px 440px 0 1px rgba(255,255,255,.5),750px 410px 0 1px rgba(255,255,255,.8),
-      850px 200px 0 1px rgba(255,255,255,.6),950px 300px 0 1px rgba(255,255,255,.7),
-      1050px 150px 0 2px rgba(255,255,255,.8),1150px 350px 0 1px rgba(255,255,255,.5),
-      1250px 80px 0 1px rgba(255,255,255,.9),1350px 280px 0 1px rgba(255,255,255,.6);"></div>
+<div id="scr-charsel" class="screen" style="background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);padding:0;height:100vh;overflow:hidden;position:relative;">
+
+  <!-- Background video -->
   <video id="charsel-video" autoplay muted loop playsinline
     src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.45;"
     onerror="this.style.display='none';">
   </video>
-    <div style="position:absolute;width:300px;height:200px;border-radius:50%;top:0;right:15%;
-      background:radial-gradient(circle,rgba(176,124,248,.12) 0%,transparent 70%);"></div>
-    <div style="position:absolute;width:250px;height:180px;border-radius:50%;bottom:15%;left:5%;
-      background:radial-gradient(circle,rgba(74,179,244,.08) 0%,transparent 70%);"></div>
-    <div style="position:absolute;width:200px;height:150px;border-radius:50%;top:40%;right:5%;
-      background:radial-gradient(circle,rgba(78,220,132,.07) 0%,transparent 70%);"></div>
-  </div>
-  <video id="space-bg-video" autoplay muted loop playsinline
-    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.4;"
-    onerror="this.style.display='none';">
-  </video>
-  <div style="position:fixed;inset:0;background:rgba(3,6,20,0.72);z-index:1;pointer-events:none;"></div>
-  <canvas id="char-stars" style="position:fixed;inset:0;z-index:0;pointer-events:none;display:none;"></canvas>
 
-  <!-- Main layout: fills exactly 100vh, nothing can overflow -->
-  <div style="
-    position:relative;z-index:2;
-    width:100%;height:100vh;
+  <!-- Star overlay -->
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;">
+    <div style="position:absolute;width:1px;height:1px;background:#fff;border-radius:50%;opacity:.6;top:5%;left:10%;
+      box-shadow:120px 40px 0 1px rgba(255,255,255,.7),240px 80px 0 1px rgba(255,255,255,.5),
+      80px 120px 0 1px rgba(255,255,255,.8),360px 20px 0 2px rgba(255,255,255,.6),
+      440px 100px 0 1px rgba(255,255,255,.4),560px 60px 0 1px rgba(255,255,255,.7),
+      640px 140px 0 1px rgba(255,255,255,.5),720px 30px 0 2px rgba(255,255,255,.6),
+      800px 110px 0 1px rgba(255,255,255,.8),900px 250px 0 1px rgba(255,255,255,.5),
+      1000px 180px 0 1px rgba(255,255,255,.7),1100px 320px 0 1px rgba(255,255,255,.4),
+      1200px 90px 0 2px rgba(255,255,255,.6),1300px 200px 0 1px rgba(255,255,255,.8),
+      200px 300px 0 1px rgba(255,255,255,.5),400px 380px 0 1px rgba(255,255,255,.7),
+      600px 420px 0 1px rgba(255,255,255,.4),800px 460px 0 2px rgba(255,255,255,.6);">
+    </div>
+  </div>
+
+  <!-- Main content: z-index:2 so it sits above background -->
+  <div style="position:relative;z-index:2;width:100%;height:100vh;
     display:flex;flex-direction:column;
     padding:clamp(8px,1.5vh,16px) clamp(10px,2vw,24px) 0;
-    box-sizing:border-box;
-    gap:clamp(4px,.6vh,8px);
-    overflow:hidden;
-  ">
+    box-sizing:border-box;gap:clamp(4px,.6vh,8px);overflow:hidden;">
 
     <!-- Header -->
-    <div style="text-align:center;flex-shrink:0;">
-      <div style="font-family:'Baloo 2',cursive;font-weight:900;
-        font-size:clamp(1.1rem,2.8vw,1.8rem);
-        background:linear-gradient(135deg,var(--g1),var(--g3));
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-        line-height:1.1;margin-bottom:1px;">
-        Choose Your Hero!
-        <span style="font-size:.5em;font-weight:700;-webkit-text-fill-color:var(--muted);
-          background:none;color:var(--muted);">เลือกตัวละคร</span>
-      </div>
-      <div style="color:#c8d8f0;font-weight:600;
-        font-size:clamp(.62rem,1.3vw,.78rem);opacity:.85;">
+    <div style="text-align:center;flex-shrink:0;padding:clamp(4px,1vh,10px) 0 clamp(2px,.5vh,6px);">
+      <h1 style="font-family:'Baloo 2',cursive;font-weight:900;
+        font-size:clamp(1.2rem,2.8vw,1.8rem);
+        background:linear-gradient(135deg,#f7c948,#ff9f43,#f7c948);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        background-clip:text;margin:0 0 4px;">
+        Choose Your Hero! <span style="-webkit-text-fill-color:#a0c4ff;font-size:.7em;">เลือกตัวละคร</span>
+      </h1>
+      <div style="font-size:clamp(.7rem,1.4vw,.85rem);color:rgba(200,220,255,.8);
+        font-weight:600;letter-spacing:.03em;line-height:1.4;
+        font-family:'Noto Sans Thai','Nunito',sans-serif;">
         Pick your space guardian 🚀
         <span style="font-family:'Noto Sans Thai',sans-serif;">เลือกผู้พิทักษ์ของคุณ</span>
       </div>
     </div>
 
-    <!-- Card grid: flex:1 = takes ALL remaining vertical space -->
+    <!-- Card grid -->
     <div id="char-card-grid" style="
       flex:1;
       display:grid;
       grid-template-columns:repeat(5,1fr);
       grid-template-rows:repeat(2,1fr);
       gap:clamp(4px,.7vw,9px);
-      width:100%;max-width:1100px;
+      width:100%;max-width:1200px;
       margin:0 auto;
       min-height:0;
-      overflow:hidden;
-    "></div>
-
-  </div>
-
-  <!-- ── PREVIEW BAR: fixed overlay, slides up from bottom on selection ── -->
-  <div id="char-preview-bar" style="
-    position:relative;
-    z-index:10;
-    flex-shrink:0;
-    max-height:0;overflow:hidden;
-    transition:max-height .4s cubic-bezier(.34,1.3,.64,1),opacity .3s,padding .4s;
-    opacity:0;
-    padding:0 clamp(10px,2vw,20px);
-    background:rgba(5,8,22,.97);
-    border-top:2px solid transparent;
-    display:flex;align-items:center;gap:12px;
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  ">
-    <div id="cpb-emoji" style="font-size:1.8rem;flex-shrink:0;">🌟</div>
-    <div style="flex:1;min-width:0;">
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-        <span id="cpb-name" style="font-family:'Baloo 2',cursive;font-weight:900;
-          font-size:clamp(.85rem,1.8vw,1rem);color:#e8f0ff;"></span>
-        <span id="cpb-type" style="font-size:.6rem;padding:2px 8px;
-          border-radius:99px;font-weight:700;"></span>
-      </div>
-      <div id="cpb-bio" style="font-size:.68rem;color:var(--muted);
-        font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+      overflow:hidden;">
     </div>
-    <button id="char-confirm-btn" class="start-btn"
-      style="flex-shrink:0;padding:9px 22px;font-size:.85rem;
-        border-radius:99px;margin:0;max-width:none;white-space:nowrap;"
-      disabled>
-      ✨ Let's Go! <span style='font-family:"Noto Sans Thai",sans-serif;
-        font-size:.85em;opacity:.85;'>ไปเลย!</span>
-    </button>
-  </div>
 
+    <!-- Preview bar: slides up from bottom when character selected -->
+    <div id="char-preview-bar" style="
+      position:relative;
+      z-index:10;
+      flex-shrink:0;
+      max-height:0;overflow:hidden;
+      transition:max-height .4s cubic-bezier(.34,1.3,.64,1),opacity .3s,padding .4s;
+      opacity:0;
+      padding:0 clamp(10px,2vw,20px);
+      background:rgba(5,8,22,.97);
+      border-top:2px solid transparent;
+      display:flex;align-items:center;gap:12px;
+      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
+      <div id="cpb-emoji" style="font-size:1.8rem;flex-shrink:0;">🌟</div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span id="cpb-name" style="font-family:'Baloo 2',cursive;font-weight:900;
+            font-size:clamp(.85rem,1.8vw,1rem);color:#e8f0ff;"></span>
+          <span id="cpb-type" style="font-size:.6rem;padding:2px 8px;
+            border-radius:99px;font-weight:700;"></span>
+        </div>
+        <div id="cpb-bio" style="font-size:.68rem;color:rgba(180,200,255,.7);
+          font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+          max-width:500px;margin-top:2px;"></div>
+      </div>
+      <button id="char-confirm-btn" class="start-btn"
+        style="flex-shrink:0;padding:9px 22px;font-size:.85rem;
+          border-radius:99px;margin:0;max-width:none;white-space:nowrap;"
+        disabled>
+        ✨ Let's Go! <span class="th-inline">ไปเลย!</span>
+      </button>
+    </div>
+
+  </div><!-- end main content -->
 </div>
+
+  
 
 
 <!-- ═══════ HOW TO PLAY SCREEN ═══════ -->
@@ -3342,7 +3322,9 @@ document.addEventListener('click',function(e){
 
 // ── Init on page load ──
 document.addEventListener('DOMContentLoaded',function(){
-  goTo('intro');  // always start on login screen
+  // Always start on login screen — clear any stale session
+  currentUser = null;
+  goTo('intro');
   buildLoginUI();
 });
 function chkLoginReady(){
@@ -4255,10 +4237,17 @@ async function buildCharacterSelection(){
     card.innerHTML = `
       <!-- Full artwork background -->
       <div class="ch-img-bg" style="
-        position:absolute;inset:0;
-        background-image:url('${imgUrl}');
-        background-size:cover;background-position:top center;
-        transition:transform .3s ease;border-radius:inherit;">
+        position:absolute;inset:0;overflow:hidden;
+        background:radial-gradient(circle at center,${ch.color}33,#07090f);
+        border-radius:inherit;">
+        ${imgUrl ? `<img src="${imgUrl}"
+          style="width:100%;height:100%;object-fit:cover;object-position:top center;
+                 display:block;transition:transform .3s ease;"
+          onerror="this.style.display='none';this.nextSibling.style.display='flex';">
+        <div style="display:none;width:100%;height:100%;align-items:center;
+          justify-content:center;font-size:5.5rem;">${ch.emoji}</div>`
+        : `<div style="display:flex;width:100%;height:100%;align-items:center;
+          justify-content:center;font-size:5.5rem;">${ch.emoji}</div>`}
       </div>
 
       <!-- Dark gradient overlay — stronger at bottom for text legibility -->
