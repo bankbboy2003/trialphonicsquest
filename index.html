@@ -789,69 +789,18 @@ footer span{color:var(--g3);}
 }
 </style>
 <!-- Firebase SDK (Realtime Database for live scoreboard) -->
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js">
-/* ═══ CONTRASTIVE FEEDBACK HELPER ═══ */
-const VOWEL_SOUND_MAP = {
-  // Short A 🐱
-  'cat':'Short A 🐱','bat':'Short A 🐱','hat':'Short A 🐱','map':'Short A 🐱',
-  'fan':'Short A 🐱','bag':'Short A 🐱','can':'Short A 🐱','man':'Short A 🐱',
-  'ran':'Short A 🐱','tap':'Short A 🐱','wax':'Short A 🐱','lab':'Short A 🐱',
-  'rag':'Short A 🐱','gap':'Short A 🐱','sad':'Short A 🐱','tan':'Short A 🐱',
-  // Short E 🛏️
-  'bed':'Short E 🛏️','red':'Short E 🛏️','pen':'Short E 🛏️','web':'Short E 🛏️',
-  'jet':'Short E 🛏️','ten':'Short E 🛏️','hen':'Short E 🛏️','set':'Short E 🛏️',
-  'net':'Short E 🛏️','peg':'Short E 🛏️','beg':'Short E 🛏️','leg':'Short E 🛏️',
-  // Short I 🐷
-  'pig':'Short I 🐷','sit':'Short I 🐷','tip':'Short I 🐷','win':'Short I 🐷',
-  'big':'Short I 🐷','lip':'Short I 🐷','bit':'Short I 🐷','hit':'Short I 🐷',
-  'fin':'Short I 🐷','kit':'Short I 🐷','zip':'Short I 🐷','lid':'Short I 🐷',
-  // Short O 🐶
-  'dog':'Short O 🐶','hot':'Short O 🐶','box':'Short O 🐶','pot':'Short O 🐶',
-  'top':'Short O 🐶','fox':'Short O 🐶','cot':'Short O 🐶','rod':'Short O 🐶',
-  'lot':'Short O 🐶','rob':'Short O 🐶','nod':'Short O 🐶','pop':'Short O 🐶',
-  // Short U ☕
-  'cup':'Short U ☕','bus':'Short U ☕','sun':'Short U ☕','run':'Short U ☕',
-  'but':'Short U ☕','bug':'Short U ☕','mud':'Short U ☕','cut':'Short U ☕',
-  'hut':'Short U ☕','pug':'Short U ☕','jut':'Short U ☕','tup':'Short U ☕',
-  // Long A 🌧️
-  'rain':'Long A 🌧️','train':'Long A 🌧️','sail':'Long A 🌧️','mail':'Long A 🌧️',
-  'play':'Long A 🌧️','day':'Long A 🌧️','say':'Long A 🌧️','tail':'Long A 🌧️',
-  'snail':'Long A 🌧️','clay':'Long A 🌧️','stay':'Long A 🌧️','bay':'Long A 🌧️',
-  // Long E 🐝
-  'tree':'Long E 🐝','bee':'Long E 🐝','feet':'Long E 🐝','seed':'Long E 🐝',
-  'week':'Long E 🐝','deep':'Long E 🐝','seen':'Long E 🐝','feel':'Long E 🐝',
-  'keep':'Long E 🐝','green':'Long E 🐝','meet':'Long E 🐝','sleep':'Long E 🐝',
-  // Long O ⛵
-  'boat':'Long O ⛵','coat':'Long O ⛵','road':'Long O ⛵','toad':'Long O ⛵',
-  'goat':'Long O ⛵','foam':'Long O ⛵','load':'Long O ⛵','moan':'Long O ⛵',
-  'soap':'Long O ⛵','coal':'Long O ⛵','groan':'Long O ⛵','oak':'Long O ⛵',
-  // Long I 💡
-  'light':'Long I 💡','night':'Long I 💡','right':'Long I 💡','sight':'Long I 💡',
-  'might':'Long I 💡','tight':'Long I 💡','flight':'Long I 💡','bright':'Long I 💡',
-  'high':'Long I 💡','sigh':'Long I 💡','thigh':'Long I 💡','fight':'Long I 💡',
-};
-
-function getContrastiveFeedback(wrongWord, correctWord, targetSound){
-  const wrongSound = VOWEL_SOUND_MAP[wrongWord.toLowerCase()] || '';
-  if(wrongSound && wrongSound !== targetSound){
-    return \`❌ "\${wrongWord}" has \${wrongSound} — not \${targetSound}. The correct answer is "\${correctWord}". Listen again!\`;
-  }
-  return \`❌ Not quite! The answer is "\${correctWord}" — \${targetSound}. Listen carefully!\`;
-}
-
-</script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
 </head>
 <body>
 <canvas id="sky-canvas"></canvas>
 
 <!-- ═══════ SCREEN 1: LOGIN with FULLSCREEN BACKGROUND VIDEO ═══════ -->
-<div id="scr-intro" class="screen" style="position:relative;overflow:hidden;padding:0;min-height:100vh;;background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);">
+<div id="scr-intro" class="screen" style="position:relative;overflow:hidden;padding:0;min-height:100vh;">
   <!-- Fullscreen background video -->
   <video id="intro-video" autoplay muted loop playsinline
-    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.55;"
-    onerror="this.style.display='none';">
+    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/Sequence%2001_1.mp4"
+    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;">
   </video>
   <!-- Dark overlay -->
   <div style="position:fixed;inset:0;background:rgba(0,0,0,0.54);z-index:1;pointer-events:none;"></div>
@@ -914,103 +863,93 @@ function getContrastiveFeedback(wrongWord, correctWord, targetSound){
 </div>
 
 <!-- ═══════ SCREEN 1.5: CHARACTER SELECTION ═══════ -->
-<div id="scr-charsel" class="screen" style="background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);padding:0;height:100vh;overflow:hidden;position:relative;">
-
-  <!-- Background video -->
+<div id="scr-charsel" class="screen" style="background:#07090f;padding:0;height:100vh;overflow:hidden;">
   <video id="charsel-video" autoplay muted loop playsinline
     src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.45;"
-    onerror="this.style.display='none';">
+    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;"
+    onerror="this.style.display='none';if(typeof initCharStars==='function')initCharStars();">
   </video>
+  <div style="position:fixed;inset:0;background:rgba(3,6,20,0.72);z-index:1;pointer-events:none;"></div>
+  <canvas id="char-stars" style="position:fixed;inset:0;z-index:0;pointer-events:none;display:none;"></canvas>
 
-  <!-- Star overlay -->
-  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;">
-    <div style="position:absolute;width:1px;height:1px;background:#fff;border-radius:50%;opacity:.6;top:5%;left:10%;
-      box-shadow:120px 40px 0 1px rgba(255,255,255,.7),240px 80px 0 1px rgba(255,255,255,.5),
-      80px 120px 0 1px rgba(255,255,255,.8),360px 20px 0 2px rgba(255,255,255,.6),
-      440px 100px 0 1px rgba(255,255,255,.4),560px 60px 0 1px rgba(255,255,255,.7),
-      640px 140px 0 1px rgba(255,255,255,.5),720px 30px 0 2px rgba(255,255,255,.6),
-      800px 110px 0 1px rgba(255,255,255,.8),900px 250px 0 1px rgba(255,255,255,.5),
-      1000px 180px 0 1px rgba(255,255,255,.7),1100px 320px 0 1px rgba(255,255,255,.4),
-      1200px 90px 0 2px rgba(255,255,255,.6),1300px 200px 0 1px rgba(255,255,255,.8),
-      200px 300px 0 1px rgba(255,255,255,.5),400px 380px 0 1px rgba(255,255,255,.7),
-      600px 420px 0 1px rgba(255,255,255,.4),800px 460px 0 2px rgba(255,255,255,.6);">
-    </div>
-  </div>
-
-  <!-- Main content: z-index:2 so it sits above background -->
-  <div style="position:relative;z-index:2;width:100%;height:100vh;
+  <!-- Main layout: fills exactly 100vh, nothing can overflow -->
+  <div style="
+    position:relative;z-index:2;
+    width:100%;height:100vh;
     display:flex;flex-direction:column;
-    padding:clamp(8px,1.5vh,16px) clamp(10px,2vw,24px) 0;
-    box-sizing:border-box;gap:clamp(4px,.6vh,8px);overflow:hidden;">
+    padding:clamp(8px,1.5vh,16px) clamp(10px,2vw,24px) clamp(6px,1vh,10px);
+    box-sizing:border-box;
+    gap:clamp(4px,.6vh,8px);
+    overflow:hidden;
+  ">
 
     <!-- Header -->
-    <div style="text-align:center;flex-shrink:0;padding:clamp(4px,1vh,10px) 0 clamp(2px,.5vh,6px);">
-      <h1 style="font-family:'Baloo 2',cursive;font-weight:900;
-        font-size:clamp(1.2rem,2.8vw,1.8rem);
-        background:linear-gradient(135deg,#f7c948,#ff9f43,#f7c948);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-        background-clip:text;margin:0 0 4px;">
-        Choose Your Hero! <span style="-webkit-text-fill-color:#a0c4ff;font-size:.7em;">เลือกตัวละคร</span>
-      </h1>
-      <div style="font-size:clamp(.7rem,1.4vw,.85rem);color:rgba(200,220,255,.8);
-        font-weight:600;letter-spacing:.03em;line-height:1.4;
-        font-family:'Noto Sans Thai','Nunito',sans-serif;">
+    <div style="text-align:center;flex-shrink:0;">
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;
+        font-size:clamp(1.1rem,2.8vw,1.8rem);
+        background:linear-gradient(135deg,var(--g1),var(--g3));
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        line-height:1.1;margin-bottom:1px;">
+        Choose Your Hero!
+        <span style="font-size:.5em;font-weight:700;-webkit-text-fill-color:var(--muted);
+          background:none;color:var(--muted);">เลือกตัวละคร</span>
+      </div>
+      <div style="color:#c8d8f0;font-weight:600;
+        font-size:clamp(.62rem,1.3vw,.78rem);opacity:.85;">
         Pick your space guardian 🚀
         <span style="font-family:'Noto Sans Thai',sans-serif;">เลือกผู้พิทักษ์ของคุณ</span>
       </div>
     </div>
 
-    <!-- Card grid -->
+    <!-- Card grid: flex:1 = takes ALL remaining vertical space -->
     <div id="char-card-grid" style="
       flex:1;
       display:grid;
       grid-template-columns:repeat(5,1fr);
       grid-template-rows:repeat(2,1fr);
       gap:clamp(4px,.7vw,9px);
-      width:100%;max-width:1200px;
+      width:100%;max-width:1100px;
       margin:0 auto;
       min-height:0;
-      overflow:hidden;">
-    </div>
+      overflow:hidden;
+    "></div>
 
-    <!-- Preview bar: slides up from bottom when character selected -->
-    <div id="char-preview-bar" style="
-      position:relative;
-      z-index:10;
-      flex-shrink:0;
-      max-height:0;overflow:hidden;
-      transition:max-height .4s cubic-bezier(.34,1.3,.64,1),opacity .3s,padding .4s;
-      opacity:0;
-      padding:0 clamp(10px,2vw,20px);
-      background:rgba(5,8,22,.97);
-      border-top:2px solid transparent;
-      display:flex;align-items:center;gap:12px;
-      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">
-      <div id="cpb-emoji" style="font-size:1.8rem;flex-shrink:0;">🌟</div>
-      <div style="flex:1;min-width:0;">
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <span id="cpb-name" style="font-family:'Baloo 2',cursive;font-weight:900;
-            font-size:clamp(.85rem,1.8vw,1rem);color:#e8f0ff;"></span>
-          <span id="cpb-type" style="font-size:.6rem;padding:2px 8px;
-            border-radius:99px;font-weight:700;"></span>
-        </div>
-        <div id="cpb-bio" style="font-size:.68rem;color:rgba(180,200,255,.7);
-          font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-          max-width:500px;margin-top:2px;"></div>
+  </div>
+
+  <!-- ── PREVIEW BAR: fixed overlay, slides up from bottom on selection ── -->
+  <div id="char-preview-bar" style="
+    position:fixed;
+    bottom:0;left:0;right:0;
+    z-index:200;
+    transform:translateY(100%);
+    transition:transform .35s cubic-bezier(.34,1.2,.64,1);
+    padding:clamp(6px,1vh,10px) clamp(10px,2vw,20px);
+    background:linear-gradient(to top,rgba(5,8,22,.97) 60%,rgba(5,8,22,.85));
+    border-top:2px solid rgba(106,130,171,.25);
+    display:flex;align-items:center;gap:12px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  ">
+    <div id="cpb-emoji" style="font-size:1.8rem;flex-shrink:0;">🌟</div>
+    <div style="flex:1;min-width:0;">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span id="cpb-name" style="font-family:'Baloo 2',cursive;font-weight:900;
+          font-size:clamp(.85rem,1.8vw,1rem);color:#e8f0ff;"></span>
+        <span id="cpb-type" style="font-size:.6rem;padding:2px 8px;
+          border-radius:99px;font-weight:700;"></span>
       </div>
-      <button id="char-confirm-btn" class="start-btn"
-        style="flex-shrink:0;padding:9px 22px;font-size:.85rem;
-          border-radius:99px;margin:0;max-width:none;white-space:nowrap;"
-        disabled>
-        ✨ Let's Go! <span class="th-inline">ไปเลย!</span>
-      </button>
+      <div id="cpb-bio" style="font-size:.68rem;color:var(--muted);
+        font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
     </div>
+    <button id="char-confirm-btn" class="start-btn"
+      style="flex-shrink:0;padding:9px 22px;font-size:.85rem;
+        border-radius:99px;margin:0;max-width:none;white-space:nowrap;"
+      disabled>
+      ✨ Let's Go! <span style='font-family:"Noto Sans Thai",sans-serif;
+        font-size:.85em;opacity:.85;'>ไปเลย!</span>
+    </button>
+  </div>
 
-  </div><!-- end main content -->
 </div>
-
-  
 
 
 <!-- ═══════ HOW TO PLAY SCREEN ═══════ -->
@@ -1018,19 +957,19 @@ function getContrastiveFeedback(wrongWord, correctWord, targetSound){
   <!-- ══════════════════════════════════════════════
        CONFIRMATION SCREEN — "Ready, [name]!"
   ══════════════════════════════════════════════ -->
-  <div id="scr-confirm" class="screen" style="position:relative;overflow:hidden;min-height:100vh;background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);">
+  <div id="scr-confirm" class="screen" style="position:relative;overflow:hidden;min-height:100vh;background:#07090f;">
     <video autoplay muted loop playsinline id="confirm-video"
       src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
-      style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.4;"
+      style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.35;"
       onerror="this.style.display='none';">
     </video>
     <div style="position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;">
       <!-- Character portrait -->
-      <div id="confirm-portrait" style="width:160px;height:160px;border-radius:50%;border:4px solid #f7c948;
+      <div id="confirm-portrait" style="width:140px;height:140px;border-radius:50%;border:4px solid #f7c948;
         display:flex;align-items:center;justify-content:center;font-size:5rem;
-        background:rgba(22,33,62,.9);margin-bottom:20px;overflow:hidden;
-        box-shadow:0 0 40px rgba(247,201,72,.5),0 0 0 4px rgba(247,201,72,.2);
-        animation:pulse 2s ease-in-out infinite alternate;">
+        background:rgba(22,33,62,.9);margin-bottom:20px;
+        box-shadow:0 0 40px rgba(247,201,72,.5);animation:pulse 2s ease-in-out infinite alternate;">
+        🐱
       </div>
       <!-- Ready text -->
       <div id="confirm-ready" style="font-family:'Baloo 2',cursive;font-weight:900;font-size:2.4rem;
@@ -1083,21 +1022,270 @@ function getContrastiveFeedback(wrongWord, correctWord, targetSound){
   </div>
   <!-- END CONFIRMATION SCREEN -->
 
-  <div id="scr-howto" class="screen" style="position:relative;overflow:hidden;min-height:100vh;
-  background:radial-gradient(ellipse at 20% 30%,#1a0a3a 0%,#07090f 40%,#030614 70%,#0a1628 100%);">
-  <!-- Static galaxy stars (CSS only — no motion sickness) -->
-  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
-    <div style="position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.8;top:8%;left:15%;box-shadow:120px 40px #fff8,240px 80px #fff6,80px 120px #fff9,360px 20px #fff7,440px 100px #fff5,560px 60px #fff8,640px 140px #fff6,720px 30px #fff7,800px 110px #fff9,100px 200px #fff6,300px 180px #fff8,500px 160px #fff5,700px 190px #fff7,200px 280px #fff6,400px 260px #fff8,600px 240px #fff9,50px 320px #fff7,250px 350px #fff5,450px 300px #fff8,650px 370px #fff6,150px 420px #fff9,350px 400px #fff7,550px 440px #fff5,750px 410px #fff8,50px 480px #fff6,850px 200px #fff7,900px 350px #fff8,950px 100px #fff6,1000px 280px #fff9,1100px 160px #fff7,1200px 380px #fff5,1300px 50px #fff8,1400px 320px #fff6;"></div>
-    <!-- Purple nebula glow -->
-    <div style="position:absolute;width:400px;height:300px;border-radius:50%;
-      background:radial-gradient(circle,rgba(176,124,248,.15) 0%,transparent 70%);
-      top:-50px;right:10%;pointer-events:none;"></div>
-    <!-- Blue nebula -->
-    <div style="position:absolute;width:300px;height:200px;border-radius:50%;
-      background:radial-gradient(circle,rgba(74,179,244,.1) 0%,transparent 70%);
-      bottom:10%;left:5%;pointer-events:none;"></div>
-  </div>
+  <div id="scr-howto" class="screen" style="position:relative;overflow-y:auto;min-height:100vh;background:#07090f;">
+  <video autoplay muted loop playsinline
+    src="https://raw.githubusercontent.com/bankbboy2003/Phonicsquest/main/hailuo-2_3_Cinematic_space_panorama_with_seamless_looping_motion._Animate_a_vast_cosmic_sce-0.mp4"
+    style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;opacity:.35;display:none;"
+    onerror="this.style.display='none';">
+  </video>
 
+  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;padding:32px 20px 60px;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:36px;padding-top:20px;">
+      <div style="font-size:3.5rem;margin-bottom:12px;">🚀</div>
+      <div style="font-family:'Baloo 2',cursive;font-weight:900;font-size:2.8rem;
+        background:linear-gradient(135deg,var(--g1),var(--g3));
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        background-clip:text;margin-bottom:8px;line-height:1.2;">How to Play</div>
+      <div style="font-size:1.4rem;font-weight:700;color:var(--g3);
+        font-family:'Noto Sans Thai','Nunito',sans-serif;">วิธีเล่น PhonicsQuest</div>
+    </div>
+
+    <!-- Step cards -->
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+
+      <!-- Step 1 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(247,201,72,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g1);
+          color:#1a0800;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(247,201,72,.5);">1</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g1);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            🌍 Choose Your Planet / เลือกดาวเคราะห์
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            Tap any unlocked planet on the map to start a mission.
+          </div>
+          <div style="font-size:1rem;color:var(--g3);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            แตะดาวเคราะห์ที่ปลดล็อกแล้วบนแผนที่เพื่อเริ่มภารกิจ
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(74,179,244,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g3);
+          color:#031525;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(74,179,244,.5);">2</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g3);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            👂 Listen Carefully / ฟังให้ดี
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            Tap 🔊 to hear a word. Then choose the correct answer or say it out loud!
+          </div>
+          <div style="font-size:1rem;color:var(--g3);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            แตะ 🔊 เพื่อฟังคำ แล้วเลือกคำตอบที่ถูกต้องหรือพูดออกเสียง!
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(78,220,132,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g2);
+          color:#041208;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(78,220,132,.5);">3</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g2);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            ❤️ Don't Lose All Hearts! / อย่าให้หมดหัวใจ!
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            You have 3 hearts per mission. Wrong answers cost a heart. Lose all 3 and restart!
+          </div>
+          <div style="font-size:1rem;color:var(--g2);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            คุณมี 3 หัวใจต่อภารกิจ — ตอบผิด = เสีย 1 หัวใจ — หมดทั้ง 3 = เริ่มใหม่!
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(176,124,248,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g5);
+          color:#fff;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(176,124,248,.5);">4</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g5);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            ⚡ Earn XP &amp; Level Up! / สะสม XP และเลเวลอัป!
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            Every correct answer gives XP. Fill the bar to level up and unlock badges!
+          </div>
+          <div style="font-size:1rem;color:var(--g5);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            ตอบถูกทุกข้อ = ได้ XP — เต็มบาร์ = เลเวลอัป และปลดล็อกป้าย!
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div style="background:rgba(22,33,62,.92);border:2px solid rgba(240,106,106,.5);
+        border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;
+        backdrop-filter:blur(10px);">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--g4);
+          color:#fff;font-weight:900;font-size:1.4rem;display:flex;align-items:center;
+          justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(240,106,106,.5);">5</div>
+        <div style="flex:1;">
+          <div style="font-weight:800;font-size:1.25rem;color:var(--g4);margin-bottom:8px;
+            font-family:'Baloo 2',cursive;">
+            🌟 Planet Challenge at the End! / ภารกิจพิเศษตอนท้าย!
+          </div>
+          <div style="font-size:1.05rem;color:#e8f0ff;line-height:1.8;">
+            Every planet ends with a creative task — sort sounds or record your favourite word!
+          </div>
+          <div style="font-size:1rem;color:var(--g4);margin-top:6px;line-height:1.7;
+            font-family:'Noto Sans Thai','Nunito',sans-serif;">
+            ทุกดาวมีงานสร้างสรรค์ตอนท้าย — จัดเรียงเสียงหรือบันทึกคำโปรด! ไม่เสียหัวใจ!
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end steps -->
+
+    <!-- Task type legend -->
+    <div style="background:rgba(22,33,62,.92);border:2px solid rgba(247,201,72,.35);
+      border-radius:20px;padding:20px 22px;margin-bottom:24px;backdrop-filter:blur(10px);">
+      <div style="font-weight:800;font-size:1.2rem;color:var(--g1);margin-bottom:16px;
+        text-align:center;font-family:'Baloo 2',cursive;">
+        📋 Task Types / ประเภทงาน
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">👂</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Listen &amp; Choose</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">ฟังและเลือก</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">🖼️</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Picture Match</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จับคู่รูปภาพ</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">⚡</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Rapid Fire</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">รอบด่วน 12 วินาที</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">🔗</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Match Pairs</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จับคู่</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">✏️</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Sentence Builder</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">สร้างประโยค</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(7,9,15,.5);
+          border-radius:12px;padding:10px 12px;">
+          <span style="font-size:1.5rem;">🎤</span>
+          <div>
+            <div style="font-weight:700;color:#e8f0ff;font-size:1rem;">Speak &amp; Record</div>
+            <div style="color:var(--g3);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">พูดและบันทึกเสียง</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(176,124,248,.15);
+          border-radius:12px;padding:10px 12px;border:1px solid rgba(176,124,248,.3);">
+          <span style="font-size:1.5rem;">🔀</span>
+          <div>
+            <div style="font-weight:700;color:var(--g5);font-size:1rem;">Sound Sorter ⭐</div>
+            <div style="color:var(--g5);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">จัดเรียงเสียง</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(176,124,248,.15);
+          border-radius:12px;padding:10px 12px;border:1px solid rgba(176,124,248,.3);">
+          <span style="font-size:1.5rem;">⭐</span>
+          <div>
+            <div style="font-weight:700;color:var(--g5);font-size:1rem;">Favourite Word ⭐</div>
+            <div style="color:var(--g5);font-size:.9rem;font-family:'Noto Sans Thai','Nunito',sans-serif;">คำโปรดของฉัน</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:14px;font-size:1rem;color:var(--g5);text-align:center;
+        font-family:'Noto Sans Thai','Nunito',sans-serif;font-weight:700;">
+        ⭐ Planet Challenge = Creative Task / งานสร้างสรรค์ — ไม่เสียหัวใจ!
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div style="background:rgba(247,201,72,.08);border:2px solid rgba(247,201,72,.35);
+      border-radius:20px;padding:18px 22px;margin-bottom:32px;backdrop-filter:blur(10px);">
+      <div style="font-weight:800;font-size:1.15rem;color:var(--g1);margin-bottom:12px;
+        font-family:'Baloo 2',cursive;">
+        💡 Quick Tips / เคล็ดลับ
+      </div>
+      <div style="font-size:1rem;color:#e8f0ff;line-height:2.1;
+        font-family:'Noto Sans Thai','Nunito',sans-serif;">
+        🔊 Always tap <strong style="color:var(--g1);">Hear Example</strong> first!
+        <span style="color:var(--g3);"> / แตะ "ฟังตัวอย่าง" ก่อนเสมอ!</span><br>
+        🎤 Chrome browser works best for speaking tasks
+        <span style="color:var(--g3);"> / ใช้ Chrome ดีที่สุดสำหรับงานพูด</span><br>
+        🔥 Answer correctly in a row to build a streak!
+        <span style="color:var(--g3);"> / ตอบถูกติดกันเพื่อสร้าง streak!</span><br>
+        🌟 Complete all planets to unlock the Final Mission
+        <span style="color:var(--g3);"> / ทำทุกดาวเพื่อปลดล็อกภารกิจสุดท้าย!</span>
+      </div>
+    </div>
+
+    <!-- Start button -->
+    <button onclick="goTo('app');renderRoadmaps();"
+      style="width:100%;background:linear-gradient(135deg,var(--g1),#ff9f43);
+        color:#1a0800;border:none;font-family:'Baloo 2',cursive;font-weight:900;
+        font-size:1.4rem;padding:22px;border-radius:99px;cursor:pointer;
+        touch-action:manipulation;box-shadow:0 8px 28px rgba(247,201,72,.5);
+        transition:all .2s;animation:pulse 2s ease-in-out infinite alternate;
+        margin-bottom:12px;">
+      🚀 Start Playing! / เริ่มเล่นได้เลย!
+    </button>
+
+    <!-- Skip -->
+    <div style="text-align:center;">
+      <button onclick="goTo('app');renderRoadmaps();"
+        style="background:none;border:none;color:rgba(106,130,171,.8);
+          font-family:'Noto Sans Thai','Nunito',sans-serif;
+          font-size:.95rem;cursor:pointer;text-decoration:underline;padding:10px;">
+        Already know how to play? Skip / รู้วิธีเล่นแล้ว? ข้ามได้
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ END HOW TO PLAY ═══════ -->
+
+<!-- ═══════ SCREEN 2: LOGIN (kept for compatibility, hidden) ═══════ -->
+<div id="scr-login" class="screen" style="display:none!important;"></div>
+
+<!-- ═══════ SCREEN 3: MAIN APP ═══════ -->
 <div id="scr-app" class="screen">
   <!-- Space background video for game page -->
   <video id="space-bg-video" autoplay muted loop playsinline
@@ -1321,8 +1509,6 @@ function getContrastiveFeedback(wrongWord, correctWord, targetSound){
   </div>
   <footer>Designed and created by <span>FL(EX), RELO Grantees 2025–2026</span> | ThailandTESOL, <span>Embassy of USA</span> 🇺🇸</footer>
 </div>
-
-
 
 <!-- ═══════ SCREEN 4: TEACHER DASHBOARD ═══════ -->
 <div id="scr-teacher" class="screen" style="position:relative;z-index:2;">
@@ -1618,7 +1804,7 @@ function openMissionScroll(m){
       box-shadow:0 0 60px ${m.col}33,0 24px 64px rgba(0,0,0,.8);">
 
       <!-- Header -->
-      <button id="msc-close-btn" onclick="closeMissionScroll()" style="position:absolute;top:14px;right:14px;
+      <button id="msc-close-btn" style="position:absolute;top:14px;right:14px;
         background:rgba(106,130,171,.2);border:none;color:#e8f0ff;font-size:1.1rem;
         width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
 
@@ -1666,8 +1852,7 @@ function openMissionScroll(m){
       </div>
 
       <!-- Launch button (id-based so JS can attach handler safely) -->
-      <button id="msc-launch-btn"
-        onclick="closeMissionScroll();startMission(window._currentScrollMission);"
+      <button id="msc-launch-btn" onclick="closeMissionScroll();startMission(window._mscMission);"
         style="width:100%;margin-top:16px;padding:15px;border-radius:99px;border:none;
         background:linear-gradient(135deg,${m.col},${m.col}cc);color:#1a0800;
         font-family:'Baloo 2',cursive;font-weight:900;font-size:1.05rem;
@@ -2144,66 +2329,25 @@ const MISSIONS=[
      clueEmoji:'🐱',clueHint:'This animal says meow!',clueExtra:'It has a Short A 🐱 in its name.',
      q:'🔊 Listen — which word has the Short A 🐱 sound like the animal above?',
      ipa:'Short A 🐱',word:'cat',opts:['cat','cut','cot','kit'],ans:0,
-     ok:"✅ Yes! 'cat' — Short A 🐱! Open your mouth wide!",
-     no:"❌ Short A 🐱 sounds like the meow animal 'cat' — listen again!",
-     sets:[
-       {clueEmoji:'🎩',clueHint:'You wear this on your head!',
-        q:'🔊 Which word has the Short A 🐱 sound?',
-        word:'hat',opts:['hat','hit','hot','hut'],ans:0,
-        ok:"✅ 'hat' — Short A 🐱! Great mouth shape!",
-        no:"❌ 'hat' has Short A 🐱. 'hit'=Short I 🐷, 'hot'=Short O 🐶, 'hut'=Short U ☕"},
-       {clueEmoji:'🗺️',clueHint:'You use this to find your way!',
-        q:'🔊 Which word has the Short A 🐱 sound?',
-        word:'map',opts:['map','mop','mup','mip'],ans:0,
-        ok:"✅ 'map' has Short A 🐱! Explorer skill unlocked! 🗺️",
-        no:"❌ 'map' has Short A 🐱. 'mop' has Short O 🐶. Try again!"},
-       {clueEmoji:'💨',clueHint:'This keeps you cool on a hot day!',
-        q:'🔊 Which word has the Short A 🐱 sound?',
-        word:'fan',opts:['fan','fin','fun','fon'],ans:0,
-        ok:"✅ 'fan' — Short A 🐱! Cool answer! 💨",
-        no:"❌ 'fan' has Short A 🐱. 'fin'=Short I 🐷, 'fun'=Short U ☕!"}
-     ]},
+     ok:"✅ Yes! 'cat' /kæt/ — short Short A 🐱 sound! Open your mouth wide!",
+     no:"❌ Not quite! Short A 🐱 is the short 'a' sound — like the meow animal! Listen again."},
     {t:'pic', ph:'Short A 🐱 · เสียง A สั้น',
      q:'🔊 Listen — which picture\'s word has the Short A 🐱 sound?',
      word:'hat',
-     pics:[{e:'🎩',w:'hat Short A 🐱',c:true},{e:'☕',w:'cup Short U ☕',c:false},{e:'🐝',w:'bee Long E 🐝',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
-     ok:"✅ 'hat' — Short A 🐱! Wide open mouth!",
-     no:"❌ 'hat' has Short A 🐱. Others have different vowels!",
-     sets:[
-       {word:'cat',q:'🔊 Which picture has Short A 🐱?',
-        pics:[{e:'🐱',w:'cat Short A 🐱',c:true},{e:'🐶',w:'dog Short O 🐶',c:false},{e:'🐝',w:'bee Long E 🐝',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
-        ok:"✅ 'cat' — Short A 🐱! Meow! 🐱",no:"❌ 'cat' has Short A 🐱!"},
-       {word:'bat',q:'🔊 Which picture has Short A 🐱?',
-        pics:[{e:'🦇',w:'bat Short A 🐱',c:true},{e:'☕',w:'cup Short U ☕',c:false},{e:'🖊️',w:'pen Short E 🛏️',c:false},{e:'🔥',w:'hot Short O 🐶',c:false}],
-        ok:"✅ 'bat' — Short A 🐱! 🦇",no:"❌ 'bat' has Short A 🐱!"},
-       {word:'fan',q:'🔊 Which picture has Short A 🐱?',
-        pics:[{e:'💨',w:'fan Short A 🐱',c:true},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☀️',w:'sun Short U ☕',c:false},{e:'📦',w:'box Short O 🐶',c:false}],
-        ok:"✅ 'fan' — Short A 🐱! Cool air! 💨",no:"❌ 'fan' has Short A 🐱!"}
-     ]},
+     pics:[{e:'🎩',w:'hat Short A 🐱',c:true},{e:'☕',w:'cup Short U ☕',c:false},{e:'🐝',w:'bee (Long E)',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
+     ok:"✅ 'hat' /hæt/ — open your mouth wide for Short A 🐱! Also: bat, cat, map!",
+     no:"❌ Short A 🐱 is in 'hat' — not 'cup' or 'bus'. Those have different vowels!"},
     {t:'obstacle', title:'⚠️ Obstacle! Letter Swap',
      desc:"A sneaky monster swapped letters! Unscramble the Short A 🐱 word — the clue is the emoji below.",
      clueEmoji:'🗺️',clueHint:'You use this to find your way.',
      word:'map',opts:['mop','map','mup','mip'],ans:1,
-     ok:"✅ 'map' — Short A 🐱! Monster defeated! 🗺️",
-     no:"❌ 'map' has Short A 🐱 — not 'mop' (Short O 🐶)!",
-     sets:[
-       {desc:"The monster hid a Short A 🐱 word! Which one is real?",
-        clueEmoji:'🦇',clueHint:'This flies at night!',
-        word:'bat',opts:['bit','but','bat','bet'],ans:2,
-        ok:"✅ 'bat' — Short A 🐱! Night warrior! 🦇",
-        no:"❌ 'bat' has Short A 🐱. 'bit'=Short I, 'but'=Short U!"},
-       {desc:"Short A 🐱 or different vowel? Pick carefully!",
-        clueEmoji:'👜',clueHint:'You carry your things in this!',
-        word:'bag',opts:['bog','bug','big','bag'],ans:3,
-        ok:"✅ 'bag' — Short A 🐱! You packed the right answer! 👜",
-        no:"❌ 'bag' has Short A 🐱. Others have Short O, U, or I!"}
-     ]},
+     ok:"✅ 'map' /mæp/ — you beat the monster! 🗺️ Great Short A 🐱 word!",
+     no:"❌ The monster tricked you! 'map' has Short A 🐱 — not 'mop' (Short O 🐶) or 'mup' (not a word)!"},
     {t:'rapid', ph:'Short A 🐱 words',
      q:"⚡ Rapid Round! Tap ALL words with the short Short A 🐱 sound:",
      words:['cat','cup','hat','hot','map','mud','fan','fun','bat','bit'],
      ans:[0,2,4,6,8],
      altWords:['sad','sun','ran','run','man','men','cap','cop','jam','gem'],altAns:[0,2,4,6,8],
-     altWords2:['tap','tip','wax','wix','lab','lib','rag','rig','gap','gip'],altAns2:[0,2,4,6,8],
      ok:"✅ cat, hat, map, fan, bat — all have Short A 🐱! You're fast! ⚡",
      no:"❌ Short A 🐱 words: cat, hat, map, fan, bat. Not cup(ʌ), hot(ɒ), mud(ʌ), fun(ʌ), bit(ɪ)!"},
     {t:'spk', ph:'Short A 🐱 · เสียง A สั้น',word:'cat',
@@ -2227,80 +2371,28 @@ const MISSIONS=[
      clueEmoji:'🛏️',clueHint:'You sleep on this at night.',
      q:'🔊 Listen — which word matches this clue and has Short E 🛏️?',
      ipa:'Short E 🛏️',word:'bed',opts:['bad','bid','bed','bud'],ans:2,
-     ok:"✅ 'bed' — Short E 🛏️! Great job!",
-     no:"❌ 'bed' has Short E 🛏️. 'bad'=A, 'bid'=I, 'bud'=U!",
-     sets:[
-       {clueEmoji:'🔴',clueHint:'This colour is the same as fire!',
-        q:'🔊 Which word has Short E 🛏️?',
-        word:'red',opts:['rod','rid','red','rud'],ans:2,
-        ok:"✅ 'red' — Short E 🛏️! Hot colour! 🔴",
-        no:"❌ 'red' has Short E 🛏️. 'rod'=Short O, 'rid'=Short I!"},
-       {clueEmoji:'✈️',clueHint:'This fast plane is called a ___ jet!',
-        q:'🔊 Which word has Short E 🛏️?',
-        word:'jet',opts:['jot','jut','jet','jit'],ans:2,
-        ok:"✅ 'jet' — Short E 🛏️! Zoom! ✈️",
-        no:"❌ 'jet' has Short E 🛏️. 'jot'=Short O, 'jut'=Short U!"},
-       {clueEmoji:'🕸️',clueHint:'A spider spins this to catch insects!',
-        q:'🔊 Which word has Short E 🛏️?',
-        word:'web',opts:['wob','wub','web','wib'],ans:2,
-        ok:"✅ 'web' — Short E 🛏️! Sticky! 🕸️",
-        no:"❌ 'web' has Short E 🛏️!"}
-     ]},
+     ok:"✅ 'bed' /bɛd/ — perfect Short E 🛏️! Also: red, pen, ten!",
+     no:"❌ 'bad' has Short A 🐱, 'bid' has Short I 🐷, 'bud' has Short U ☕. 'bed' is Short E 🛏️!"},
     {t:'pic', ph:'Short E 🛏️ · เสียง E สั้น',
      q:'🔊 Listen — which picture has the Short E 🛏️ sound?',word:'pen',
      pics:[{e:'🖊️',w:'pen Short E 🛏️',c:true},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☀️',w:'sun Short U ☕',c:false},{e:'🔥',w:'hot Short O 🐶',c:false}],
-     ok:"✅ 'pen' — Short E 🛏️! Write it down! 🖊️",
-     no:"❌ 'pen' has Short E 🛏️!",
-     sets:[
-       {word:'red',q:'🔊 Which picture has Short E 🛏️?',
-        pics:[{e:'🔴',w:'red Short E 🛏️',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☕',w:'cup Short U ☕',c:false}],
-        ok:"✅ 'red' — Short E 🛏️! 🔴",no:"❌ 'red' has Short E 🛏️!"},
-       {word:'bed',q:'🔊 Which picture has Short E 🛏️?',
-        pics:[{e:'🛏️',w:'bed Short E 🛏️',c:true},{e:'🦇',w:'bat Short A 🐱',c:false},{e:'📦',w:'box Short O 🐶',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
-        ok:"✅ 'bed' — Short E 🛏️! Sweet dreams! 🛏️",no:"❌ 'bed' has Short E 🛏️!"},
-       {word:'ten',q:'🔊 Which picture has Short E 🛏️?',
-        pics:[{e:'🔟',w:'ten Short E 🛏️',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'🍄',w:'mud Short U ☕',c:false},{e:'🐶',w:'dog Short O 🐶',c:false}],
-        ok:"✅ 'ten' — Short E 🛏️! Count to ten! 🔟",no:"❌ 'ten' has Short E 🛏️!"}
-     ]},
+     ok:"✅ 'pen' /pɛn/ — Short E 🛏️! You write with it! 🖊️",
+     no:"❌ 'pen' has Short E 🛏️. 'pig' has Short I 🐷, 'sun' has Short U ☕, 'hot' has Short O 🐶."},
     {t:'match', ph:'Short E 🛏️ matching',
      q:'Match the clue emoji to its Short E 🛏️ word:',
      pairs:[{l:'🛏️',r:'bed'},{l:'🔴',r:'red'},{l:'🖊️',r:'pen'},{l:'🕸️',r:'web'}],
-     ok:"✅ bed, red, pen, web — all Short E 🛏️!",
-     no:"❌ bed=🛏️, red=🔴, pen=🖊️, web=🕸️!",
-     sets:[
-       {q:'Match emoji to Short E 🛏️ word:',
-        pairs:[{l:'✈️',r:'jet'},{l:'🔟',r:'ten'},{l:'🕸️',r:'web'},{l:'🛏️',r:'bed'}],
-        ok:"✅ jet, ten, web, bed — Short E 🛏️ masters! ✈️",
-        no:"❌ jet=✈️, ten=🔟, web=🕸️, bed=🛏️!"},
-       {q:'Match emoji to Short E 🛏️ word:',
-        pairs:[{l:'🔴',r:'red'},{l:'✈️',r:'jet'},{l:'🖊️',r:'pen'},{l:'🔟',r:'ten'}],
-        ok:"✅ red, jet, pen, ten — Short E 🛏️! 🔴",
-        no:"❌ red=🔴, jet=✈️, pen=🖊️, ten=🔟!"}
-     ]},
+     ok:"✅ All matched! bed, red, pen, web — all have Short E 🛏️! 🌿",
+     no:"❌ bed=🛏️, red=🔴, pen=🖊️, web=🕸️ — try again!"},
     {t:'obstacle', title:'⚠️ Obstacle! The Echo Cave',
      desc:"The cave echoes wrong sounds! Which one truly has Short E 🛏️? Listen carefully!",
      clueEmoji:'✈️',clueHint:'This flies very fast through the sky.',
      word:'jet',opts:['jot','jut','jet','jit'],ans:2,
-     ok:"✅ 'jet' — Short E 🛏️! Echo defeated! ✈️",
-     no:"❌ 'jet' has Short E 🛏️. 'jot'=O, 'jut'=U!",
-     sets:[
-       {desc:"Pick the real Short E 🛏️ word hiding in the cave!",
-        clueEmoji:'🕸️',clueHint:'A spider spins this!',
-        word:'web',opts:['wob','web','wub','wib'],ans:1,
-        ok:"✅ 'web' — Short E 🛏️! Spider caught! 🕸️",
-        no:"❌ 'web' has Short E 🛏️!"},
-       {desc:"The monster scrambled Short E 🛏️! Fix it!",
-        clueEmoji:'🔟',clueHint:'The number after nine!',
-        word:'ten',opts:['tin','ton','tan','ten'],ans:3,
-        ok:"✅ 'ten' — Short E 🛏️! Number master! 🔟",
-        no:"❌ 'ten' has Short E 🛏️. 'tin'=I, 'ton'=O, 'tan'=A!"}
-     ]},
+     ok:"✅ 'jet' /dʒɛt/ — you escaped the echo cave! 🎉",
+     no:"❌ 'jet' has Short E 🛏️. 'jot'=Short O 🐶, 'jut'=Short U ☕, 'jit' isn't a word!"},
     {t:'rapid', ph:'Short E 🛏️ words',
      q:"⚡ Rapid! Tap ALL words with the Short E 🛏️ sound:",
      words:['bed','bid','red','rod','pen','pan','ten','tin','web','wob'],
      ans:[0,2,4,6,8],
-     altWords:['jet','jot','web','wob','ten','ton','red','rod','hen','han'],altAns:[0,2,4,6,8],
-     altWords2:['set','sat','net','not','peg','pig','beg','bag','leg','log'],altAns2:[0,2,4,6,8],
      ok:"✅ bed, red, pen, ten, web — all Short E 🛏️! Superfast! ⚡",
      no:"❌ Short E 🛏️ words: bed, red, pen, ten, web. Others have different vowels!"},
     {t:'spk', ph:'Short E 🛏️ · เสียง E สั้น',word:'red',
@@ -2319,82 +2411,30 @@ const MISSIONS=[
      clueEmoji:'🐷',clueHint:'This pink farm animal loves mud.',
      q:'🔊 Listen — which word matches this clue?',
      ipa:'Short I 🐷',word:'pig',opts:['peg','pig','pug','pog'],ans:1,
-     ok:"✅ 'pig' — Short I 🐷! Almost closed mouth!",
-     no:"❌ 'pig' has Short I 🐷. 'peg'=E, 'pug'=U!",
-     sets:[
-       {clueEmoji:'🪑',clueHint:'You do this when you use a chair!',
-        q:'🔊 Which word has Short I 🐷?',
-        word:'sit',opts:['sat','set','sit','sot'],ans:2,
-        ok:"✅ 'sit' — Short I 🐷! Have a seat! 🪑",
-        no:"❌ 'sit' has Short I 🐷. 'sat'=A, 'set'=E, 'sot'=O!"},
-       {clueEmoji:'💡',clueHint:'The pointy end of something sharp!',
-        q:'🔊 Which word has Short I 🐷?',
-        word:'tip',opts:['tap','top','tip','tup'],ans:2,
-        ok:"✅ 'tip' — Short I 🐷! Sharp answer! 💡",
-        no:"❌ 'tip' has Short I 🐷. 'tap'=A, 'top'=O!"},
-       {clueEmoji:'🏆',clueHint:'You do this in a race to come first!',
-        q:'🔊 Which word has Short I 🐷?',
-        word:'win',opts:['wan','won','win','wen'],ans:2,
-        ok:"✅ 'win' — Short I 🐷! Champion! 🏆",
-        no:"❌ 'win' has Short I 🐷!"}
-     ]},
+     ok:"✅ 'pig' /pɪg/ — Short I 🐷, almost closed mouth! 🐷",
+     no:"❌ 'peg'=Short E 🛏️, 'pug'=Short U ☕, 'pog' isn't a word. 'pig' has Short I 🐷!"},
     {t:'pic', ph:'Short I 🐷 · เสียง I สั้น',
      q:'🔊 Listen — which picture has the Short I 🐷 sound?',word:'sit',
      pics:[{e:'🪑',w:'sit Short I 🐷',c:true},{e:'🐶',w:'dog Short O 🐶',c:false},{e:'🧢',w:'cap Short A 🐱',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
-     ok:"✅ 'sit' — Short I 🐷! 🪑",
-     no:"❌ 'sit' has Short I 🐷!",
-     sets:[
-       {word:'pig',q:'🔊 Which picture has Short I 🐷?',
-        pics:[{e:'🐷',w:'pig Short I 🐷',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'☕',w:'cup Short U ☕',c:false},{e:'🛏️',w:'bed Short E 🛏️',c:false}],
-        ok:"✅ 'pig' — Short I 🐷! Oink! 🐷",no:"❌ 'pig' has Short I 🐷!"},
-       {word:'big',q:'🔊 Which picture has Short I 🐷?',
-        pics:[{e:'📦',w:'big Short I 🐷',c:true},{e:'🗺️',w:'map Short A 🐱',c:false},{e:'🔥',w:'hot Short O 🐶',c:false},{e:'🌳',w:'tree Long E 🐝',c:false}],
-        ok:"✅ 'big' — Short I 🐷! Large and correct! 📦",no:"❌ 'big' has Short I 🐷!"},
-       {word:'win',q:'🔊 Which picture has Short I 🐷?',
-        pics:[{e:'🏆',w:'win Short I 🐷',c:true},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🐶',w:'dog Short O 🐶',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
-        ok:"✅ 'win' — Short I 🐷! Winner! 🏆",no:"❌ 'win' has Short I 🐷!"}
-     ]},
+     ok:"✅ 'sit' /sɪt/ — you sit on a chair! Short I 🐷! 🪑",
+     no:"❌ 'sit' has Short I 🐷. Others have Short O 🐶, Short A 🐱, and Short U ☕!"},
     {t:'obstacle', title:'⚠️ Obstacle! Minimal Pair Minefield!',
      desc:"Step carefully — Short I 🐷 and Long E 🐝 look similar but sound different! Pick the Short I 🐷 word!",
      clueEmoji:'💡',clueHint:'A small pointed end — like at the top of a pencil.',
      word:'tip',opts:['tip (Short I)','teep','tape','type'],ans:0,
-     ok:"✅ 'tip' — Short I 🐷! Minefield cleared!",
-     no:"❌ 'tip' has Short I 🐷. Others have long vowels!",
-     sets:[
-       {desc:"Short I 🐷 or something else? Pick carefully!",
-        clueEmoji:'🐷',clueHint:'This farm animal loves rolling in mud!',
-        word:'pig',opts:['pig','peg','page','peeg'],ans:0,
-        ok:"✅ 'pig' — Short I 🐷! Oink! 🐷",
-        no:"❌ 'pig' has Short I 🐷. 'peg'=Short E, 'page'=Long A!"},
-       {desc:"The minefield has mixed vowels! Find Short I 🐷!",
-        clueEmoji:'🏆',clueHint:'You do this when you beat everyone in a race!',
-        word:'win',opts:['win','wine','ween','wane'],ans:0,
-        ok:"✅ 'win' — Short I 🐷! Champion! 🏆",
-        no:"❌ 'win' has Short I 🐷. 'wine'=Long I, 'ween'=Long E!"}
-     ]},
+     ok:"✅ 'tip' /tɪp/ — Short I 🐷. You dodged the Long E 🐝 minefield! 💥",
+     no:"❌ Short I 🐷 = 'tip'. The others are long vowels or wrong!"},
     {t:'rapid', ph:'Short I 🐷 words',
      q:"⚡ Rapid! Tap ALL words with Short I 🐷 sound:",
      words:['sit','seat','big','beg','lip','leap','win','wine','tip','tape'],
      ans:[0,2,4,6,8],
-     altWords:['pig','page','dig','dog','win','wane','tip','tape','bit','beat'],altAns:[0,2,4,6,8],
-     altWords2:['fin','fine','kit','kite','hit','heat','zip','zap','lid','load'],altAns2:[0,2,4,6,8],
      ok:"✅ sit, big, lip, win, tip — all Short I 🐷! Amazing! ⚡",
      no:"❌ Short I 🐷 words: sit, big, lip, win, tip. Others have long Long E 🐝 or different vowels!"},
     {t:'match', ph:'Short I 🐷 matching',
      q:'Match emoji clue to its Short I 🐷 word:',
      pairs:[{l:'🐷',r:'pig'},{l:'🪑',r:'sit'},{l:'💡',r:'tip'},{l:'🏆',r:'win'}],
-     ok:"✅ pig, sit, tip, win — Short I 🐷!",
-     no:"❌ pig=🐷, sit=🪑, tip=💡, win=🏆!",
-     sets:[
-       {q:'Match emoji to Short I 🐷 word:',
-        pairs:[{l:'📦',r:'big'},{l:'💋',r:'lip'},{l:'🐷',r:'pig'},{l:'🪑',r:'sit'}],
-        ok:"✅ big, lip, pig, sit — Short I 🐷! 📦",
-        no:"❌ big=📦, lip=💋, pig=🐷, sit=🪑!"},
-       {q:'Match emoji to Short I 🐷 word:',
-        pairs:[{l:'🏆',r:'win'},{l:'💡',r:'tip'},{l:'📦',r:'big'},{l:'💋',r:'lip'}],
-        ok:"✅ win, tip, big, lip — Short I 🐷! 🏆",
-        no:"❌ win=🏆, tip=💡, big=📦, lip=💋!"}
-     ]},
+     ok:"✅ pig, sit, tip, win — all Short I 🐷! Forest cleared! 🌲",
+     no:"❌ pig=🐷, sit=🪑, tip=💡, win=🏆 — try again!"},
     {t:'spk', ph:'Short I 🐷 · เสียง I สั้น',word:'big',
      clueEmoji:'📦',clueHint:"Say the opposite of 'small' — this box is ___!",
      q:"🎤 Complete the phrase: 'This box is ___'",
@@ -2411,67 +2451,23 @@ const MISSIONS=[
      clueEmoji:'🔥',clueHint:'The opposite of cold — the volcano is very ___!',
      q:'🔊 Listen — which word matches this clue?',
      ipa:'Short O 🐶',word:'hot',opts:['hot','hat','hit','hut'],ans:0,
-     ok:"✅ 'hot' — Short O 🐶! Like fire! 🔥",
-     no:"❌ 'hot' has Short O 🐶. 'hat'=A, 'hit'=I, 'hut'=U!",
-     sets:[
-       {clueEmoji:'🐶',clueHint:'This friendly four-legged pet barks!',
-        q:'🔊 Which word has Short O 🐶?',
-        word:'dog',opts:['dig','dag','dug','dog'],ans:3,
-        ok:"✅ 'dog' — Short O 🐶! Woof! 🐶",
-        no:"❌ 'dog' has Short O 🐶. 'dig'=I, 'dag' isn't a word, 'dug'=U!"},
-       {clueEmoji:'📦',clueHint:'You keep things inside this square container!',
-        q:'🔊 Which word has Short O 🐶?',
-        word:'box',opts:['bax','bix','bux','box'],ans:3,
-        ok:"✅ 'box' — Short O 🐶! Packed it right! 📦",
-        no:"❌ 'box' has Short O 🐶!"},
-       {clueEmoji:'⬆️',clueHint:'The highest point — this is the ___ of the mountain!',
-        q:'🔊 Which word has Short O 🐶?',
-        word:'top',opts:['tap','tip','tup','top'],ans:3,
-        ok:"✅ 'top' — Short O 🐶! Reached the summit! ⬆️",
-        no:"❌ 'top' has Short O 🐶. 'tap'=A, 'tip'=I!"}
-     ],
      ok:"✅ 'hot' /hɒt/ — round lips, open mouth for Short O 🐶! 🔥",
      no:"❌ 'hat'=Short A 🐱, 'hit'=Short I 🐷, 'hut'=Short U ☕. 'hot' has Short O 🐶 — round your lips!"},
     {t:'pic', ph:'Short O 🐶 · เสียง O สั้น',
      q:'🔊 Listen — which picture has the Short O 🐶 sound?',word:'dog',
      pics:[{e:'🐶',w:'dog Short O 🐶',c:true},{e:'🐛',w:'bug Short U ☕',c:false},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🐷',w:'pig Short I 🐷',c:false}],
      ok:"✅ 'dog' /dɒg/ — rounded mouth for Short O 🐶! 🐶",
-     no:"❌ 'dog' has Short O 🐶. Bug=Short U ☕, hat=Short A 🐱, pig=Short I 🐷!"},,
-     sets:[
-       {word:'hot',q:'🔊 Which picture has Short O 🐶?',
-        pics:[{e:'🔥',w:'hot Short O 🐶',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☕',w:'cup Short U ☕',c:false}],
-        ok:"✅ 'hot' — Short O 🐶! 🔥",no:"❌ 'hot' has Short O 🐶!"},
-       {word:'fox',q:'🔊 Which picture has Short O 🐶?',
-        pics:[{e:'🦊',w:'fox Short O 🐶',c:true},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🌳',w:'tree Long E 🐝',c:false},{e:'🐷',w:'pig Short I 🐷',c:false}],
-        ok:"✅ 'fox' — Short O 🐶! 🦊",no:"❌ 'fox' has Short O 🐶!"},
-       {word:'pot',q:'🔊 Which picture has Short O 🐶?',
-        pics:[{e:'🍯',w:'pot Short O 🐶',c:true},{e:'🦇',w:'bat Short A 🐱',c:false},{e:'🛏️',w:'bed Short E 🛏️',c:false},{e:'☀️',w:'sun Short U ☕',c:false}],
-        ok:"✅ 'pot' — Short O 🐶! Cooking! 🍯",no:"❌ 'pot' has Short O 🐶!"}
-     ]
+     no:"❌ 'dog' has Short O 🐶. Bug=Short U ☕, hat=Short A 🐱, pig=Short I 🐷!"},
     {t:'obstacle', title:'⚠️ Obstacle! Lava Jump — 4 Vowels!',
      desc:"Jump over lava! Only the Short O 🐶 word is safe. Others will burn you!",
      clueEmoji:'📦',clueHint:'You put things inside this square container.',
      word:'box',opts:['bax (Short A)','box (Short O)','bix (Short I)','bux (Short U)'],ans:1,
      ok:"✅ 'box' /bɒks/ — you jumped the lava! Safe! 📦🌋",
-     no:"❌ Only 'box' Short O 🐶 is safe! bax(Short A 🐱), bix(Short I 🐷), bux(Short U ☕) — all wrong!"},,
-     sets:[
-       {desc:"Short O 🐶 hides between look-alikes! Find it!",
-        clueEmoji:'⬆️',clueHint:'The highest point!',
-        word:'top',opts:['tap','tip','top','tup'],ans:2,
-        ok:"✅ 'top' — Short O 🐶! Climbed it! ⬆️",
-        no:"❌ 'top' has Short O 🐶. 'tap'=A, 'tip'=I, 'tup'=U!"},
-       {desc:"Monster scrambled Short O 🐶! Fix it!",
-        clueEmoji:'🍯',clueHint:'You cook soup in this!',
-        word:'pot',opts:['pit','pat','put','pot'],ans:3,
-        ok:"✅ 'pot' — Short O 🐶! Cooking with vowels! 🍯",
-        no:"❌ 'pot' has Short O 🐶. 'pit'=I, 'pat'=A, 'put'=U!"}
-     ]
+     no:"❌ Only 'box' Short O 🐶 is safe! bax(Short A 🐱), bix(Short I 🐷), bux(Short U ☕) — all wrong!"},
     {t:'rapid', ph:'Short O 🐶 words',
      q:"⚡ Rapid! Tap ALL words with Short O 🐶 sound:",
      words:['hot','hat','dog','dig','box','bus','pot','put','top','tip'],
      ans:[0,2,4,6,8],
-     altWords:['cot','cat','fox','fix','lot','let','rob','rib','sob','sub'],altAns:[0,2,4,6,8],
-     altWords2:['log','leg','nod','nid','pop','pip','rod','rid','sob','sib'],altAns2:[0,2,4,6,8],
      ok:"✅ hot, dog, box, pot, top — all Short O 🐶! Volcano survived! 🌋",
      no:"❌ Short O 🐶 words: hot, dog, box, pot, top. Others have Short A 🐱,Short I 🐷,Short U ☕!"},
     {t:'match', ph:'Short O 🐶 · จับคู่',
@@ -2479,16 +2475,6 @@ const MISSIONS=[
      pairs:[{l:'🔥',r:'hot'},{l:'🐶',r:'dog'},{l:'📦',r:'box'},{l:'🦊',r:'fox'}],
      ok:"✅ hot, dog, box, fox — all Short O 🐶! Volcano conquered! 🌋",
      no:"❌ hot=🔥, dog=🐶, box=📦, fox=🦊 — try again!"},
-     sets:[
-       {q:'Match emoji to Short O 🐶 word:',
-        pairs:[{l:'🍯',r:'pot'},{l:'⬆️',r:'top'},{l:'🔥',r:'hot'},{l:'🐶',r:'dog'}],
-        ok:"✅ pot, top, hot, dog — Short O 🐶! 🍯",
-        no:"❌ pot=🍯, top=⬆️, hot=🔥, dog=🐶!"},
-       {q:'Match emoji to Short O 🐶 word:',
-        pairs:[{l:'📦',r:'box'},{l:'🦊',r:'fox'},{l:'🍯',r:'pot'},{l:'⬆️',r:'top'}],
-        ok:"✅ box, fox, pot, top — Short O 🐶! 📦",
-        no:"❌ box=📦, fox=🦊, pot=🍯, top=⬆️!"}
-     ]
     {t:'spk', ph:'Short O 🐶 · เสียง O สั้น',word:'hot',
      clueEmoji:'🔥',clueHint:"Say how the volcano feels — it's very ___!",
      q:"🎤 Complete: 'The volcano is ___'",
@@ -2588,78 +2574,26 @@ const MISSIONS=[
      ipa:'Long A 🌧️',word:'rain',opts:['rain','ran','run','rin'],ans:0,
      ok:"✅ 'rain' /reɪn/ — long Long A 🌧️ gliding sound! Hold it: raaaaain! ☔",
      no:"❌ 'rain' has the long Long A 🌧️. 'ran' has Short A 🐱 — very different!"},
-     sets:[
-       {clueEmoji:'🚂',clueHint:'This long vehicle travels on railway tracks!',
-        q:'🔊 Which word has Long A 🌧️?',
-        word:'train',opts:['train','tran','trin','trun'],ans:0,
-        ok:"✅ 'train' — Long A 🌧️! ai says /eɪ/! 🚂",
-        no:"❌ 'train' has Long A 🌧️ (ai pattern)!"},
-       {clueEmoji:'⛵',clueHint:'The wind pushes this on a boat to move it!',
-        q:'🔊 Which word has Long A 🌧️?',
-        word:'sail',opts:['sail','sell','sill','soil'],ans:0,
-        ok:"✅ 'sail' — Long A 🌧️! Set sail! ⛵",
-        no:"❌ 'sail' has Long A 🌧️. 'sell'=Short E, 'sill'=Short I!"},
-       {clueEmoji:'🎮',clueHint:'Children love to do this in the park!',
-        q:'🔊 Which word has Long A 🌧️?',
-        word:'play',opts:['play','plan','ploy','plum'],ans:0,
-        ok:"✅ 'play' — Long A 🌧️! ay says /eɪ/! 🎮",
-        no:"❌ 'play' has Long A 🌧️ (ay pattern)!"}
-     ]
     {t:'pic', ph:'Long A 🌧️ · ay',
      q:'🔊 Listen — which picture has the Long A 🌧️ sound?',word:'play',
      pics:[{e:'🎮',w:'play Long A 🌧️',c:true},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☀️',w:'sun Short U ☕',c:false},{e:'🐶',w:'dog Short O 🐶',c:false}],
      ok:"✅ 'play' /pleɪ/ — long Long A 🌧️ at the end! plaaaay! 🎮",
      no:"❌ 'play' has Long A 🌧️. The others have short vowels!"},
-     sets:[
-       {word:'rain',q:'🔊 Which picture has Long A 🌧️?',
-        pics:[{e:'🌧️',w:'rain Long A 🌧️',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☕',w:'cup Short U ☕',c:false}],
-        ok:"✅ 'rain' — Long A 🌧️! ai pattern! 🌧️",no:"❌ 'rain' has Long A 🌧️!"},
-       {word:'train',q:'🔊 Which picture has Long A 🌧️?',
-        pics:[{e:'🚂',w:'train Long A 🌧️',c:true},{e:'🦇',w:'bat Short A 🐱',c:false},{e:'🐝',w:'bee Long E 🐝',c:false},{e:'🐶',w:'dog Short O 🐶',c:false}],
-        ok:"✅ 'train' — Long A 🌧️! 🚂",no:"❌ 'train' has Long A 🌧️!"},
-       {word:'sail',q:'🔊 Which picture has Long A 🌧️?',
-        pics:[{e:'⛵',w:'sail Long A 🌧️',c:true},{e:'🛏️',w:'bed Short E 🛏️',c:false},{e:'📦',w:'box Short O 🐶',c:false},{e:'🏆',w:'win Short I 🐷',c:false}],
-        ok:"✅ 'sail' — Long A 🌧️! ⛵",no:"❌ 'sail' has Long A 🌧️!"}
-     ]
     {t:'obstacle', title:'⚠️ Sky Storm! Short vs Long A',
      desc:"A storm mixes up Short A 🐱 (short) and Long A 🌧️ (long)! Pick only the LONG Long A 🌧️ word!",
      clueEmoji:'🚂',clueHint:'This vehicle runs on railway tracks.',
      word:'train',opts:['tan (Short A)','tin (Short I)','train (Long A)','ton (Short O)'],ans:2,
      ok:"✅ 'train' /treɪn/ — long Long A 🌧️! You flew through the storm! 🚂",
      no:"❌ Only 'train' has the long Long A 🌧️! Others have short vowels."},
-     sets:[
-       {desc:"Pick the real Long A 🌧️ word!",
-        clueEmoji:'⛵',clueHint:'Wind-powered boat travel!',
-        word:'sail',opts:['sell','sail','soil','sill'],ans:1,
-        ok:"✅ 'sail' — Long A 🌧️! ⛵",
-        no:"❌ 'sail' has Long A 🌧️!"},
-       {desc:"Find Long A 🌧️ hiding in the storm!",
-        clueEmoji:'📬',clueHint:'Letters arrive here from the post office!',
-        word:'mail',opts:['mill','mull','mail','mell'],ans:2,
-        ok:"✅ 'mail' — Long A 🌧️! Letter delivered! 📬",
-        no:"❌ 'mail' has Long A 🌧️!"}
-     ]
     {t:'match', ph:'Long A 🌧️ · spellings',
      q:'Match the emoji to its long Long A 🌧️ word:',
      pairs:[{l:'🌧️',r:'rain'},{l:'🚂',r:'train'},{l:'🎮',r:'play'},{l:'☀️',r:'day'}],
      ok:"✅ rain, train, play, day — all long Long A 🌧️! Sky island conquered! 🏝️",
      no:"❌ rain=🌧️, train=🚂, play=🎮, day=☀️ — try again!"},
-     sets:[
-       {q:'Match emoji to Long A 🌧️ word:',
-        pairs:[{l:'⛵',r:'sail'},{l:'📬',r:'mail'},{l:'🐌',r:'snail'},{l:'🚂',r:'train'}],
-        ok:"✅ sail, mail, snail, train — Long A 🌧️! ⛵",
-        no:"❌ sail=⛵, mail=📬, snail=🐌, train=🚂!"},
-       {q:'Match emoji to Long A 🌧️ word:',
-        pairs:[{l:'🌧️',r:'rain'},{l:'☀️',r:'day'},{l:'💬',r:'say'},{l:'🎮',r:'play'}],
-        ok:"✅ rain, day, say, play — Long A 🌧️! 🌧️",
-        no:"❌ rain=🌧️, day=☀️, say=💬, play=🎮!"}
-     ]
     {t:'rapid', ph:'Long A 🌧️ words',
      q:"⚡ Rapid! Tap ONLY long Long A 🌧️ words:",
      words:['rain','ran','play','plan','day','dad','train','tan','say','sat'],
      ans:[0,2,4,6,8],
-     altWords:['sail','sad','mail','mat','tail','tan','rail','ran','snail','snap'],altAns:[0,2,4,6,8],
-     altWords2:['clay','clip','stay','stop','spray','spring','bay','bit','pay','pot'],altAns2:[0,2,4,6,8],
      ok:"✅ rain, play, day, train, say — all Long A 🌧️! Cloud-fast! ⚡",
      no:"❌ Long A 🌧️ words: rain, play, day, train, say. Others have Short A 🐱!"},
     {t:'spk', ph:'Long A 🌧️ · เสียง A ยาว',word:'play',
@@ -2680,78 +2614,26 @@ const MISSIONS=[
      ipa:'Long E 🐝',word:'tree',opts:['tree','trip','tray','try'],ans:0,
      ok:"✅ 'tree' /triː/ — long Long E 🐝, smile wide! 🌳 Also: bee, see, feel!",
      no:"❌ 'tree' has long Long E 🐝. 'trip'=Short I 🐷 (short), 'tray'=Long A 🌧️ — different!"},
-     sets:[
-       {clueEmoji:'🐝',clueHint:'This yellow insect makes honey!',
-        q:'🔊 Which word has Long E 🐝?',
-        word:'bee',opts:['bee','bit','bay','boo'],ans:0,
-        ok:"✅ 'bee' — Long E 🐝! ee says /iː/! 🐝",
-        no:"❌ 'bee' has Long E 🐝!"},
-       {clueEmoji:'👣',clueHint:'You have two of these at the bottom of your legs!',
-        q:'🔊 Which word has Long E 🐝?',
-        word:'feet',opts:['feet','fit','fat','fot'],ans:0,
-        ok:"✅ 'feet' — Long E 🐝! ee pattern! 👣",
-        no:"❌ 'feet' has Long E 🐝. 'fit'=Short I!"},
-       {clueEmoji:'🌱',clueHint:'A plant grows from this tiny thing!',
-        q:'🔊 Which word has Long E 🐝?',
-        word:'seed',opts:['seed','said','side','sod'],ans:0,
-        ok:"✅ 'seed' — Long E 🐝! ee pattern! 🌱",
-        no:"❌ 'seed' has Long E 🐝!"}
-     ]
     {t:'pic', ph:'Long E 🐝 · ee',
      q:'🔊 Listen — which picture has the Long E 🐝 sound?',word:'bee',
      pics:[{e:'🐝',w:'bee (Long E)',c:true},{e:'📦',w:'box Short O 🐶',c:false},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🏃',w:'run Short U ☕',c:false}],
      ok:"✅ 'bee' /biː/ — hold the smile and stretch: beeee! 🐝",
      no:"❌ 'bee' has Long E 🐝. Box=Short O 🐶, hat=Short A 🐱, run=Short U ☕ — all short!"},
-     sets:[
-       {word:'tree',q:'🔊 Which picture has Long E 🐝?',
-        pics:[{e:'🌳',w:'tree Long E 🐝',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'🐶',w:'dog Short O 🐶',c:false},{e:'☕',w:'cup Short U ☕',c:false}],
-        ok:"✅ 'tree' — Long E 🐝! 🌳",no:"❌ 'tree' has Long E 🐝!"},
-       {word:'feet',q:'🔊 Which picture has Long E 🐝?',
-        pics:[{e:'👣',w:'feet Long E 🐝',c:true},{e:'🦇',w:'bat Short A 🐱',c:false},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'📦',w:'box Short O 🐶',c:false}],
-        ok:"✅ 'feet' — Long E 🐝! 👣",no:"❌ 'feet' has Long E 🐝!"},
-       {word:'seed',q:'🔊 Which picture has Long E 🐝?',
-        pics:[{e:'🌱',w:'seed Long E 🐝',c:true},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🛏️',w:'bed Short E 🛏️',c:false},{e:'🏆',w:'win Short I 🐷',c:false}],
-        ok:"✅ 'seed' — Long E 🐝! 🌱",no:"❌ 'seed' has Long E 🐝!"}
-     ]
     {t:'obstacle', title:'⚠️ Deep Sea! Short I vs Long E',
      desc:"The pressure is high! Short I 🐷 and Long E 🐝 sound VERY similar. Pick the LONG Long E 🐝 word!",
      clueEmoji:'👣',clueHint:'You walk on these — at the bottom of your legs.',
      word:'feet',opts:['fit (Short I)','feet (Long E)','fat (Short A)','fut'],ans:1,
      ok:"✅ 'feet' /fiːt/ — long Long E 🐝! You resisted the pressure! 👣",
      no:"❌ 'feet' = long Long E 🐝. 'fit' = Short I 🐷. They sound similar — hold Long E 🐝 longer!"},
-     sets:[
-       {desc:"Find the Long E 🐝 word in the swarm!",
-        clueEmoji:'🌱',clueHint:'Plants grow from this!',
-        word:'seed',opts:['said','seed','side','sad'],ans:1,
-        ok:"✅ 'seed' — Long E 🐝! 🌱",
-        no:"❌ 'seed' has Long E 🐝!"},
-       {desc:"Long E 🐝 or short? Find it!",
-        clueEmoji:'👣',clueHint:'Two of these at the end of your legs!',
-        word:'feet',opts:['fit','fat','feet','fot'],ans:2,
-        ok:"✅ 'feet' — Long E 🐝! 👣",
-        no:"❌ 'feet' has Long E 🐝. 'fit'=Short I, 'fat'=Short A!"}
-     ]
     {t:'match', ph:'Long E 🐝 · words',
      q:'Match emoji to its long Long E 🐝 word:',
      pairs:[{l:'🌳',r:'tree'},{l:'🐝',r:'bee'},{l:'👣',r:'feet'},{l:'🌱',r:'seed'}],
      ok:"✅ tree, bee, feet, seed — all long Long E 🐝! Deep sea explored! 🌊",
      no:"❌ tree=🌳, bee=🐝, feet=👣, seed=🌱 — try again!"},
-     sets:[
-       {q:'Match emoji to Long E 🐝 word:',
-        pairs:[{l:'📅',r:'week'},{l:'🌊',r:'deep'},{l:'🌳',r:'tree'},{l:'🐝',r:'bee'}],
-        ok:"✅ week, deep, tree, bee — Long E 🐝! 📅",
-        no:"❌ week=📅, deep=🌊, tree=🌳, bee=🐝!"},
-       {q:'Match emoji to Long E 🐝 word:',
-        pairs:[{l:'🌱',r:'seed'},{l:'👣',r:'feet'},{l:'📅',r:'week'},{l:'🌊',r:'deep'}],
-        ok:"✅ seed, feet, week, deep — Long E 🐝! 🌱",
-        no:"❌ seed=🌱, feet=👣, week=📅, deep=🌊!"}
-     ]
     {t:'rapid', ph:'Long E 🐝 words',
      q:"⚡ Rapid! Tap ONLY long Long E 🐝 words:",
      words:['tree','trip','bee','bit','feet','fit','seed','sit','week','wick'],
      ans:[0,2,4,6,8],
-     altWords:['deep','dip','seen','sin','feel','fill','keep','kit','green','grin'],altAns:[0,2,4,6,8],
-     altWords2:['meet','mat','sleep','slip','sheep','ship','teeth','tip','three','throw'],altAns2:[0,2,4,6,8],
      ok:"✅ tree, bee, feet, seed, week — all long Long E 🐝! Deep diver! ⚡",
      no:"❌ Long E 🐝 words: tree, bee, feet, seed, week. Others have Short I 🐷!"},
     {t:'spk', ph:'Long E 🐝 · เสียง E ยาว',word:'tree',
@@ -2772,78 +2654,26 @@ const MISSIONS=[
      ipa:'Long O ⛵',word:'boat',opts:['boat','bat','bit','but'],ans:0,
      ok:"✅ 'boat' /boʊt/ — round lips glide to /ʊ/! Also: coat, road, toad! ⛵",
      no:"❌ 'boat' has long Long O ⛵. 'bat'=Short A 🐱, 'bit'=Short I 🐷, 'but'=Short U ☕ — all short!"},
-     sets:[
-       {clueEmoji:'🧥',clueHint:'You wear this to stay warm outside!',
-        q:'🔊 Which word has Long O ⛵?',
-        word:'coat',opts:['coat','cat','cut','cot'],ans:0,
-        ok:"✅ 'coat' — Long O ⛵! oa says /oʊ/! 🧥",
-        no:"❌ 'coat' has Long O ⛵. 'cat'=A, 'cut'=U, 'cot'=Short O!"},
-       {clueEmoji:'🛣️',clueHint:'Cars drive on this long path!',
-        q:'🔊 Which word has Long O ⛵?',
-        word:'road',opts:['rod','road','red','rid'],ans:1,
-        ok:"✅ 'road' — Long O ⛵! Drive safely! 🛣️",
-        no:"❌ 'road' has Long O ⛵. 'rod'=Short O!"},
-       {clueEmoji:'🐐',clueHint:'This horned animal lives on a farm or mountain!',
-        q:'🔊 Which word has Long O ⛵?',
-        word:'goat',opts:['got','goat','gut','git'],ans:1,
-        ok:"✅ 'goat' — Long O ⛵! 🐐",
-        no:"❌ 'goat' has Long O ⛵. 'got'=Short O!"}
-     ]
     {t:'pic', ph:'Long O ⛵ · oa, ow',
      q:'🔊 Listen — which picture has Long O ⛵?',word:'coat',
      pics:[{e:'🧥',w:'coat Long O ⛵',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'☕',w:'cup Short U ☕',c:false},{e:'🐷',w:'pig Short I 🐷',c:false}],
      ok:"✅ 'coat' /koʊt/ — long Long O ⛵, round your lips! 🧥",
      no:"❌ 'coat' has Long O ⛵. Cat=Short A 🐱, cup=Short U ☕, pig=Short I 🐷 — all short!"},
-     sets:[
-       {word:'boat',q:'🔊 Which picture has Long O ⛵?',
-        pics:[{e:'⛵',w:'boat Long O ⛵',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'🐷',w:'pig Short I 🐷',c:false},{e:'☕',w:'cup Short U ☕',c:false}],
-        ok:"✅ 'boat' — Long O ⛵! ⛵",no:"❌ 'boat' has Long O ⛵!"},
-       {word:'road',q:'🔊 Which picture has Long O ⛵?',
-        pics:[{e:'🛣️',w:'road Long O ⛵',c:true},{e:'🛏️',w:'bed Short E 🛏️',c:false},{e:'🐶',w:'dog Short O 🐶',c:false},{e:'💡',w:'tip Short I 🐷',c:false}],
-        ok:"✅ 'road' — Long O ⛵! 🛣️",no:"❌ 'road' has Long O ⛵!"},
-       {word:'goat',q:'🔊 Which picture has Long O ⛵?',
-        pics:[{e:'🐐',w:'goat Long O ⛵',c:true},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'🌳',w:'tree Long E 🐝',c:false},{e:'🚌',w:'bus Short U ☕',c:false}],
-        ok:"✅ 'goat' — Long O ⛵! 🐐",no:"❌ 'goat' has Long O ⛵!"}
-     ]
     {t:'obstacle', title:'⚠️ Mountain Wind! Short O vs Long O',
      desc:"Strong winds mix up Short O 🐶 and long Long O ⛵! Pick the LONG one!",
      clueEmoji:'🐸',clueHint:'A green jumping amphibian that lives near ponds.',
      word:'toad',opts:['tod (Short O)','toad (Long O)','tid (Short I)','tud (Short U)'],ans:1,
      ok:"✅ 'toad' /toʊd/ — long Long O ⛵! You climbed through the wind! 🐸",
      no:"❌ 'toad' has long Long O ⛵. 'tod' would be Short O 🐶 — hear the difference!"},
-     sets:[
-       {desc:"Long O ⛵ or Short O 🐶? Find the right one!",
-        clueEmoji:'🛣️',clueHint:'Cars drive on this!',
-        word:'road',opts:['rod','road','rid','red'],ans:1,
-        ok:"✅ 'road' — Long O ⛵! 🛣️",
-        no:"❌ 'road' has Long O ⛵. 'rod'=Short O!"},
-       {desc:"Monster swapped Long O ⛵! Fix it!",
-        clueEmoji:'🧥',clueHint:'Warm outer garment!',
-        word:'coat',opts:['cot','cut','cat','coat'],ans:3,
-        ok:"✅ 'coat' — Long O ⛵! 🧥",
-        no:"❌ 'coat' has Long O ⛵. 'cot'=Short O!"}
-     ]
     {t:'match', ph:'Long O ⛵ · words',
      q:'Match emoji to its long Long O ⛵ word:',
      pairs:[{l:'⛵',r:'boat'},{l:'🧥',r:'coat'},{l:'🛣️',r:'road'},{l:'🐸',r:'toad'}],
      ok:"✅ boat, coat, road, toad — all Long O ⛵! Mountain summit! ⛰️",
      no:"❌ boat=⛵, coat=🧥, road=🛣️, toad=🐸 — try again!"},
-     sets:[
-       {q:'Match emoji to Long O ⛵ word:',
-        pairs:[{l:'🐐',r:'goat'},{l:'🛣️',r:'road'},{l:'🫧',r:'foam'},{l:'⛵',r:'boat'}],
-        ok:"✅ goat, road, foam, boat — Long O ⛵! 🐐",
-        no:"❌ goat=🐐, road=🛣️, foam=🫧, boat=⛵!"},
-       {q:'Match emoji to Long O ⛵ word:',
-        pairs:[{l:'🧥',r:'coat'},{l:'🐐',r:'goat'},{l:'🛣️',r:'road'},{l:'🐸',r:'toad'}],
-        ok:"✅ coat, goat, road, toad — Long O ⛵! 🧥",
-        no:"❌ coat=🧥, goat=🐐, road=🛣️, toad=🐸!"}
-     ]
     {t:'rapid', ph:'Long O ⛵ words',
      q:"⚡ Rapid! Tap ONLY Long O ⛵ words:",
      words:['boat','bat','coat','cat','road','rod','toad','top','goat','got'],
      ans:[0,2,4,6,8],
-     altWords:['foam','from','load','lad','float','flat','moan','man','toast','test'],altAns:[0,2,4,6,8],
-     altWords2:['soap','sap','coal','cot','groan','gran','oak','ok','soak','sock'],altAns2:[0,2,4,6,8],
      ok:"✅ boat, coat, road, toad, goat — all long Long O ⛵! Summit reached! ⚡",
      no:"❌ Long O ⛵ words: boat, coat, road, toad, goat. Others have Short A 🐱, Short O 🐶!"},
     {t:'spk', ph:'Long O ⛵ · เสียง O ยาว',word:'road',
@@ -2864,78 +2694,26 @@ const MISSIONS=[
      ipa:'Long I 💡',word:'light',opts:['light','lit','let','lot'],ans:0,
      ok:"✅ 'light' /laɪt/ — Long I 💡 glides from /a/ to Short I 🐷! 💡",
      no:"❌ 'light' has Long I 💡. 'lit'=Short I 🐷, 'let'=Short E 🛏️, 'lot'=Short O 🐶 — all short!"},
-     sets:[
-       {clueEmoji:'🌙',clueHint:'The dark period from sunset to sunrise!',
-        q:'🔊 Which word has Long I 💡?',
-        word:'night',opts:['night','nit','not','net'],ans:0,
-        ok:"✅ 'night' — Long I 💡! igh says /aɪ/! 🌙",
-        no:"❌ 'night' has Long I 💡. 'nit'=Short I, 'not'=Short O!"},
-       {clueEmoji:'✅',clueHint:'You are correct! The answer is ___!',
-        q:'🔊 Which word has Long I 💡?',
-        word:'right',opts:['right','rot','rat','rit'],ans:0,
-        ok:"✅ 'right' — Long I 💡! ✅",
-        no:"❌ 'right' has Long I 💡!"},
-       {clueEmoji:'👁️',clueHint:'You use this to see the world around you!',
-        q:'🔊 Which word has Long I 💡?',
-        word:'sight',opts:['sit','sat','sight','sot'],ans:2,
-        ok:"✅ 'sight' — Long I 💡! Eye can see it! 👁️",
-        no:"❌ 'sight' has Long I 💡. 'sit'=Short I!"}
-     ]
     {t:'pic', ph:'Long I 💡 · igh',
      q:'🔊 Listen — which picture has Long I 💡?',word:'night',
      pics:[{e:'🌙',w:'night Long I 💡',c:true},{e:'🐝',w:'bee (Long E)',c:false},{e:'🚌',w:'bus Short U ☕',c:false},{e:'🔥',w:'hot Short O 🐶',c:false}],
      ok:"✅ 'night' /naɪt/ — long Long I 💡 diphthong! 🌙",
      no:"❌ 'night' has Long I 💡. Bee=Long E 🐝, bus=Short U ☕, hot=Short O 🐶!"},
-     sets:[
-       {word:'light',q:'🔊 Which picture has Long I 💡?',
-        pics:[{e:'💡',w:'light Long I 💡',c:true},{e:'🐱',w:'cat Short A 🐱',c:false},{e:'🛏️',w:'bed Short E 🛏️',c:false},{e:'🐷',w:'pig Short I 🐷',c:false}],
-        ok:"✅ 'light' — Long I 💡! 💡",no:"❌ 'light' has Long I 💡!"},
-       {word:'right',q:'🔊 Which picture has Long I 💡?',
-        pics:[{e:'✅',w:'right Long I 💡',c:true},{e:'🐶',w:'dog Short O 🐶',c:false},{e:'🎩',w:'hat Short A 🐱',c:false},{e:'⛵',w:'boat Long O ⛵',c:false}],
-        ok:"✅ 'right' — Long I 💡! ✅",no:"❌ 'right' has Long I 💡!"},
-       {word:'sight',q:'🔊 Which picture has Long I 💡?',
-        pics:[{e:'👁️',w:'sight Long I 💡',c:true},{e:'🌱',w:'seed Long E 🐝',c:false},{e:'🚌',w:'bus Short U ☕',c:false},{e:'📦',w:'box Short O 🐶',c:false}],
-        ok:"✅ 'sight' — Long I 💡! 👁️",no:"❌ 'sight' has Long I 💡!"}
-     ]
     {t:'obstacle', title:'⚠️ Meteor Shower! Short I vs Long I',
      desc:"Meteors of Short I 🐷 are falling! Only the Long I 💡 words are safe shields!",
      clueEmoji:'✅',clueHint:"The direction on the right — it means correct!",
      word:'right',opts:['rit (Short I)','right (Long I)','ret (Short E)','rot (Short O)'],ans:1,
      ok:"✅ 'right' /raɪt/ — your shield held! Meteor blocked! ✅",
      no:"❌ 'right' has Long I 💡. Don't confuse with 'rit'(Short I 🐷) — it's not even a word!"},
-     sets:[
-       {desc:"igh = Long I 💡! Find the real word!",
-        clueEmoji:'✅',clueHint:'Opposite of wrong!',
-        word:'right',opts:['rot','rit','right','rat'],ans:2,
-        ok:"✅ 'right' — Long I 💡! ✅",
-        no:"❌ 'right' has Long I 💡!"},
-       {desc:"Long I 💡 is powerful! Pick it!",
-        clueEmoji:'💪',clueHint:'Being very strong — you ___ be able to do it!',
-        word:'might',opts:['mat','mit','mot','might'],ans:3,
-        ok:"✅ 'might' — Long I 💡! Mighty! 💪",
-        no:"❌ 'might' has Long I 💡!"}
-     ]
     {t:'match', ph:'Long I 💡 · words',
      q:'Match emoji to long Long I 💡 word:',
      pairs:[{l:'💡',r:'light'},{l:'🌙',r:'night'},{l:'✅',r:'right'},{l:'💪',r:'might'}],
      ok:"✅ light, night, right, might — all Long I 💡! Star navigator! ⭐",
      no:"❌ light=💡, night=🌙, right=✅, might=💪 — try again!"},
-     sets:[
-       {q:'Match emoji to Long I 💡 word:',
-        pairs:[{l:'👁️',r:'sight'},{l:'💪',r:'might'},{l:'💡',r:'light'},{l:'🌙',r:'night'}],
-        ok:"✅ sight, might, light, night — Long I 💡! 👁️",
-        no:"❌ sight=👁️, might=💪, light=💡, night=🌙!"},
-       {q:'Match emoji to Long I 💡 word:',
-        pairs:[{l:'✅',r:'right'},{l:'🤜',r:'tight'},{l:'👁️',r:'sight'},{l:'💪',r:'might'}],
-        ok:"✅ right, tight, sight, might — Long I 💡! ✅",
-        no:"❌ right=✅, tight=🤜, sight=👁️, might=💪!"}
-     ]
     {t:'rapid', ph:'Long I 💡 words',
      q:"⚡ Rapid! Tap ONLY Long I 💡 words:",
      words:['light','lit','night','nit','right','rit','sight','sit','might','mit'],
      ans:[0,2,4,6,8],
-     altWords:['tight','tip','flight','flat','bright','brit','slight','slit','knight','knit'],altAns:[0,2,4,6,8],
-     altWords2:['high','hip','sigh','sip','thigh','this','fight','fit','fright','frit'],altAns2:[0,2,4,6,8],
      ok:"✅ light, night, right, sight, might — all Long I 💡! Shooting star! ⚡",
      no:"❌ Long I 💡 words: light, night, right, sight, might. Others have Short I 🐷!"},
     {t:'spk', ph:'Long I 💡 · เสียง I ยาว',word:'night',
@@ -3181,7 +2959,7 @@ function goTo(screen){
   }
 }
 
-const ALL_PANELS=['map','game','scoreboard','profile','badges','upload'];
+const ALL_PANELS=['map','game','scoreboard','profile','avatar','badges','upload'];
 function showPanel(p){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.p===p));
   ALL_PANELS.forEach(id=>{
@@ -3322,9 +3100,7 @@ document.addEventListener('click',function(e){
 
 // ── Init on page load ──
 document.addEventListener('DOMContentLoaded',function(){
-  // Always start on login screen — clear any stale session
-  currentUser = null;
-  goTo('intro');
+  goTo('intro');  // always start on login screen
   buildLoginUI();
 });
 function chkLoginReady(){
@@ -4203,10 +3979,10 @@ async function buildCharacterSelection(){
   grid.style.cssText = `
     flex:1;
     display:grid;
-    grid-template-columns:repeat(5,1fr);
+    grid-template-columns:repeat(${cols},1fr);
     grid-template-rows:repeat(2,1fr);
-    gap:clamp(6px,.8vw,12px);
-    width:100%;max-width:1200px;
+    gap:clamp(4px,.7vw,9px);
+    width:100%;max-width:1100px;
     margin:0 auto;
     min-height:0;
     overflow:hidden;`;
@@ -4237,17 +4013,10 @@ async function buildCharacterSelection(){
     card.innerHTML = `
       <!-- Full artwork background -->
       <div class="ch-img-bg" style="
-        position:absolute;inset:0;overflow:hidden;
-        background:radial-gradient(circle at center,${ch.color}33,#07090f);
-        border-radius:inherit;">
-        ${imgUrl ? `<img src="${imgUrl}"
-          style="width:100%;height:100%;object-fit:cover;object-position:top center;
-                 display:block;transition:transform .3s ease;"
-          onerror="this.style.display='none';this.nextSibling.style.display='flex';">
-        <div style="display:none;width:100%;height:100%;align-items:center;
-          justify-content:center;font-size:5.5rem;">${ch.emoji}</div>`
-        : `<div style="display:flex;width:100%;height:100%;align-items:center;
-          justify-content:center;font-size:5.5rem;">${ch.emoji}</div>`}
+        position:absolute;inset:0;
+        background-image:url('${imgUrl}');
+        background-size:cover;background-position:top center;
+        transition:transform .3s ease;border-radius:inherit;">
       </div>
 
       <!-- Dark gradient overlay — stronger at bottom for text legibility -->
@@ -4380,7 +4149,7 @@ async function buildCharacterSelection(){
       // Slide up the preview bar
       const bar = document.getElementById('char-preview-bar');
       if(bar){
-        bar.style.maxHeight = '72px'; bar.style.opacity = '1'; bar.style.padding = 'clamp(6px,1vh,10px) clamp(10px,2vw,20px)'; bar.style.borderTopColor = 'rgba(106,130,171,.25)';
+        bar.style.transform = 'translateY(0)';
         bar.style.borderTopColor = ch.color + '66';
         document.getElementById('cpb-emoji').textContent = ch.emoji;
         document.getElementById('cpb-name').textContent = ch.name;
@@ -4462,19 +4231,7 @@ function confirmCharacter(){
   const bioEl     = document.getElementById('confirm-bio');
   const nextBtn   = document.getElementById('confirm-next-btn');
 
-  if(portrait){
-    portrait.style.borderColor = ch.color;
-    portrait.style.boxShadow = `0 0 40px ${ch.color}77`;
-    // Show character image if available, else emoji fallback
-    const imgUrl = (window.CHAR_IMGS && CHAR_IMGS[ch.id]) ? CHAR_IMGS[ch.id] : '';
-    if(imgUrl){
-      portrait.innerHTML = `<div style="width:100%;height:100%;border-radius:50%;
-        background:url('${imgUrl}') center top/cover no-repeat;"></div>`;
-    } else {
-      portrait.textContent = ch.emoji;
-      portrait.style.fontSize = '5rem';
-    }
-  }
+  if(portrait){ portrait.textContent = ch.emoji; portrait.style.borderColor = ch.color; portrait.style.boxShadow = `0 0 40px ${ch.color}77`; }
   if(ready)    ready.textContent    = `Ready, ${currentUser || 'Explorer'}!`;
   if(subtitle) subtitle.textContent = `${ch.name} stands beside you.`;
   if(explorer) explorer.textContent = currentUser || 'Explorer';
@@ -4613,40 +4370,23 @@ function showClueUnlock(clueId){
    MISSION ENGINE
 ══════════════════════════════════════════════ */
 
-/* ══════════════════════════════════════════════
-   QUIZ VARIETY ENGINE
-   — picks a random question set each session
-   — ensures students see different questions
-══════════════════════════════════════════════ */
 function applyQuizVariety(mission){
-  if(!mission || !mission.tasks) return mission;
-  // Deep clone to avoid mutating original
-  const m = JSON.parse(JSON.stringify(mission));
-  m.tasks = m.tasks.map(tk => {
-    if(tk.sets && Array.isArray(tk.sets) && tk.sets.length > 0){
-      // Pick a random set (0 = original, 1+ = alternates)
-      const allSets = [{
-        // Original set fields
-        ...(tk.word !== undefined && {word: tk.word}),
-        ...(tk.opts !== undefined && {opts: tk.opts, ans: tk.ans}),
-        ...(tk.clueEmoji !== undefined && {clueEmoji: tk.clueEmoji, clueHint: tk.clueHint}),
-        ...(tk.pics !== undefined && {pics: tk.pics}),
-        ...(tk.pairs !== undefined && {pairs: tk.pairs}),
-        ...(tk.q !== undefined && {q: tk.q}),
-        ...(tk.ok !== undefined && {ok: tk.ok, no: tk.no}),
-        ...(tk.desc !== undefined && {desc: tk.desc}),
-        ...(tk.tip !== undefined && {tip: tk.tip}),
-      }, ...tk.sets];
-      const chosen = allSets[Math.floor(Math.random() * allSets.length)];
-      return { ...tk, ...chosen };
+  if(!mission||!mission.tasks)return mission;
+  var m=JSON.parse(JSON.stringify(mission));
+  m.tasks=m.tasks.map(function(tk){
+    if(tk.sets&&Array.isArray(tk.sets)&&tk.sets.length>0){
+      var allSets=[{word:tk.word,opts:tk.opts,ans:tk.ans,clueEmoji:tk.clueEmoji,
+        clueHint:tk.clueHint,pics:tk.pics,pairs:tk.pairs,q:tk.q,
+        ok:tk.ok,no:tk.no,desc:tk.desc,tip:tk.tip}].concat(tk.sets);
+      var chosen=allSets[Math.floor(Math.random()*allSets.length)];
+      return Object.assign({},tk,chosen);
     }
-    // Rapid Fire: rotate between 3 word sets
-    if(tk.t === 'rapid' && tk.altWords){
-      const r = Math.random();
-      if(r < 0.33) return tk; // original
-      if(r < 0.67) return { ...tk, words: tk.altWords, ans: tk.altAns || tk.ans };
-      if(tk.altWords2) return { ...tk, words: tk.altWords2, ans: tk.altAns2 || tk.ans };
-      return { ...tk, words: tk.altWords, ans: tk.altAns || tk.ans };
+    if(tk.t==='rapid'&&tk.altWords){
+      var r=Math.random();
+      if(r<0.33)return tk;
+      if(r<0.67)return Object.assign({},tk,{words:tk.altWords,ans:tk.altAns||tk.ans});
+      if(tk.altWords2)return Object.assign({},tk,{words:tk.altWords2,ans:tk.altAns2||tk.ans});
+      return Object.assign({},tk,{words:tk.altWords,ans:tk.altAns||tk.ans});
     }
     return tk;
   });
@@ -4654,91 +4394,26 @@ function applyQuizVariety(mission){
 }
 
 
-/* ══════════════════════════════════════════════
-   TASK PROGRESS SAVE / RESUME
-══════════════════════════════════════════════ */
 function saveTaskProgress(){
-  if(!S.curMission || !currentUser) return;
-  const key = 'progress_' + S.curMission.id;
-  try {
-    const data = {
-      missionId: S.curMission.id,
-      task: S.task,
-      lives: S.lives,
-      xp: S.xp,
-      streak: S.streak,
-      savedAt: Date.now()
-    };
-    localStorage.setItem(currentUser + '_' + key, JSON.stringify(data));
-    // Also save to Firebase if available
-    if(window.db && firebase){
-      const ref = firebase.database().ref('progress/' + currentUser + '/' + S.curMission.id);
-      ref.set(data).catch(()=>{});
-    }
-  } catch(e){}
+  if(!S.curMission||!currentUser)return;
+  try{
+    var d={missionId:S.curMission.id,task:S.task,lives:S.lives,savedAt:Date.now()};
+    localStorage.setItem((currentUser||'')+'_prog_'+S.curMission.id,JSON.stringify(d));
+  }catch(e){}
 }
-
-function loadTaskProgress(missionId, callback){
-  if(!currentUser){ callback(null); return; }
-  const key = currentUser + '_progress_' + missionId;
-  // Try Firebase first
-  if(window.db && firebase){
-    firebase.database().ref('progress/' + currentUser + '/' + missionId)
-      .once('value')
-      .then(snap => {
-        const data = snap.val();
-        // Only resume if saved within last 24 hours
-        if(data && data.task > 0 && (Date.now() - data.savedAt) < 86400000){
-          callback(data);
-        } else {
-          callback(null);
-        }
-      }).catch(() => {
-        // Fallback to localStorage
-        try {
-          const local = JSON.parse(localStorage.getItem(key)||'null');
-          if(local && local.task > 0 && (Date.now() - local.savedAt) < 86400000){
-            callback(local);
-          } else { callback(null); }
-        } catch(e){ callback(null); }
-      });
-  } else {
-    try {
-      const local = JSON.parse(localStorage.getItem(key)||'null');
-      if(local && local.task > 0 && (Date.now() - local.savedAt) < 86400000){
-        callback(local);
-      } else { callback(null); }
-    } catch(e){ callback(null); }
-  }
+function loadTaskProgress(missionId,cb){
+  try{
+    var d=JSON.parse(localStorage.getItem((currentUser||'')+'_prog_'+missionId)||'null');
+    if(d&&d.task>0&&(Date.now()-d.savedAt)<86400000){cb(d);}else{cb(null);}
+  }catch(e){cb(null);}
 }
-
 function clearTaskProgress(missionId){
-  if(!currentUser) return;
-  localStorage.removeItem(currentUser + '_progress_' + missionId);
-  if(window.db && firebase){
-    firebase.database().ref('progress/' + currentUser + '/' + missionId).remove().catch(()=>{});
-  }
+  try{localStorage.removeItem((currentUser||'')+'_prog_'+missionId);}catch(e){}
 }
 
 function startMission(m){
-  // Check for saved mid-mission progress
-  loadTaskProgress(m.id, function(saved){
-    if(saved && saved.task > 0 && saved.task < (m.tasks ? m.tasks.length : 7)){
-      const resume = confirm(
-        'Resume from Task ' + (saved.task+1) + '? / กลับมาต่อจากงานที่ ' + (saved.task+1) + '?\n' +
-        '(Cancel = Start over / ยกเลิก = เริ่มใหม่)'
-      );
-      if(resume){
-        _startMissionAt(m, saved.task, saved.lives);
-        return;
-      }
-    }
-    _startMissionAt(m, 0, m.lives||3);
-  });
-}
-function _startMissionAt(m, startTask, startLives){
-  m = (typeof applyQuizVariety === "function") ? applyQuizVariety(m) : m;
-  S.curMission=m;S.task=startTask;S.results=[];S.lives=startLives;S.maxLives=m.lives||3;S.streak=0;
+  m=(typeof applyQuizVariety==="function")?applyQuizVariety(m):m;
+  S.curMission=m;S.task=0;S.results=[];S.lives=m.lives||3;S.maxLives=m.lives||3;S.streak=0;
   // CRITICAL: switch panel to 'game' FIRST so pnl-game is display:block before we write into it
   showPanel('game');
   const pg=document.getElementById('pnl-game');
@@ -5549,16 +5224,14 @@ function chkSB(target,alts){
 ══════════════════════════════════════════════ */
 function nextTask(){
   clearHintTimer();
+  if(typeof saveTaskProgress==="function")saveTaskProgress();
   clearInterval(S.rapidIv); S.rapidIv = null;
   S.task++;
   if(!S.curMission)return;
-  // Save mid-mission progress to Firebase
-  if(typeof saveTaskProgress === 'function') saveTaskProgress();
   if(S.task>=S.curMission.tasks.length)finishMission();else renderTask();
 }
 function finishMission(){
-  // Clear saved progress since mission is done
-  if(S.curMission) clearTaskProgress(S.curMission.id);
+  if(S.curMission)clearTaskProgress(S.curMission.id);
   const id=S.curMission.id;
   const pass=S.results.filter(Boolean).length;
   const total=S.results.length;
@@ -6016,7 +5689,7 @@ function panKeepRec(){
       </div>
       <div style="font-size:.68rem;color:var(--muted);text-align:center;font-family:'Noto Sans Thai','Nunito',sans-serif;">
         แตะปุ่มเพื่อเปิด/ปิดเพลง
-      `;
+      </div>`;
 
     document.body.appendChild(popup);
     document.body.appendChild(btn);
@@ -6251,7 +5924,24 @@ function panKeepRec(){
   // Expose toggle to global scope for any external use
   window.toggleBGMusic = toggleMusic;
 })();
+
+var VOWEL_SOUND_MAP={
+  cat:'Short A',bat:'Short A',hat:'Short A',map:'Short A',fan:'Short A',bag:'Short A',
+  bed:'Short E',red:'Short E',pen:'Short E',web:'Short E',jet:'Short E',ten:'Short E',
+  pig:'Short I',sit:'Short I',tip:'Short I',win:'Short I',big:'Short I',lip:'Short I',
+  dog:'Short O',hot:'Short O',box:'Short O',pot:'Short O',top:'Short O',fox:'Short O',
+  cup:'Short U',bus:'Short U',sun:'Short U',run:'Short U',bug:'Short U',cut:'Short U',
+  rain:'Long A',train:'Long A',sail:'Long A',play:'Long A',day:'Long A',mail:'Long A',
+  tree:'Long E',bee:'Long E',feet:'Long E',seed:'Long E',week:'Long E',deep:'Long E',
+  boat:'Long O',coat:'Long O',road:'Long O',goat:'Long O',foam:'Long O',toad:'Long O',
+  light:'Long I',night:'Long I',right:'Long I',sight:'Long I',might:'Long I',tight:'Long I'
+};
+function getContrastFeedback(wrong,correct,sound){
+  var ws=VOWEL_SOUND_MAP[(wrong||'').toLowerCase()]||'';
+  if(ws&&ws!==sound)return '\u274C "'+wrong+'" has '+ws+' \u2014 not '+sound+'. Try "'+correct+'"!';
+  return '\u274C Not quite! The answer is "'+correct+'" \u2014 '+sound;
+}
+
 </script>
-</div></div>
 </body>
 </html>
